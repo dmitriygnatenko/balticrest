@@ -3,3 +3,8 @@
 /.env.*.local
 /.idea/
 /var/
+
+/docker/mysql/data
+/docker/mysql/logs
+/docker/nginx/logs
+/docker/php-fpm/logs
