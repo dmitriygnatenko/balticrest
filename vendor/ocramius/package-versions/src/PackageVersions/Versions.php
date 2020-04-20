@@ -115,6 +115,8 @@ final class Versions
   'webmozart/assert' => '1.8.0@ab2cb0b3b559010b75981b1bdce728da3ee90ad6',
   'zendframework/zend-code' => '3.4.1@268040548f92c2bfcba164421c1add2ba43abaaa',
   'zendframework/zend-eventmanager' => '3.2.1@a5e2583a211f73604691586b8406ff7296a946dd',
+  'doctrine/data-fixtures' => '1.4.2@39e9777c9089351a468f780b01cffa3cb0a42907',
+  'doctrine/doctrine-fixtures-bundle' => '3.3.1@39defca57ee0949e1475c46177b30b6d1b732e8f',
   'nikic/php-parser' => 'v4.4.0@bd43ec7152eaaab3bd8c6d0aa95ceeb1df8ee120',
   'symfony/browser-kit' => 'v5.0.7@0fa03cfaf1155eedbef871eef1a64c427e624c56',
   'symfony/css-selector' => 'v5.0.7@5f8d5271303dad260692ba73dfa21777d38e124e',
@@ -133,7 +135,7 @@ final class Versions
   'symfony/polyfill-php71' => '*@',
   'symfony/polyfill-php70' => '*@',
   'symfony/polyfill-php56' => '*@',
-  'symfony/website-skeleton' => 'v5.0.99@',
+  'symfony/website-skeleton' => 'No version set (parsed as 1.0.0)@',
 );
 
     private function __construct()
