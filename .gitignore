@@ -7,3 +7,9 @@
 /docker/mysql/logs
 /docker/nginx/logs
 /docker/php-fpm/logs
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

@@ -1,6 +1,13 @@
-controllers:
-    resource: ../../src/Controller/
+app_controllers:
+    resource: ../../src/Components/Balticrest/Controller/
     type: annotation
+    prefix:
+        ru: ''
+        en: '/en'
+        de: '/de'
+        pl: '/pl'
+        lv: '/lv'
+        cn: '/cn'
 
 kernel:
     resource: ../../src/Kernel.php
