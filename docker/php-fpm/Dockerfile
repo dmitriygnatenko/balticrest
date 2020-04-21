@@ -28,6 +28,9 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     chmod 755 composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs
+
 COPY config/cli/php.ini /etc/php/7.3/cli/php.ini
 COPY config/fpm/php.ini /etc/php/7.3/fpm/php.ini
 COPY config/fpm/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
