@@ -1,0 +1,27 @@
+{
+  "entrypoints": {
+    "balticrest_js_jquery": {
+      "js": [
+        "/build/balticrest_js_jquery.js"
+      ]
+    },
+    "balticrest_js_main": {
+      "js": [
+        "/build/balticrest_js_main.js"
+      ]
+    },
+    "balticrest_css_main": {
+      "css": [
+        "/build/balticrest_css_main.css"
+      ],
+      "js": [
+        "/build/balticrest_css_main.js"
+      ]
+    },
+    "balticrest_js_map_index": {
+      "js": [
+        "/build/balticrest_js_map_index.js"
+      ]
+    }
+  }
+}

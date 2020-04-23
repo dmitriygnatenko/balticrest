@@ -2,14 +2,9 @@
 /.env.local.php
 /.env.*.local
 /.idea/
-/var/
 /docker/mysql/data
 /docker/mysql/logs
 /docker/nginx/logs
 /docker/php-fpm/logs
-###> symfony/webpack-encore-bundle ###
+/var/
 /node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###

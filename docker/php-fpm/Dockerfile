@@ -29,7 +29,8 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    npm install yarn jquery
 
 COPY config/cli/php.ini /etc/php/7.3/cli/php.ini
 COPY config/fpm/php.ini /etc/php/7.3/fpm/php.ini
