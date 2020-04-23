@@ -27,7 +27,6 @@ Encore
     ])
 
     .addEntry('balticrest_js_map_index', [
-        './assets/balticrest/js/map.js',
         './assets/balticrest/js/infobox.js',
         './assets/balticrest/js/map_index.js',
     ])

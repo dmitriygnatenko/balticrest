@@ -567,14 +567,14 @@ window.initialize = function initialize () {
 		});
 };
 
-function hideAllMarkers () {
+window.hideAllMarkers = function hideAllMarkers () {
 	for (var key in markers)
 		markers[key].forEach(function (marker) {
 			marker.setMap(null);
 		});
 };
 
-function toggleMarkers (category) {
+window.toggleMarkers = function toggleMarkers (category) {
 	hideAllMarkers();
 	closeInfoBox();
 
@@ -587,11 +587,11 @@ function toggleMarkers (category) {
 	});
 };
 
-function closeInfoBox() {
+window.closeInfoBox = function closeInfoBox() {
 	$('div.infoBox').remove();
 };
 
-function getInfoBox(item) {
+window.getInfoBox = function getInfoBox(item) {
 	return new InfoBox({
 		content:
 			'<div class="marker_visit" id="marker_info">' +
