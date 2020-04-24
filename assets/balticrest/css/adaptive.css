@@ -354,6 +354,20 @@ margin-top: 28px;
         font-size: 16px;
         padding: 20px 0px;
     }
+    .menu li a.hotel.active,
+    .menu li a.medicine.active,
+    .menu li a.cafe.active,
+    .menu li a.shop.active,
+    .menu li a.bank.active,
+    .menu li a.museum.active,
+    .menu li a.sport.active,
+    .menu li a.transport.active
+    {
+        background-image: linear-gradient(transparent 99%, transparent 1%);
+    }
+
+
+
     .page_info {
         padding: 190px 15px 60px;
     }

@@ -58,40 +58,36 @@
         </div>
     </div>
 
-    <!--categori menu-->
+    {% set city = app.request.attributes.get('city', '') %}
+    {% set category = app.request.attributes.get('category', '') %}
+
     <div class="container-fluid menu mobile">
         <div class="row">
             <div class="col-md-12">
-                <span>Categori menu</span>
+                <span>{% trans %}map.menu.category{% endtrans %}</span>
                 <i class="fa fa-times" id="close_menu"></i>
                 <ul>
-                    <li><a href="javascript:toggleMarkers('Shop');" class="shop"><i class="fa fa-shopping-cart"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Cinema');" class="cinema"><i class="fa fa-film"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Club');" class="club"><i class="fa fa-beer"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Cafe');" class="cafe"><i class="fa fa-cutlery"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Sport');" class="sport"><i class="fa fa-futbol-o"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Port');" class="port"><i class="fa fa-life-ring"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Bank');" class="bank"><i class="fa fa-university"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Post');" class="post"><i class="fa fa-envelope-o"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Showplace');" class="showplace"><i class="fa fa-eye"></i></a></li>
-                    <li><a href="javascript:toggleMarkers('Park');" class="park"><i class="fa fa-leaf"></i></a></li>
+                    <li><a title="{% trans %}map.menu.hotels{% endtrans %}" href="{{ path('map', {city: city, category: 'hotels'}) }}" class="hotel {% if category == 'hotels' %}active{% endif %}"><i class="fa fa-hotel"></i></a></li>
+                    <li><a title="{% trans %}map.menu.medicine{% endtrans %}" href="{{ path('map', {city: city, category: 'medicine'}) }}" class="medicine {% if category == 'medicine' %}active{% endif %}"><i class="fa fa-plus-square"></i></a></li>
+                    <li><a title="{% trans %}map.menu.cafes{% endtrans %}" href="{{ path('map', {city: city, category: 'cafes'}) }}" class="cafe {% if category == 'cafes' %}active{% endif %}"><i class="fa fa-cutlery"></i></a></li>
+                    <li><a title="{% trans %}map.menu.shops{% endtrans %}" href="{{ path('map', {city: city, category: 'shops'}) }}" class="shop {% if category == 'shops' %}active{% endif %}"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a title="{% trans %}map.menu.banks{% endtrans %}" href="{{ path('map', {city: city, category: 'banks'}) }}" class="bank {% if category == 'banks' %}active{% endif %}"><i class="fa fa-usd"></i></a></li>
+                    <li><a title="{% trans %}map.menu.museums{% endtrans %}" href="{{ path('map', {city: city, category: 'museums'}) }}" class="museum {% if category == 'museums' %}active{% endif %}"><i class="fa fa-university"></i></a></li>
+                    <li><a title="{% trans %}map.menu.sport{% endtrans %}" href="{{ path('map', {city: city, category: 'sport'}) }}" class="sport {% if category == 'sport' %}active{% endif %}"><i class="fa fa-futbol-o"></i></a></li>
+                    <li><a title="{% trans %}map.menu.transport{% endtrans %}" href="{{ path('map', {city: city, category: 'transport'}) }}" class="transport {% if category == 'transport' %}active{% endif %}"><i class="fa fa-bus"></i></a></li>
                     <li class="mobile_menu"><a href="#"><i class="fa fa-bars"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<!--map-->
+
 <div id="map" class="map"></div>
-<!--/map-->
 
 {% endblock %}
 
 {% block javascripts %}
-    <!--Google maps API linl-->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCsbzuJDUEOoq-jS1HO-LUXW4qo0gW9FNs"></script>
-
     {{ parent() }}
-
     {{ encore_entry_script_tags('balticrest_js_map_index') }}
 {% endblock %}

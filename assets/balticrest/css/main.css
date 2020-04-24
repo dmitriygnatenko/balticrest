@@ -916,46 +916,64 @@ body.inner_page .bg_parallax {
     transition: 0.3s;
 }
 .menu ul li a span {}
+
+.menu li a.hotel.active {
+    background-image: linear-gradient(transparent 85%, #FFAC00 15%);
+}
+.menu li a.hotel:hover, .menu li a.hotel:focus {
+    background: #FFAC00;
+    transition: 0.3s;
+}
+.menu li a.medicine.active {
+    background-image: linear-gradient(transparent 85%, #62B50A 15%);
+}
+.menu li a.medicine:hover, .menu li a.medicine:focus {
+    background: #62B50A;
+    transition: 0.3s;
+}
+.menu li a.cafe.active {
+    background-image: linear-gradient(transparent 85%, #DD3D83 15%);
+}
+.menu li a.cafe:hover, .menu li a.cafe:focus {
+    background: #DD3D83;
+    transition: 0.3s;
+}
+.menu li a.shop.active {
+    background-image: linear-gradient(transparent 85%, #F54100 15%);
+}
 .menu li a.shop:hover, .menu li a.shop:focus {
     background: #F54100;
     transition: 0.3s;
 }
-.menu li a.cinema:hover, .menu li a.cinema:focus {
-    background: #00B2B3;
-    transition: 0.3s;
-}
-.menu li a.club:hover, .menu li a.club:focus {
-    background: #FFAC00;
-    transition: 0.3s;
-}
-.menu li a.cafe:hover, .menu li a.cafe:focus {
-    background: #62B50A;
-    transition: 0.3s;
-}
-.menu li a.sport:hover, .menu li a.sport:focus {
-    background: #DD3D83;
-    transition: 0.3s;
-}
-.menu li a.port:hover, .menu li a.port:focus {
-    background: #006EC6;
-    transition: 0.3s;
+.menu li a.bank.active {
+    background-image: linear-gradient(transparent 85%, #0081DB 15%);
 }
 .menu li a.bank:hover, .menu li a.bank:focus {
     background: #0081DB;
     transition: 0.3s;
 }
-.menu li a.post:hover, .menu li a.post:focus {
-    background: #AAC600;
+.menu li a.museum.active {
+    background-image: linear-gradient(transparent 85%, #00B2B3 15%);
+}
+.menu li a.museum:hover, .menu li a.museum:focus {
+    background: #00B2B3;
     transition: 0.3s;
 }
-.menu li a.showplace:hover, .menu li a.showplace:focus {
-    background: #009ECC;
+.menu li a.sport.active {
+    background-image: linear-gradient(transparent 85%, #00c61e 15%);
+}
+.menu li a.sport:hover, .menu li a.sport:focus {
+    background: #00c61e;
     transition: 0.3s;
 }
-.menu li a.park:hover, .menu li a.park:focus {
-    background: #006BC3;
+.menu li a.transport.active {
+    background-image: linear-gradient(transparent 85%, #aac600 15%);
+}
+.menu li a.transport:hover, .menu li a.transport:focus {
+    background: #aac600;
     transition: 0.3s;
 }
+
 .container-fluid.menu span, .container-fluid.menu .icon-remove, .container-fluid.menu .mobile_menu {display: none;}
 
 .marker_info .info {

@@ -1,0 +1,11 @@
+map:
+    menu:
+        category: Категории
+        hotels: Отели
+        medicine: Санатории
+        cafes: Кафе
+        shops: Магазины
+        banks: Банки
+        museums: Музеи
+        sport: Спорт
+        transport: Транспорт
