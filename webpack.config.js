@@ -10,6 +10,11 @@ Encore
 
     .addEntry('balticrest_js_jquery', './assets/balticrest/js/jquery.min.js')
 
+    .addEntry('balticrest_js_ie9', [
+        './assets/balticrest/js/html5shiv.min.js',
+        './assets/balticrest/js/respond.min.js',
+    ])
+
     .addEntry('balticrest_js_main', [
         './assets/balticrest/js/bootstrap.min.js',
         './assets/balticrest/js/all_scr.js',

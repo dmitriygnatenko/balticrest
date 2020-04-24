@@ -5,6 +5,11 @@
         "/build/balticrest_js_jquery.js"
       ]
     },
+    "balticrest_js_ie9": {
+      "js": [
+        "/build/balticrest_js_ie9.js"
+      ]
+    },
     "balticrest_js_main": {
       "js": [
         "/build/balticrest_js_main.js"

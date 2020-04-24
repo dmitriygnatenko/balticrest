@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('balticrest_css_main') }}
+        {{ encore_entry_script_tags('balticrest_js_jquery') }}
+    {% endblock %}
+    <!--[if lt IE 9]>
+        {{ encore_entry_script_tags('balticrest_js_ie9') }}
+    <![endif]-->
+</head>
+<body {% block body_attr %}{% endblock %}>
+    {% block body %}{% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('balticrest_js_main') }}
+    {% endblock %}
+</body>
+</html>

@@ -1,6 +1,7 @@
 {
   "build/balticrest_css_main.css": "/build/balticrest_css_main.css",
   "build/balticrest_css_main.js": "/build/balticrest_css_main.js",
+  "build/balticrest_js_ie9.js": "/build/balticrest_js_ie9.js",
   "build/balticrest_js_jquery.js": "/build/balticrest_js_jquery.js",
   "build/balticrest_js_main.js": "/build/balticrest_js_main.js",
   "build/balticrest_js_map_index.js": "/build/balticrest_js_map_index.js"
