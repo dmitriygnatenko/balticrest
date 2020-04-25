@@ -158,18 +158,29 @@ body.inner_page .bg_parallax {
     text-decoration: none;
 }
 
-.pushy .profile .log_btn {
+.pushy .profile .logout_btn {
     width: 100px;
     display: block;
     border: 2px solid #FFFFFF;
     text-align: center;
     padding: 8px;
     border-radius: 3px;
-    margin: 20px auto;
+    margin: 20px auto 0 auto;
     color: #FFFFFF;
 }
 
-.pushy .profile .log_btn:hover {
+.pushy .profile .login_btn {
+    width: 100px;
+    display: block;
+    border: 2px solid #FFFFFF;
+    text-align: center;
+    padding: 8px;
+    border-radius: 3px;
+    margin: 60px auto 0 auto;
+    color: #FFFFFF;
+}
+
+.pushy .profile .logout_btn:hover, .pushy .profile .login_btn:hover {
     border: 2px solid #ffffff;
     color:#ffffff;
     text-decoration: none;

@@ -18,7 +18,7 @@ $(document).ready(function () {
   })
 
   //////Autorization//////
-  $('.log_btn').on('click', function () {
+  $('.login_btn').on('click', function () {
     "use strict";
     $('#autorized').removeClass("none");
   })

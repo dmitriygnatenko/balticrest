@@ -1,20 +1,60 @@
-<!--navigation swipe-->
 <div class="menu-btn">&#9776;</div>
 <nav class="pushy pushy-left">
+
     <div class="profile">
-        <div class="avatar"><img src="{{ asset('static/balticrest/img/avatar/ava_2.jpg') }}" alt="#"><span>5</span></div>
-        <h3><a href="03.html">Test user</a></h3>
-        <a href="#" class="log_btn">Log in</a>
+        {% if app.user %}
+            <div class="avatar">
+                <img src="{{ asset('static/balticrest/img/avatar/ava_2.jpg') }}" alt="#">
+            </div>
+            <h3>
+                <a href="#">{{ app.user.username }}</a>
+            </h3>
+            <a href="#" class="logout_btn">{% trans %}profile.logout{% endtrans %}</a>
+        {% else %}
+            <a href="#" class="login_btn">{% trans %}profile.login{% endtrans %}</a>
+        {% endif %}
     </div>
+
     <ul class="side_menu">
-        <li><a href="index.html"><i class="fa fa-bookmark-o"></i>Promo page</a></li>
-        <li><a href="01.html" class="animsition-link"><i class="fa fa-map-marker"></i>Map</a></li>
-        <li><a href="05.html"><i class="fa fa-list"></i>Place list</a></li>
-        <li><a href="04.html"><i class="fa fa-th"></i>Place grid</a></li>
-        <li><a href="02.html"><i class="fa fa-building-o"></i>Place</a></li>
-        <li><a href="03.html"><i class="fa fa-user"></i>User profile</a></li>
-        <li><a href="06.html"><i class="fa fa-book"></i>Blog</a></li>
-        <li><a href="07.html"><i class="fa fa-file-powerpoint-o"></i>Open post</a></li>
+        <li>
+            <a href="#">
+                <i class="fa fa-bookmark-o"></i>{% trans %}navigation.menu.main{% endtrans %}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-map-marker"></i>{% trans %}navigation.menu.map{% endtrans %}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-list"></i>{% trans %}navigation.menu.point_list{% endtrans %}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-video-camera"></i>{% trans %}navigation.menu.webcam{% endtrans %}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-newspaper-o"></i>{% trans %}navigation.menu.news{% endtrans %}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-envelope"></i>{% trans %}navigation.menu.contacts{% endtrans %}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-briefcase"></i>{% trans %}navigation.menu.privacy_policy{% endtrans %}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-user"></i>{% trans %}navigation.menu.user_profile{% endtrans %}
+            </a>
+        </li>
     </ul>
 </nav>
-

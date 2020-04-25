@@ -365,9 +365,6 @@ margin-top: 28px;
     {
         background-image: linear-gradient(transparent 99%, transparent 1%);
     }
-
-
-
     .page_info {
         padding: 190px 15px 60px;
     }
@@ -644,7 +641,7 @@ body.inner_page .bg_parallax {
     line-height: 28px;
 }
 .search {display: none;}
-.log_btn     {
+.logout_btn, .login_btn {
     margin-top: -10px;
 }
 .user_cover {

@@ -1,0 +1,27 @@
+profile:
+    login: Войти
+    logout: Выйти
+
+map:
+    menu:
+        category: Категории
+        hotels: Отели
+        medicine: Санатории
+        cafes: Кафе
+        shops: Магазины
+        banks: Банки
+        museums: Музеи
+        sport: Спорт
+        transport: Транспорт
+
+navigation:
+    menu:
+        main: Главная
+        map: Карта
+        point_list: Список
+        webcam: Вебкамеры
+        news: Новости
+        contacts: Контакты
+        about: О проекте
+        privacy_policy: Конфиденциальность
+        user_profile: Профиль пользователя
