@@ -1084,10 +1084,6 @@ a.green_btn:hover {
     border-bottom: 1px solid #cc130a;
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.59);
 }
-.header:hover {
-    background: rgba(204, 19, 10, 1);
-    transition: 0.3s;
-}
 .open_side {
     float: left;
     font-size: 21px;
@@ -1150,6 +1146,44 @@ a.green_btn:hover {
     margin: 9px;
     text-decoration: none;
     transition: 0.3s;
+}
+
+
+
+
+
+.language-selector {
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin: 9px;
+}
+.language-selector img {
+    border: 1px solid #828282;
+    height: 20px !important;
+    width: 30px !important;
+}
+.language-selector .btn-default:hover,
+.language-selector .btn-default:focus,
+.language-selector .btn-default:active,
+.language-selector.open > .dropdown-toggle.btn-default
+{
+    background: white !important;
+}
+.language-selector .caret {
+    color: #828282;
+}
+.language-selector .btn:hover .caret {
+    color: #000000;
+}
+.language-selector .dropdown-menu {
+    min-width: 30px;
+}
+.language-selector .dropdown-menu li a {
+    padding: 5px 11px;
 }
 
 .inner_head .menu-btn {

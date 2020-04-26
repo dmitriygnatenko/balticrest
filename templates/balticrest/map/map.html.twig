@@ -52,8 +52,13 @@
 
         <div class="fixed_w">
             <div class="row">
-                <div class="col-md-12"><a href="index.html" class="logo"><img src="{{ asset('static/balticrest/img/logoin.png') }}" alt="Mycity"/></a>
-                    <input type="text" class="search" placeholder="search"><a href="#" class="green_btn_header" id="ad">Add place</a></div>
+                <div class="col-md-12">
+                    <a href="index.html" class="logo"><img src="{{ asset('static/balticrest/img/logoin.png') }}" alt="Mycity"/></a>
+
+                    {{ include('balticrest/include/language.html.twig') }}
+                    <input type="text" class="search" placeholder="search">
+                    <a href="#" class="green_btn_header" id="ad">Add place</a>
+                </div>
             </div>
         </div>
     </div>

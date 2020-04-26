@@ -6,7 +6,7 @@ app_controllers:
         en: '/en'
         de: '/de'
         pl: '/pl'
-        lv: '/lv'
+        lt: '/lt'
         cn: '/cn'
 
 kernel:
