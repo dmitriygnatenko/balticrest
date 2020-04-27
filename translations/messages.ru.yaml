@@ -1,3 +1,12 @@
+cities:
+    zelenogradsk: Зеленоградск
+    svetlogorsk: Светлогорск
+
+header:
+    search:
+        btn_title: Искать
+        text_placeholder: Поиск
+
 profile:
     login: Войти
     logout: Выйти

@@ -44,24 +44,10 @@
     </div>
 </div>
 
-<!-- Site Overlay -->
 <div class="site-overlay"></div>
 <div id="container">
-    <!--Header-->
-    <div class="container-fluid header inner_head">
 
-        <div class="fixed_w">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="index.html" class="logo"><img src="{{ asset('static/balticrest/img/logoin.png') }}" alt="Mycity"/></a>
-
-                    {{ include('balticrest/include/language.html.twig') }}
-                    <input type="text" class="search" placeholder="search">
-                    <a href="#" class="green_btn_header" id="ad">Add place</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{ include('balticrest/include/header.html.twig') }}
 
     {% set city = app.request.attributes.get('city', '') %}
     {% set category = app.request.attributes.get('category', '') %}
