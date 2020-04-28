@@ -1166,22 +1166,28 @@ a.green_btn:hover {
     margin-right: 3px;
 }
 .language-selector .btn-default {
+    padding: 6px 9px 6px 10px;
     background: transparent;
+    border-radius: 4px !important;
 }
 .language-selector .caret {
-    color: #e6e6e6;
-}
-.language-selector .btn:hover .caret {
     color: #ffffff;
+    border-top: 8px solid;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
 }
 .language-selector .btn-default:hover,
 .language-selector .btn-default:focus,
 .language-selector .btn-default:active,
 .language-selector.open > .dropdown-toggle.btn-default {
-    background: transparent;
+    background-color: #ca332c;
+    transition: 0.3s;
 }
 .language-selector.open .caret {
-    color: transparent !important;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid;
+    border-top: none;
 }
 .language-selector .dropdown-menu {
     top: 39px;
@@ -1199,48 +1205,51 @@ a.green_btn:hover {
 .city-selector {
     display: block;
     float: left;
-    margin: 6px;
+    margin: 4px;
     background-color: transparent;
 }
 .city-selector .btn-default {
     font-size: 20px;
     font-weight: bold;
     background-color: transparent;
-    color: #e6e6e6;
-    padding-top: 1px;
+    color: #ffffff;
+    padding: 3px 8px 4px 8px;
 }
 .city-selector .btn-default img {
     height: 37px;
     border-radius: 20px;
-    border: 2px solid #e6e6e6;
+    border: 2px solid #ffffff;
     margin-right: 3px;
 }
 .city-selector .caret {
-    color: #e6e6e6;
+    color: #ffffff;
+    border-top: 8px solid;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
 }
 .city-selector .btn-default:hover,
 .city-selector .btn-default:focus,
 .city-selector .btn-default:active,
 .city-selector.open > .dropdown-toggle.btn-default {
-    color: #ffffff;
+    background-color: #ca332c;
+    transition: 0.3s;
 }
 .city-selector.open .caret {
-    color: transparent !important;
-}
-.city-selector .btn:hover .caret {
-    color: #ffffff;
-    transition: 0.3s;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid;
+    border-top: none;
 }
 .city-selector .btn-default:hover img {
     border: 2px solid #ffffff;
 }
 .city-selector .dropdown-menu {
-    left: 5px;
-    top: 41px;
-    min-width: 200px;
+    left: -1px;
+    top: 43px;
+    min-width: 211px;
 }
 .city-selector .dropdown-menu li a {
-    padding: 3px;
+    padding: 2px;
     margin: 3px 15px 3px 5px;
     font-size: 16px;
     font-weight: bold;
@@ -1267,12 +1276,14 @@ a.green_btn:hover {
 }
 .innerpage .menu-btn {
     color: #ffffff;
+    padding: 5px 0 0 10px;
     top: 5px;
 }
 .innerpage .menu-btn:hover {
-    color: #202020;
+    background-color: #ca332c;
+    transition: 0.3s;
+    padding: 5px 0 0 10px;
     top: 5px;
-    background: none;
 }
 
 /*add place*/
