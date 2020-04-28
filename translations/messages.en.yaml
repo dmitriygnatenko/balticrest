@@ -1,0 +1,36 @@
+cities:
+    zelenogradsk: Zelenogradsk
+    svetlogorsk: Svetlogorsk
+
+header:
+    search:
+        btn_title: Find
+        text_placeholder: Search text
+
+profile:
+    login: Login
+    logout: Logout
+
+map:
+    menu:
+        category: Categories
+        hotels: Hotels
+        medicine: Medicine
+        cafes: Cafes
+        shops: Shops
+        banks: banks
+        museums: Museums
+        sport: Sport
+        transport: Transport
+
+navigation:
+    menu:
+        main: Main page
+        map: Map
+        point_list: Points list
+        webcam: Webcams
+        news: News
+        contacts: Contacts
+        about: About
+        privacy_policy: Privacy policy
+        user_profile: User profile

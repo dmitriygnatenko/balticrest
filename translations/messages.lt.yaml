@@ -1,0 +1,36 @@
+cities:
+    zelenogradsk: Zelenogradsk
+    svetlogorsk: Svetlogorsk
+
+header:
+    search:
+        btn_title: Paieška
+        text_placeholder: Paieškos eilutė
+
+profile:
+    login: Prisijungti
+    logout: Atsijungti
+
+map:
+    menu:
+        category: Kategorijos
+        hotels: Viešbučiai
+        medicine: Sanatorijos
+        cafes: Kavinė
+        shops: Parduotuvės
+        banks: Bankai
+        museums: Muziejai
+        sport: Sportas
+        transport: Transportas
+
+navigation:
+    menu:
+        main: Pradinis puslapis
+        map: Žemėlapis
+        point_list: Sąrašas
+        webcam: Interneto kameros
+        news: Naujienos
+        contacts: Kontaktiniai duomenys
+        about: Apie projektą
+        privacy_policy: Privatumo politika
+        user_profile: Vartotojo profilis
