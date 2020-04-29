@@ -1,0 +1,36 @@
+cities:
+    zelenogradsk: Zelenogradsk
+    svetlogorsk: Svetlogorsk
+
+header:
+    search:
+        btn_title: 搜尋
+        text_placeholder: 搜索文字
+
+profile:
+    login: 登錄
+    logout: 登出
+
+map:
+    menu:
+        category: 分類目錄
+        hotels: 飯店
+        medicine: 療養院
+        cafes: 咖啡廳
+        shops: 商舖
+        banks: 銀行
+        museums: 博物館
+        sport: 運動
+        transport: 交通運輸
+
+navigation:
+    menu:
+        main: 主頁
+        map: 地圖
+        point_list: 清單
+        webcam: 網路攝影機
+        news: 最新消息
+        contacts: 聯絡資料
+        about: 關於項目
+        privacy_policy: 隱私政策
+        user_profile: 用戶資料

@@ -1170,6 +1170,9 @@ a.green_btn:hover {
     background: transparent;
     border-radius: 4px !important;
 }
+.language-selector .btn-default img {
+    border: 1px solid #ffffff;
+}
 .language-selector .caret {
     color: #ffffff;
     border-top: 8px solid;
