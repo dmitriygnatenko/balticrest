@@ -49,6 +49,8 @@
 
     {{ include('balticrest/include/header.html.twig') }}
 
+    <div id="map" class="map"></div>
+
     {% set city = app.request.attributes.get('city', '') %}
     {% set category = app.request.attributes.get('category', '') %}
 
@@ -72,8 +74,6 @@
         </div>
     </div>
 </div>
-
-<div id="map" class="map"></div>
 
 {% endblock %}
 

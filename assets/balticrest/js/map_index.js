@@ -4,9 +4,52 @@ window.initialize = function initialize () {
 	ymaps.ready(init);
 
 	function init(){
-		var myMap = new ymaps.Map("map", {
+
+		const typeSelector = new ymaps.control.TypeSelector({
+			options: {
+				float: 'none',
+				position: {
+					top: '15px',
+					left: '12px'
+				}
+			}
+		});
+
+		const zoomControl = new ymaps.control.ZoomControl({
+			options: {
+				float: 'none',
+				position: {
+					top: '57px',
+					left: '12px'
+				},
+			}
+		});
+
+		const geolocationControl = new ymaps.control.GeolocationControl({
+			options: {
+				float: 'none',
+				position: {
+					top: '275px',
+					left: '12px'
+				}
+			}
+		});
+
+		const rulerControl = new ymaps.control.RulerControl({
+			options: {
+				float: 'none',
+				position: {
+					top: '315px',
+					left: '12px'
+				},
+				scaleLine: false,
+			}
+		});
+
+		const map = new ymaps.Map("map", {
 			center: [map_data.center.lat, map_data.center.lon],
-			zoom: map_data.zoom
+			zoom: map_data.zoom,
+			controls: [geolocationControl, typeSelector, rulerControl, zoomControl]
 		});
 	}
 
@@ -14,37 +57,6 @@ window.initialize = function initialize () {
 
 
 
-
-
-	var mapOptions = {
-		zoom: 16,
-		center: new google.maps.LatLng(43.119, 131.883),
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-
-		mapTypeControl: false,
-		mapTypeControlOptions: {
-			style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-			position: google.maps.ControlPosition.LEFT_CENTER
-		},
-		panControl: false,
-		panControlOptions: {
-			position: google.maps.ControlPosition.TOP_RIGHT
-		},
-		zoomControl: false,
-		zoomControlOptions: {
-			style: google.maps.ZoomControlStyle.LARGE,
-			position: google.maps.ControlPosition.TOP_RIGHT
-		},
-		scaleControl: false,
-		scaleControlOptions: {
-			position: google.maps.ControlPosition.TOP_LEFT
-		},
-		streetViewControl: false,
-		streetViewControlOptions: {
-			position: google.maps.ControlPosition.LEFT_TOP
-		},
-		scrollwheel: false
-	};
 	var
 		marker;
 	mapObject = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -68,13 +80,6 @@ window.initialize = function initialize () {
 
 		});
 };
-
-
-
-
-
-
-
 
 
 (function(A) {
