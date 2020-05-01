@@ -1,4 +1,4 @@
-app_controllers:
+balticrest_controllers:
     resource: ../../src/Components/Balticrest/Controller/
     type: annotation
     prefix:

@@ -1,7 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
-app_controllers:
+balticrest_controllers:
     resource: ../src/Components/Balticrest/Controller/
     type: annotation

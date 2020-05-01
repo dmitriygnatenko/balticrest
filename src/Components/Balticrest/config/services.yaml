@@ -1,0 +1,8 @@
+imports:
+    - { resource: 'parameters.yaml'}
+
+services:
+
+    App\Components\Balticrest\Controller\:
+        resource: '../Controller'
+        tags: ['controller.service_arguments']

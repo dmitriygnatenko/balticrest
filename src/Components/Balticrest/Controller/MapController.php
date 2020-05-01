@@ -2,6 +2,7 @@
 
 namespace App\Components\Balticrest\Controller;
 
+use App\Components\Balticrest\Service\MapManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,6 +10,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MapController extends AbstractController
 {
+    /** @var MapManagerInterface  */
+    private $mapManager;
+
+    /**
+     * @param MapManagerInterface $mapManager
+     */
+    public function __construct(MapManagerInterface $mapManager)
+    {
+        $this->mapManager = $mapManager;
+    }
+
     /**
      * @Route(
      *     "/{city}/{category}",
@@ -28,11 +40,8 @@ class MapController extends AbstractController
      */
     public function map(Request $request): Response
     {
-        $city = $request->attributes->get('city');
-        $category = $request->attributes->get('category');
-
         return $this->render('balticrest/map/map.html.twig', [
+            'map_data' => $this->mapManager->generateCityMapData($request)
         ]);
     }
-
 }

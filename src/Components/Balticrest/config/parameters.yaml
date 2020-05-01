@@ -1,0 +1,37 @@
+parameters:
+
+    cities:
+        svetlogorsk:
+            title: cities.svetlogorsk
+            image: static/balticrest/images/cities/svetlogorsk.png
+            center:
+                lat: 54.943347
+                lon: 20.157184
+            zoom: 15
+        zelenogradsk:
+            title: cities.zelenogradsk
+            image: static/balticrest/images/cities/zelenogradsk.png
+            center:
+                lat: 54.943347
+                lon: 20.157184
+            zoom: 15
+
+    languages:
+        ru:
+            image: static/balticrest/images/flags/ru.png
+            title: Русский
+        en:
+           image: static/balticrest/images/flags/gb.png
+           title: English
+        de:
+            image: static/balticrest/images/flags/de.png
+            title: Deutsch
+        pl:
+            image: static/balticrest/images/flags/pl.png
+            title: Polski
+        lt:
+            image: static/balticrest/images/flags/lt.png
+            title: Lietuvis
+        cn:
+            image: static/balticrest/images/flags/cn.png
+            title: 中文
