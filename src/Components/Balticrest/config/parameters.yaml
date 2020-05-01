@@ -5,15 +5,15 @@ parameters:
             title: cities.svetlogorsk
             image: static/balticrest/images/cities/svetlogorsk.png
             center:
-                lat: 54.943347
-                lon: 20.157184
+                lat: 54.942050
+                lon: 20.153235
             zoom: 15
         zelenogradsk:
             title: cities.zelenogradsk
             image: static/balticrest/images/cities/zelenogradsk.png
             center:
-                lat: 54.943347
-                lon: 20.157184
+                lat: 54.957757
+                lon: 20.474495
             zoom: 15
 
     languages:
