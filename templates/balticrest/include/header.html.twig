@@ -5,30 +5,33 @@
             <div class="col-md-12">
 
                 {% set city = app.request.get('city') %}
-                <div class="dropdown city-selector">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {% if cities[city] is defined %}
-                            {% set city_title = cities[city]['title'] %}
-                            <img src="{{ asset(cities[city]['image']) }}" title="'{{ city_title|trans }}">
-                            {{ city_title|trans }}
-                        {% endif %}
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        {% for key, values in cities %}
-                            {% if key != city %}
-                                {% set route_params = app.request.attributes.get('_route_params')|merge({'city': key}) %}
-                                <li>
-                                    {% set city_title = values['title'] %}
-                                    <a href="{{ path(app.request.attributes.get('_route'), route_params) }}">
-                                        <img src="{{ asset(values['image']) }}" title="{{ city_title|trans }}">
-                                        {{ city_title|trans }}
-                                    </a>
-                                </li>
+
+                {% if city %}
+                    <div class="dropdown city-selector">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {% if cities[city] is defined %}
+                                {% set city_title = cities[city]['title'] %}
+                                <img src="{{ asset(cities[city]['image']) }}" title="'{{ city_title|trans }}">
+                                {{ city_title|trans }}
                             {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% for key, values in cities %}
+                                {% if key != city %}
+                                    {% set route_params = app.request.attributes.get('_route_params')|merge({'city': key}) %}
+                                    <li>
+                                        {% set city_title = values['title'] %}
+                                        <a href="{{ path(app.request.attributes.get('_route'), route_params) }}">
+                                            <img src="{{ asset(values['image']) }}" title="{{ city_title|trans }}">
+                                            {{ city_title|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
 
                 {% set language = app.request.locale %}
                 <div class="dropdown language-selector">

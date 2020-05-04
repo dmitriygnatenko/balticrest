@@ -2,5 +2,9 @@
 
 {% block body %}
     {{ include('balticrest/include/navigation.html.twig') }}
-    {% block content %}{% endblock %}
+    <div class="site-overlay"></div>
+    <div id="container">
+        {{ include('balticrest/include/header.html.twig') }}
+        {% block content %}{% endblock %}
+    </div>
 {% endblock %}

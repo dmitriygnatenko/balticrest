@@ -5,50 +5,6 @@
 {% block body_attr %}onload="initialize()" class="inmap innerpage"{% endblock %}
 
 {% block content %}
-
-<!--add-->
-<div class="add_place none" id="pl">
-    <div class="place_form">
-        <i class="fa fa-times close_window" id="close"></i>
-        <h3>Add new place<span></span></h3>
-        <form>
-            <label>Place name:<input type="text"></label>
-            <label>latitude:<input type="text"></label>
-            <label>longitude:<input type="text"></label>
-            <label>Categori:
-                <select>
-                    <option value="Cafe">Cafe</option>
-                    <option value="Bar">Bar</option>
-                    <option value="Cinema">Cinema</option>
-                    <option value="Shop">Shop</option>
-                    <option value="Club">Club</option>
-                    <option value="Bank">Bank</option>
-                </select>
-            </label>
-            <a href="#" class="green_btn_header" id="add">Add</a>
-        </form>
-    </div>
-</div>
-
-<!--autorization-->
-<div class="add_place none" id="autorized">
-    <div class="place_form login_form">
-        <i class="fa fa-times close_window" id="closeau"></i>
-        <h3>Autorization<span></span></h3>
-        <form>
-            <label>Login:<input type="text"></label>
-            <label>Password:<input type="text"></label>
-            <a href="#" class="btn btn-success">Log in</a>
-            <a href="#" class="btn btn-primary"><i class="icon-facebook"></i>Log in with Facebook</a>
-        </form>
-    </div>
-</div>
-
-<div class="site-overlay"></div>
-<div id="container">
-
-    {{ include('balticrest/include/header.html.twig') }}
-
     <div id="map" class="map"></div>
 
     {% set city = app.request.attributes.get('city', '') %}
@@ -73,8 +29,6 @@
             </div>
         </div>
     </div>
-</div>
-
 {% endblock %}
 
 {% block head_javascripts %}
