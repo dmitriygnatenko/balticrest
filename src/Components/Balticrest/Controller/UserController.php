@@ -11,9 +11,18 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+
+
+
+
+
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
@@ -23,8 +32,11 @@ class UserController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('balticrest/user/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+
+
 
     /**
      * @Route("/logout", name="app_logout")

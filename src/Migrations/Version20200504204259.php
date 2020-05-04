@@ -8,7 +8,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20200420200049 extends AbstractMigration
+final class Version20200504204259 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -24,9 +24,10 @@ final class Version20200420200049 extends AbstractMigration
 
         $this->addSql('CREATE TABLE user (
             id INT AUTO_INCREMENT NOT NULL,
-            email VARCHAR(180) NOT NULL,
+            email VARCHAR(180) DEFAULT NULL,
+            username VARCHAR(255) NOT NULL,
+            password VARCHAR(255) DEFAULT NULL,
             roles JSON NOT NULL,
-            password VARCHAR(255) NOT NULL,
             UNIQUE INDEX UNIQ_8D93D649E7927C74 (email),
             PRIMARY KEY(id)
         ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

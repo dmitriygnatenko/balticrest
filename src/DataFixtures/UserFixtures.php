@@ -28,6 +28,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setRoles([User::ROLE_SUPER_ADMIN]);
         $user->setEmail('test@balticrest.ru');
+        $user->setUsername('Super admin');
         $user->setPassword($this->passwordEncoder->encodePassword($user, '12345'));
 
         $manager->persist($user);
