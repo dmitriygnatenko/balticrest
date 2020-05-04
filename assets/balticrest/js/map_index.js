@@ -1,9 +1,89 @@
 
 window.initialize = function initialize () {
 
+	let activePoint;
+
 	ymaps.ready(init);
 
-	function init(){
+	function init() {
+
+		const map = new ymaps.Map("map", {
+			center: [map_data.center.lat, map_data.center.lon],
+			zoom: map_data.zoom,
+			controls: getControls()
+		});
+
+		map.events.add('click', function (e) {
+			if (activePoint !== undefined) {
+				activePoint.onCloseClick(e);
+			}
+		});
+
+		map_data.points.forEach(function (item) {
+			let point = new ymaps.Placemark([item.lat, item.lon], {
+				hintContent: item.hint,
+			}, {
+				balloonShadow: false,
+				balloonPanelMaxMapArea: 0,
+ 				balloonContentLayout: getBalloonContent(item),
+				balloonLayout: getBalloonLayout(),
+				preset: item.preset,
+			});
+
+			map.geoObjects.add(point);
+		});
+	}
+
+	function getBalloonContent(item) {
+		return ymaps.templateLayoutFactory.createClass(
+			'<img src="/' + item.image + '" class="logotype">' +
+			'<h3>'+ item.title +'<span></span></h3>' +
+			'<span>'+ item.description +'</span>' +
+			'<a href="/'+ item.link + '" class="green_btn">' + map_data.trans.point_button + '</a>');
+	}
+
+	function getBalloonLayout() {
+		return ymaps.templateLayoutFactory.createClass(
+			'<div class="marker_info">' +
+				'<div class="info">'+
+					'<button type="button" class="close"><span>&times;</span></button>' +
+					'$[[options.contentLayout]]' +
+					'<span class="arrow"></span>' +
+				'</div>' +
+			'</div>',
+			{
+				build: function () {
+					activePoint = this;
+					this.constructor.superclass.build.call(this);
+					this._$element = $('.marker_info .info', this.getParentElement());
+					this.applyElementOffset();
+					this._$element.find('.close').on('click', $.proxy(this.onCloseClick, this));
+				},
+				onCloseClick: function (e) {
+					activePoint = undefined;
+					e.preventDefault();
+					this.events.fire('userclose');
+				},
+				applyElementOffset: function () {
+					this._$element.css({
+						top: -(this._$element[0].offsetHeight + this._$element.find('.arrow')[0].offsetHeight)
+					});
+				},
+				getShape: function () {
+					let position = this._$element.position();
+
+					return new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([
+						[position.left, position.top], [
+							position.left + this._$element[0].offsetWidth,
+							position.top - this._$element[0].offsetHeight
+						]
+					]));
+				},
+			}
+		);
+	}
+
+	function getControls() {
 
 		const typeSelector = new ymaps.control.TypeSelector({
 			options: {
@@ -46,603 +126,7 @@ window.initialize = function initialize () {
 			}
 		});
 
-		const map = new ymaps.Map("map", {
-			center: [map_data.center.lat, map_data.center.lon],
-			zoom: map_data.zoom,
-			controls: [geolocationControl, typeSelector, rulerControl, zoomControl]
-		});
+		return [geolocationControl, typeSelector, rulerControl, zoomControl];
 	}
 
-	return;
-
-
-
-	var
-		marker;
-	mapObject = new google.maps.Map(document.getElementById('map'), mapOptions);
-	for (var key in markersData)
-		markersData[key].forEach(function (item) {
-			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
-				map: mapObject,
-				icon: '/static/balticrest/img/icon/' + key + '.png',
-			});
-
-			if ('undefined' === typeof markers[key])
-				markers[key] = [];
-			markers[key].push(marker);
-			google.maps.event.addListener(marker, 'mouseover', (function () {
-				closeInfoBox();
-				getInfoBox(item).open(mapObject, this);
-
-			}));
-
-
-		});
 };
-
-
-(function(A) {
-
-	if (!Array.prototype.forEach)
-		A.forEach = A.forEach || function(action, that) {
-			for (var i = 0, l = this.length; i < l; i++)
-				if (i in this)
-					action.call(that, this[i], i, this);
-		};
-
-})(Array.prototype);
-
-var
-	mapObject,
-	markers = [],
-	markersData = {
-			'Shop': [
-			{
-				name: 'Bondi Beach',
-				location_latitude: 43.119445, 
-				location_longitude: 131.881006,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Coogee Beach',
-				location_latitude: 43.120338, 
-				location_longitude: 131.883002,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.119884, 
-				location_longitude: 131.882723,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.118834, 
-				location_longitude: 131.889718,
-				map_image_url: 'img/img4.png',
-				name_point: 'Themeforest',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.120573, 
-				location_longitude: 131.885705,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-			'Cinema': [
-			{
-				name: 'Bondi Beach',
-				location_latitude: 43.124034, 
-				location_longitude: 131.883517,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Coogee Beach',
-				location_latitude: 43.126117, 
-				location_longitude: 131.877423,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.116657, 
-				location_longitude: 131.891992,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.116031, 
-				location_longitude: 131.899481,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.117519,
-				location_longitude: 131.903665,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-			'Club': [
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.114527, 
-				location_longitude: 131.879354,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.112428, 
-				location_longitude: 131.882980,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.117393, 
-				location_longitude: 131.881242,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-
-			'Cafe': [
-			{
-				name: 'Bondi Beach',
-				location_latitude: 43.121450, 
-				location_longitude: 131.888623,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Coogee Beach',
-				location_latitude: 43.120682, 
-				location_longitude: 131.890469,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.123924, 
-				location_longitude: 131.888881,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.122750, 
-				location_longitude: 131.879611,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.120322, 
-				location_longitude: 131.880126,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-
-			'Sport': [
-			{
-				name: 'Bondi Beach',
-				location_latitude: 43.119993, 
-				location_longitude: 131.884310,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Coogee Beach',
-				location_latitude: 43.119414,
-				location_longitude:  131.878238,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.120573, 
-				location_longitude: 131.886285,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.116454, 
-				location_longitude: 131.886564,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.118223, 
-				location_longitude: 131.888066,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-
-			'Port': [
-			{
-				name: 'Bondi Beach',
-				location_latitude: 43.122805, 
-				location_longitude: 131.873539,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Coogee Beach',
-				location_latitude: 43.118341, 
-				location_longitude: 131.876714,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.113078, 
-				location_longitude: 131.886671,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.111527, 
-				location_longitude: 131.894954,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.112561,
-				location_longitude: 131.900661,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-
-
-			'Bank': [
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.116508, 
-				location_longitude: 131.890469,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.118686, 
-				location_longitude: 131.887207,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.115678, 
-				location_longitude: 131.882615,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.114519, 
-				location_longitude: 131.895490,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.121520, 
-				location_longitude: 131.892894,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 41.104,
-				location_longitude: -73.406,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.125451, 
-				location_longitude: 131.881628,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.121113,
-				location_longitude: 131.877058,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.123697, 
-				location_longitude: 131.894224,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-
-
-			'Post': [
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.115897, 
-				location_longitude: 131.889246,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.120643, 
-				location_longitude: 131.885491,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.118701, 
-				location_longitude: 131.893580,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-
-			'Showplace': [
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.119030, 
-				location_longitude: 131.879225,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.115177, 
-				location_longitude: 131.885576,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.113517, 
-				location_longitude: 131.893730,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.119437, 
-				location_longitude: 131.894095,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.122241, 
-				location_longitude: 131.901949,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.113986, 
-				location_longitude: 131.906970,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			],
-
-			'Park': [
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.120401,
-				location_longitude:  131.877208,
-				map_image_url: 'img/img.png',
-				name_point: 'Vladivostok',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.117801, 
-				location_longitude: 131.878732,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.126266, 
-				location_longitude: 131.890447,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Cronulla Beach',
-				location_latitude: 43.123071, 
-				location_longitude:  131.897593,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Manly Beach',
-				location_latitude: 43.115161, 
-				location_longitude: 131.881821,
-				map_image_url: 'img/img2.png',
-				name_point: 'Matart Group',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			},
-			{
-				name: 'Maroubra Beach',
-				location_latitude: 43.119265, 
-				location_longitude: 131.900146,
-				map_image_url: 'img/img3.png',
-				name_point: 'Envato',
-				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard',
-				url_point: '02.html'
-			}
-			]
-		};
-
-
-window.hideAllMarkers = function hideAllMarkers () {
-	for (var key in markers)
-		markers[key].forEach(function (marker) {
-			marker.setMap(null);
-		});
-};
-
-window.toggleMarkers = function toggleMarkers (category) {
-	hideAllMarkers();
-	closeInfoBox();
-
-	if ('undefined' === typeof markers[category])
-		return false;
-	markers[category].forEach(function (marker) {
-		marker.setMap(mapObject);
-		marker.setAnimation(google.maps.Animation.DROP);
-
-	});
-};
-
-window.closeInfoBox = function closeInfoBox() {
-	$('div.infoBox').remove();
-};
-
-window.getInfoBox = function getInfoBox(item) {
-	return new InfoBox({
-		content:
-			'<div class="marker_visit" id="marker_info">' +
-			'<div class="info" id="info">'+
-			'<a href="'+ item.url_point + '" class="">'+ item.name_point +'</a>' +
-			'<span></span>' +
-			'</div>' +
-			'</div>',
-		disableAutoPan: true,
-		maxWidth: 0,
-		pixelOffset: new google.maps.Size(40, -50),
-		closeBoxMargin: '50px 0px',
-		closeBoxURL: '',
-		isHidden: false,
-		pane: 'floatPane',
-		enableEventPropagation: true
-	});
-
-
-};
-
-
-
-

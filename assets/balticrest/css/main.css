@@ -938,52 +938,52 @@ body.inner_page .bg_parallax {
     transition: 0.3s;
 }
 .menu li a.medicine.active {
-    background-image: linear-gradient(transparent 85%, #62B50A 15%);
+    background-image: linear-gradient(transparent 85%, #56db40 15%);
 }
 .menu li a.medicine:hover, .menu li a.medicine:focus {
-    background: #62B50A;
+    background: #56db40;
     transition: 0.3s;
 }
 .menu li a.cafe.active {
-    background-image: linear-gradient(transparent 85%, #DD3D83 15%);
+    background-image: linear-gradient(transparent 85%, #e26cc3 15%);
 }
 .menu li a.cafe:hover, .menu li a.cafe:focus {
-    background: #DD3D83;
+    background: #e26cc3;
     transition: 0.3s;
 }
 .menu li a.shop.active {
-    background-image: linear-gradient(transparent 85%, #F54100 15%);
+    background-image: linear-gradient(transparent 85%, #e6761b 15%);
 }
 .menu li a.shop:hover, .menu li a.shop:focus {
-    background: #F54100;
+    background: #e6761b;
     transition: 0.3s;
 }
 .menu li a.bank.active {
-    background-image: linear-gradient(transparent 85%, #0081DB 15%);
+    background-image: linear-gradient(transparent 85%, #177bc9 15%);
 }
 .menu li a.bank:hover, .menu li a.bank:focus {
-    background: #0081DB;
+    background: #177bc9;
     transition: 0.3s;
 }
 .menu li a.museum.active {
-    background-image: linear-gradient(transparent 85%, #00B2B3 15%);
+    background-image: linear-gradient(transparent 85%, #97a100 15%);
 }
 .menu li a.museum:hover, .menu li a.museum:focus {
-    background: #00B2B3;
+    background: #97a100;
     transition: 0.3s;
 }
 .menu li a.sport.active {
-    background-image: linear-gradient(transparent 85%, #00c61e 15%);
+    background-image: linear-gradient(transparent 85%, #1bad03 15%);
 }
 .menu li a.sport:hover, .menu li a.sport:focus {
-    background: #00c61e;
+    background: #1bad03;
     transition: 0.3s;
 }
 .menu li a.transport.active {
-    background-image: linear-gradient(transparent 85%, #aac600 15%);
+    background-image: linear-gradient(transparent 85%, #ed4543 15%);
 }
 .menu li a.transport:hover, .menu li a.transport:focus {
-    background: #aac600;
+    background: #ed4543;
     transition: 0.3s;
 }
 
@@ -991,13 +991,13 @@ body.inner_page .bg_parallax {
 
 .marker_info .info {
     width: 300px;
-    height: 320px;
     border-radius: 5px;
     background: rgba(37, 32, 48, 0.9);
     position: relative;
     z-index: 9999999;
+    padding-bottom: 10px;
+    right: 148px;
 }
-
 .marker_info .info img {
     display: block;
     border-radius: 100px;
@@ -1008,19 +1008,30 @@ body.inner_page .bg_parallax {
     border: 7px solid #e9e5db;
     background: #ffffff;
 }
-.marker_info .info h2 {
+.marker_info .info h3 {
     text-align: center;
     padding-top: 70px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: #ffffff;
 }
-.marker_info .info h2 span {
+.marker_info .info h3 span {
     width: 70px;
     height: 1px;
     background: #E73931;
     display: block;
     margin: 15px auto;
+}
+.marker_info .info .close {
+    outline: none !important;
+    opacity: 0.5;
+}
+.marker_info .info .close:hover {
+    opacity: 1;
+}
+.marker_info .info .close span {
+    padding: 0 10px;
+    font-size: 20px;
 }
 .marker_info .info span {
     font-family: 'Roboto', sans-serif;
@@ -1029,11 +1040,10 @@ body.inner_page .bg_parallax {
     line-height: 22px;
     text-align: center;
     display: block;
-    padding: 0px 30px;
+    padding: 0 20px;
     font-size: 14px;
 }
-.marker_info .info a {}
-a.green_btn {
+.marker_info a.green_btn {
     background: #E73931;
     border: 1px solid #000000;
     padding: 10px 50px;
@@ -1043,10 +1053,8 @@ a.green_btn {
     display: block;
     width: 180px;
     text-align: center;
-    bottom: 40px;
-    position: absolute;
-    left: 60px;
     transition: 0.3s;
+    margin: 10px auto 10px auto;
 }
 a.green_btn:hover {
     background: #ffffff; /* Old browsers */
@@ -1059,22 +1067,19 @@ a.green_btn:hover {
     display: block;
     width: 180px;
     text-align: center;
-    bottom: 40px;
-    position: absolute;
-    left: 60px;
     text-decoration: none;
 }
 .marker_info .arrow {
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     position: absolute;
-    padding: 0px !important;
-    left: -28px;
-    top: 150px !important;
+    padding: 0 !important;
     border: 14px solid rgba(255, 0, 0, 0);
-    top: 0px;
-    border-right-color: rgba(37, 32, 48, 0.9);
+    border-top-color: rgba(37, 32, 48, 0.9);
+    bottom: -28px !important;
+    left: 135px !important;
 }
+
 /*header*/
 .header {
     position: fixed;

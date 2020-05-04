@@ -2,10 +2,10 @@
 
 namespace App\Components\Balticrest\Service;
 
+use App\Components\Balticrest\Service\DTO\MapPointDTO;
+use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Serializer;
 
 class MapManager implements MapManagerInterface
 {
@@ -32,19 +32,76 @@ class MapManager implements MapManagerInterface
 
         $cities = $this->containerBag->get('cities');
 
-        $data = [];
+        $listDTO = new MapPointsListDTO();
+
+        $listDTO->setTransPointButton('Подробнее');
 
         // Центр карты и масштаб
         if (isset($cities[$city])) {
-            $data['center']['lat'] = $cities[$city]['center']['lat'];
-            $data['center']['lon'] = $cities[$city]['center']['lon'];
-            $data['zoom'] = $cities[$city]['zoom'];
+            $listDTO->setCenterLat($cities[$city]['center']['lat'])
+                ->setCenterLon($cities[$city]['center']['lon'])
+                ->setZoom($cities[$city]['zoom']);
         }
 
-        // TODO category
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.956757)
+            ->setLon(20.463495)
+            ->setHint('Рога и копыта')
+            ->setTitle('ООО "Рога и копыта" fdgfdg df gdf')
+            ->setDescription('Описание компании Рога и копыта в пару строк')
+            ->setImage('static/balticrest/images/cities/zelenogradsk.png')
+            ->setPreset('islands#yellowHotelIcon')
+        );
 
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.956647)
+            ->setLon(20.474495)
+            ->setTitle('Рога и копыта')
+            ->setPreset('islands#pinkFoodIcon')
+        );
 
-        $serializer = new Serializer([], [new JsonEncoder()]);
-        return $serializer->serialize($data, 'json');
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.955647)
+            ->setLon(20.474495)
+            ->setTitle('Рога и копыта')
+            ->setPreset('islands#darkOrangeShoppingIcon')
+        );
+
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.954647)
+            ->setLon(20.474495)
+            ->setTitle('Рога и копыта')
+            ->setPreset('islands#darkBlueMoneyIcon')
+        );
+
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.953647)
+            ->setLon(20.47295)
+            ->setTitle('Рога и копыта')
+            ->setPreset('islands#greenMedicalIcon')
+        );
+
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.952647)
+            ->setLon(20.47195)
+            ->setTitle('Рога и копыта')
+            ->setPreset('islands#redMassTransitIcon')
+        );
+
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.951647)
+            ->setLon(20.47095)
+            ->setTitle('Рога и копыта')
+            ->setPreset('islands#darkGreenSportIcon')
+        );
+
+        $listDTO->addPoint((new MapPointDTO())
+            ->setLat(54.950647)
+            ->setLon(20.46595)
+            ->setTitle('Рога и копыта')
+            ->setPreset('islands#oliveSportIcon')
+        );
+
+        return $listDTO->getJsonResult();
     }
 }
