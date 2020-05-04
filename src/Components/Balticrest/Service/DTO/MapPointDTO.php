@@ -11,9 +11,6 @@ class MapPointDTO
     private $lon;
 
     /** @var string */
-    private $preset;
-
-    /** @var string */
     private $hint;
 
     /** @var string */
@@ -27,6 +24,15 @@ class MapPointDTO
 
     /** @var string */
     private $link;
+
+    /** @var string */
+    private $iconImage;
+
+    /** @var int */
+    private $iconImageX;
+
+    /** @var int */
+    private $iconImageY;
 
     /**
      * @param float $lat
@@ -49,17 +55,6 @@ class MapPointDTO
     {
         $this->lon = $lon;
 
-        return $this;
-    }
-
-    /**
-     * @param string $preset
-     *
-     * @return MapPointDTO
-     */
-    public function setPreset(string $preset): MapPointDTO
-    {
-        $this->preset = $preset;
         return $this;
     }
 
@@ -124,6 +119,42 @@ class MapPointDTO
     }
 
     /**
+     * @param string $iconImage
+     *
+     * @return MapPointDTO
+     */
+    public function setIconImage(string $iconImage): MapPointDTO
+    {
+        $this->iconImage = $iconImage;
+
+        return $this;
+    }
+
+    /**
+     * @param int $iconImageX
+     *
+     * @return MapPointDTO
+     */
+    public function setIconImageX(int $iconImageX): MapPointDTO
+    {
+        $this->iconImageX = $iconImageX;
+
+        return $this;
+    }
+
+    /**
+     * @param int $iconImageY
+     *
+     * @return MapPointDTO
+     */
+    public function setIconImageY(int $iconImageY): MapPointDTO
+    {
+        $this->iconImageY = $iconImageY;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getArrayResult(): array
@@ -136,7 +167,13 @@ class MapPointDTO
             'description' => (string) $this->description,
             'image' => (string) $this->image,
             'link' => (string) $this->link,
-            'preset' => (string)$this->preset
+            'icon' => [
+                'image' => $this->iconImage,
+                'size' => [
+                    'x' => (int) $this->iconImageX,
+                    'y' => (int) $this->iconImageY,
+                ]
+            ]
         ];
     }
 }
