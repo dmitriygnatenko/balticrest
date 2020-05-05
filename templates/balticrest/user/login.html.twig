@@ -1,25 +1,25 @@
 {% extends 'balticrest/base_left_top_menu.html.twig' %}
 
-{% block title %}Авторизация{% endblock %}
+{% block title %}{% trans %}login.title{% endtrans %} - {{ parent() }}{% endblock %}
 
 {% block body_attr %}class="innerpage"{% endblock %}
 
 {% block content %}
     <div class="login_form">
-        <h3>{% trans %}login.title.autorization{% endtrans %}<span></span></h3>
+        <h3>{% trans %}login.form.title{% endtrans %}<span></span></h3>
         {% if error %}
             <div class="errors">{{ error.message }}</div>
         {% endif %}
         <form method="post">
             <label>
-                {% trans %}login.label.email{% endtrans %}:<input type="text" name="email" value="{{ last_username }}">
+                {% trans %}login.form.label.email{% endtrans %}:<input type="text" name="email" value="{{ last_username }}">
             </label>
             <label>
-                {% trans %}login.label.password{% endtrans %}:<input type="password" name="password">
+                {% trans %}login.form.label.password{% endtrans %}:<input type="password" name="password">
             </label>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <button class="btn btn-success" type="submit">
-                {% trans %}login.label.button{% endtrans %}
+                {% trans %}login.form.label.button{% endtrans %}
             </button>
         </form>
     </div>

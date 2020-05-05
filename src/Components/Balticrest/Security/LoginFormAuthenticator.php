@@ -114,7 +114,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
 
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException($this->translator->trans('login.error.csrf'));
+            throw new InvalidCsrfTokenException($this->translator->trans('login.form.error.csrf'));
         }
 
         $user = $this->entityManager
@@ -123,7 +123,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.error.email_or_password')
+                $this->translator->trans('login.form.error.email_or_password')
             );
         }
 
@@ -160,7 +160,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $customException = new CustomUserMessageAuthenticationException(
-            $this->translator->trans('login.error.email_or_password')
+            $this->translator->trans('login.form.error.email_or_password')
         );
 
         if ($request->hasSession()) {
