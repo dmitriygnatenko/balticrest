@@ -9,9 +9,9 @@
             <h3>
                 <a href="#">{{ app.user.username }}</a>
             </h3>
-            <a href="#" class="logout_btn">{% trans %}profile.logout{% endtrans %}</a>
+            <a href="{{ path('logout') }}" class="logout_btn">{% trans %}profile.logout{% endtrans %}</a>
         {% else %}
-            <a href="{{ path('app_login') }}" class="login_btn">{% trans %}profile.login{% endtrans %}</a>
+            <a href="{{ path('login') }}" class="login_btn">{% trans %}profile.login{% endtrans %}</a>
         {% endif %}
     </div>
 

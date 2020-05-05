@@ -34,3 +34,14 @@ navigation:
         about: О проекте
         privacy_policy: Конфиденциальность
         user_profile: Профиль пользователя
+
+login:
+    title:
+        autorization: Вход
+    label:
+        email: Адрес электронной почты
+        password: Пароль
+        button: Войти
+    error:
+        email_or_password: Неверный адрес электронной почты или пароль
+        csrf: Ошибка проверки аутентификационных данных

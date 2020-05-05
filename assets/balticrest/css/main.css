@@ -1378,11 +1378,8 @@ a.green_btn:hover {
     margin-top: 18px;
 }
 
-
-
 /* Login form */
 .login_form {
-    height: 400px;
     position: absolute;
     top: 50%;
     left:50%;
@@ -1391,11 +1388,12 @@ a.green_btn:hover {
     background: #ffffff;
     border-radius: 4px;
     margin: 0 auto;
+    padding-bottom: 20px;
 }
 .login_form h3 {
     font-weight: 300;
     text-align: center;
-    padding: 20px 0px;
+    padding: 10px 0 20px 0;
     display: block;
 }
 .login_form h3 span {
@@ -1409,8 +1407,8 @@ a.green_btn:hover {
     font-size: 11px;
     text-transform: uppercase;
     display: block;
-    padding: 0px 30px;
-    margin: 20px 0px 20px 0px;
+    padding: 0 30px;
+    margin: 20px 0 20px 0;
 }
 .login_form label input {
     display: block;
@@ -1420,7 +1418,7 @@ a.green_btn:hover {
     border: 1px solid #DDDDDD;
     margin-top: 10px;
     background: #F9F9F9;
-    padding: 0px 20px;
+    padding: 0 20px;
     font-size: 16px;
     font-weight: 300;
 }
@@ -1438,13 +1436,13 @@ a.green_btn:hover {
     margin-top: 10px;
     height: 30px;
 }
-.login_form a {
+.login_form button {
     margin: 10px 30px;
     width: 240px;
     border-radius: 3px;
     padding: 10px;
 }
-.login_form a:hover {
+.login_form button:hover {
     width: 100%;
     margin: 0;
     border-top-left-radius: 0;
@@ -1452,14 +1450,19 @@ a.green_btn:hover {
     padding: 20px;
     margin-top: 18px;
 }
-.login_form a i {
+.login_form button i {
     padding: 0 10px 0 0;
 }
-.login_form a, .login_form a:hover {
+.login_form button, .login_form button:hover {
     margin: 10px 30px;
     width: 240px;
     border-radius: 3px;
     padding: 10px;
+}
+.login_form .errors {
+    margin: 20px 30px;
+    font-size: 13px;
+    color: #e73931;
 }
 
 /*------------------------------------------------------------------
