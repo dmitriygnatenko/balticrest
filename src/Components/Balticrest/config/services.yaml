@@ -1,6 +1,3 @@
-imports:
-    - { resource: 'parameters.yaml'}
-
 services:
 
     App\Components\Balticrest\Controller\:

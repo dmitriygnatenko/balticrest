@@ -2,7 +2,7 @@
 
 namespace App\Components\Balticrest\Controller;
 
-use App\Components\Balticrest\Service\MapManagerInterface;
+use App\Components\Balticrest\Service\Manager\MapDataManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,15 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MapController extends AbstractController
 {
-    /** @var MapManagerInterface  */
-    private $mapManager;
+    /** @var MapDataManagerInterface  */
+    private $mapDataManager;
 
     /**
-     * @param MapManagerInterface $mapManager
+     * @param MapDataManagerInterface $mapDataManager
      */
-    public function __construct(MapManagerInterface $mapManager)
+    public function __construct(MapDataManagerInterface $mapDataManager)
     {
-        $this->mapManager = $mapManager;
+        $this->mapDataManager = $mapDataManager;
     }
 
     /**
@@ -41,7 +41,7 @@ class MapController extends AbstractController
     public function map(Request $request): Response
     {
         return $this->render('balticrest/map/map.html.twig', [
-            'map_data' => $this->mapManager->generateCityMapData($request)
+            'map_data' => $this->mapDataManager->generateCityMapData($request)
         ]);
     }
 }

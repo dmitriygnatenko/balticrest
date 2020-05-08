@@ -2,5 +2,4 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         yandex_maps_api_key: '%env(YANDEX_MAPS_API_KEY)%'
-        cities: '%cities%'
-        languages: '%languages%'
+        global_service: '@App\Components\Balticrest\Service\Twig\TwigGlobalService'

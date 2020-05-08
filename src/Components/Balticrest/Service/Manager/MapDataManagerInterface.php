@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Components\Balticrest\Service;
+namespace App\Components\Balticrest\Service\Manager;
 
 use Symfony\Component\HttpFoundation\Request;
 
-interface MapManagerInterface
+interface MapDataManagerInterface
 {
     /**
      * @param Request $request

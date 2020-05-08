@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Components\Balticrest\Service;
+namespace App\Components\Balticrest\Service\Manager;
 
 use App\Components\Balticrest\Service\DTO\MapPointDTO;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+use App\Entity\City;
 use Symfony\Component\HttpFoundation\Request;
 
-class MapManager implements MapManagerInterface
+class MapDataManager implements MapDataManagerInterface
 {
-    /** @var ContainerBagInterface */
-    private $containerBag;
+    /** @var CityManager */
+    private $cityManager;
 
     /**
-     * @param ContainerBagInterface $containerBag
+     * @param CityManagerInterface $cityManager
      */
-    public function __construct(ContainerBagInterface $containerBag)
+    public function __construct(CityManagerInterface $cityManager)
     {
-        $this->containerBag = $containerBag;
+        $this->cityManager = $cityManager;
     }
 
     /**
@@ -30,7 +30,7 @@ class MapManager implements MapManagerInterface
         $city = $request->get('city', '');
         $category = $request->get('category', '');
 
-        $cities = $this->containerBag->get('cities');
+        $cities = $this->cityManager->getActiveCached();
 
         // TODO получать данные из БД и использовать маппер
 
@@ -40,16 +40,19 @@ class MapManager implements MapManagerInterface
 
         // Центр карты и масштаб
         if (isset($cities[$city])) {
-            $listDTO->setCenterLat($cities[$city]['center']['lat'])
-                ->setCenterLon($cities[$city]['center']['lon'])
-                ->setZoom($cities[$city]['zoom']);
+            /** @var City $cityEntity */
+            $cityEntity = $cities[$city];
+
+            $listDTO->setCenterLat($cityEntity->getLat())
+                ->setCenterLon($cityEntity->getLon())
+                ->setZoom($cityEntity->getZoom());
         }
 
         $listDTO->addPoint((new MapPointDTO())
             ->setLat(54.958713)
             ->setLon(20.472676)
             ->setHint('Рога и копыта')
-            ->setTitle('ООО "Рога и копыта" fdgfdg df gdf')
+            ->setTitle('ООО "Рога и копыта"')
             ->setDescription('Описание компании Рога и копыта в пару строк')
             ->setImage('/static/balticrest/images/cities/zelenogradsk.png')
             ->setIconImage('/static/balticrest/images/markers/marker-hotel.png')
