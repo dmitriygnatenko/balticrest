@@ -25,8 +25,9 @@ final class Version20200508205129 extends AbstractMigration
         $this->addSql('CREATE TABLE point_type (
             id INT AUTO_INCREMENT NOT NULL,
             code VARCHAR(50) NOT NULL,
+            UNIQUE INDEX UNIQ_55EB04B77153098 (code),
             PRIMARY KEY(id)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     /**

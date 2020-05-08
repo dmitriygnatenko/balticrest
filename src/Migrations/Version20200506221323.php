@@ -27,8 +27,9 @@ final class Version20200506221323 extends AbstractMigration
             code VARCHAR(2) NOT NULL,
             title VARCHAR(150) NOT NULL,
             image VARCHAR(255) NOT NULL,
-            is_active TINYINT(1) NOT NULL,
-            INDEX IDX_D4DB71B577153098 (code),
+            is_active TINYINT(1) DEFAULT \'1\' NOT NULL,
+            UNIQUE INDEX UNIQ_D4DB71B577153098 (code),
+            INDEX IDX_D4DB71B51B5771DD (is_active),
             PRIMARY KEY(id)
         ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }

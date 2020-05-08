@@ -2,10 +2,18 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PointTypeRepository")
+ * @ORM\Table(
+ *     name="point_type",
+ *     uniqueConstraints={
+ *          @ORM\UniqueConstraint(columns={"code"})
+ *     }
+ * )
  */
 class PointType
 {
@@ -20,6 +28,16 @@ class PointType
      * @ORM\Column(type="string", length=50)
      */
     private $code;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Point", mappedBy="type", orphanRemoval=true)
+     */
+    private $points;
+
+    public function __construct()
+    {
+        $this->points = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -45,6 +63,46 @@ class PointType
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Point[]
+     */
+    public function getPoints(): Collection
+    {
+        return $this->points;
+    }
+
+    /**
+     * @param Point $point
+     *
+     * @return $this
+     */
+    public function addPoint(Point $point): self
+    {
+        if (!$this->points->contains($point)) {
+            $this->points[] = $point;
+            $point->setType($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Point $point
+     *
+     * @return $this
+     */
+    public function removePoint(Point $point): self
+    {
+        if ($this->points->contains($point)) {
+            $this->points->removeElement($point);
+            if ($point->getType() === $this) {
+                $point->setType(null);
+            }
+        }
 
         return $this;
     }

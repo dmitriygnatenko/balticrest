@@ -8,8 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\LanguageRepository")
  * @ORM\Table(
  *     name="language",
+ *     uniqueConstraints={
+ *          @ORM\UniqueConstraint(columns={"code"})
+ *     },
  *     indexes={
- *          @ORM\Index(columns={"code"})
+ *          @ORM\Index(columns={"is_active"})
  *     }
  * )
  */
@@ -38,7 +41,7 @@ class Language
     private $image;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": true})
      */
     private $is_active;
 

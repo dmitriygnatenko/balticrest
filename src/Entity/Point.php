@@ -5,18 +5,18 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CityRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PointRepository")
  * @ORM\Table(
- *     name="city",
+ *     name="point",
  *     uniqueConstraints={
- *          @ORM\UniqueConstraint(columns={"code"})
+ *          @ORM\UniqueConstraint(columns={"url"})
  *     },
  *     indexes={
  *          @ORM\Index(columns={"is_active"})
  *     }
  * )
  */
-class City
+class Point
 {
     /**
      * @ORM\Id()
@@ -26,14 +26,16 @@ class City
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity="App\Entity\City")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $code;
+    private $city;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\PointType", inversedBy="points")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $image;
+    private $type;
 
     /**
      * @ORM\Column(type="float")
@@ -46,14 +48,19 @@ class City
     private $lon;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="string", length=255)
      */
-    private $zoom;
+    private $url;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private $logo;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $data = [];
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
@@ -69,41 +76,41 @@ class City
     }
 
     /**
-     * @return string|null
+     * @return City|null
      */
-    public function getCode(): ?string
+    public function getCity(): ?City
     {
-        return $this->code;
+        return $this->city;
     }
 
     /**
-     * @param string $code
+     * @param City|null $city
      *
      * @return $this
      */
-    public function setCode(string $code): self
+    public function setCity(?City $city): self
     {
-        $this->code = $code;
+        $this->city = $city;
 
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return PointType|null
      */
-    public function getImage(): ?string
+    public function getType(): ?PointType
     {
-        return $this->image;
+        return $this->type;
     }
 
     /**
-     * @param string $image
+     * @param PointType|null $type
      *
      * @return $this
      */
-    public function setImage(string $image): self
+    public function setType(?PointType $type): self
     {
-        $this->image = $image;
+        $this->type = $type;
 
         return $this;
     }
@@ -149,21 +156,21 @@ class City
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getZoom(): ?int
+    public function getUrl(): ?string
     {
-        return $this->zoom;
+        return $this->url;
     }
 
     /**
-     * @param int $zoom
+     * @param string $url
      *
      * @return $this
      */
-    public function setZoom(int $zoom): self
+    public function setUrl(string $url): self
     {
-        $this->zoom = $zoom;
+        $this->url = $url;
 
         return $this;
     }
@@ -171,39 +178,59 @@ class City
     /**
      * @return string|null
      */
-    public function getTitle(): ?string
+    public function getLogo(): ?string
     {
-        return $this->title;
+        return $this->logo;
     }
 
     /**
-     * @param string $title
+     * @param string $logo
      *
      * @return $this
      */
-    public function setTitle(string $title): self
+    public function setLogo(string $logo): self
     {
-        $this->title = $title;
+        $this->logo = $logo;
 
         return $this;
     }
 
     /**
-     * @return bool|null
+     * @return array
      */
-    public function getIsActive(): ?bool
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return $this
+     */
+    public function setData(array $data): self
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive(): bool
     {
         return $this->is_active;
     }
 
     /**
-     * @param bool $isActive
+     * @param bool $is_active
      *
      * @return $this
      */
-    public function setIsActive(bool $isActive): self
+    public function setIsActive(bool $is_active): self
     {
-        $this->is_active = $isActive;
+        $this->is_active = $is_active;
 
         return $this;
     }
