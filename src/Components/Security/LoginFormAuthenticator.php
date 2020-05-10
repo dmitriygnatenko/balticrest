@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Balticrest\Security;
+namespace App\Components\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
