@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,6 +68,16 @@ class Point
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $is_active = true;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PointLangData", mappedBy="point", orphanRemoval=true)
+     */
+    private $pointLangData;
+
+    public function __construct()
+    {
+        $this->pointLangData = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -231,6 +243,46 @@ class Point
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PointLangData[]
+     */
+    public function getPointLangData(): Collection
+    {
+        return $this->pointLangData;
+    }
+
+    /**
+     * @param PointLangData $pointLangData
+     *
+     * @return $this
+     */
+    public function addPointLangData(PointLangData $pointLangData): self
+    {
+        if (!$this->pointLangData->contains($pointLangData)) {
+            $this->pointLangData[] = $pointLangData;
+            $pointLangData->setPoint($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PointLangData $pointLangData
+     *
+     * @return $this
+     */
+    public function removePointLangData(PointLangData $pointLangData): self
+    {
+        if ($this->pointLangData->contains($pointLangData)) {
+            $this->pointLangData->removeElement($pointLangData);
+            if ($pointLangData->getPoint() === $this) {
+                $pointLangData->setPoint(null);
+            }
+        }
 
         return $this;
     }
