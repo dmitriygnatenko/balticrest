@@ -17,3 +17,4 @@ services:
 
 imports:
     - { resource: '../src/Components/Balticrest/config/services.yaml'}
+    - { resource: '../src/Components/Admin/config/services.yaml'}

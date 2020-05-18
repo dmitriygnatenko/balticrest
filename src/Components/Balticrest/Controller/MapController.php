@@ -34,6 +34,7 @@ class MapController extends AbstractController
      *     methods={"GET"},
      *     name="map"
      * )
+     *
      * @param Request $request
      *
      * @return Response

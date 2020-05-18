@@ -39,7 +39,14 @@ Encore
 
     // Admin
 
+    .addEntry('admin_js_jquery', './assets/admin/jquery/js/jquery.min.js')
+
+    .addEntry('admin_js_main', ['./assets/admin/adminlte/js/AdminLTE.js'])
+
+    .addEntry('admin_css_main', ['./assets/admin/adminlte/scss/AdminLTE.scss'])
+
     // https://symfony.com/doc/current/frontend.html#adding-more-features
+    .enableSassLoader()
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())

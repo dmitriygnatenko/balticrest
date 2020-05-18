@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+WORKDIR /var/www/balticrest.ru
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y software-properties-common mc nano curl
@@ -30,7 +32,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs && \
-    npm install yarn
+    npm install yarn -g
 
 COPY config/cli/php.ini /etc/php/7.3/cli/php.ini
 COPY config/fpm/php.ini /etc/php/7.3/fpm/php.ini
@@ -39,7 +41,5 @@ COPY config/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY config/fpm/xdebug.ini /etc/php/7.3/mods-available/xdebug.ini
 
 EXPOSE 9000
-
-WORKDIR /var/www/balticrest.ru
 
 CMD ["php-fpm7.3"]

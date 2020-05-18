@@ -1,3 +1,8 @@
 balticrest_controllers:
     resource: ../src/Components/Balticrest/Controller/
     type: annotation
+
+admin_controllers:
+    resource: ../src/Components/Admin/Controller/
+    type: annotation
+    prefix: '/admin'

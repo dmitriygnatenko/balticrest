@@ -27,6 +27,24 @@
       "js": [
         "/build/balticrest_js_map_index.js"
       ]
+    },
+    "admin_js_jquery": {
+      "js": [
+        "/build/admin_js_jquery.js"
+      ]
+    },
+    "admin_js_main": {
+      "js": [
+        "/build/admin_js_main.js"
+      ]
+    },
+    "admin_css_main": {
+      "css": [
+        "/build/admin_css_main.css"
+      ],
+      "js": [
+        "/build/admin_css_main.js"
+      ]
     }
   }
 }

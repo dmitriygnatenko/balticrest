@@ -1,0 +1,5 @@
+services:
+
+    App\Components\Admin\Controller\:
+        resource: '../Controller'
+        tags: ['controller.service_arguments']
