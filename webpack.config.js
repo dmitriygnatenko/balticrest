@@ -39,19 +39,29 @@ Encore
 
     // Admin
 
-    .addEntry('admin_js_jquery', './assets/admin/jquery/js/jquery.min.js')
+    .addEntry('admin_js_main', [
+        './assets/admin/jquery/js/jquery.min.js',
+        './assets/admin/bootstrap/js/bootstrap.min.js',
+        './assets/admin/bootstrap/js/bootstrap-datepicker.js',
+        './assets/admin/bootstrap/js/bootstrap-switch.js',
+        './assets/admin/bootstrap/js/bootstrap-notify.js',
+        './assets/admin/popper/js/popper.min.js',
+        // './assets/admin/chart/js/chartist.min.js',
+        './assets/admin/light-bootstrap/js/light-bootstrap-dashboard.js',
+        './assets/admin/light-bootstrap/js/demo.js'
+    ])
 
-    .addEntry('admin_js_main', ['./assets/admin/adminlte/js/AdminLTE.js'])
-
-    .addEntry('admin_css_main', ['./assets/admin/adminlte/scss/AdminLTE.scss'])
+    .addEntry('admin_css_main', [
+        './assets/admin/bootstrap/css/bootstrap.min.css',
+        './assets/admin/light-bootstrap/css/demo.css',
+        './assets/admin/light-bootstrap/css/light-bootstrap-dashboard.css',
+    ])
 
     // https://symfony.com/doc/current/frontend.html#adding-more-features
-    .enableSassLoader()
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
-    .autoProvidejQuery()
     .disableSingleRuntimeChunk()
 ;
 
