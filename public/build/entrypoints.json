@@ -1,44 +1,12 @@
 {
   "entrypoints": {
-    "balticrest_js_jquery": {
+    "admin": {
       "js": [
-        "/build/balticrest_js_jquery.js"
-      ]
-    },
-    "balticrest_js_ie9": {
-      "js": [
-        "/build/balticrest_js_ie9.js"
-      ]
-    },
-    "balticrest_js_main": {
-      "js": [
-        "/build/balticrest_js_main.js"
-      ]
-    },
-    "balticrest_css_main": {
-      "css": [
-        "/build/balticrest_css_main.css"
+        "/build/runtime.js",
+        "/build/admin.js"
       ],
-      "js": [
-        "/build/balticrest_css_main.js"
-      ]
-    },
-    "balticrest_js_map_index": {
-      "js": [
-        "/build/balticrest_js_map_index.js"
-      ]
-    },
-    "admin_js_main": {
-      "js": [
-        "/build/admin_js_main.js"
-      ]
-    },
-    "admin_css_main": {
       "css": [
-        "/build/admin_css_main.css"
-      ],
-      "js": [
-        "/build/admin_css_main.js"
+        "/build/admin.css"
       ]
     }
   }

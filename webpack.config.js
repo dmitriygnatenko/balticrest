@@ -10,6 +10,7 @@ Encore
 
     // Balticrest
 
+    /*
     .addEntry('balticrest_js_jquery', './assets/balticrest/jquery/js/jquery.min.js')
 
     .addEntry('balticrest_js_ie9', [
@@ -36,33 +37,19 @@ Encore
     .addEntry('balticrest_js_map_index', [
         './assets/balticrest/balticrest/js/map_index.js',
     ])
+    */
 
     // Admin
 
-    .addEntry('admin_js_main', [
-        './assets/admin/jquery/js/jquery.min.js',
-        './assets/admin/bootstrap/js/bootstrap.min.js',
-        './assets/admin/bootstrap/js/bootstrap-datepicker.js',
-        './assets/admin/bootstrap/js/bootstrap-switch.js',
-        './assets/admin/bootstrap/js/bootstrap-notify.js',
-        './assets/admin/popper/js/popper.min.js',
-        // './assets/admin/chart/js/chartist.min.js',
-        './assets/admin/light-bootstrap/js/light-bootstrap-dashboard.js',
-        './assets/admin/light-bootstrap/js/demo.js'
-    ])
-
-    .addEntry('admin_css_main', [
-        './assets/admin/bootstrap/css/bootstrap.min.css',
-        './assets/admin/light-bootstrap/css/demo.css',
-        './assets/admin/light-bootstrap/css/light-bootstrap-dashboard.css',
-    ])
+    .addEntry('admin', './assets/admin/admin.js')
 
     // https://symfony.com/doc/current/frontend.html#adding-more-features
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
-    .disableSingleRuntimeChunk()
+    .enableSingleRuntimeChunk()
+    .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();

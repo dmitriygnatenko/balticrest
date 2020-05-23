@@ -2104,10 +2104,18 @@ fieldset[disabled] .form-control {
 }
 
 .navbar.fixed {
-    width: calc(100% - $sidebar-width);
     right: 0;
     left: auto;
     border-radius: 0;
+}
+
+.navbar.fixed {
+}
+
+.navbar.fixed {
+}
+
+.navbar.fixed {
 }
 
 .navbar .nc-icon {
