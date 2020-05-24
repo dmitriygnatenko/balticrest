@@ -1,5 +1,5 @@
 
-window.initialize = function initialize () {
+const initializeMap = function() {
 
 	let activePoint;
 
@@ -132,3 +132,5 @@ window.initialize = function initialize () {
 	}
 
 };
+
+export default initializeMap;

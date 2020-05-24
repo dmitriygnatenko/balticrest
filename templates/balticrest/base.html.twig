@@ -7,22 +7,19 @@
     <title>{% block title %}{% trans %}head.default_title{% endtrans %}{% endblock %}</title>
     <meta name="description" content="{% block description %}{% trans %}head.default_description{% endtrans %}{% endblock %}">
     <meta name="keywords" content="{% block keywords %}{% trans %}head.default_keywords{% endtrans %}{% endblock %}">
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('balticrest_css_main') }}
+    {% block balticrest_css_head %}
+        {{ encore_entry_link_tags('balticrest_main') }}
     {% endblock %}
-    {% block head_javascripts %}
-        {{ encore_entry_script_tags('balticrest_js_jquery') }}
-    {% endblock %}
+    {% block balticrest_js_head %}
     <!--[if lt IE 9]>
-        {% block head_javascripts_ie9 %}
-            {{ encore_entry_script_tags('balticrest_js_ie9') }}
-        {% endblock %}
+        {{ encore_entry_script_tags('balticrest_ie9') }}
     <![endif]-->
+    {% endblock %}
 </head>
 <body {% block body_attr %}{% endblock %}>
     {% block body %}{% endblock %}
-    {% block body_javascripts %}
-        {{ encore_entry_script_tags('balticrest_js_main') }}
+    {% block balticrest_js_body %}
+        {{ encore_entry_script_tags('balticrest_main') }}
     {% endblock %}
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 {% block title %}Тестовая карта{% endblock %}
 
-{% block body_attr %}onload="initialize()" class="inmap innerpage"{% endblock %}
+{% block body_attr %}onload="initializeMap()" class="inmap innerpage"{% endblock %}
 
 {% block content %}
     <div id="map" class="map"></div>
@@ -31,15 +31,11 @@
     </div>
 {% endblock %}
 
-{% block head_javascripts %}
-    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_maps_api_key }}&lang={{ app.request.locale }}" type="text/javascript">
-    {{ parent() }}
-{% endblock %}
-
-{% block body_javascripts %}
+{% block balticrest_js_body %}
+    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_maps_api_key }}&lang={{ app.request.locale }}" type="text/javascript"></script>
     {{ parent() }}
     <script type="text/javascript">
         const map_data = {{ map_data|raw }};
     </script>
-    {{ encore_entry_script_tags('balticrest_js_map_index') }}
+    {{ encore_entry_script_tags('balticrest_map') }}
 {% endblock %}
