@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Components\Balticrest\Controller;
 
 use App\Components\Balticrest\Service\Manager\MapDataManagerInterface;
