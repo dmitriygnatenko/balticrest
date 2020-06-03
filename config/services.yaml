@@ -6,15 +6,14 @@
 parameters:
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
 
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
 imports:
-    - { resource: '../src/Components/Balticrest/config/services.yaml'}
     - { resource: '../src/Components/Admin/config/services.yaml'}
+    - { resource: '../src/Components/Balticrest/config/services.yaml'}
