@@ -1,0 +1,112 @@
+{% extends 'admin/base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+
+{% set languages = global_service.languages %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Добавление объекта</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+
+
+                            {{ form_errors(form) }}
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{ form_row(form.city) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(form.type) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(form.is_active) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{ form_row(form.lat) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(form.lon) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(form.url) }}
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(form.website) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(form.phones) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_row(form.logo) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_row(form.comment) }}
+                            </div>
+                        </div>
+
+                        {% for language in languages %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="form-lang-header">
+                                        <img src="{{ asset(language.image) }}">
+                                        {{ language.title }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(form["lang_#{language.id}_title"]) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(form["lang_#{language.id}_address"]) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(form["lang_#{language.id}_short_desc"]) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(form["lang_#{language.id}_desc"]) }}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                        <div class="clearfix"></div>
+
+
+
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

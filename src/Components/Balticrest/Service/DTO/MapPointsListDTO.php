@@ -38,11 +38,11 @@ class MapPointsListDTO
     }
 
     /**
-     * @param string $centerLon
+     * @param float $centerLon
      *
      * @return MapPointsListDTO
      */
-    public function setCenterLon(string $centerLon): MapPointsListDTO
+    public function setCenterLon(float $centerLon): MapPointsListDTO
     {
         $this->centerLon = $centerLon;
 

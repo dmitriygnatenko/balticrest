@@ -5319,3 +5319,9 @@ License - nucleoapp.com/license/
 }
 
 /* all icon font classes list here */
+
+h5.form-lang-header img {
+    width: 30px;
+    height: 20px;
+    border: 1px solid #797979;
+}
