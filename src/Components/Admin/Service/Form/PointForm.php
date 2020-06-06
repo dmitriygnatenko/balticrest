@@ -16,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
@@ -30,9 +29,6 @@ class PointForm extends AbstractType
 
     /** @var string */
     public const VALIDATION_GROUP_UPDATE = 'update';
-
-    /** @var string */
-    public const LANG_FIELD_PREFIX = 'lang_';
 
     /** @var string */
     public const MAIN_LANG = 'ru';
@@ -130,25 +126,25 @@ class PointForm extends AbstractType
         /** @var Language $language */
         foreach ($languages as $language) {
 
-            $builder->add(self::LANG_FIELD_PREFIX . $language->getId() . '_title', TextType::class, [
+            $builder->add('lang_' . $language->getId() . '_title', TextType::class, [
                 'label' => 'Название',
                 'constraints' => $language->getCode() === self::MAIN_LANG
                     ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
                     : []
             ]);
 
-            $builder->add(self::LANG_FIELD_PREFIX . $language->getId() . '_address', TextType::class, [
+            $builder->add('lang_' . $language->getId() . '_address', TextType::class, [
                 'label' => 'Адрес',
                 'constraints' => $language->getCode() === self::MAIN_LANG
                     ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
                     : []
             ]);
 
-            $builder->add(self::LANG_FIELD_PREFIX . $language->getId() . '_desc', TextareaType::class, [
+            $builder->add('lang_' . $language->getId() . '_desc', TextareaType::class, [
                 'label' => 'Описание',
             ]);
 
-            $builder->add(self::LANG_FIELD_PREFIX . $language->getId() . '_short_desc', TextareaType::class, [
+            $builder->add('lang_' . $language->getId() . '_short_desc', TextareaType::class, [
                 'label' => 'Краткое описание',
             ]);
         }
