@@ -8,7 +8,7 @@ use App\Components\Admin\Service\Form\Mapper\PointFormDataMapper;
 use App\Components\Admin\Service\Form\PointForm;
 use App\Entity\Point;
 use Doctrine\ORM\EntityManager;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,11 +21,11 @@ class PointController extends AbstractController
      *
      * @param Request $request
      * @param PointFormDataMapper $pointFormDataMapper
-     * @param Logger $logger
+     * @param LoggerInterface $logger
      *
      * @return Response
      */
-    public function addPoint(Request $request, PointFormDataMapper $pointFormDataMapper, Logger $logger): Response
+    public function addPoint(Request $request, PointFormDataMapper $pointFormDataMapper, LoggerInterface $logger): Response
     {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
@@ -43,12 +43,17 @@ class PointController extends AbstractController
 
             try {
                 $entityManager->persist($point);
+
+                foreach ($point->getPointLangData() as $pointLangData) {
+                    $entityManager->persist($pointLangData);
+                }
+
                 $entityManager->flush();
             } catch (\Throwable $exception) {
                 $logger->error($exception->getMessage(), ['exception' => $exception]);
             }
 
-            die;
+            // TODO
             //return $this->redirectToRoute('point_lang_data_index');
         }
 

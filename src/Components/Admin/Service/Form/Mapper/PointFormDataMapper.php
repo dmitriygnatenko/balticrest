@@ -72,6 +72,8 @@ class PointFormDataMapper implements DataMapperInterface
             ];
 
             $pointLangData->setData($pointLangExtData);
+
+            $point->addPointLangData($pointLangData);
         }
     }
 }

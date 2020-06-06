@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% form_theme form 'admin/form/custom_theme.html.twig' %}
 
 {% block content %}
 
@@ -16,10 +16,6 @@
                     </div>
                     <div class="card-body">
                         {{ form_start(form) }}
-
-
-                            {{ form_errors(form) }}
-
                             <div class="row">
                                 <div class="col-md-4">
                                     {{ form_row(form.city) }}
