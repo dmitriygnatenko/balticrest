@@ -59,8 +59,9 @@ class PointController extends AbstractController
             //return $this->redirectToRoute('point_lang_data_index');
         }
 
-        return $this->render('admin/point/add.html.twig', [
+        return $this->render('admin/point/edit.html.twig', [
             'form' => $form->createView(),
+            'title' => 'Добавление объекта',
         ]);
     }
 
@@ -111,8 +112,9 @@ class PointController extends AbstractController
             //return $this->redirectToRoute('point_lang_data_index');
         }
 
-        return $this->render('admin/point/add.html.twig', [
+        return $this->render('admin/point/edit.html.twig', [
             'form' => $form->createView(),
+            'title' => 'Редактирование объекта',
         ]);
     }
 }
