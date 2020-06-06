@@ -9,9 +9,8 @@ use App\Entity\Point;
 use App\Entity\PointLangData;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\DataMapperInterface;
 
-class PointFormDataMapper implements DataMapperInterface
+class PointFormDataMapper
 {
     /** @var EntityManager */
     private $em;
@@ -25,19 +24,46 @@ class PointFormDataMapper implements DataMapperInterface
     }
 
     /**
-     * @param mixed $data
-     * @param iterable $forms
+     * @param Point $point
+     *
+     * @return array
      */
-    public function mapDataToForms($data, iterable $forms)
+    public function mapPointToForm(Point $point): array
     {
-        // TODO: Implement mapDataToForms() method.
+        $pointExtData = $point->getData();
+
+        $data = [
+            'city' => $point->getCity(),
+            'type' => $point->getType(),
+            'is_active' => $point->getIsActive(),
+            'lat' => $point->getLat(),
+            'lon' => $point->getLon(),
+            'logo' => $point->getLogo(),
+            'url' => $point->getUrl(),
+            'email' => $pointExtData[Point::FIELD_EMAIl] ?? '',
+            'website' => $pointExtData[Point::FIELD_WEBSITE] ?? '',
+            'phones' => $pointExtData[Point::FIELD_PHONES] ?? '',
+            'comment' => $pointExtData[Point::FIELD_COMMENT] ?? '',
+        ];
+
+        foreach ($point->getPointLangData() as $pointLangData) {
+            $langId = $pointLangData->getLanguage()->getId();
+            $pointLangExtData = $pointLangData->getData();
+
+            $data['lang_' . $langId . '_title'] = $pointLangData->getTitle();
+            $data['lang_' . $langId . '_desc'] = $pointLangExtData[PointLangData::FIELD_DESC ?? ''];
+            $data['lang_' . $langId . '_short_desc'] = $pointLangExtData[PointLangData::FIELD_SHORT_DESC ?? ''];
+            $data['lang_' . $langId . '_address'] = $pointLangExtData[PointLangData::FIELD_ADDRESS ?? ''];
+        }
+
+        return $data;
     }
 
     /**
-     * @param iterable $form
-     * @param mixed $point
+     * @param array $form
+     * @param Point $point
      */
-    public function mapFormsToData(iterable $form, &$point)
+    public function mapFormToPoint(array $form, Point $point): void
     {
         $pointExtData = [
             Point::FIELD_EMAIl => (string) $form['email'] ?? '',
@@ -59,11 +85,23 @@ class PointFormDataMapper implements DataMapperInterface
         $languages = $this->em->getRepository(Language::class)
             ->findBy(['is_active' => true]);
 
+        $pointLangDataRepository = $this->em->getRepository(PointLangData::class);
+
         foreach ($languages as $language) {
-            $pointLangData = new PointLangData();
-            $pointLangData->setPoint($point)
-                ->setLanguage($language)
-                ->setTitle((string) $form['lang_' . $language->getId() . '_title'] ?? '');
+            $pointLangData = $pointLangDataRepository->findOneBy([
+                'language' => $language,
+                'point' => $point,
+            ]);
+
+            if ($pointLangData === null) {
+                $pointLangData = (new PointLangData())
+                    ->setPoint($point)
+                    ->setLanguage($language);
+
+                $point->addPointLangData($pointLangData);
+            }
+
+            $pointLangData->setTitle((string) $form['lang_' . $language->getId() . '_title'] ?? '');
 
             $pointLangExtData = [
                 PointLangData::FIELD_DESC => (string) $form['lang_' . $language->getId() . '_desc'] ?? '',
@@ -72,8 +110,6 @@ class PointFormDataMapper implements DataMapperInterface
             ];
 
             $pointLangData->setData($pointLangExtData);
-
-            $point->addPointLangData($pointLangData);
         }
     }
 }

@@ -29,6 +29,9 @@ class PointForm extends AbstractType
     public const VALIDATION_GROUP_CREATE = 'create';
 
     /** @var string */
+    public const VALIDATION_GROUP_UPDATE = 'update';
+
+    /** @var string */
     public const LANG_FIELD_PREFIX = 'lang_';
 
     /** @var string */
@@ -45,42 +48,53 @@ class PointForm extends AbstractType
         /** @var EntityManager $em */
         $em = $options['em'];
 
-        if (!is_a($em, EntityManagerInterface::class)) {
-            throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        /** @var Point|null $point */
+        $point = $options['point'] ?? null;
+
+        /** @var array $validationGroups */
+        $validationGroups = $options['validation_groups'] ?? [];
 
         $languages = $em->getRepository(Language::class)
             ->findBy(['is_active' => true]);
 
         $builder->setRequired(false);
 
-        $builder->add('city', CityFormType::class)
-            ->add('type', PointFormType::class)
-            ->add('is_active', IsActiveFormType::class);
+        $isTypeDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups);
+        $builder->add('type', PointFormType::class, ['disabled' => $isTypeDisabled]);
+
+        $isCityDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups);
+        $builder->add('city', CityFormType::class,  ['disabled' => $isCityDisabled]);
+
+        $builder->add('is_active', IsActiveFormType::class);
 
         $builder->add('lat', TextType::class, [
             'label' => 'Широта',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE]])
+                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
             ]
         ]);
 
         $builder->add('lon', TextType::class, [
             'label' => 'Долгота',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE]])
+                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
             ]
         ]);
 
         $builder->add('url', TextType::class, [
             'label' => 'URL',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE]]),
+                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]]),
                 new Callback([
-                    'groups' => [self::VALIDATION_GROUP_CREATE],
-                    'callback' => function($value, $context) use ($em) {
+                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
+                    'callback' => function($value, $context) use ($em, $point) {
+                        if ($point !== null && $point->getUrl() === $value) {
+                            return;
+                        }
+
                         $count = $em->getRepository(Point::class)->count(['url' => $value]);
-                        if ($count > 0) {
+
+                        if ($count) {
                             $context->buildViolation('Данный URL уже используется')
                                 ->atPath('url')
                                 ->addViolation();
@@ -93,7 +107,7 @@ class PointForm extends AbstractType
         $builder->add('email', EmailType::class, [
             'label' => 'Электронная почта',
             'constraints' => [
-                new Email(['groups' => [self::VALIDATION_GROUP_CREATE]])
+                new Email(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
             ]
         ]);
 
@@ -119,14 +133,14 @@ class PointForm extends AbstractType
             $builder->add(self::LANG_FIELD_PREFIX . $language->getId() . '_title', TextType::class, [
                 'label' => 'Название',
                 'constraints' => $language->getCode() === self::MAIN_LANG
-                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE]])]
+                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
                     : []
             ]);
 
             $builder->add(self::LANG_FIELD_PREFIX . $language->getId() . '_address', TextType::class, [
                 'label' => 'Адрес',
                 'constraints' => $language->getCode() === self::MAIN_LANG
-                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE]])]
+                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
                     : []
             ]);
 
@@ -147,6 +161,9 @@ class PointForm extends AbstractType
     {
         $resolver
             ->setRequired('em')
+            ->addAllowedTypes('em', EntityManagerInterface::class)
+            ->setDefault('point', null)
+            ->addAllowedTypes('point', Point::class)
             ->setRequired('validation_groups');
     }
 }

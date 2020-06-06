@@ -25,8 +25,11 @@ class PointController extends AbstractController
      *
      * @return Response
      */
-    public function addPoint(Request $request, PointFormDataMapper $pointFormDataMapper, LoggerInterface $logger): Response
-    {
+    public function addPoint(
+        Request $request,
+        PointFormDataMapper $pointFormDataMapper,
+        LoggerInterface $logger
+    ): Response {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -39,18 +42,69 @@ class PointController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $point = new Point();
-            $pointFormDataMapper->mapFormsToData($form->getData(), $point);
+            $pointFormDataMapper->mapFormToPoint($form->getData(), $point);
 
             try {
                 $entityManager->persist($point);
-
                 foreach ($point->getPointLangData() as $pointLangData) {
                     $entityManager->persist($pointLangData);
                 }
-
                 $entityManager->flush();
             } catch (\Throwable $exception) {
                 $logger->error($exception->getMessage(), ['exception' => $exception]);
+                // TODO
+            }
+
+            // TODO
+            //return $this->redirectToRoute('point_lang_data_index');
+        }
+
+        return $this->render('admin/point/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/point/edit/{id}", name="point_edit", methods={"GET","POST"})
+     *
+     * @param Point $point
+     * @param Request $request
+     * @param PointFormDataMapper $pointFormDataMapper
+     * @param LoggerInterface $logger
+     *
+     * @return Response
+     */
+    public function editPoint(
+        Point $point,
+        Request $request,
+        PointFormDataMapper $pointFormDataMapper,
+        LoggerInterface $logger
+    ): Response {
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $formData = $pointFormDataMapper->mapPointToForm($point);
+
+        $form = $this->createForm(PointForm::class, $formData, [
+            'em' => $entityManager,
+            'point' => $point,
+            'validation_groups' => PointForm::VALIDATION_GROUP_UPDATE
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pointFormDataMapper->mapFormToPoint($form->getData(), $point);
+
+            try {
+                $entityManager->persist($point);
+                foreach ($point->getPointLangData() as $pointLangData) {
+                    $entityManager->persist($pointLangData);
+                }
+                $entityManager->flush();
+            } catch (\Throwable $exception) {
+                $logger->error($exception->getMessage(), ['exception' => $exception]);
+                // TODO
             }
 
             // TODO
