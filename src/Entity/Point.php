@@ -22,6 +22,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Point
 {
+    /** @var string */
+    public const FIELD_EMAIl = 'email';
+
+    /** @var string */
+    public const FIELD_WEBSITE = 'website';
+
+    /** @var string */
+    public const FIELD_PHONES = 'phones';
+
+    /** @var string */
+    public const FIELD_COMMENT = 'comment';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

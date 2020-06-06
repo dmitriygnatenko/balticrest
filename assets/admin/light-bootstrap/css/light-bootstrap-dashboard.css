@@ -2925,6 +2925,11 @@ Copyright (c) 2015 Daniel Eden
     font-size: 14px;
 }
 
+.card .invalid-feedback {
+    font-size: 60%;
+    text-transform: uppercase;
+}
+
 .card h6 {
     font-size: 12px;
     margin: 0;

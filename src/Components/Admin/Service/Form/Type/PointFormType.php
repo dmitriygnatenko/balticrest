@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Admin\Form\Type;
+namespace App\Components\Admin\Service\Form\Type;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
