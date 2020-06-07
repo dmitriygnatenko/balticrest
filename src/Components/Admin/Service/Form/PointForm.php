@@ -7,6 +7,7 @@ namespace App\Components\Admin\Service\Form;
 use App\Components\Admin\Service\Form\Type\CityFormType;
 use App\Components\Admin\Service\Form\Type\IsActiveFormType;
 use App\Components\Admin\Service\Form\Type\PointFormType;
+use App\Components\Admin\Service\Form\Type\ServicesFormType;
 use App\Entity\Language;
 use App\Entity\Point;
 use Doctrine\ORM\EntityManager;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PointForm extends AbstractType
@@ -63,17 +65,27 @@ class PointForm extends AbstractType
 
         $builder->add('is_active', IsActiveFormType::class);
 
+        $builder->add('services', ServicesFormType::class);
+
         $builder->add('lat', TextType::class, [
             'label' => 'Широта',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
+                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]]),
+                new Type([
+                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
+                    'type' => 'numeric'
+                ])
             ]
         ]);
 
         $builder->add('lon', TextType::class, [
             'label' => 'Долгота',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
+                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]]),
+                new Type([
+                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
+                    'type' => 'numeric'
+                ])
             ]
         ]);
 
@@ -159,7 +171,6 @@ class PointForm extends AbstractType
             ->setRequired('em')
             ->addAllowedTypes('em', EntityManagerInterface::class)
             ->setDefault('point', null)
-            ->addAllowedTypes('point', Point::class)
             ->setRequired('validation_groups');
     }
 }

@@ -44,6 +44,7 @@ class PointFormDataMapper
             'website' => $pointExtData[Point::FIELD_WEBSITE] ?? '',
             'phones' => $pointExtData[Point::FIELD_PHONES] ?? '',
             'comment' => $pointExtData[Point::FIELD_COMMENT] ?? '',
+            'services' => $pointExtData[Point::FIELD_SERVICES] ?? [],
         ];
 
         foreach ($point->getPointLangData() as $pointLangData) {
@@ -70,6 +71,7 @@ class PointFormDataMapper
             Point::FIELD_WEBSITE => (string) $form['website'] ?? '',
             Point::FIELD_PHONES => (string) $form['phones'] ?? '',
             Point::FIELD_COMMENT => (string) $form['comment'] ?? '',
+            Point::FIELD_SERVICES => (array) $form['services'] ?? [],
         ];
 
         /** @var Point $point */
