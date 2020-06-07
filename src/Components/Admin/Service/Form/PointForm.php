@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Components\Admin\Service\Form;
 
 use App\Components\Admin\Service\Form\Type\CityFormType;
+use App\Components\Admin\Service\Form\Type\CKEditorFormType;
 use App\Components\Admin\Service\Form\Type\IsActiveFormType;
 use App\Components\Admin\Service\Form\Type\PointFormType;
 use App\Components\Admin\Service\Form\Type\ServicesFormType;
@@ -14,7 +15,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -131,7 +131,7 @@ class PointForm extends AbstractType
             'label' => 'Логотип',
         ]);
 
-        $builder->add('comment', TextAreaType::class, [
+        $builder->add('comment', CKEditorFormType::class, [
             'label' => 'Комментарий',
         ]);
 
@@ -152,11 +152,11 @@ class PointForm extends AbstractType
                     : []
             ]);
 
-            $builder->add('lang_' . $language->getId() . '_desc', TextareaType::class, [
+            $builder->add('lang_' . $language->getId() . '_desc', CKEditorFormType::class, [
                 'label' => 'Описание',
             ]);
 
-            $builder->add('lang_' . $language->getId() . '_short_desc', TextareaType::class, [
+            $builder->add('lang_' . $language->getId() . '_short_desc', CKEditorFormType::class, [
                 'label' => 'Краткое описание',
             ]);
         }

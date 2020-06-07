@@ -122,6 +122,10 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         array (
             'Monolog\\' => 8,
         ),
+        'F' => 
+        array (
+            'FOS\\CKEditorBundle\\' => 19,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -475,6 +479,10 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'FOS\\CKEditorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofsymfony/ckeditor-bundle/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
