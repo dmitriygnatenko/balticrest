@@ -11,17 +11,16 @@ profile:
     login: Prisijungti
     logout: Atsijungti
 
-map:
-    menu:
-        category: Kategorijos
-        hotels: Viešbučiai
-        medicine: Sanatorijos
-        cafes: Kavinė
-        shops: Parduotuvės
-        banks: Bankai
-        museums: Muziejai
-        sport: Sportas
-        transport: Transportas
+categories:
+    category: Kategorijos
+    hotels: Viešbučiai
+    medicine: Sanatorijos
+    cafes: Kavinė
+    shops: Parduotuvės
+    banks: Bankai
+    museums: Muziejai
+    sport: Sportas
+    transport: Transportas
 
 navigation:
     menu:

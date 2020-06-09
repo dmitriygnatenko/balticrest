@@ -11,17 +11,16 @@ profile:
     login: Login
     logout: Logout
 
-map:
-    menu:
-        category: Categories
-        hotels: Hotels
-        medicine: Medicine
-        cafes: Cafes
-        shops: Shops
-        banks: banks
-        museums: Museums
-        sport: Sport
-        transport: Transport
+categories:
+    category: Categories
+    hotels: Hotels
+    medicine: Medicine
+    cafes: Cafes
+    shops: Shops
+    banks: banks
+    museums: Museums
+    sport: Sport
+    transport: Transport
 
 navigation:
     menu:

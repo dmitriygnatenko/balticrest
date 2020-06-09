@@ -11,17 +11,16 @@ profile:
     login: Zaloguj się
     logout: Wyloguj się
 
-map:
-    menu:
-        category: Kategorie
-        hotels: Hotele
-        medicine: Sanatoria
-        cafes: Cafe
-        shops: Sklepy
-        banks: Banki
-        museums: Muzea
-        sport: Sport
-        transport: Transport
+categories:
+    category: Kategorie
+    hotels: Hotele
+    medicine: Sanatoria
+    cafes: Cafe
+    shops: Sklepy
+    banks: Banki
+    museums: Muzea
+    sport: Sport
+    transport: Transport
 
 navigation:
     menu:

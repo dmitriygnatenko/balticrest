@@ -32,8 +32,8 @@ class PointForm extends AbstractType
     /** @var string */
     public const VALIDATION_GROUP_UPDATE = 'update';
 
-    /** @var string */
-    public const MAIN_LANG = 'ru';
+    /** @var array */
+    public const REQUIRED_LANGUAGES = ['ru', 'en'];
 
     /**
      * @param FormBuilderInterface $builder
@@ -140,14 +140,14 @@ class PointForm extends AbstractType
 
             $builder->add('lang_' . $language->getId() . '_title', TextType::class, [
                 'label' => 'Название',
-                'constraints' => $language->getCode() === self::MAIN_LANG
+                'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES)
                     ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
                     : []
             ]);
 
             $builder->add('lang_' . $language->getId() . '_address', TextType::class, [
                 'label' => 'Адрес',
-                'constraints' => $language->getCode() === self::MAIN_LANG
+                'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES)
                     ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
                     : []
             ]);

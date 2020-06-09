@@ -6,8 +6,8 @@
             </a>
         </div>
         <ul class="nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="./maps.html">
+            <li class="nav-item {% if app.request.requestUri starts with '/admin/point' %}active{% endif %}">
+                <a class="nav-link" href="{{ path('point_list') }}">
                     <i class="nc-icon nc-pin-3"></i>
                     <p>Объекты</p>
                 </a>

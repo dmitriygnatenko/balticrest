@@ -1,0 +1,69 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Список объектов</h4>
+                    </div>
+                    <div class="card-body">
+                        {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info', 'primary']) %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ label }}">
+                                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
+                                        <i class="nc-icon nc-simple-remove"></i>
+                                    </button>
+                                    <span>{{ message }}</span>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                            <th>ID</th>
+                            <th>Город</th>
+                            <th>Тип</th>
+                            <th>Название</th>
+                            <th>Активен</th>
+                            </thead>
+                            <tbody>
+                            {% for point in points %}
+                                {% set city_title = 'cities.' ~ point.city %}
+                                {% set type_title = 'categories.' ~ point.type %}
+                                <tr>
+                                    <td>{{ point.id }}</td>
+                                    <td>{{ city_title|trans }}</td>
+                                    <td>{{ type_title|trans }}</td>
+                                    <td>{{ point.title }}</td>
+                                    {% if point.is_active %}
+                                        <td class="text-success">Да</td>
+                                    {% else %}
+                                        <td class="text-danger">Нет</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <br>
+                        <ul class="pagination justify-content-center">
+                            {% if prev_page %}
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Предыдущая страница</a>
+                                </li>
+                            {% endif %}
+                            {% if next_page %}
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Следующая страница</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

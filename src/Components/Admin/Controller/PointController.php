@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Controller;
 
+use App\Components\Admin\Service\DTO\PointDTO;
 use App\Components\Admin\Service\Form\Mapper\PointFormDataMapper;
 use App\Components\Admin\Service\Form\PointForm;
 use App\Entity\Point;
@@ -13,9 +14,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Exception;
 
 class PointController extends AbstractController
 {
+    /**
+     * @Route("/point", name="point_list", methods={"GET"})
+     *
+     * @param Request $request
+     * @param LoggerInterface $logger
+     *
+     * @return Response
+     */
+    public function pointList(Request $request, LoggerInterface $logger): Response {
+        $page = $request->query->getInt('page', 1);
+
+        $points = [];
+
+        try {
+            $pointPaginator = $this->getDoctrine()->getRepository(Point::class)->getAllForList($page);
+
+            foreach ($pointPaginator->getIterator() as $point) {
+                $points[] = (new PointDTO())->fillByPoint($point);
+            }
+        } catch (Exception $exception) {
+            $pointPaginator = null;
+            $logger->error($exception->getMessage(), ['exception' => $exception]);
+        }
+
+        return $this->render('admin/point/list.html.twig', [
+            'points' => $points,
+            'next_page' => $pointPaginator->getNextPage(),
+            'prev_page' => $pointPaginator->getPrevPage(),
+        ]);
+    }
+
     /**
      * @Route("/point/add", name="point_add", methods={"GET","POST"})
      *
@@ -52,11 +85,12 @@ class PointController extends AbstractController
                 $entityManager->flush();
             } catch (\Throwable $exception) {
                 $logger->error($exception->getMessage(), ['exception' => $exception]);
-                // TODO
+                $this->addFlash('danger', 'Ошибка при добавлении объекта');
             }
 
-            // TODO
-            //return $this->redirectToRoute('point_lang_data_index');
+            $this->addFlash('success', 'Объект успешно добавлен');
+
+            return $this->redirectToRoute('point_list');
         }
 
         return $this->render('admin/point/edit.html.twig', [
@@ -105,11 +139,12 @@ class PointController extends AbstractController
                 $entityManager->flush();
             } catch (\Throwable $exception) {
                 $logger->error($exception->getMessage(), ['exception' => $exception]);
-                // TODO
+                $this->addFlash('danger', 'Ошибка при сохранении объекта');
             }
 
-            // TODO
-            //return $this->redirectToRoute('point_lang_data_index');
+            $this->addFlash('success', 'Объект успешно сохранен');
+
+            return $this->redirectToRoute('point_list');
         }
 
         return $this->render('admin/point/edit.html.twig', [
