@@ -21,7 +21,7 @@ class PointFormType extends AbstractType
             'class' => PointType::class,
             'choice_translation_domain' => true,
             'choice_label' => function ($type) {
-                return 'map.menu.' . $type->getCode();
+                return 'categories.' . $type->getCode();
             },
         ]);
     }

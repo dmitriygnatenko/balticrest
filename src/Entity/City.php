@@ -53,11 +53,6 @@ class City
     private $zoom;
 
     /**
-     * @ORM\Column(type="string", length=150)
-     */
-    private $title;
-
-    /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $is_active = true;
@@ -166,26 +161,6 @@ class City
     public function setZoom(int $zoom): self
     {
         $this->zoom = $zoom;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     *
-     * @return $this
-     */
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
 
         return $this;
     }

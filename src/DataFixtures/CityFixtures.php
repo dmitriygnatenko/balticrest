@@ -17,7 +17,6 @@ class CityFixtures extends Fixture
     {
         $zelenogradsk = (new City())
             ->setCode('zelenogradsk')
-            ->setTitle('cities.zelenogradsk')
             ->setImage('/static/balticrest/images/cities/zelenogradsk.png')
             ->setLat(54.957757)
             ->setLon(20.474495)
@@ -28,7 +27,6 @@ class CityFixtures extends Fixture
 
         $svetlogorsk = (new City())
             ->setCode('svetlogorsk')
-            ->setTitle('cities.svetlogorsk')
             ->setImage('/static/balticrest/images/cities/svetlogorsk.png')
             ->setLat(54.942050)
             ->setLon(20.153235)

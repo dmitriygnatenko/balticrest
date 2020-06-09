@@ -25,7 +25,6 @@ final class Version20200506214911 extends AbstractMigration
         $this->addSql('CREATE TABLE city (
             id INT AUTO_INCREMENT NOT NULL,
             code VARCHAR(50) NOT NULL,
-            title VARCHAR(150) NOT NULL,
             image VARCHAR(255) NOT NULL,
             lat DOUBLE PRECISION NOT NULL,
             lon DOUBLE PRECISION NOT NULL,

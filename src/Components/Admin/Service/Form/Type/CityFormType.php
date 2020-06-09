@@ -23,10 +23,12 @@ class CityFormType extends AbstractType
             'query_builder' => function (CityRepository $cityRepository) {
                 return $cityRepository->createQueryBuilder('c')
                     ->where('c.is_active = 1')
-                    ->orderBy('c.title', 'DESC');
+                    ->orderBy('c.code', 'DESC');
             },
             'choice_translation_domain' => true,
-            'choice_label' => 'title',
+            'choice_label' => function ($type) {
+                return 'cities.' . $type->getCode();
+            },
         ]);
     }
 
