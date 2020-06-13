@@ -13,17 +13,17 @@
     <div class="container-fluid menu mobile">
         <div class="row">
             <div class="col-md-12">
-                <span>{% trans %}map.menu.category{% endtrans %}</span>
+                <span>{% trans %}categories.category{% endtrans %}</span>
                 <i class="fa fa-times" id="close_menu"></i>
                 <ul>
-                    <li><a title="{% trans %}map.menu.hotels{% endtrans %}" href="{{ path('map', {city: city, category: 'hotels'}) }}" class="hotel {% if category == 'hotels' %}active{% endif %}"><i class="fa fa-hotel"></i></a></li>
-                    <li><a title="{% trans %}map.menu.medicine{% endtrans %}" href="{{ path('map', {city: city, category: 'medicine'}) }}" class="medicine {% if category == 'medicine' %}active{% endif %}"><i class="fa fa-plus-square"></i></a></li>
-                    <li><a title="{% trans %}map.menu.cafes{% endtrans %}" href="{{ path('map', {city: city, category: 'cafes'}) }}" class="cafe {% if category == 'cafes' %}active{% endif %}"><i class="fa fa-cutlery"></i></a></li>
-                    <li><a title="{% trans %}map.menu.shops{% endtrans %}" href="{{ path('map', {city: city, category: 'shops'}) }}" class="shop {% if category == 'shops' %}active{% endif %}"><i class="fa fa-shopping-cart"></i></a></li>
-                    <li><a title="{% trans %}map.menu.banks{% endtrans %}" href="{{ path('map', {city: city, category: 'banks'}) }}" class="bank {% if category == 'banks' %}active{% endif %}"><i class="fa fa-usd"></i></a></li>
-                    <li><a title="{% trans %}map.menu.museums{% endtrans %}" href="{{ path('map', {city: city, category: 'museums'}) }}" class="museum {% if category == 'museums' %}active{% endif %}"><i class="fa fa-university"></i></a></li>
-                    <li><a title="{% trans %}map.menu.sport{% endtrans %}" href="{{ path('map', {city: city, category: 'sport'}) }}" class="sport {% if category == 'sport' %}active{% endif %}"><i class="fa fa-futbol-o"></i></a></li>
-                    <li><a title="{% trans %}map.menu.transport{% endtrans %}" href="{{ path('map', {city: city, category: 'transport'}) }}" class="transport {% if category == 'transport' %}active{% endif %}"><i class="fa fa-bus"></i></a></li>
+                    <li><a title="{% trans %}categories.hotels{% endtrans %}" href="{{ path('map', {city: city, category: 'hotels'}) }}" class="hotel {% if category == 'hotels' %}active{% endif %}"><i class="fa fa-hotel"></i></a></li>
+                    <li><a title="{% trans %}categories.medicine{% endtrans %}" href="{{ path('map', {city: city, category: 'medicine'}) }}" class="medicine {% if category == 'medicine' %}active{% endif %}"><i class="fa fa-plus-square"></i></a></li>
+                    <li><a title="{% trans %}categories.cafes{% endtrans %}" href="{{ path('map', {city: city, category: 'cafes'}) }}" class="cafe {% if category == 'cafes' %}active{% endif %}"><i class="fa fa-cutlery"></i></a></li>
+                    <li><a title="{% trans %}categories.shops{% endtrans %}" href="{{ path('map', {city: city, category: 'shops'}) }}" class="shop {% if category == 'shops' %}active{% endif %}"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a title="{% trans %}categories.banks{% endtrans %}" href="{{ path('map', {city: city, category: 'banks'}) }}" class="bank {% if category == 'banks' %}active{% endif %}"><i class="fa fa-usd"></i></a></li>
+                    <li><a title="{% trans %}categories.museums{% endtrans %}" href="{{ path('map', {city: city, category: 'museums'}) }}" class="museum {% if category == 'museums' %}active{% endif %}"><i class="fa fa-university"></i></a></li>
+                    <li><a title="{% trans %}categories.sport{% endtrans %}" href="{{ path('map', {city: city, category: 'sport'}) }}" class="sport {% if category == 'sport' %}active{% endif %}"><i class="fa fa-futbol-o"></i></a></li>
+                    <li><a title="{% trans %}categories.transport{% endtrans %}" href="{{ path('map', {city: city, category: 'transport'}) }}" class="transport {% if category == 'transport' %}active{% endif %}"><i class="fa fa-bus"></i></a></li>
                     <li class="mobile_menu"><a href="#"><i class="fa fa-bars"></i></a></li>
                 </ul>
             </div>

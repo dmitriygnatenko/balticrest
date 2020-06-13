@@ -7,15 +7,19 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Список объектов</h4>
+                        <div class="float-left">
+                            <h4 class="card-title">Список объектов</h4>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-primary btn-sm btn-fill" href="{{ path('point_add') }}" role="button" title="Редактировать">
+                                <i class="fa fa-plus"></i> Добавить
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info', 'primary']) %}
                             {% for message in messages %}
                                 <div class="alert alert-{{ label }}">
-                                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                                        <i class="nc-icon nc-simple-remove"></i>
-                                    </button>
                                     <span>{{ message }}</span>
                                 </div>
                             {% endfor %}
@@ -23,11 +27,12 @@
 
                         <table class="table table-hover table-bordered">
                             <thead>
-                            <th>ID</th>
-                            <th>Город</th>
-                            <th>Тип</th>
-                            <th>Название</th>
-                            <th>Активен</th>
+                                <th>ID</th>
+                                <th>Город</th>
+                                <th>Тип</th>
+                                <th>Название</th>
+                                <th>Активен</th>
+                                <th></th>
                             </thead>
                             <tbody>
                             {% for point in points %}
@@ -43,6 +48,14 @@
                                     {% else %}
                                         <td class="text-danger">Нет</td>
                                     {% endif %}
+                                    <td class="action-buttons" style="width: 110px">
+                                        <a class="btn btn-primary btn-fill" href="{{ path('point_edit', {id: point.id}) }}" role="button" title="Редактировать">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-fill" href="{{ path('point_edit', {id: point.id}) }}" role="button" title="Удалить">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>

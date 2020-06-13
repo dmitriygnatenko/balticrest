@@ -1,5 +1,6 @@
 
 import './bootstrap/css/bootstrap.min.css';
+import './font-awesome/css/font-awesome.css';
 import './light-bootstrap/css/light-bootstrap-dashboard.css';
 
 window.$ = window.jQuery = jQuery = require('./jquery/js/jquery.min.js');
