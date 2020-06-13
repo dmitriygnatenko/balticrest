@@ -8,9 +8,15 @@ use App\Components\Balticrest\Service\Manager\CityManager;
 use App\Components\Balticrest\Service\Manager\CityManagerInterface;
 use App\Components\Balticrest\Service\Manager\LanguageManager;
 use App\Components\Balticrest\Service\Manager\LanguageManagerInterface;
+use App\Entity\PointType;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 
 class TwigGlobalService
 {
+    /** @var EntityManager */
+    private $em;
+
     /** @var CityManager */
     private $cityManager;
 
@@ -18,11 +24,16 @@ class TwigGlobalService
     private $languageManager;
 
     /**
+     * @param EntityManagerInterface $em
      * @param CityManagerInterface $cityManager
      * @param LanguageManagerInterface $languageManager
      */
-    public function __construct(CityManagerInterface $cityManager, LanguageManagerInterface $languageManager)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        CityManagerInterface $cityManager,
+        LanguageManagerInterface $languageManager
+    ) {
+        $this->em = $em;
         $this->cityManager = $cityManager;
         $this->languageManager = $languageManager;
     }
@@ -41,5 +52,13 @@ class TwigGlobalService
     public function getLanguages(): array
     {
         return $this->languageManager->getActiveCached();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPointTypes(): array
+    {
+        return $this->em->getRepository(PointType::class)->findAll();
     }
 }

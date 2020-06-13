@@ -28,8 +28,26 @@
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <th>ID</th>
-                                <th>Город</th>
-                                <th>Тип</th>
+                                <th>
+                                    {% set cities = global_service.cities %}
+                                    <select class="form-control">
+                                        <option value="">Город</option>
+                                        {% for key, value in cities %}
+                                            {% set city_title = 'cities.' ~ value.code  %}
+                                            <option value="{{ value.id }}">{{ city_title|trans }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </th>
+                                <th>
+                                    {% set categories = global_service.pointTypes %}
+                                    <select class="form-control">
+                                        <option value="">Категория</option>
+                                        {% for value in categories %}
+                                            {% set category_title = 'categories.' ~ value.code  %}
+                                            <option value="{{ value.id }}">{{ category_title|trans }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </th>
                                 <th>Название</th>
                                 <th>Активен</th>
                                 <th></th>
