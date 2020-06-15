@@ -27,12 +27,10 @@ class PointController extends AbstractController
      * @return Response
      */
     public function pointList(Request $request, LoggerInterface $logger): Response {
-        $page = $request->query->getInt('page', 1);
-
         $points = [];
 
         try {
-            $pointPaginator = $this->getDoctrine()->getRepository(Point::class)->getAllForList($page);
+            $pointPaginator = $this->getDoctrine()->getRepository(Point::class)->getFilteredPoints($request);
 
             foreach ($pointPaginator->getIterator() as $point) {
                 $points[] = (new PointDTO())->fillByPoint($point);

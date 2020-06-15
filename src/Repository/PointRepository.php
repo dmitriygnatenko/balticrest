@@ -8,7 +8,7 @@ use App\Entity\Point;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Components\Admin\Service\Pager\Paginator;
-use Exception;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Point|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,16 +27,27 @@ class PointRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $page
+     * @param Request $request
      * @param int $max
      *
      * @return Paginator
-     *
-     * @throws Exception
      */
-    public function getAllForList(int $page = 1, int $max = 100): Paginator
+    public function getFilteredPoints(Request $request, int $max = 100): Paginator
     {
-        $qb = $this->createQueryBuilder('p')->orderBy('p.id');
+        $page = $request->query->getInt('page', 1);
+        $city = $request->query->getInt('city');
+        $category = $request->query->getInt('category');
+
+        $qb = $this->createQueryBuilder('p')
+            ->orderBy('p.id');
+
+        if ($city) {
+            $qb->andWhere('p.city = :city')->setParameter('city', $city);
+        }
+
+        if ($category) {
+            $qb->andWhere('p.type = :type')->setParameter('type', $category);
+        }
 
         return new Paginator($qb->getQuery(), $page, $max);
     }

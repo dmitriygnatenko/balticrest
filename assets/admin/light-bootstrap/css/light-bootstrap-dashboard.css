@@ -4732,6 +4732,6 @@ h5.form-lang-header img {
     border: 1px solid #797979;
 }
 
-.action-buttons .btn {
+.btn.btn-icon {
     padding: 4px 8px;
 }

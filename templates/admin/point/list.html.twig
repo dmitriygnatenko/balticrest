@@ -1,6 +1,8 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block content %}
+    {% set city_filter = app.request.get('city') %}
+    {% set category_filter = app.request.get('category') %}
     <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -11,8 +13,8 @@
                             <h4 class="card-title">Список объектов</h4>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary btn-sm btn-fill" href="{{ path('point_add') }}" role="button" title="Редактировать">
-                                <i class="fa fa-plus"></i> Добавить
+                            <a class="btn btn-primary btn-fill btn-icon" href="{{ path('point_add') }}" role="button" title="Добавить">
+                                <i class="fa fa-plus"></i>
                             </a>
                         </div>
                     </div>
@@ -30,21 +32,21 @@
                                 <th>ID</th>
                                 <th>
                                     {% set cities = global_service.cities %}
-                                    <select class="form-control">
-                                        <option value="">Город</option>
+                                    <select class="form-control city-filter">
+                                        <option value="0">---</option>
                                         {% for key, value in cities %}
                                             {% set city_title = 'cities.' ~ value.code  %}
-                                            <option value="{{ value.id }}">{{ city_title|trans }}</option>
+                                            <option value="{{ value.id }}" {% if value.id == city_filter %}selected{% endif %}>{{ city_title|trans }}</option>
                                         {% endfor %}
                                     </select>
                                 </th>
                                 <th>
                                     {% set categories = global_service.pointTypes %}
-                                    <select class="form-control">
-                                        <option value="">Категория</option>
+                                    <select class="form-control category-filter">
+                                        <option value="0">---</option>
                                         {% for value in categories %}
                                             {% set category_title = 'categories.' ~ value.code  %}
-                                            <option value="{{ value.id }}">{{ category_title|trans }}</option>
+                                            <option value="{{ value.id }}" {% if value.id == category_filter %}selected{% endif %}>{{ category_title|trans }}</option>
                                         {% endfor %}
                                     </select>
                                 </th>
@@ -66,11 +68,11 @@
                                     {% else %}
                                         <td class="text-danger">Нет</td>
                                     {% endif %}
-                                    <td class="action-buttons" style="width: 110px">
-                                        <a class="btn btn-primary btn-fill" href="{{ path('point_edit', {id: point.id}) }}" role="button" title="Редактировать">
+                                    <td style="width: 110px">
+                                        <a class="btn btn-primary btn-fill btn-icon" href="{{ path('point_edit', {id: point.id}) }}" role="button" title="Редактировать">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a class="btn btn-danger btn-fill" href="{{ path('point_edit', {id: point.id}) }}" role="button" title="Удалить">
+                                        <a class="btn btn-danger btn-fill btn-icon" href="{{ path('point_edit', {id: point.id}) }}" role="button" title="Удалить">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
                                     </td>
@@ -83,12 +85,20 @@
                         <ul class="pagination justify-content-center">
                             {% if prev_page %}
                                 <li class="page-item">
-                                    <a class="page-link" href="#">Предыдущая страница</a>
+                                    <a class="page-link" href="{{ path('point_list', {
+                                        page: prev_page,
+                                        city: city_filter,
+                                        category: category_filter
+                                    }) }}">Предыдущая страница</a>
                                 </li>
                             {% endif %}
                             {% if next_page %}
                                 <li class="page-item">
-                                    <a class="page-link" href="#">Следующая страница</a>
+                                    <a class="page-link" href="{{ path('point_list', {
+                                        page: next_page,
+                                        city: city_filter,
+                                        category: category_filter
+                                    }) }}">Следующая страница</a>
                                 </li>
                             {% endif %}
                         </ul>
@@ -97,4 +107,18 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block admin_js_body %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        $(".city-filter, .category-filter").change(function () {
+            let url = '?page=1'
+                + '&city=' + $(".city-filter").val()
+                + '&category=' + $(".category-filter").val();
+            window.location.href = url;
+        });
+
+    </script>
 {% endblock %}
