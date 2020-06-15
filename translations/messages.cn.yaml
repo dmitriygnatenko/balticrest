@@ -7,6 +7,10 @@ header:
         btn_title: 搜尋
         text_placeholder: 搜索文字
 
+map:
+    point:
+        btn_title: 更多細節
+
 profile:
     login: 登錄
     logout: 登出

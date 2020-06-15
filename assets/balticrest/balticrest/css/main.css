@@ -1046,7 +1046,7 @@ body.inner_page .bg_parallax {
 .marker_info a.green_btn {
     background: #E73931;
     border: 1px solid #000000;
-    padding: 10px 50px;
+    padding: 10px;
     color: #ffffff;
     font-size: 14px;
     border-radius: 4px;
@@ -1059,7 +1059,7 @@ body.inner_page .bg_parallax {
 a.green_btn:hover {
     background: #ffffff; /* Old browsers */
     border: 1px solid #000000;
-    padding: 10px 50px;
+    padding: 10px;
     color: #E73931;
     font-size: 14px;
     box-shadow: none;

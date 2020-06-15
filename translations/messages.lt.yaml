@@ -7,6 +7,10 @@ header:
         btn_title: Paieška
         text_placeholder: Paieškos eilutė
 
+map:
+    point:
+        btn_title: Daugiau informacijos
+
 profile:
     login: Prisijungti
     logout: Atsijungti

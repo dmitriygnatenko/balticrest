@@ -32,7 +32,14 @@
 {% endblock %}
 
 {% block balticrest_js_body %}
-    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_maps_api_key }}&lang={{ app.request.locale }}" type="text/javascript"></script>
+
+    {% if app.request.locale == 'ru' %}
+        {% set yandex_maps_locale = 'ru' %}
+    {% else %}
+        {% set yandex_maps_locale = 'en' %}
+    {% endif %}
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_maps_api_key }}&lang={{ yandex_maps_locale }}" type="text/javascript"></script>
     {{ parent() }}
     <script type="text/javascript">
         const map_data = {{ map_data|raw }};

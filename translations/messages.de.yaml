@@ -7,6 +7,10 @@ header:
         btn_title: Suche
         text_placeholder: Suchzeichenfolge
 
+map:
+    point:
+        btn_title: Mehr Details
+
 profile:
     login: Anmeldung
     logout: Ausloggen

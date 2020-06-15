@@ -7,6 +7,10 @@ header:
         btn_title: Szukaj
         text_placeholder: Сiąg wyszukiwania
 
+map:
+    point:
+        btn_title: Więcej szczegółów
+
 profile:
     login: Zaloguj się
     logout: Wyloguj się

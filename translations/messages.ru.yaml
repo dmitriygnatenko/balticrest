@@ -12,6 +12,10 @@ header:
         btn_title: Искать
         text_placeholder: Поиск
 
+map:
+    point:
+        btn_title: Подробнее
+
 profile:
     login: Войти
     logout: Выйти

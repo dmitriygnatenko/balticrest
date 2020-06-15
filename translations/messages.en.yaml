@@ -7,6 +7,10 @@ header:
         btn_title: Find
         text_placeholder: Search text
 
+map:
+    point:
+        btn_title: More details
+
 profile:
     login: Login
     logout: Logout
