@@ -8,6 +8,7 @@ use App\Components\Admin\Service\DTO\PointDTO;
 use App\Components\Admin\Service\Form\Mapper\PointFormDataMapper;
 use App\Components\Admin\Service\Form\PointForm;
 use App\Entity\Point;
+use App\Entity\PointLangData;
 use Doctrine\ORM\EntityManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +32,6 @@ class PointController extends AbstractController
 
         try {
             $pointPaginator = $this->getDoctrine()->getRepository(Point::class)->getFilteredPoints($request);
-
             foreach ($pointPaginator->getIterator() as $point) {
                 $points[] = (new PointDTO())->fillByPoint($point);
             }
@@ -81,12 +81,12 @@ class PointController extends AbstractController
                     $entityManager->persist($pointLangData);
                 }
                 $entityManager->flush();
+
+                $this->addFlash('success', 'Объект успешно добавлен');
             } catch (\Throwable $exception) {
                 $logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при добавлении объекта');
             }
-
-            $this->addFlash('success', 'Объект успешно добавлен');
 
             return $this->redirectToRoute('point_list');
         }
@@ -135,12 +135,12 @@ class PointController extends AbstractController
                     $entityManager->persist($pointLangData);
                 }
                 $entityManager->flush();
+
+                $this->addFlash('success', 'Объект успешно сохранен');
             } catch (\Throwable $exception) {
                 $logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при сохранении объекта');
             }
-
-            $this->addFlash('success', 'Объект успешно сохранен');
 
             return $this->redirectToRoute('point_list');
         }
@@ -148,6 +148,48 @@ class PointController extends AbstractController
         return $this->render('admin/point/edit.html.twig', [
             'form' => $form->createView(),
             'title' => 'Редактирование объекта',
+        ]);
+    }
+
+    /**
+     * @Route("/point/delete/{id}", name="point_delete", methods={"GET","POST"})
+     *
+     * @param Point $point
+     * @param Request $request
+     * @param LoggerInterface $logger
+     *
+     * @return Response
+     */
+    public function deletePoint(
+        Point $point,
+        Request $request,
+        LoggerInterface $logger
+    ): Response {
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+
+        if ($request->isMethod('post')) {
+            try {
+                $entityManager->remove($point);
+                $entityManager->flush();
+                $this->addFlash('success', 'Объект успешно удален');
+            } catch (\Throwable $exception) {
+                $logger->error($exception->getMessage(), ['exception' => $exception]);
+                $this->addFlash('danger', 'Ошибка при удалении объекта');
+            }
+
+            return $this->redirectToRoute('point_list');
+        }
+
+        $pointRuData = $point->getPointLangData()->filter(function($pointLangData) {
+            /** @var PointLangData $pointLangData */
+            return $pointLangData->getLanguage()->getCode() == 'ru';
+        });
+
+        $title = !$pointRuData->isEmpty() ? $pointRuData->first()->getTitle() : '';
+
+        return $this->render('admin/point/delete.html.twig', [
+            'title' => $title,
         ]);
     }
 }
