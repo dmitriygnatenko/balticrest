@@ -31,7 +31,7 @@ class PointController extends AbstractController
         $points = [];
 
         try {
-            $pointPaginator = $this->getDoctrine()->getRepository(Point::class)->getFilteredPoints($request);
+            $pointPaginator = $this->getDoctrine()->getRepository(Point::class)->getPaginatedFilteredPoints($request);
             foreach ($pointPaginator->getIterator() as $point) {
                 $points[] = (new PointDTO())->fillByPoint($point);
             }

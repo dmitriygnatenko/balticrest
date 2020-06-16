@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Manager;
 
-use App\Entity\City;
+use App\Entity\Point;
+use App\Entity\PointType;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-class CityManager implements CityManagerInterface
+class PointManager implements PointManagerInterface
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -37,33 +38,36 @@ class CityManager implements CityManagerInterface
     /**
      * @return array
      */
-    public function getCachedActiveCities(): array
+    public function getCachedPointTypes(): array
     {
         try {
-            return $this->cache->get(self::CACHE_KEY, function (ItemInterface $item) {
-                $item->tag(self::CACHE_TAG);
-                $item->expiresAfter(self::CACHE_EXPIRE_TIME);
-                return $this->getActiveCities();
+            return $this->cache->get(self::POINT_TYPE_CACHE_KEY, function (ItemInterface $item) {
+                $item->tag(self::POINT_TYPE_CACHE_TAG);
+                $item->expiresAfter(self::POINT_TYPE_CACHE_EXPIRE_TIME);
+                return $this->getPointTypes();
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
-            return $this->getActiveCities();
+            return $this->getPointTypes();
         }
     }
 
     /**
      * @return array
      */
-    public function getActiveCities(): array
+    public function getPointTypes(): array
     {
-        $results = $this->em->getRepository(City::class)
-            ->findBy(['is_active' => true], ['id' => 'ASC']);
+        return $this->em->getRepository(PointType::class)->findAll();
+    }
 
-        $formattedResults = [];
-        foreach ($results as $result) {
-            $formattedResults[$result->getCode()] = $result;
-        }
-
-        return $formattedResults;
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return array
+     */
+    public function getPointsByCityAndCategory(string $city, string $category): array
+    {
+        return $this->em->getRepository(Point::class)->getPointsByCityAndCategory($city, $category);
     }
 }

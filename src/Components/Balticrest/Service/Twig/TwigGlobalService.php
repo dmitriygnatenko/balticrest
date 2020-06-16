@@ -8,14 +8,13 @@ use App\Components\Balticrest\Service\Manager\CityManager;
 use App\Components\Balticrest\Service\Manager\CityManagerInterface;
 use App\Components\Balticrest\Service\Manager\LanguageManager;
 use App\Components\Balticrest\Service\Manager\LanguageManagerInterface;
-use App\Entity\PointType;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityManager;
+use App\Components\Balticrest\Service\Manager\PointManager;
+use App\Components\Balticrest\Service\Manager\PointManagerInterface;
 
 class TwigGlobalService
 {
-    /** @var EntityManager */
-    private $em;
+    /** @var PointManager */
+    private $pointManager;
 
     /** @var CityManager */
     private $cityManager;
@@ -24,16 +23,16 @@ class TwigGlobalService
     private $languageManager;
 
     /**
-     * @param EntityManagerInterface $em
+     * @param PointManagerInterface $pointManager
      * @param CityManagerInterface $cityManager
      * @param LanguageManagerInterface $languageManager
      */
     public function __construct(
-        EntityManagerInterface $em,
+        PointManagerInterface $pointManager,
         CityManagerInterface $cityManager,
         LanguageManagerInterface $languageManager
     ) {
-        $this->em = $em;
+        $this->pointManager = $pointManager;
         $this->cityManager = $cityManager;
         $this->languageManager = $languageManager;
     }
@@ -43,7 +42,7 @@ class TwigGlobalService
      */
     public function getCities(): array
     {
-        return $this->cityManager->getActiveCached();
+        return $this->cityManager->getCachedActiveCities();
     }
 
     /**
@@ -51,7 +50,7 @@ class TwigGlobalService
      */
     public function getLanguages(): array
     {
-        return $this->languageManager->getActiveCached();
+        return $this->languageManager->getCachedActiveLanguages();
     }
 
     /**
@@ -59,6 +58,6 @@ class TwigGlobalService
      */
     public function getPointTypes(): array
     {
-        return $this->em->getRepository(PointType::class)->findAll();
+        return $this->pointManager->getCachedPointTypes();
     }
 }

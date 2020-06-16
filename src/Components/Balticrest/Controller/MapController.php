@@ -44,7 +44,7 @@ class MapController extends AbstractController
     public function map(Request $request): Response
     {
         return $this->render('balticrest/map/map.html.twig', [
-            'map_data' => $this->mapDataManager->generateCityMapData($request)
+            'map_data' => $this->mapDataManager->generateCityMapJsonData($request)
         ]);
     }
 }

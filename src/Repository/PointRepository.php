@@ -32,7 +32,7 @@ class PointRepository extends ServiceEntityRepository
      *
      * @return Paginator
      */
-    public function getFilteredPoints(Request $request, int $max = 100): Paginator
+    public function getPaginatedFilteredPoints(Request $request, int $max = 100): Paginator
     {
         $page = $request->query->getInt('page', 1);
         $city = $request->query->getInt('city');
@@ -42,13 +42,42 @@ class PointRepository extends ServiceEntityRepository
             ->orderBy('p.id');
 
         if ($city) {
-            $qb->andWhere('p.city = :city')->setParameter('city', $city);
+            $qb->andWhere('p.city = :city')
+                ->setParameter('city', $city);
         }
 
         if ($category) {
-            $qb->andWhere('p.type = :type')->setParameter('type', $category);
+            $qb->andWhere('p.type = :type')
+                ->setParameter('type', $category);
         }
 
         return new Paginator($qb->getQuery(), $page, $max);
+    }
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return array
+     */
+    public function getPointsByCityAndCategory(string $city, string $category): array
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->where('p.is_active = true');
+
+        if ($city) {
+            $qb->join('p.city', 'c')
+                ->andWhere('c.code = :city')
+                ->setParameter('city', $city);
+        }
+
+        if ($category) {
+            $qb->join('p.type', 't')
+                ->andWhere('t.code = :category')
+                ->setParameter('category', $category);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

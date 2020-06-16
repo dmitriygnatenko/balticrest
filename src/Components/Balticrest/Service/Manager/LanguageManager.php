@@ -8,22 +8,15 @@ use App\Entity\Language;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Contracts\Cache\ItemInterface;
-use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class LanguageManager implements LanguageManagerInterface
 {
-    /** @var string */
-    const CACHE_KEY = 'balticrest.language.active_languages';
-
-    /** @var int */
-    const CACHE_EXPIRE_TIME = 86400;
-
     /** @var EntityManagerInterface */
     private $em;
 
-    /** @var FilesystemAdapter */
+    /** @var TagAwareCacheInterface */
     private $cache;
 
     /** @var LoggerInterface */
@@ -31,10 +24,10 @@ class LanguageManager implements LanguageManagerInterface
 
     /**
      * @param EntityManagerInterface $em
-     * @param CacheInterface $cache
+     * @param TagAwareCacheInterface $cache
      * @param LoggerInterface $logger
      */
-    public function __construct(EntityManagerInterface $em, CacheInterface $cache, LoggerInterface $logger)
+    public function __construct(EntityManagerInterface $em, TagAwareCacheInterface $cache, LoggerInterface $logger)
     {
         $this->em = $em;
         $this->cache = $cache;
@@ -44,23 +37,24 @@ class LanguageManager implements LanguageManagerInterface
     /**
      * @return array
      */
-    public function getActiveCached(): array
+    public function getCachedActiveLanguages(): array
     {
         try {
             return $this->cache->get(self::CACHE_KEY, function (ItemInterface $item) {
+                $item->tag(self::CACHE_TAG);
                 $item->expiresAfter(self::CACHE_EXPIRE_TIME);
-                return $this->getActive();
+                return $this->getActiveLanguages();
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
-            return $this->getActive();
+            return $this->getActiveLanguages();
         }
     }
 
     /**
      * @return array
      */
-    public function getActive(): array
+    public function getActiveLanguages(): array
     {
         $results = $this->em->getRepository(Language::class)
             ->findBy(['is_active' => true], ['id' => 'ASC']);
