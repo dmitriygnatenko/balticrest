@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Service\Form\Type;
 
-use App\Entity\Point;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Interfaces\ServiceTypesInterface as ServiceTypes;
 
 class ServicesFormType extends AbstractType
 {
@@ -21,23 +21,23 @@ class ServicesFormType extends AbstractType
             'expanded' => true,
             'multiple' => true,
             'choices' => [
-                'Парковка' => Point::FIELD_SERVICE_PARKING,
-                'Ресторан' => Point::FIELD_SERVICE_RESTAURANT,
-                'Конференц-зал' => Point::FIELD_SERVICE_CONFERENCE_HALL,
-                'SPA' => Point::FIELD_SERVICE_SPA,
-                'Фитнес-центр' => Point::FIELD_SERVICE_FITNESS,
-                'Бар' => Point::FIELD_SERVICE_BAR,
-                'Закрытый бассейн' => Point::FIELD_SERVICE_INDOOR_POOL,
-                'Открытый бассейн' => Point::FIELD_SERVICE_OUTDOOR_POOL,
-                'Прокат авто' => Point::FIELD_SERVICE_CAR_RENTAL,
-                'Сейф' => Point::FIELD_SERVICE_SAFE,
-                'Библиотека' => Point::FIELD_SERVICE_LIBRARY,
-                'Прачечная' => Point::FIELD_SERVICE_LAUNDRY,
-                'Услуги гида-переводчика' => Point::FIELD_SERVICE_GUIDE,
-                'Wi-Fi' => Point::FIELD_SERVICE_WI_FI,
-                'Трансфер' => Point::FIELD_SERVICE_TRANSFER,
-                'Сауна' => Point::FIELD_SERVICE_SAUNA,
-                'Детская игровая площадка' => Point::FIELD_SERVICE_CHILDREN_PLAYGROUND,
+                'Парковка' => ServiceTypes::FIELD_SERVICE_PARKING,
+                'Ресторан' => ServiceTypes::FIELD_SERVICE_RESTAURANT,
+                'Конференц-зал' => ServiceTypes::FIELD_SERVICE_CONFERENCE_HALL,
+                'SPA' => ServiceTypes::FIELD_SERVICE_SPA,
+                'Фитнес-центр' => ServiceTypes::FIELD_SERVICE_FITNESS,
+                'Бар' => ServiceTypes::FIELD_SERVICE_BAR,
+                'Закрытый бассейн' => ServiceTypes::FIELD_SERVICE_INDOOR_POOL,
+                'Открытый бассейн' => ServiceTypes::FIELD_SERVICE_OUTDOOR_POOL,
+                'Прокат авто' => ServiceTypes::FIELD_SERVICE_CAR_RENTAL,
+                'Сейф' => ServiceTypes::FIELD_SERVICE_SAFE,
+                'Библиотека' => ServiceTypes::FIELD_SERVICE_LIBRARY,
+                'Прачечная' => ServiceTypes::FIELD_SERVICE_LAUNDRY,
+                'Услуги гида-переводчика' => ServiceTypes::FIELD_SERVICE_GUIDE,
+                'Wi-Fi' => ServiceTypes::FIELD_SERVICE_WI_FI,
+                'Трансфер' => ServiceTypes::FIELD_SERVICE_TRANSFER,
+                'Сауна' => ServiceTypes::FIELD_SERVICE_SAUNA,
+                'Детская игровая площадка' => ServiceTypes::FIELD_SERVICE_CHILDREN_PLAYGROUND,
             ],
         ]);
     }

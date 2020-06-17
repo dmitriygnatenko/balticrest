@@ -31,10 +31,10 @@ class MapPointDTO
     private $iconImage;
 
     /** @var int */
-    private $iconImageX;
+    private $iconImageWidth;
 
     /** @var int */
-    private $iconImageY;
+    private $iconImageHeight;
 
     /**
      * @param float $lat
@@ -133,25 +133,25 @@ class MapPointDTO
     }
 
     /**
-     * @param int $iconImageX
+     * @param int $iconImageWidth
      *
      * @return MapPointDTO
      */
-    public function setIconImageX(int $iconImageX): MapPointDTO
+    public function setIconImageWidth(int $iconImageWidth): MapPointDTO
     {
-        $this->iconImageX = $iconImageX;
+        $this->iconImageWidth = $iconImageWidth;
 
         return $this;
     }
 
     /**
-     * @param int $iconImageY
+     * @param int $iconImageHeight
      *
      * @return MapPointDTO
      */
-    public function setIconImageY(int $iconImageY): MapPointDTO
+    public function setIconImageHeight(int $iconImageHeight): MapPointDTO
     {
-        $this->iconImageY = $iconImageY;
+        $this->iconImageHeight = $iconImageHeight;
 
         return $this;
     }
@@ -172,8 +172,8 @@ class MapPointDTO
             'icon' => [
                 'image' => $this->iconImage,
                 'size' => [
-                    'x' => (int) $this->iconImageX,
-                    'y' => (int) $this->iconImageY,
+                    'width' => (int) $this->iconImageWidth,
+                    'height' => (int) $this->iconImageHeight,
                 ]
             ]
         ];

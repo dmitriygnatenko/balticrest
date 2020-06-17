@@ -11,15 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PointLangData
 {
-    /** @var string */
-    public const FIELD_ADDRESS = 'address';
-
-    /** @var string */
-    public const FIELD_DESC = 'desc';
-
-    /** @var string */
-    public const FIELD_SHORT_DESC = 'short_desc';
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -6,6 +6,7 @@ namespace App\Components\Admin\Service\Form;
 
 use App\Components\Admin\Service\Form\Type\CityFormType;
 use App\Components\Admin\Service\Form\Type\CKEditorFormType;
+use App\Components\Admin\Service\Form\Type\DetailedPointFormType;
 use App\Components\Admin\Service\Form\Type\IsActiveFormType;
 use App\Components\Admin\Service\Form\Type\PointFormType;
 use App\Components\Admin\Service\Form\Type\ServicesFormType;
@@ -59,6 +60,8 @@ class PointForm extends AbstractType
 
         $isTypeDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups);
         $builder->add('type', PointFormType::class, ['disabled' => $isTypeDisabled]);
+
+        $builder->add('detailed_type', DetailedPointFormType::class);
 
         $isCityDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups);
         $builder->add('city', CityFormType::class,  ['disabled' => $isCityDisabled]);

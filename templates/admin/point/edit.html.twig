@@ -16,6 +16,13 @@
                     </div>
                     <div class="card-body">
                         {{ form_start(form) }}
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{ form_row(form.is_active) }}
+                                </div>
+                                <div class="col-md-8"></div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     {{ form_row(form.city) }}
@@ -24,7 +31,7 @@
                                     {{ form_row(form.type) }}
                                 </div>
                                 <div class="col-md-4">
-                                    {{ form_row(form.is_active) }}
+                                    {{ form_row(form.detailed_type) }}
                                 </div>
                             </div>
                             <div class="row">

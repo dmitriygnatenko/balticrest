@@ -9,6 +9,8 @@ use App\Entity\Point;
 use App\Entity\PointLangData;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
+use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
 
 class PointFormDataMapper
 {
@@ -40,11 +42,12 @@ class PointFormDataMapper
             'lon' => $point->getLon(),
             'logo' => $point->getLogo(),
             'url' => $point->getUrl(),
-            'email' => $pointExtData[Point::FIELD_EMAIl] ?? '',
-            'website' => $pointExtData[Point::FIELD_WEBSITE] ?? '',
-            'phones' => $pointExtData[Point::FIELD_PHONES] ?? '',
-            'comment' => $pointExtData[Point::FIELD_COMMENT] ?? '',
-            'services' => $pointExtData[Point::FIELD_SERVICES] ?? [],
+            'email' => $pointExtData[Fields::FIELD_EMAIl] ?? '',
+            'website' => $pointExtData[Fields::FIELD_WEBSITE] ?? '',
+            'phones' => $pointExtData[Fields::FIELD_PHONES] ?? '',
+            'comment' => $pointExtData[Fields::FIELD_COMMENT] ?? '',
+            'services' => $pointExtData[Fields::FIELD_SERVICES] ?? [],
+            'detailed_type' => $pointExtData[Fields::FIELD_DETAILED_TYPE] ?? '',
         ];
 
         foreach ($point->getPointLangData() as $pointLangData) {
@@ -52,9 +55,9 @@ class PointFormDataMapper
             $pointLangExtData = $pointLangData->getData();
 
             $data['lang_' . $langId . '_title'] = $pointLangData->getTitle();
-            $data['lang_' . $langId . '_desc'] = $pointLangExtData[PointLangData::FIELD_DESC ?? ''];
-            $data['lang_' . $langId . '_short_desc'] = $pointLangExtData[PointLangData::FIELD_SHORT_DESC ?? ''];
-            $data['lang_' . $langId . '_address'] = $pointLangExtData[PointLangData::FIELD_ADDRESS ?? ''];
+            $data['lang_' . $langId . '_desc'] = $pointLangExtData[LangFields::FIELD_DESC ?? ''];
+            $data['lang_' . $langId . '_short_desc'] = $pointLangExtData[LangFields::FIELD_SHORT_DESC ?? ''];
+            $data['lang_' . $langId . '_address'] = $pointLangExtData[LangFields::FIELD_ADDRESS ?? ''];
         }
 
         return $data;
@@ -67,11 +70,12 @@ class PointFormDataMapper
     public function mapFormToPoint(array $form, Point $point): void
     {
         $pointExtData = [
-            Point::FIELD_EMAIl => (string) $form['email'] ?? '',
-            Point::FIELD_WEBSITE => (string) $form['website'] ?? '',
-            Point::FIELD_PHONES => (string) $form['phones'] ?? '',
-            Point::FIELD_COMMENT => (string) $form['comment'] ?? '',
-            Point::FIELD_SERVICES => (array) $form['services'] ?? [],
+            Fields::FIELD_EMAIl => (string) $form['email'] ?? '',
+            Fields::FIELD_WEBSITE => (string) $form['website'] ?? '',
+            Fields::FIELD_PHONES => (string) $form['phones'] ?? '',
+            Fields::FIELD_COMMENT => (string) $form['comment'] ?? '',
+            Fields::FIELD_SERVICES => (array) $form['services'] ?? [],
+            Fields::FIELD_DETAILED_TYPE => (string) $form['detailed_type'] ?? '',
         ];
 
         /** @var Point $point */
@@ -106,9 +110,9 @@ class PointFormDataMapper
             $pointLangData->setTitle((string) $form['lang_' . $language->getId() . '_title'] ?? '');
 
             $pointLangExtData = [
-                PointLangData::FIELD_DESC => (string) $form['lang_' . $language->getId() . '_desc'] ?? '',
-                PointLangData::FIELD_SHORT_DESC => (string) $form['lang_' . $language->getId() . '_short_desc'] ?? '',
-                PointLangData::FIELD_ADDRESS => (string) $form['lang_' . $language->getId() . '_address'] ?? '',
+                LangFields::FIELD_DESC => (string) $form['lang_' . $language->getId() . '_desc'] ?? '',
+                LangFields::FIELD_SHORT_DESC => (string) $form['lang_' . $language->getId() . '_short_desc'] ?? '',
+                LangFields::FIELD_ADDRESS => (string) $form['lang_' . $language->getId() . '_address'] ?? '',
             ];
 
             $pointLangData->setData($pointLangExtData);

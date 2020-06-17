@@ -29,7 +29,7 @@ const initializeMap = function() {
 				balloonLayout: getBalloonLayout(),
 				iconLayout: 'default#image',
 				iconImageHref: item.icon.image,
-				iconImageSize: [item.icon.size.x, item.icon.size.y],
+				iconImageSize: [item.icon.size.width, item.icon.size.height],
 			});
 
 			map.geoObjects.add(point);
