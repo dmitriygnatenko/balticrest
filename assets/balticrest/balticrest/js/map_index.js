@@ -33,7 +33,14 @@ const initializeMap = function() {
 			});
 
 			map.geoObjects.add(point);
+
+			// Image preload
+			preloadImage(item.image);
 		});
+	}
+
+	function preloadImage(item) {
+		$('<img>').attr('src', item);
 	}
 
 	function getBalloonContent(item) {
