@@ -36,6 +36,9 @@ class PointTypeFixtures extends Fixture
         $transport = (new PointType())->setCode('transport');
         $manager->persist($transport);
 
+        $transport = (new PointType())->setCode('banks');
+        $manager->persist($transport);
+
         $manager->flush();
     }
 }

@@ -21,10 +21,10 @@ use App\Entity\City;
 class MapDataManager implements MapDataManagerInterface
 {
     /** @var int */
-    const ICON_IMAGE_WIDTH = 29;
+    const ICON_IMAGE_WIDTH = 27;
 
     /** @var int */
-    const ICON_IMAGE_HEIGHT = 46;
+    const ICON_IMAGE_HEIGHT = 48;
 
     /** @var LoggerInterface */
     private $logger;
