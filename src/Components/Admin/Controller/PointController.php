@@ -10,24 +10,44 @@ use App\Components\Admin\Service\Form\PointForm;
 use App\Entity\Point;
 use App\Entity\PointLangData;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Exception;
 
 class PointController extends AbstractController
 {
+
+    /** @var TagAwareCacheInterface */
+    private $cache;
+
+    /** @var LoggerInterface */
+    private $logger;
+
+    /**
+     * @param TagAwareCacheInterface $cache
+     * @param LoggerInterface $logger
+     */
+    public function __construct(TagAwareCacheInterface $cache, LoggerInterface $logger)
+    {
+        $this->cache = $cache;
+        $this->logger = $logger;
+    }
+
     /**
      * @Route("/point", name="point_list", methods={"GET"})
      *
      * @param Request $request
-     * @param LoggerInterface $logger
      *
      * @return Response
      */
-    public function pointList(Request $request, LoggerInterface $logger): Response {
+    public function pointList(Request $request): Response {
         $points = [];
 
         try {
@@ -37,7 +57,7 @@ class PointController extends AbstractController
             }
         } catch (Exception $exception) {
             $pointPaginator = null;
-            $logger->error($exception->getMessage(), ['exception' => $exception]);
+            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
         }
 
         return $this->render('admin/point/list.html.twig', [
@@ -52,15 +72,10 @@ class PointController extends AbstractController
      *
      * @param Request $request
      * @param PointFormDataMapper $pointFormDataMapper
-     * @param LoggerInterface $logger
      *
      * @return Response
      */
-    public function addPoint(
-        Request $request,
-        PointFormDataMapper $pointFormDataMapper,
-        LoggerInterface $logger
-    ): Response {
+    public function addPoint(Request $request, PointFormDataMapper $pointFormDataMapper): Response {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -82,9 +97,11 @@ class PointController extends AbstractController
                 }
                 $entityManager->flush();
 
+                $this->cache->invalidateTags([$point->getCity()->getCode()]);
+
                 $this->addFlash('success', 'Объект успешно добавлен');
-            } catch (\Throwable $exception) {
-                $logger->error($exception->getMessage(), ['exception' => $exception]);
+            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+                $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при добавлении объекта');
             }
 
@@ -103,15 +120,13 @@ class PointController extends AbstractController
      * @param Point $point
      * @param Request $request
      * @param PointFormDataMapper $pointFormDataMapper
-     * @param LoggerInterface $logger
      *
      * @return Response
      */
     public function editPoint(
         Point $point,
         Request $request,
-        PointFormDataMapper $pointFormDataMapper,
-        LoggerInterface $logger
+        PointFormDataMapper $pointFormDataMapper
     ): Response {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
@@ -136,10 +151,12 @@ class PointController extends AbstractController
                 }
                 $entityManager->flush();
 
+                $this->cache->invalidateTags([$point->getCity()->getCode()]);
+
                 $this->addFlash('success', 'Объект успешно сохранен');
-            } catch (\Throwable $exception) {
-                $logger->error($exception->getMessage(), ['exception' => $exception]);
-                $this->addFlash('danger', 'Ошибка при сохранении объекта');
+
+            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+                $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             }
 
             return $this->redirectToRoute('point_list');
@@ -156,25 +173,25 @@ class PointController extends AbstractController
      *
      * @param Point $point
      * @param Request $request
-     * @param LoggerInterface $logger
      *
      * @return Response
      */
-    public function deletePoint(
-        Point $point,
-        Request $request,
-        LoggerInterface $logger
-    ): Response {
+    public function deletePoint(Point $point, Request $request): Response {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
         if ($request->isMethod('post')) {
             try {
+                $city = $point->getCity()->getCode();
+
                 $entityManager->remove($point);
                 $entityManager->flush();
+
+                $this->cache->invalidateTags([$city]);
+
                 $this->addFlash('success', 'Объект успешно удален');
-            } catch (\Throwable $exception) {
-                $logger->error($exception->getMessage(), ['exception' => $exception]);
+            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+                $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при удалении объекта');
             }
 

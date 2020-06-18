@@ -12,6 +12,7 @@ use App\Entity\PointLangData;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
@@ -32,6 +33,9 @@ class MapDataManager implements MapDataManagerInterface
     /** @var TranslatorInterface */
     private $translator;
 
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
+
     /** @var TagAwareCacheInterface */
     private $cache;
 
@@ -44,6 +48,7 @@ class MapDataManager implements MapDataManagerInterface
     /**
      * @param LoggerInterface $logger
      * @param TranslatorInterface $translator
+     * @param UrlGeneratorInterface $urlGenerator
      * @param TagAwareCacheInterface $cache
      * @param CityManagerInterface $cityManager
      * @param PointManagerInterface $pointManager
@@ -51,6 +56,7 @@ class MapDataManager implements MapDataManagerInterface
     public function __construct(
         LoggerInterface $logger,
         TranslatorInterface $translator,
+        UrlGeneratorInterface $urlGenerator,
         TagAwareCacheInterface $cache,
         CityManagerInterface $cityManager,
         PointManagerInterface $pointManager
@@ -58,6 +64,7 @@ class MapDataManager implements MapDataManagerInterface
     {
         $this->logger = $logger;
         $this->translator = $translator;
+        $this->urlGenerator = $urlGenerator;
         $this->cache = $cache;
         $this->cityManager = $cityManager;
         $this->pointManager = $pointManager;
@@ -70,7 +77,7 @@ class MapDataManager implements MapDataManagerInterface
      */
     public function generateCityMapJsonData(Request $request): string
     {
-        return $this->getCityMapData($request); // TODO
+        return $this->getCachedCityMapJsonData($request);
     }
 
     /**
@@ -94,10 +101,12 @@ class MapDataManager implements MapDataManagerInterface
             return $this->cache->get($this->getCacheKey($request), function (ItemInterface $item) use ($request) {
                 $item->tag($request->get('city', ''));
                 $item->expiresAfter(self::CACHE_EXPIRE_TIME);
+
                 return $this->getCityMapData($request);
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
+
             return $this->getCityMapData($request);
         }
     }
@@ -191,12 +200,24 @@ class MapDataManager implements MapDataManagerInterface
                 if ($pointLangData !== null) {
                     $pointData = $pointLangData->getData();
 
+                    $link = $this->urlGenerator->generate(
+                        'point',
+                        [
+                            '_locale' => $locale,
+                            'city' => $city,
+                            'category' => $point->getType()->getCode(),
+                            'url' => $point->getUrl(),
+                        ],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    );
+
                     $pointDTO = (new MapPointDTO())
                         ->setLat($point->getLat())
                         ->setLon($point->getLon())
                         ->setTitle($pointLangData->getTitle())
                         ->setHint($pointLangData->getTitle())
                         ->setDescription($pointData[PointLangFields::FIELD_SHORT_DESC] ?? '')
+                        ->setLink($link)
                         ->setImage($this->getPointImage($point))
                         ->setIconImage($this->getPointIconImage($point))
                         ->setIconImageWidth(self::ICON_IMAGE_WIDTH)
