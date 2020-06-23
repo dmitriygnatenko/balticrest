@@ -1,4 +1,5 @@
 framework:
     cache:
-        app: cache.adapter.array
+        app: cache.adapter.filesystem
+        # app: cache.adapter.array
         system: cache.adapter.system

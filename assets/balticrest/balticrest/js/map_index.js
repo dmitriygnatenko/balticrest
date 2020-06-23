@@ -82,9 +82,10 @@ const initializeMap = function() {
 					let position = this._$element.position();
 
 					return new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([
-						[position.left, position.top], [
+						[position.left, position.top - 30],
+						[
 							position.left + this._$element[0].offsetWidth,
-							position.top - this._$element[0].offsetHeight
+							position.top + this._$element[0].offsetHeight
 						]
 					]));
 				},
