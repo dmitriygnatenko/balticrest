@@ -28,7 +28,7 @@ class MapController extends AbstractController
      *     "/{city}/{category}",
      *     requirements={
      *         "city": "svetlogorsk|zelenogradsk",
-     *         "category": "hotels|medicine|cafes|shops|banks|museums|sport|transport|webcam"
+     *         "category": "hotels|medicine|cafes|shops|banks|museums|sport|transport"
      *     },
      *     defaults={
      *         "category": ""

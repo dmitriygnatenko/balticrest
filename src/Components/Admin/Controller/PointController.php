@@ -41,7 +41,7 @@ class PointController extends AbstractController
     }
 
     /**
-     * @Route("/point", name="point_list", methods={"GET"})
+     * @Route("/point", name="admin.point_list", methods={"GET"})
      *
      * @param Request $request
      *
@@ -105,7 +105,7 @@ class PointController extends AbstractController
                 $this->addFlash('danger', 'Ошибка при добавлении объекта');
             }
 
-            return $this->redirectToRoute('point_list');
+            return $this->redirectToRoute('admin.point_list');
         }
 
         return $this->render('admin/point/edit.html.twig', [
@@ -159,7 +159,7 @@ class PointController extends AbstractController
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             }
 
-            return $this->redirectToRoute('point_list');
+            return $this->redirectToRoute('admin.point_list');
         }
 
         return $this->render('admin/point/edit.html.twig', [
@@ -195,7 +195,7 @@ class PointController extends AbstractController
                 $this->addFlash('danger', 'Ошибка при удалении объекта');
             }
 
-            return $this->redirectToRoute('point_list');
+            return $this->redirectToRoute('admin.point_list');
         }
 
         $pointRuData = $point->getPointLangData()->filter(function($pointLangData) {
