@@ -263,9 +263,9 @@ class MapDataManager implements MapDataManagerInterface
         $pointData = $point->getData();
 
         if ($pointData[PointFields::FIELD_DETAILED_TYPE] ?? '') {
-            return '/static/balticrest/images/logo/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
+            return '/static/balticrest/images/logo/default/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
         }
 
-        return '/static/balticrest/images/logo/'  . $point->getType()->getCode() . '.png';
+        return '/static/balticrest/images/logo/default/'  . $point->getType()->getCode() . '.png';
     }
 }

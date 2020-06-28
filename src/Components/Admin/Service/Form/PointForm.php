@@ -150,9 +150,6 @@ class PointForm extends AbstractType
 
             $builder->add('lang_' . $language->getId() . '_address', TextType::class, [
                 'label' => 'Адрес',
-                'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES)
-                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
-                    : []
             ]);
 
             $builder->add('lang_' . $language->getId() . '_desc', CKEditorFormType::class, [
