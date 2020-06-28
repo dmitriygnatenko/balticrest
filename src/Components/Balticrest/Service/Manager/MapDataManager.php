@@ -200,16 +200,20 @@ class MapDataManager implements MapDataManagerInterface
                 if ($pointLangData !== null) {
                     $pointData = $pointLangData->getData();
 
-                    $link = $this->urlGenerator->generate(
-                        'point',
-                        [
-                            '_locale' => $locale,
-                            'city' => $city,
-                            'category' => $point->getType()->getCode(),
-                            'url' => $point->getUrl(),
-                        ],
-                        UrlGeneratorInterface::ABSOLUTE_URL
-                    );
+                    if ($point->getUrl()) {
+                        $link = $this->urlGenerator->generate(
+                            'point',
+                            [
+                                '_locale' => $locale,
+                                'city' => $city,
+                                'category' => $point->getType()->getCode(),
+                                'url' => $point->getUrl(),
+                            ],
+                            UrlGeneratorInterface::ABSOLUTE_URL
+                        );
+                    } else {
+                        $link = '';
+                    }
 
                     $pointDTO = (new MapPointDTO())
                         ->setLat($point->getLat())

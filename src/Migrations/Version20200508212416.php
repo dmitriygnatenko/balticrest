@@ -28,7 +28,7 @@ final class Version20200508212416 extends AbstractMigration
             type_id INT NOT NULL,
             lat DOUBLE PRECISION NOT NULL,
             lon DOUBLE PRECISION NOT NULL,
-            url VARCHAR(255) NOT NULL,
+            url VARCHAR(255) NULL,
             logo VARCHAR(255) NOT NULL,
             data JSON NOT NULL,
             is_active TINYINT(1) DEFAULT \'1\' NOT NULL,

@@ -44,11 +44,21 @@ const initializeMap = function() {
 	}
 
 	function getBalloonContent(item) {
-		return ymaps.templateLayoutFactory.createClass(
-			'<img src="' + item.image + '" class="logotype">' +
-			'<h3>'+ item.title +'<span></span></h3>' +
-			'<span>'+ item.description +'</span>' +
-			'<a href="'+ item.link + '" class="green_btn">' + map_data.trans.point_button + '</a>');
+		if (item.link !== '') {
+			return ymaps.templateLayoutFactory.createClass(
+				'<img src="' + item.image + '" class="logotype">' +
+				'<h3>'+ item.title +'<span></span></h3>' +
+				'<span>'+ item.description +'</span>' +
+				'<a href="'+ item.link + '" class="green_btn">' + map_data.trans.point_button + '</a>'
+			);
+
+		} else {
+			return ymaps.templateLayoutFactory.createClass(
+				'<img src="' + item.image + '" class="logotype">' +
+				'<h3>'+ item.title +'</h3>' +
+				'<span>'+ item.description +'</span>'
+			);
+		}
 	}
 
 	function getBalloonLayout() {

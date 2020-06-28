@@ -52,7 +52,7 @@ class Point
     private $lon;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
 
@@ -178,11 +178,11 @@ class Point
     }
 
     /**
-     * @param string $url
+     * @param string|null $url
      *
      * @return $this
      */
-    public function setUrl(string $url): self
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
 

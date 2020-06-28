@@ -95,10 +95,13 @@ class PointForm extends AbstractType
         $builder->add('url', TextType::class, [
             'label' => 'URL',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]]),
                 new Callback([
                     'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
                     'callback' => function($value, $context) use ($em, $point) {
+                        if ($value === '' || $value === null) {
+                            return;
+                        }
+
                         if ($point !== null && $point->getUrl() === $value) {
                             return;
                         }

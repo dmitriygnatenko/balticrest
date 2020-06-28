@@ -82,7 +82,7 @@ class PointFormDataMapper
         $point->setLat((float) $form['lat'] ?? 0)
             ->setLon((float) $form['lon'] ?? 0)
             ->setLogo((string) $form['logo'] ?? '')
-            ->setUrl((string) $form['url'] ?? '')
+            ->setUrl($form['url'] ? $form['url'] : null)
             ->setIsActive((bool) $form['is_active'] ?? true)
             ->setCity($form['city'] ?? null)
             ->setType($form['type'] ?? null)
