@@ -1,16 +1,18 @@
 {% extends 'balticrest/base_left_top_menu.html.twig' %}
 
-{% block title %}Тестовая карта{% endblock %}
+{% set city = app.request.attributes.get('city', '') %}
+{% set category = app.request.attributes.get('category', '') %}
+
+{% block title %}{{ global_service.title('map', city, category) }}{% endblock %}
+{% block description %}{{ global_service.description('map', city, category) }}{% endblock %}
+{% block keywords %}{{ global_service.keywords('map', city, category) }}{% endblock %}
 
 {% block body_attr %}onload="initializeMap()" class="inmap innerpage"{% endblock %}
 
 {% block content %}
     <div id="map" class="map"></div>
 
-    {% set city = app.request.attributes.get('city', '') %}
-    {% set category = app.request.attributes.get('category', '') %}
-
-    <div class="container-fluid menu mobile">
+   <div class="container-fluid menu mobile">
         <div class="row">
             <div class="col-md-12">
                 <span>{% trans %}categories.category{% endtrans %}</span>

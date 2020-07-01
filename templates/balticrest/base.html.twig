@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% trans %}head.default_title{% endtrans %}{% endblock %}</title>
-    <meta name="description" content="{% block description %}{% trans %}head.default_description{% endtrans %}{% endblock %}">
-    <meta name="keywords" content="{% block keywords %}{% trans %}head.default_keywords{% endtrans %}{% endblock %}">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
     {% block balticrest_css_head %}
         {{ encore_entry_link_tags('balticrest_main') }}
     {% endblock %}

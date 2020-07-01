@@ -2,6 +2,10 @@ cities:
     zelenogradsk: Zelenogradsk
     svetlogorsk: Svetlogorsk
 
+cities_genitive:
+    zelenogradsk: Zelenogradsk
+    svetlogorsk: Svetlogorsk
+
 header:
     search:
         btn_title: 搜尋
