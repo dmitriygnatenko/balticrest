@@ -1,10 +1,12 @@
 cities:
     zelenogradsk: Зеленоградск
     svetlogorsk: Светлогорск
+    otradnoe: Отрадное
 
 cities_genitive:
     zelenogradsk: Зеленоградска
     svetlogorsk: Светлогорска
+    otradnoe: Отрадного
 
 header:
     search:
