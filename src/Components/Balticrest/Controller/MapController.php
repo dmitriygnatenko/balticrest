@@ -27,7 +27,7 @@ class MapController extends AbstractController
      * @Route(
      *     "/{city}/{category}",
      *     requirements={
-     *         "city": "svetlogorsk|zelenogradsk",
+     *         "city": "svetlogorsk|zelenogradsk|otradnoe",
      *         "category": "hotels|medicine|cafes|shops|banks|museums|sport|transport"
      *     },
      *     defaults={
