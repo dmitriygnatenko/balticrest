@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Balticrest\Service\Manager;
+namespace App\Components\Balticrest\Service\Provider;
 
+use App\Components\Balticrest\Service\Cache\CacheDefinitions;
 use App\Entity\Language;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\InvalidArgumentException;
@@ -11,7 +12,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-class LanguageManager implements LanguageManagerInterface
+class LanguageDataProvider implements LanguageDataProviderInterface, CacheDefinitions
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -37,24 +38,23 @@ class LanguageManager implements LanguageManagerInterface
     /**
      * @return array
      */
-    public function getCachedActiveLanguages(): array
+    public function getCachedActiveLanguagesList(): array
     {
         try {
-            return $this->cache->get(self::CACHE_KEY, function (ItemInterface $item) {
-                $item->tag(self::CACHE_TAG);
-                $item->expiresAfter(self::CACHE_EXPIRE_TIME);
-                return $this->getActiveLanguages();
+            return $this->cache->get(self::LANGUAGE_LIST_CACHE_KEY, function (ItemInterface $item) {
+                $item->expiresAfter(self::LANGUAGE_LIST_CACHE_EXPIRE_TIME);
+                return $this->getActiveLanguagesList();
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
-            return $this->getActiveLanguages();
+            return $this->getActiveLanguagesList();
         }
     }
 
     /**
      * @return array
      */
-    public function getActiveLanguages(): array
+    public function getActiveLanguagesList(): array
     {
         $results = $this->em->getRepository(Language::class)
             ->findBy(['is_active' => true], ['id' => 'ASC']);

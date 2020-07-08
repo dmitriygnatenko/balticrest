@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Twig;
 
-use App\Components\Balticrest\Service\Manager\CityManager;
-use App\Components\Balticrest\Service\Manager\CityManagerInterface;
-use App\Components\Balticrest\Service\Manager\LanguageManager;
-use App\Components\Balticrest\Service\Manager\LanguageManagerInterface;
+use App\Components\Balticrest\Service\Provider\CityDataProvider;
+use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
+use App\Components\Balticrest\Service\Provider\LanguageDataProvider;
+use App\Components\Balticrest\Service\Provider\LanguageDataProviderInterface;
 use App\Components\Balticrest\Service\Manager\PointManager;
 use App\Components\Balticrest\Service\Manager\PointManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -30,13 +30,13 @@ class TwigGlobalService
     /** @var PointManager */
     private $pointManager;
 
-    /** @var CityManager */
-    private $cityManager;
+    /** @var CityDataProvider */
+    private $cityDataProvider;
 
-    /** @var LanguageManager */
-    private $languageManager;
+    /** @var LanguageDataProvider */
+    private $languageDataProvider;
 
-    /** @var LanguageManager */
+    /** @var TranslatorInterface */
     private $translator;
 
     /** @var LoggerInterface */
@@ -46,19 +46,19 @@ class TwigGlobalService
      * @param TranslatorInterface $translator
      * @param LoggerInterface $logger
      * @param PointManagerInterface $pointManager
-     * @param CityManagerInterface $cityManager
-     * @param LanguageManagerInterface $languageManager
+     * @param CityDataProviderInterface $cityDataProvider
+     * @param LanguageDataProviderInterface $languageDataProvider
      */
     public function __construct(
         TranslatorInterface $translator,
         LoggerInterface $logger,
         PointManagerInterface $pointManager,
-        CityManagerInterface $cityManager,
-        LanguageManagerInterface $languageManager
+        CityDataProviderInterface $cityDataProvider,
+        LanguageDataProviderInterface $languageDataProvider
     ) {
         $this->pointManager = $pointManager;
-        $this->cityManager = $cityManager;
-        $this->languageManager = $languageManager;
+        $this->cityDataProvider = $cityDataProvider;
+        $this->languageDataProvider = $languageDataProvider;
         $this->translator = $translator;
         $this->logger = $logger;
     }
@@ -68,7 +68,7 @@ class TwigGlobalService
      */
     public function getCities(): array
     {
-        return $this->cityManager->getCachedActiveCities();
+        return $this->cityDataProvider->getCachedActiveCitiesList();
     }
 
     /**
@@ -76,8 +76,24 @@ class TwigGlobalService
      */
     public function getLanguages(): array
     {
-        return $this->languageManager->getCachedActiveLanguages();
+        return $this->languageDataProvider->getActiveLanguagesList();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @return array
@@ -86,6 +102,20 @@ class TwigGlobalService
     {
         return $this->pointManager->getCachedPointTypes();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @param string $type
