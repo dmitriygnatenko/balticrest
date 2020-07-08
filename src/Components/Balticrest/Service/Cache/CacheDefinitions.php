@@ -15,7 +15,7 @@ interface CacheDefinitions
     /** @var string */
     const LANGUAGE_LIST_CACHE_KEY = 'balticrest.active_languages_list';
 
-    /** @var int Неделя */
+    /** @var int */
     const LANGUAGE_LIST_CACHE_EXPIRE_TIME = 604800;
 
     /** @var string */
@@ -23,4 +23,13 @@ interface CacheDefinitions
 
     /** @var int */
     const POINT_TYPES_CACHE_EXPIRE_TIME = 604800;
+
+    /** @var string */
+    const MAP_POINTS_CACHE_KEY = 'balticrest.map_points';
+
+    /** @var int */
+    const MAP_POINTS_CACHE_EXPIRE_TIME = 604800;
+
+    /** @var string */
+    const MAP_POINTS_TAG = 'map_points';
 }

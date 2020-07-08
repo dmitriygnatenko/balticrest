@@ -23,7 +23,6 @@ use Exception;
 
 class PointController extends AbstractController
 {
-
     /** @var TagAwareCacheInterface */
     private $cache;
 
