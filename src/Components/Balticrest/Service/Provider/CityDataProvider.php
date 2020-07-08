@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Balticrest\Service\Manager;
+namespace App\Components\Balticrest\Service\Provider;
 
+use App\Components\Balticrest\Service\Cache\CacheDefinitions;
 use App\Entity\City;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -11,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-class CityManager implements CityManagerInterface
+class CityDataProvider implements CityDataProviderInterface, CacheDefinitions
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -37,24 +38,23 @@ class CityManager implements CityManagerInterface
     /**
      * @return array
      */
-    public function getCachedActiveCities(): array
+    public function getCachedActiveCitiesList(): array
     {
         try {
-            return $this->cache->get(self::CACHE_KEY, function (ItemInterface $item) {
-                $item->tag(self::CACHE_TAG);
-                $item->expiresAfter(self::CACHE_EXPIRE_TIME);
-                return $this->getActiveCities();
+            return $this->cache->get(self::CITY_LIST_CACHE_KEY, function (ItemInterface $item) {
+                $item->expiresAfter(self::CITY_LIST_CACHE_EXPIRE_TIME);
+                return $this->getActiveCitiesList();
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
-            return $this->getActiveCities();
+            return $this->getActiveCitiesList();
         }
     }
 
     /**
      * @return array
      */
-    public function getActiveCities(): array
+    public function getActiveCitiesList(): array
     {
         $results = $this->em->getRepository(City::class)
             ->findBy(['is_active' => true], ['id' => 'ASC']);

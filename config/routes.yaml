@@ -1,8 +1,15 @@
-balticrest_controllers:
+balticrest:
     resource: ../src/Components/Balticrest/Controller/
     type: annotation
+    prefix:
+        ru: ''
+        en: '/en'
+        de: '/de'
+        pl: '/pl'
+        lt: '/lt'
+        cn: '/cn'
 
-admin_controllers:
+admin:
     resource: ../src/Components/Admin/Controller/
     type: annotation
     prefix: '/admin'
