@@ -34,6 +34,7 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions
         try {
             $this->cache->delete(self::CITY_LIST_CACHE_KEY);
             $this->cache->delete(self::LANGUAGE_LIST_CACHE_KEY);
+            $this->cache->delete(self::POINT_TYPES_CACHE_KEY);
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
         }

@@ -17,4 +17,10 @@ interface CacheDefinitions
 
     /** @var int Неделя */
     const LANGUAGE_LIST_CACHE_EXPIRE_TIME = 604800;
+
+    /** @var string */
+    const POINT_TYPES_CACHE_KEY = 'balticrest.point_types';
+
+    /** @var int */
+    const POINT_TYPES_CACHE_EXPIRE_TIME = 604800;
 }

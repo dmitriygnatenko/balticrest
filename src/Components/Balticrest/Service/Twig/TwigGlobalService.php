@@ -8,8 +8,8 @@ use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\LanguageDataProvider;
 use App\Components\Balticrest\Service\Provider\LanguageDataProviderInterface;
-use App\Components\Balticrest\Service\Manager\PointManager;
-use App\Components\Balticrest\Service\Manager\PointManagerInterface;
+use App\Components\Balticrest\Service\Provider\PointTypeProvider;
+use App\Components\Balticrest\Service\Provider\PointTypeProviderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Psr\Log\LoggerInterface;
 
@@ -27,8 +27,8 @@ class TwigGlobalService
     /** @var array */
     private $allowed_types = ['map'];
 
-    /** @var PointManager */
-    private $pointManager;
+    /** @var PointTypeProvider */
+    private $pointTypeProvider;
 
     /** @var CityDataProvider */
     private $cityDataProvider;
@@ -45,18 +45,18 @@ class TwigGlobalService
     /**
      * @param TranslatorInterface $translator
      * @param LoggerInterface $logger
-     * @param PointManagerInterface $pointManager
+     * @param PointTypeProviderInterface $pointTypeProvider
      * @param CityDataProviderInterface $cityDataProvider
      * @param LanguageDataProviderInterface $languageDataProvider
      */
     public function __construct(
         TranslatorInterface $translator,
         LoggerInterface $logger,
-        PointManagerInterface $pointManager,
+        PointTypeProviderInterface $pointTypeProvider,
         CityDataProviderInterface $cityDataProvider,
         LanguageDataProviderInterface $languageDataProvider
     ) {
-        $this->pointManager = $pointManager;
+        $this->pointTypeProvider = $pointTypeProvider;
         $this->cityDataProvider = $cityDataProvider;
         $this->languageDataProvider = $languageDataProvider;
         $this->translator = $translator;
@@ -79,43 +79,13 @@ class TwigGlobalService
         return $this->languageDataProvider->getActiveLanguagesList();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * @return array
      */
     public function getPointTypes(): array
     {
-        return $this->pointManager->getCachedPointTypes();
+        return $this->pointTypeProvider->getCachedPointTypes();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * @param string $type
