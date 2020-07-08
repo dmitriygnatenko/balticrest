@@ -7,6 +7,8 @@ namespace App\Components\Admin\Controller;
 use App\Components\Admin\Service\DTO\PointDTO;
 use App\Components\Admin\Service\Form\Mapper\PointFormDataMapper;
 use App\Components\Admin\Service\Form\PointForm;
+use App\Components\Balticrest\Service\Cache\CacheManager;
+use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Entity\Point;
 use App\Entity\PointLangData;
 use Doctrine\ORM\EntityManager;
@@ -18,24 +20,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Exception;
 
 class PointController extends AbstractController
 {
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    /** @var CacheManager */
+    private $cacheManager;
 
     /** @var LoggerInterface */
     private $logger;
 
     /**
-     * @param TagAwareCacheInterface $cache
+     * @param CacheManagerInterface $cacheManager
      * @param LoggerInterface $logger
      */
-    public function __construct(TagAwareCacheInterface $cache, LoggerInterface $logger)
+    public function __construct(CacheManagerInterface $cacheManager, LoggerInterface $logger)
     {
-        $this->cache = $cache;
+        $this->cacheManager = $cacheManager;
         $this->logger = $logger;
     }
 
@@ -50,7 +51,9 @@ class PointController extends AbstractController
         $points = [];
 
         try {
-            $pointPaginator = $this->getDoctrine()->getRepository(Point::class)->getPaginatedFilteredPoints($request);
+            $pointPaginator = $this->getDoctrine()->getRepository(Point::class)
+                ->getPaginatedFilteredPoints($request);
+
             foreach ($pointPaginator->getIterator() as $point) {
                 $points[] = (new PointDTO())->fillByPoint($point);
             }
@@ -96,7 +99,7 @@ class PointController extends AbstractController
                 }
                 $entityManager->flush();
 
-                $this->cache->invalidateTags([$point->getCity()->getCode()]);
+                $this->cacheManager->clearByTag($point->getCity()->getCode());
 
                 $this->addFlash('success', 'Объект успешно добавлен');
             } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
@@ -150,7 +153,7 @@ class PointController extends AbstractController
                 }
                 $entityManager->flush();
 
-                $this->cache->invalidateTags([$point->getCity()->getCode()]);
+                $this->cacheManager->clearByTag($point->getCity()->getCode());
 
                 $this->addFlash('success', 'Объект успешно сохранен');
 
@@ -186,7 +189,7 @@ class PointController extends AbstractController
                 $entityManager->remove($point);
                 $entityManager->flush();
 
-                $this->cache->invalidateTags([$city]);
+                $this->cacheManager->clearByTag($city);
 
                 $this->addFlash('success', 'Объект успешно удален');
             } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {

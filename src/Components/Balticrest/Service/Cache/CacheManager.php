@@ -44,6 +44,20 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions
     }
 
     /**
+     * @param string $tag
+     *
+     * @return void
+     */
+    public function clearByTag(string $tag): void
+    {
+        try {
+            $this->cache->invalidateTags([$tag]);
+        } catch (InvalidArgumentException $exception) {
+            $this->logger->error($exception);
+        }
+    }
+
+    /**
      * @param Request $request
      *
      * @return string

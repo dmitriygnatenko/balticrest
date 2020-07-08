@@ -76,7 +76,7 @@ class TwigGlobalService
      */
     public function getLanguages(): array
     {
-        return $this->languageDataProvider->getActiveLanguagesList();
+        return $this->languageDataProvider->getCachedActiveLanguagesList();
     }
 
     /**
