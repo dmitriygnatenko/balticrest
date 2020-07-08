@@ -9,7 +9,6 @@ use Symfony\Component\Serializer\Serializer;
 
 class MapPointsListDTO
 {
-
     /** @var float */
     private $centerLat;
 

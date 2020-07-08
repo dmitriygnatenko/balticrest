@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface MapDataManagerInterface
 {
-    /** @var string */
-    const CACHE_KEY = 'balticrest.map.city';
+    /** @var int */
+    const ICON_IMAGE_WIDTH = 27;
 
-    /** @var int Неделя */
-    const CACHE_EXPIRE_TIME = 604800;
+    /** @var int */
+    const ICON_IMAGE_HEIGHT = 48;
 
     /**
      * @param Request $request
