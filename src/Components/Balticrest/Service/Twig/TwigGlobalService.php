@@ -16,16 +16,17 @@ use Psr\Log\LoggerInterface;
 class TwigGlobalService
 {
     /** @var string */
-    private const PART_TITLE = 'title';
+    private const TAG_TYPE_TITLE = 'title';
 
     /** @var string */
-    private const PART_DESC = 'desc';
+    private const TAG_TYPE_DESC = 'desc';
 
     /** @var string */
-    private const PART_KEYWORDS = 'keywords';
+    private const TAG_TYPE_KEYWORDS = 'keywords';
 
-    /** @var array */
-    private $allowed_types = ['map'];
+    /** @var string */
+    private const PAGE_TYPE_MAP = 'map';
+
 
     /** @var PointTypeProvider */
     private $pointTypeProvider;
@@ -88,59 +89,50 @@ class TwigGlobalService
     }
 
     /**
-     * @param string $type
      * @param string $city
      * @param string $category
      *
      * @return string
      */
-    public function getTitle(string $type, string $city, string $category): string
+    public function getMapPageTitle(string $city, string $category): string
     {
-        return $this->getSeoTrans(self::PART_TITLE, $type, $city, $category);
+        return $this->getSeoTrans(self::TAG_TYPE_TITLE, self::PAGE_TYPE_MAP, $city, $category);
     }
 
     /**
-     * @param string $type
      * @param string $city
      * @param string $category
      *
      * @return string
      */
-    public function getDescription(string $type, string $city, string $category): string
+    public function getMapPageDescription(string $city, string $category): string
     {
-        return $this->getSeoTrans(self::PART_DESC, $type, $city, $category);
+        return $this->getSeoTrans(self::TAG_TYPE_DESC, self::PAGE_TYPE_MAP, $city, $category);
     }
 
     /**
-     * @param string $type
      * @param string $city
      * @param string $category
      *
      * @return string
      */
-    public function getKeywords(string $type, string $city, string $category): string
+    public function getMapPageKeywords(string $city, string $category): string
     {
-        return $this->getSeoTrans(self::PART_KEYWORDS, $type, $city, $category);
+        return $this->getSeoTrans(self::TAG_TYPE_KEYWORDS, self::PAGE_TYPE_MAP, $city, $category);
     }
 
     /**
-     * @param string $part
-     * @param string $type
+     * @param string $tagType
+     * @param string $pageType
      * @param string $city
      * @param string $category
      *
      * @return string
      */
-    private function getSeoTrans(string $part, string $type, string $city, string $category): string
+    private function getSeoTrans(string $tagType, string $pageType, string $city, string $category): string
     {
-        if (!in_array($type, $this->allowed_types, true)) {
-            $this->logger->warning('Translation type ' . $type . ' not found');
-
-            return '';
-        }
-
         return $this->translator->trans(
-            'seo.' . $type . '.' . ($category === '' ? 'default' : $category) . '.' . $part,
+            'seo.' . $pageType . '.' . ($category === '' ? 'default' : $category) . '.' . $tagType,
             [
                 '%city_gen%' => $this->translator->trans('cities_genitive.' . $city),
                 '%city%' => $this->translator->trans('cities.' . $city),

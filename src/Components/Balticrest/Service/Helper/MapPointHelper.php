@@ -19,10 +19,10 @@ class MapPointHelper implements MapPointHelperInterface
         $pointData = $point->getData();
 
         if ($pointData[PointFields::FIELD_DETAILED_TYPE] ?? '') {
-            return '/static/balticrest/images/markers/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
+            return self::IMAGES_PATH . 'markers/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
         }
 
-        return '/static/balticrest/images/markers/'  . $point->getType()->getCode() . '.png';
+        return self::IMAGES_PATH . 'markers/'  . $point->getType()->getCode() . '.png';
     }
 
     /**
@@ -41,9 +41,9 @@ class MapPointHelper implements MapPointHelperInterface
         $pointData = $point->getData();
 
         if ($pointData[PointFields::FIELD_DETAILED_TYPE] ?? '') {
-            return '/static/balticrest/images/logo/default/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
+            return self::IMAGES_PATH . 'logo/default/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
         }
 
-        return '/static/balticrest/images/logo/default/'  . $point->getType()->getCode() . '.png';
+        return self::IMAGES_PATH . 'logo/default/'  . $point->getType()->getCode() . '.png';
     }
 }

@@ -8,6 +8,9 @@ use App\Entity\Point;
 
 interface MapPointHelperInterface
 {
+    /** @var string */
+    public const IMAGES_PATH = '/static/balticrest/images/';
+
     /**
      * @param Point $point
      *
