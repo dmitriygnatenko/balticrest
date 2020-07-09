@@ -1010,7 +1010,7 @@ body.inner_page .bg_parallax {
 }
 .marker_info .info h3 {
     text-align: center;
-    padding-top: 70px;
+    padding: 70px 5px 0 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: #ffffff;
