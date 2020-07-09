@@ -69,4 +69,14 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions
             . $request->get('category', '')
             . $request->getLocale();
     }
+
+    /**
+     * @param string $city
+     *
+     * @return string
+     */
+    public function getActivePointsCacheKey(string $city): string
+    {
+        return self::ACTIVE_POINT_TYPES_CACHE_KEY . $city;
+    }
 }

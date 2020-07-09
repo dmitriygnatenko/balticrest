@@ -39,7 +39,7 @@ class PointRepository extends ServiceEntityRepository
         $category = $request->query->getInt('category');
 
         $qb = $this->createQueryBuilder('p')
-            ->orderBy('p.id');
+            ->orderBy('p.id', 'DESC');
 
         if ($city) {
             $qb->andWhere('p.city = :city')

@@ -23,4 +23,23 @@ class PointTypeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, PointType::class);
     }
+
+    /**
+     * @param string $city
+     *
+     * @return array
+     */
+    public function findActivePointTypes(string $city): array
+    {
+        $qb = $this->createQueryBuilder('t');
+
+        $qb->distinct()
+            ->join('t.points', 'p')
+            ->join('p.city', 'c')
+            ->andWhere('p.is_active = 1')
+            ->andWhere('c.code = :city')
+            ->setParameter('city', $city);
+
+        return $qb->getQuery()->getResult();
+    }
 }

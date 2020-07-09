@@ -25,6 +25,12 @@ interface CacheDefinitions
     const POINT_TYPES_CACHE_EXPIRE_TIME = 604800;
 
     /** @var string */
+    const ACTIVE_POINT_TYPES_CACHE_KEY = 'balticrest.active_point_types';
+
+    /** @var int */
+    const ACTIVE_POINT_TYPES_CACHE_EXPIRE_TIME = 604800;
+
+    /** @var string */
     const MAP_POINTS_CACHE_KEY = 'balticrest.map_points';
 
     /** @var int */

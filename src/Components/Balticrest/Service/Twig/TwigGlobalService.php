@@ -27,7 +27,6 @@ class TwigGlobalService
     /** @var string */
     private const PAGE_TYPE_MAP = 'map';
 
-
     /** @var PointTypeProvider */
     private $pointTypeProvider;
 
@@ -86,6 +85,16 @@ class TwigGlobalService
     public function getPointTypes(): array
     {
         return $this->pointTypeProvider->getCachedPointTypes();
+    }
+
+    /**
+     * @param string $city
+     *
+     * @return array
+     */
+    public function getActivePointTypes(string $city): array
+    {
+        return $this->pointTypeProvider->getCachedActivePointTypesList($city);
     }
 
     /**
