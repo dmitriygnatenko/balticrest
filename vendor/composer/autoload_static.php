@@ -34,6 +34,10 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'VK\\' => 3,
+        ),
         'T' => 
         array (
             'Twig\\Extra\\TwigExtraBundle\\' => 27,
@@ -175,6 +179,10 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'VK\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vkcom/vk-php-sdk/src/VK',
         ),
         'Twig\\Extra\\TwigExtraBundle\\' => 
         array (

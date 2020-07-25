@@ -116,6 +116,7 @@ final class Versions
   'symfony/yaml' => 'v5.1.0@ea342353a3ef4f453809acc4ebc55382231d4d23',
   'twig/extra-bundle' => 'v3.0.3@6eaf1637abe6b68518e7e0949ebb84e55770d5c6',
   'twig/twig' => 'v3.0.3@3b88ccd180a6b61ebb517aea3b1a8906762a1dc2',
+  'vkcom/vk-php-sdk' => '5.101.0@46a8f76503050c0c6730359fc234a4d6448b8653',
   'webmozart/assert' => '1.8.0@ab2cb0b3b559010b75981b1bdce728da3ee90ad6',
   'zendframework/zend-code' => '3.4.1@268040548f92c2bfcba164421c1add2ba43abaaa',
   'zendframework/zend-eventmanager' => '3.2.1@a5e2583a211f73604691586b8406ff7296a946dd',

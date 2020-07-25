@@ -51,7 +51,12 @@ login:
         label:
             email: Адрес электронной почты
             password: Пароль
-            button: Войти
+            vk: ВКонтакте
+            fb: Facebook
+        button:
+            login: Войти
+            register: Зарегистрироваться
+            restore: Восстановить пароль
         error:
             email_or_password: Неверный адрес электронной почты или пароль
             csrf: Ошибка проверки аутентификационных данных

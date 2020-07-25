@@ -36,6 +36,11 @@ class User implements UserInterface, UserRolesInterface
     private $password;
 
     /**
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $vk_id;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -46,6 +51,26 @@ class User implements UserInterface, UserRolesInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getVkId(): ?int
+    {
+        return $this->vk_id;
+    }
+
+    /**
+     * @param int|null $vkId
+     *
+     * @return User
+     */
+    public function setVkId(?int $vkId): self
+    {
+        $this->vk_id = $vkId;
+
+        return $this;
     }
 
     /**

@@ -554,6 +554,9 @@
     "twig/twig": {
         "version": "v3.0.3"
     },
+    "vkcom/vk-php-sdk": {
+        "version": "5.101.0"
+    },
     "webmozart/assert": {
         "version": "1.8.0"
     },

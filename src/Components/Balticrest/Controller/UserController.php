@@ -26,7 +26,7 @@ class UserController extends AbstractController
     public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
+        //      return $this->redirectToRoute('/');
         // }
 
         if ($request->isMethod('GET')) {
@@ -40,6 +40,32 @@ class UserController extends AbstractController
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
+    }
+
+    /**
+     * @Route("/register", name="register")
+     *
+     * @param Request $request
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return Response
+     */
+    public function register(Request $request, AuthenticationUtils $authenticationUtils): Response
+    {
+
+    }
+
+    /**
+     * @Route("/restore", name="restore")
+     *
+     * @param Request $request
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return Response
+     */
+    public function restore(Request $request, AuthenticationUtils $authenticationUtils): Response
+    {
+
     }
 
     /**

@@ -32,7 +32,8 @@
         "symfony/validator": "*",
         "symfony/web-link": "*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+        "vkcom/vk-php-sdk": "^5.101"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

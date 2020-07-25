@@ -6,10 +6,22 @@
 
 {% block content %}
     <div class="login_form">
-        <h3>{% trans %}login.form.title{% endtrans %}<span></span></h3>
+        <h3>
+            {% trans %}login.form.title{% endtrans %}
+            <span></span>
+        </h3>
+
         {% if error %}
             <div class="errors">{{ error.message }}</div>
         {% endif %}
+
+        {% if not error %}
+            <div class="social">
+                <a href="#" class="vk" title="{% trans %}login.form.label.vk{% endtrans %}"></a>
+                <a href="#" class="fb" title="{% trans %}login.form.label.fb{% endtrans %}"></a>
+            </div>
+        {% endif %}
+
         <form method="post">
             <label>
                 {% trans %}login.form.label.email{% endtrans %}:<input type="text" name="email" value="{{ last_username }}">
@@ -17,10 +29,19 @@
             <label>
                 {% trans %}login.form.label.password{% endtrans %}:<input type="password" name="password">
             </label>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <button class="btn btn-success" type="submit">
-                {% trans %}login.form.label.button{% endtrans %}
+            <button class="btn btn-primary" type="submit">
+                {% trans %}login.form.button.login{% endtrans %}
             </button>
+            <a href="{{ path('register') }}" class="btn btn-success">
+                {% trans %}login.form.button.register{% endtrans %}
+            </a>
+
+            {% if error %}
+                <a href="{{ path('restore') }}" class="btn btn-success">
+                    {% trans %}login.form.button.restore{% endtrans %}
+                </a>
+            {% endif %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         </form>
     </div>
 {% endblock %}
