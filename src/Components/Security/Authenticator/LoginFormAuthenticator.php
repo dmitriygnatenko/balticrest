@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Components\Security;
+declare(strict_types=1);
+
+namespace App\Components\Security\Authenticator;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,11 +24,10 @@ use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+    implements PasswordAuthenticatedInterface, AuthenticatorInterface
 {
     use TargetPathTrait;
-
-    public const LOGIN_ROUTE = 'login';
 
     /** @var EntityManagerInterface */
     private $entityManager;
@@ -121,6 +122,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             ->getRepository(User::class)
             ->findOneBy(['email' => $credentials['email']]);
 
+        if ($user && $user->getIsActive() === false) {
+            throw new CustomUserMessageAuthenticationException(
+                $this->translator->trans('login.form.error.blocked')
+            );
+        }
+
         if (!$user) {
             throw new CustomUserMessageAuthenticationException(
                 $this->translator->trans('login.form.error.email_or_password')
@@ -159,12 +166,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $customException = new CustomUserMessageAuthenticationException(
-            $this->translator->trans('login.form.error.email_or_password')
-        );
-
         if ($request->hasSession()) {
-            $request->getSession()->set(Security::AUTHENTICATION_ERROR, $customException);
+            $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
         }
 
         return new RedirectResponse($this->getLoginUrl());
@@ -186,8 +189,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        // TODO
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('main'));
     }
 }

@@ -17,7 +17,9 @@ security:
             provider: entity_user_provider
             guard:
                 authenticators:
-                    - App\Components\Security\LoginFormAuthenticator
+                    - App\Components\Security\Authenticator\LoginFormAuthenticator
+                    - App\Components\Security\Authenticator\VkAuthenticator
+                entry_point: App\Components\Security\Authenticator\LoginFormAuthenticator
             logout:
                 path: logout
 

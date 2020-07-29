@@ -24,12 +24,15 @@ final class Version20200504204259 extends AbstractMigration
 
         $this->addSql('CREATE TABLE user (
             id INT AUTO_INCREMENT NOT NULL,
+            vk_id BIGINT DEFAULT NULL,
             email VARCHAR(180) DEFAULT NULL,
             username VARCHAR(255) NOT NULL,
             password VARCHAR(255) DEFAULT NULL,
-            vk_id BIGINT DEFAULT NULL,
+            photo LONGBLOB DEFAULT NULL,
             roles JSON NOT NULL,
+            is_active TINYINT(1) DEFAULT \'1\' NOT NULL,
             UNIQUE INDEX UNIQ_8D93D649E7927C74 (email),
+            UNIQUE INDEX UNIQ_8D93D649C5978E52 (vk_id),
             PRIMARY KEY(id)
         ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }

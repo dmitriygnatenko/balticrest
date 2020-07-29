@@ -36,9 +36,19 @@ class User implements UserInterface, UserRolesInterface
     private $password;
 
     /**
-     * @ORM\Column(type="bigint", nullable=true)
+     * @ORM\Column(type="bigint", unique=true, nullable=true)
      */
     private $vk_id;
+
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $photo;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": true})
+     */
+    private $is_active = true;
 
     /**
      * @ORM\Column(type="json")
@@ -54,19 +64,19 @@ class User implements UserInterface, UserRolesInterface
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getVkId(): ?int
+    public function getVkId(): ?string
     {
         return $this->vk_id;
     }
 
     /**
-     * @param int|null $vkId
+     * @param string|null $vkId
      *
      * @return User
      */
-    public function setVkId(?int $vkId): self
+    public function setVkId(?string $vkId): self
     {
         $this->vk_id = $vkId;
 
@@ -82,11 +92,11 @@ class User implements UserInterface, UserRolesInterface
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return $this
      */
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -146,13 +156,53 @@ class User implements UserInterface, UserRolesInterface
     }
 
     /**
-     * @param string $password
+     * @param string|null $password
      *
      * @return $this
      */
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param string|null $photo
+     *
+     * @return User
+     */
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return User
+     */
+    public function setIsActive(bool $isActive): self
+    {
+        $this->is_active = $isActive;
 
         return $this;
     }
