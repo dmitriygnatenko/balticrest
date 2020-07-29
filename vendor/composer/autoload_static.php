@@ -18,6 +18,7 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -128,6 +129,7 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         ),
         'F' => 
         array (
+            'Facebook\\' => 9,
             'FOS\\CKEditorBundle\\' => 19,
         ),
         'E' => 
@@ -487,6 +489,10 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Facebook\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
         ),
         'FOS\\CKEditorBundle\\' => 
         array (
