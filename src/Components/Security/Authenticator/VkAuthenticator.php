@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Components\Security\Authenticator;
 
 use App\Components\Security\DTO\VkUserDTO;
-use App\Components\Security\Provider\FbAuthProviderInterface;
+use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,7 +40,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /** @var EntityManager */
     private $entityManager;
 
-    /** @var FbAuthProviderInterface */
+    /** @var VkAuthProviderInterface */
     private $vkAuthProvider;
 
     /** @var Translator */
@@ -52,14 +52,14 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /**
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
-     * @param FbAuthProviderInterface $vkAuthProvider
+     * @param VkAuthProviderInterface $vkAuthProvider
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
-        FbAuthProviderInterface $vkAuthProvider,
+        VkAuthProviderInterface $vkAuthProvider,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator
     )

@@ -1160,25 +1160,42 @@ a.green_btn:hover {
 }
 
 /* ------------------------------------- Language selector ------------------------------------ */
-
+.flag.ru {
+    background-image: url("/static/balticrest/images/flags/ru.png");
+}
+.flag.en {
+    background-image: url("/static/balticrest/images/flags/gb.png");
+}
+.flag.pl {
+    background-image: url("/static/balticrest/images/flags/pl.png");
+}
+.flag.cn {
+    background-image: url("/static/balticrest/images/flags/cn.png");
+}
+.flag.lt {
+    background-image: url("/static/balticrest/images/flags/lt.png");
+}
+.flag.de {
+    background-image: url("/static/balticrest/images/flags/de.png");
+}
 .language-selector {
     display: block;
     text-align: center;
     float: right;
     margin: 9px;
 }
-.language-selector img {
-    height: 20px !important;
-    width: 30px !important;
-    margin-right: 3px;
+.language-selector div.flag {
+    display: inline-block;
+    margin-right: 5px;
+    float: left;
+    height: 20px;
+    width: 30px;
+    border: 1px solid #ffffff;
 }
 .language-selector .btn-default {
     padding: 6px 9px 6px 10px;
     background: transparent;
     border-radius: 4px !important;
-}
-.language-selector .btn-default img {
-    border: 1px solid #ffffff;
 }
 .language-selector .caret {
     color: #ffffff;
@@ -1203,13 +1220,13 @@ a.green_btn:hover {
     top: 39px;
     min-width: 30px;
 }
-.language-selector .dropdown-menu li a {
-    padding: 5px 11px;
+.language-selector .dropdown-menu li a.flag {
+    margin: 12px 15px;
+    padding: 0;
+    height: 20px;
+    width: 30px;
+    border: 1px solid #a9a9a9;
 }
-.language-selector .dropdown-menu li a img {
-    border: 1px solid #848484;
-}
-
 /* ------------------------------------- City selector ------------------------------------ */
 
 .city-selector {

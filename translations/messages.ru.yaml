@@ -45,7 +45,7 @@ navigation:
         user_profile: Профиль пользователя
 
 login:
-    title: Авторизация
+    title: Вход
     form:
         title: Вход
         label:
@@ -62,5 +62,5 @@ login:
             blocked: Пользователь заблокирован
             user_create: Ошибка создания пользователя
             csrf: Ошибка проверки аутентификационных данных
-            vk_incorrect_response: Ошибка получения данных от от ВКонтакте
-            fb_incorrect_response: Ошибка получения данных от от Facebook
+            vk_incorrect_response: Ошибка получения данных от ВКонтакте
+            fb_incorrect_response: Ошибка получения данных от Facebook

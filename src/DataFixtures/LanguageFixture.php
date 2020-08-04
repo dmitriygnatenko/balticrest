@@ -18,7 +18,6 @@ class LanguageFixture extends Fixture
         $ru = (new Language())
             ->setCode('ru')
             ->setTitle('Русский')
-            ->setImage('/static/balticrest/images/flags/ru.png')
             ->setIsActive(true);
 
         $manager->persist($ru);
@@ -26,7 +25,6 @@ class LanguageFixture extends Fixture
         $en = (new Language())
             ->setCode('en')
             ->setTitle('English')
-            ->setImage('/static/balticrest/images/flags/gb.png')
             ->setIsActive(true);
 
         $manager->persist($en);
@@ -34,7 +32,6 @@ class LanguageFixture extends Fixture
         $de = (new Language())
             ->setCode('de')
             ->setTitle('Deutsch')
-            ->setImage('/static/balticrest/images/flags/de.png')
             ->setIsActive(true);
 
         $manager->persist($de);
@@ -42,7 +39,6 @@ class LanguageFixture extends Fixture
         $pl = (new Language())
             ->setCode('pl')
             ->setTitle('Polski')
-            ->setImage('/static/balticrest/images/flags/pl.png')
             ->setIsActive(true);
 
         $manager->persist($pl);
@@ -50,7 +46,6 @@ class LanguageFixture extends Fixture
         $lt = (new Language())
             ->setCode('lt')
             ->setTitle('Lietuvis')
-            ->setImage('/static/balticrest/images/flags/lt.png')
             ->setIsActive(true);
 
         $manager->persist($lt);
@@ -58,7 +53,6 @@ class LanguageFixture extends Fixture
         $cn = (new Language())
             ->setCode('cn')
             ->setTitle('中文')
-            ->setImage('/static/balticrest/images/flags/cn.png')
             ->setIsActive(true);
 
         $manager->persist($cn);

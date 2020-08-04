@@ -39,7 +39,7 @@
                 <div class="dropdown language-selector">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         {% if languages[language] is defined %}
-                            <img src="{{ asset(languages[language].image) }}" title="{{ languages[language].title }}">
+                            <div class="flag {{ language }}" title="{{ languages[language].title }}"></div>
                         {% endif %}
                         <span class="caret"></span>
                     </button>
@@ -48,9 +48,7 @@
                             {% if key != language %}
                                 {% set route_params = app.request.attributes.get('_route_params')|merge({'_locale': key}) %}
                                 <li>
-                                    <a href="{{ path(app.request.attributes.get('_route'), route_params) }}">
-                                        <img src="{{ asset(values.image) }}" title="{{ values.title }}">
-                                    </a>
+                                    <a class="flag {{ key }}" href="{{ path(app.request.attributes.get('_route'), route_params) }}" title="{{ values.title }}"></a>
                                 </li>
                             {% endif %}
                         {% endfor %}

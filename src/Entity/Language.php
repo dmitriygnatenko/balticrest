@@ -38,11 +38,6 @@ class Language
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $image;
-
-    /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $is_active;
@@ -91,26 +86,6 @@ class Language
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     *
-     * @return $this
-     */
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }

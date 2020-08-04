@@ -43,3 +43,24 @@ navigation:
         about: Apie projektą
         privacy_policy: Privatumo politika
         user_profile: Vartotojo profilis
+
+login:
+    title: Prisijungti
+    form:
+        title: Prisijungti
+        label:
+            email: Elektroninio pašto adresas
+            password: Slaptažodis
+            vk: VKontakte
+            fb: Facebook
+        button:
+            login: Įeiti
+            register: Užsiregistruokite svetainėje
+            restore: Atkurti slaptažodį
+        error:
+            email_or_password: Neteisingas elektroninis paštas arba slaptažodis
+            blocked: Vartotojas užblokuotas
+            user_create: Vartotojo kūrimo klaida
+            csrf: Autentifikavimo duomenų patikros klaida
+            vk_incorrect_response: Klaida gaunant duomenis iš VKontakte
+            fb_incorrect_response: Klaida gaunant duomenis iš Facebook

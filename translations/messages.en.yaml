@@ -43,3 +43,24 @@ navigation:
         about: About
         privacy_policy: Privacy policy
         user_profile: User profile
+
+login:
+    title: Login
+    form:
+        title: Login
+        label:
+            email: Email
+            password: Password
+            vk: VKontakte
+            fb: Facebook
+        button:
+            login: Login
+            register: Register
+            restore: Restore password
+        error:
+            email_or_password: Incorrect email or password
+            blocked: User is blocked
+            user_create: User creation error
+            csrf: Authentication data verification error
+            vk_incorrect_response: Error receiving data from VKontakte
+            fb_incorrect_response: Error receiving data from Facebook
