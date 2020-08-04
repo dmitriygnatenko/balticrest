@@ -227,7 +227,7 @@ class PhpDumper extends Dumper
                     $regex = preg_quote(\DIRECTORY_SEPARATOR.$dir[$i], '#').$regex;
                 } while (0 < --$i);
 
-                $this->targetDirRegex = '#'.preg_quote($dir[0], '#').$regex.'#';
+                $this->targetDirRegex = '#(^|file://|[:;, \|\r\n])'.preg_quote($dir[0], '#').$regex.'#';
             }
         }
 
@@ -338,6 +338,10 @@ EOF;
 // You can reference it in the "opcache.preload" php.ini setting on PHP >= 7.4 when preloading is desired
 
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
+
+if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
+    return;
+}
 
 require $autoloadFile;
 require __DIR__.'/$preloadedFiles';
@@ -567,7 +571,7 @@ EOF;
             $proxyClass = explode(' ', $this->inlineRequires ? substr($proxyCode, \strlen($code)) : $proxyCode, 3)[1];
 
             if ($this->asFiles || $this->namespace) {
-                $proxyCode .= "\n\\class_alias(__NAMESPACE__.'\\\\$proxyClass', '$proxyClass', false);\n";
+                $proxyCode .= "\nif (!\\class_exists('$proxyClass', false)) {\n    \\class_alias(__NAMESPACE__.'\\\\$proxyClass', '$proxyClass', false);\n}\n";
             }
 
             $proxyClasses[$proxyClass.'.php'] = $proxyCode;
@@ -860,13 +864,23 @@ EOF;
             }
 
             if ($this->getProxyDumper()->isProxyCandidate($definition)) {
-                $factoryCode = $asFile ? "\$this->load('%s', false)" : '$this->%s(false)';
-                $factoryCode = $this->getProxyDumper()->getProxyFactoryCode($definition, $id, sprintf($factoryCode, $methodName));
+                $factoryCode = $definition->isShared() ? ($asFile ? "\$this->load('%s', false)" : '$this->%s(false)') : '$this->factories[%2$s](false)';
+                $factoryCode = $this->getProxyDumper()->getProxyFactoryCode($definition, $id, sprintf($factoryCode, $methodName, $this->doExport($id)));
                 $code .= $asFile ? preg_replace('/function \(([^)]*+)\) {/', 'function (\1) use ($container) {', $factoryCode) : $factoryCode;
             }
 
             $code .= $this->addServiceInclude($id, $definition);
-            $code .= $this->addInlineService($id, $definition);
+            $c = $this->addInlineService($id, $definition);
+
+            if (!$definition->isShared()) {
+                $c = implode("\n", array_map(function ($line) { return $line ? '    '.$line : $line; }, explode("\n", $c)));
+                $factory = sprintf('$this->factories%s[%s]', $definition->isPublic() ? '' : "['service_container']", $this->doExport($id));
+                $lazyloadInitialization = $definition->isLazy() ? '$lazyLoad = true' : '';
+
+                $c = sprintf("        %s = function (%s) {\n%s        };\n\n        return %1\$s();\n", $factory, $lazyloadInitialization, $c);
+            }
+
+            $code .= $c;
         }
 
         if ($asFile) {
@@ -1086,7 +1100,7 @@ EOTXT
                 // If the class is a string we can optimize away
                 if (0 === strpos($class, "'") && false === strpos($class, '$')) {
                     if ("''" === $class) {
-                        throw new RuntimeException(sprintf('Cannot dump definition: %s service is defined to be created by a factory but is missing the service reference, did you forget to define the factory service id or class?', $id ? 'The "'.$id.'"' : 'inline'));
+                        throw new RuntimeException(sprintf('Cannot dump definition: "%s" service is defined to be created by a factory but is missing the service reference, did you forget to define the factory service id or class?', $id ? 'The "'.$id.'"' : 'inline'));
                     }
 
                     return $return.sprintf('%s::%s(%s)', $this->dumpLiteralClass($class), $callable[1], $arguments ? implode(', ', $arguments) : '').$tail;
@@ -1876,10 +1890,14 @@ EOF;
                     $code = sprintf('$this->%s[%s] = %s', $definition->isPublic() ? 'services' : 'privates', $this->doExport($id), $code);
                 }
                 $code = "($code)";
-            } elseif ($this->asFiles && !$this->inlineFactories && !$this->isHotPath($definition)) {
-                $code = sprintf("\$this->load('%s')", $this->generateMethodName($id));
             } else {
-                $code = sprintf('$this->%s()', $this->generateMethodName($id));
+                $code = $this->asFiles && !$this->inlineFactories && !$this->isHotPath($definition) ? "\$this->load('%s')" : '$this->%s()';
+                $code = sprintf($code, $this->generateMethodName($id));
+
+                if (!$definition->isShared()) {
+                    $factory = sprintf('$this->factories%s[%s]', $definition->isPublic() ? '' : "['service_container']", $this->doExport($id));
+                    $code = sprintf('(isset(%s) ? %1$s() : %s)', $factory, $code);
+                }
             }
             if ($definition->isShared() && !isset($this->singleUsePrivateIds[$id])) {
                 $code = sprintf('($this->%s[%s] ?? %s)', $definition->isPublic() ? 'services' : 'privates', $this->doExport($id), $code);
@@ -2030,11 +2048,12 @@ EOF;
     private function export($value)
     {
         if (null !== $this->targetDirRegex && \is_string($value) && preg_match($this->targetDirRegex, $value, $matches, PREG_OFFSET_CAPTURE)) {
-            $prefix = $matches[0][1] ? $this->doExport(substr($value, 0, $matches[0][1]), true).'.' : '';
             $suffix = $matches[0][1] + \strlen($matches[0][0]);
+            $matches[0][1] += \strlen($matches[1][0]);
+            $prefix = $matches[0][1] ? $this->doExport(substr($value, 0, $matches[0][1]), true).'.' : '';
             $suffix = isset($value[$suffix]) ? '.'.$this->doExport(substr($value, $suffix), true) : '';
             $dirname = $this->asFiles ? '$this->containerDir' : '__DIR__';
-            $offset = 1 + $this->targetDirMaxMatches - \count($matches);
+            $offset = 2 + $this->targetDirMaxMatches - \count($matches);
 
             if (0 < $offset) {
                 $dirname = sprintf('\dirname(__DIR__, %d)', $offset + (int) $this->asFiles);

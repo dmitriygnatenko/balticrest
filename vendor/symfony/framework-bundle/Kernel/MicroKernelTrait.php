@@ -83,7 +83,6 @@ trait MicroKernelTrait
     {
         $loader->load(function (ContainerBuilder $container) use ($loader) {
             $container->loadFromExtension('framework', [
-                'secret' => '%env(APP_SECRET)%',
                 'router' => [
                     'resource' => 'kernel::loadRoutes',
                     'type' => 'service',
@@ -113,7 +112,7 @@ trait MicroKernelTrait
                 throw new \LogicException(sprintf('"%s" uses "%s", but does not implement the required method "protected function configureContainer(ContainerConfigurator $c): void".', get_debug_type($this), MicroKernelTrait::class), 0, $e);
             }
 
-            $configuratorClass = $configureContainer->getNumberOfParameters() > 0 && ($type = $configureContainer->getParameters()[0]->getType()) && !$type->isBuiltin() ? $type->getName() : null;
+            $configuratorClass = $configureContainer->getNumberOfParameters() > 0 && ($type = $configureContainer->getParameters()[0]->getType()) instanceof \ReflectionNamedType && !$type->isBuiltin() ? $type->getName() : null;
 
             if ($configuratorClass && !is_a(ContainerConfigurator::class, $configuratorClass, true)) {
                 $this->configureContainer($container, $loader);

@@ -956,6 +956,7 @@ class FrameworkExtension extends Extension
             // Set the handler class to be null
             $container->getDefinition('session.storage.native')->replaceArgument(1, null);
             $container->getDefinition('session.storage.php_bridge')->replaceArgument(0, null);
+            $container->setAlias('session.handler', 'session.handler.native_file')->setPrivate(true);
         } else {
             $container->resolveEnvPlaceholders($config['handler_id'], null, $usedEnvs);
 
@@ -1094,7 +1095,7 @@ class FrameworkExtension extends Extension
         $defaultOptions['cache_dir'] = $config['cache_dir'];
         $translator->setArgument(4, $defaultOptions);
 
-        $translator->setArgument(6, $config['enabled_locales']);
+        $translator->setArgument(5, $config['enabled_locales']);
 
         $container->setParameter('translator.logging', $config['logging']);
         $container->setParameter('translator.default_path', $config['default_path']);
@@ -1379,7 +1380,7 @@ class FrameworkExtension extends Extension
 
     private function registerPropertyAccessConfiguration(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
-        if (!class_exists('Symfony\Component\PropertyAccess\PropertyAccessor')) {
+        if (!class_exists(PropertyAccessor::class)) {
             return;
         }
 
@@ -1463,7 +1464,7 @@ class FrameworkExtension extends Extension
 
         $chainLoader = $container->getDefinition('serializer.mapping.chain_loader');
 
-        if (!class_exists('Symfony\Component\PropertyAccess\PropertyAccessor')) {
+        if (!class_exists(PropertyAccessor::class)) {
             $container->removeAlias('serializer.property_accessor');
             $container->removeDefinition('serializer.normalizer.object');
         }
@@ -1472,7 +1473,7 @@ class FrameworkExtension extends Extension
             $container->removeDefinition('serializer.encoder.yaml');
         }
 
-        if (!class_exists(UnwrappingDenormalizer::class)) {
+        if (!class_exists(UnwrappingDenormalizer::class) || !class_exists(PropertyAccessor::class)) {
             $container->removeDefinition('serializer.denormalizer.unwrapping');
         }
 
