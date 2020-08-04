@@ -63,3 +63,4 @@ login:
             user_create: Ошибка создания пользователя
             csrf: Ошибка проверки аутентификационных данных
             vk_incorrect_response: Ошибка получения данных от от ВКонтакте
+            fb_incorrect_response: Ошибка получения данных от от Facebook

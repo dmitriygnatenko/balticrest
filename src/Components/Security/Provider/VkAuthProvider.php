@@ -18,7 +18,7 @@ use VK\OAuth\VKOAuthDisplay;
 use VK\OAuth\VKOAuthResponseType;
 use Exception;
 
-class VkontakteAuthProvider
+class VkAuthProvider implements VkAuthProviderInterface
 {
     /** @var ContainerBagInterface */
     private $parameters;

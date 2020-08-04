@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
-use App\Components\Security\Provider\VkontakteAuthProvider;
+use App\Components\Security\Provider\VkAuthProviderInterface;
+use App\Components\Security\Provider\FbAuthProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use LogicException;
 
 class UserController extends AbstractController
@@ -25,14 +23,16 @@ class UserController extends AbstractController
      *
      * @param Request $request
      * @param AuthenticationUtils $authenticationUtils
-     * @param VkontakteAuthProvider $vkontakteAuthProvider
+     * @param VkAuthProviderInterface $vkAuthProvider
+     * @param FbAuthProviderInterface $fbAuthProvider
      *
      * @return Response
      */
     public function login(
         Request $request,
         AuthenticationUtils $authenticationUtils,
-        VkontakteAuthProvider $vkontakteAuthProvider
+        VkAuthProviderInterface $vkAuthProvider,
+        FbAuthProviderInterface $fbAuthProvider
     ): Response {
         if ($this->getUser()) {
               return $this->redirectToRoute('main');
@@ -48,7 +48,8 @@ class UserController extends AbstractController
         return $this->render('balticrest/user/login.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
-            'vk_url' => $vkontakteAuthProvider->getAuthUrl()
+            'vk_url' => $vkAuthProvider->getAuthUrl(),
+            'fb_url' => $fbAuthProvider->getAuthUrl()
         ]);
     }
 

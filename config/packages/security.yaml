@@ -19,6 +19,7 @@ security:
                 authenticators:
                     - App\Components\Security\Authenticator\LoginFormAuthenticator
                     - App\Components\Security\Authenticator\VkAuthenticator
+                    - App\Components\Security\Authenticator\FbAuthenticator
                 entry_point: App\Components\Security\Authenticator\LoginFormAuthenticator
             logout:
                 path: logout

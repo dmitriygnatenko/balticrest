@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Security\Authenticator;
 
-use App\Components\Security\DTO\VkUserDTO;
+use App\Components\Security\DTO\FbUserDTO;
 use App\Components\Security\Provider\FbAuthProviderInterface;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
@@ -21,18 +21,18 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Throwable;
 
-class VkAuthenticator extends AbstractGuardAuthenticator implements AuthenticatorInterface
+class FbAuthenticator extends AbstractGuardAuthenticator implements AuthenticatorInterface
 {
     use TargetPathTrait;
 
     /** @var string */
-    public const STATE_CODE = 'vk_code';
+    public const STATE_CODE = 'fb_code';
 
     /** @var Logger */
     private $logger;
@@ -41,7 +41,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     private $entityManager;
 
     /** @var FbAuthProviderInterface */
-    private $vkAuthProvider;
+    private $fbAuthProvider;
 
     /** @var Translator */
     private $translator;
@@ -52,21 +52,21 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /**
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
-     * @param FbAuthProviderInterface $vkAuthProvider
+     * @param FbAuthProviderInterface $fbAuthProvider
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
-        FbAuthProviderInterface $vkAuthProvider,
+        FbAuthProviderInterface $fbAuthProvider,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator
     )
     {
         $this->logger = $logger;
         $this->entityManager = $entityManager;
-        $this->vkAuthProvider = $vkAuthProvider;
+        $this->fbAuthProvider = $fbAuthProvider;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
     }
@@ -92,7 +92,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     {
         $code = $request->query->get('code');
 
-        return $this->vkAuthProvider->getUser($code) ?? false;
+        return $this->fbAuthProvider->getUser($code) ?? false;
     }
 
     /**
@@ -100,16 +100,16 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
      */
     public function getUser($dto, UserProviderInterface $userProvider)
     {
-        /** @var VkUserDTO $dto */
+        /** @var FbUserDTO $dto */
         if ($dto === false) {
             throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.form.error.vk_incorrect_response')
+                $this->translator->trans('login.form.error.fb_incorrect_response')
             );
         }
 
-        // Поиск по VK ID
+        // Поиск по FB ID
         /** @var User $user */
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['vk_id' => $dto->getId()]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['fb_id' => $dto->getId()]);
 
         if ($user) {
             if ($user->getIsActive() === false) {
@@ -131,14 +131,14 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                     );
                 }
 
-                if ($user->getVkId() !== null) {
-                    // Пользователь с эл. почтой но другим VK ID
+                if ($user->getFbId() !== null) {
+                    // Пользователь с эл. почтой но другим FB ID
                     throw new CustomUserMessageAuthenticationException(
                         $this->translator->trans('login.form.error.user_create')
                     );
                 }
 
-                $user->setVkId($dto->getId());
+                $user->setFbId($dto->getId());
 
                 try {
                     $this->entityManager->persist($user);
@@ -169,18 +169,17 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     }
 
     /**
-     * @param VkUserDTO $dto
+     * @param FbUserDTO $dto
      *
      * @return User
      */
-    private function createUser(VkUserDTO $dto): ?User
+    private function createUser(FbUserDTO $dto): ?User
     {
         try {
-            $username = trim($dto->getFirstName() . ' ' . $dto->getLastName());
-
             $user = new User();
-            $user->setVkId($dto->getId())
-                ->setUsername($username)
+
+            $user->setFbId($dto->getId())
+                ->setUsername($dto->getName())
                 ->setEmail($dto->getEmail())
                 ->setPassword(null)
                 ->setRoles([User::ROLE_USER])
@@ -199,11 +198,11 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     }
 
     /**
-     * @param VkUserDTO $dto
+     * @param FbUserDTO $dto
      *
      * @return string|null
      */
-    private function getPhotoContent(VkUserDTO $dto): ?string
+    private function getPhotoContent(FbUserDTO $dto): ?string
     {
         $photo = $dto->getPhoto();
 
@@ -217,15 +216,14 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         return null;
     }
 
-
     /**
      * @inheritDoc
      */
     public function checkCredentials($dto, UserInterface $user)
     {
         /** @var User $user */
-        /** @var VkUserDTO $dto */
-        return $user->getVkId() === $dto->getId();
+        /** @var FbUserDTO $dto */
+        return $user->getFbId() === $dto->getId();
     }
 
     /**

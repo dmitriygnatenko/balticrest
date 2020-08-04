@@ -41,6 +41,11 @@ class User implements UserInterface, UserRolesInterface
     private $vk_id;
 
     /**
+     * @ORM\Column(type="bigint", unique=true, nullable=true)
+     */
+    private $fb_id;
+
+    /**
      * @ORM\Column(type="blob", nullable=true)
      */
     private $photo;
@@ -79,6 +84,26 @@ class User implements UserInterface, UserRolesInterface
     public function setVkId(?string $vkId): self
     {
         $this->vk_id = $vkId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFbId(): ?string
+    {
+        return $this->fb_id;
+    }
+
+    /**
+     * @param string|null $fbId
+     *
+     * @return User
+     */
+    public function setFbId(?string $fbId): self
+    {
+        $this->fb_id = $fbId;
 
         return $this;
     }
