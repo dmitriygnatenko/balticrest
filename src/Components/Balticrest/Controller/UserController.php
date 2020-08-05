@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
+use App\Components\Balticrest\Service\Form\RegisterForm;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Components\Security\Provider\FbAuthProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,20 +55,28 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="register")
+     * @Route("/registration", name="registration")
      *
      * @param Request $request
      *
      * @return Response
      */
-    public function register(Request $request): Response
+    public function registration(Request $request): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
         }
 
-        return $this->render('balticrest/user/register.html.twig', [
-            'error' => null,
+        $form = $this->createForm(RegisterForm::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // TODO
+        }
+
+        return $this->render('balticrest/user/registration.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

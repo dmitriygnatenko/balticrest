@@ -103,7 +103,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         /** @var VkUserDTO $dto */
         if ($dto === false) {
             throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.form.error.vk_incorrect_response')
+                $this->translator->trans('login.vk_incorrect_response', [], 'validators')
             );
         }
 
@@ -114,13 +114,13 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         if ($user) {
             if ($user->getIsActive() === false) {
                 throw new CustomUserMessageAuthenticationException(
-                    $this->translator->trans('login.form.error.blocked')
+                    $this->translator->trans('login.blocked', [], 'validators')
                 );
             }
 
             if ($user->getIsConfirmed() === false) {
                 throw new CustomUserMessageAuthenticationException(
-                    $this->translator->trans('login.form.error.not_confirmed')
+                    $this->translator->trans('login.not_confirmed', [], 'validators')
                 );
             }
 
@@ -133,20 +133,20 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
             if ($user) {
                 if ($user->getIsActive() === false) {
                     throw new CustomUserMessageAuthenticationException(
-                        $this->translator->trans('login.form.error.blocked')
+                        $this->translator->trans('login.blocked', [], 'validators')
                     );
                 }
 
                 if ($user->getIsConfirmed() === false) {
                     throw new CustomUserMessageAuthenticationException(
-                        $this->translator->trans('login.form.error.not_confirmed')
+                        $this->translator->trans('login.not_confirmed', [], 'validators')
                     );
                 }
 
                 if ($user->getVkId() !== null) {
                     // Пользователь с эл. почтой но другим VK ID
                     throw new CustomUserMessageAuthenticationException(
-                        $this->translator->trans('login.form.error.user_create')
+                        $this->translator->trans('login.user_create', [], 'validators')
                     );
                 }
 
@@ -159,7 +159,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                     $this->logger->error($exception->getMessage(), ['exception' => $exception]);
 
                     throw new CustomUserMessageAuthenticationException(
-                        $this->translator->trans('login.form.error.user_create')
+                        $this->translator->trans('login.user_create', [], 'validators')
                     );
                 }
 
@@ -172,7 +172,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
 
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException(
-                    $this->translator->trans('login.form.error.user_create')
+                    $this->translator->trans('login.user_create', [], 'validators')
                 );
             }
         }

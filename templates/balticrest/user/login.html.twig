@@ -7,7 +7,7 @@
 {% block content %}
     <div class="login_form">
         <h3>
-            {% trans %}login.form.title{% endtrans %}
+            {% trans %}login.title{% endtrans %}
             <span></span>
         </h3>
 
@@ -32,7 +32,7 @@
             <button class="btn btn-primary" type="submit">
                 {% trans %}login.form.button.login{% endtrans %}
             </button>
-            <a href="{{ path('register') }}" class="btn btn-success">
+            <a href="{{ path('registration') }}" class="btn btn-success">
                 {% trans %}login.form.button.register{% endtrans %}
             </a>
 

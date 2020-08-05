@@ -115,7 +115,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
 
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException($this->translator->trans('login.form.error.csrf'));
+            throw new InvalidCsrfTokenException($this->translator->trans('login.csrf', [], 'validators'));
         }
 
         $user = $this->entityManager
@@ -124,19 +124,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if ($user && $user->getIsActive() === false) {
             throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.form.error.blocked')
+                $this->translator->trans('login.blocked', [], 'validators')
             );
         }
 
         if ($user && $user->getIsConfirmed() === false) {
             throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.form.error.not_confirmed')
+                $this->translator->trans('login.not_confirmed', [], 'validators')
             );
         }
 
         if (!$user) {
             throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.form.error.email_or_password')
+                $this->translator->trans('login.email_or_password', [], 'validators')
             );
         }
 

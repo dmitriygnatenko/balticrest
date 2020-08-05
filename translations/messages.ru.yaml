@@ -47,7 +47,6 @@ navigation:
 login:
     title: Вход
     form:
-        title: Вход
         label:
             email: Адрес электронной почты
             password: Пароль
@@ -57,11 +56,12 @@ login:
             login: Войти
             register: Зарегистрироваться
             restore: Восстановить пароль
-        error:
-            email_or_password: Неверный адрес электронной почты или пароль
-            blocked: Пользователь заблокирован
-            not_confirmed: Пользователь не подтвердил адрес электронной почты
-            user_create: Ошибка создания пользователя
-            csrf: Ошибка проверки аутентификационных данных
-            vk_incorrect_response: Ошибка получения данных от ВКонтакте
-            fb_incorrect_response: Ошибка получения данных от Facebook
+
+registration:
+    title: Регистрация
+    form:
+        label:
+            username: Имя пользователя
+            email: Адрес электронной почты
+        button:
+            register: Зарегистрироваться
