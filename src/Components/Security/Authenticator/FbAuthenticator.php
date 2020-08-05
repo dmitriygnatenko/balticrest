@@ -118,6 +118,12 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                 );
             }
 
+            if ($user->getIsConfirmed() === false) {
+                throw new CustomUserMessageAuthenticationException(
+                    $this->translator->trans('login.form.error.not_confirmed')
+                );
+            }
+
             return $user;
         }
 
@@ -128,6 +134,12 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                 if ($user->getIsActive() === false) {
                     throw new CustomUserMessageAuthenticationException(
                         $this->translator->trans('login.form.error.blocked')
+                    );
+                }
+
+                if ($user->getIsConfirmed() === false) {
+                    throw new CustomUserMessageAuthenticationException(
+                        $this->translator->trans('login.form.error.not_confirmed')
                     );
                 }
 
@@ -184,6 +196,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                 ->setPassword(null)
                 ->setRoles([User::ROLE_USER])
                 ->setIsActive(true)
+                ->setIsConfirmed(true)
                 ->setPhoto($this->getPhotoContent($dto));
 
             $this->entityManager->persist($user);

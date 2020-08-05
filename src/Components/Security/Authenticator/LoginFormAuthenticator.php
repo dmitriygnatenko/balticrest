@@ -128,6 +128,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             );
         }
 
+        if ($user && $user->getIsConfirmed() === false) {
+            throw new CustomUserMessageAuthenticationException(
+                $this->translator->trans('login.form.error.not_confirmed')
+            );
+        }
+
         if (!$user) {
             throw new CustomUserMessageAuthenticationException(
                 $this->translator->trans('login.form.error.email_or_password')

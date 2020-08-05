@@ -54,24 +54,29 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/register", name="register")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function register(Request $request): Response
+    {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main');
+        }
+
+        return $this->render('balticrest/user/register.html.twig', [
+            'error' => null,
+        ]);
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logout()
     {
         throw new LogicException('This method can be blank.');
-    }
-
-    /**
-     * @Route("/register", name="register")
-     *
-     * @param Request $request
-     * @param AuthenticationUtils $authenticationUtils
-     *
-     * @return Response
-     */
-    public function register(Request $request, AuthenticationUtils $authenticationUtils): Response
-    {
-
     }
 
     /**

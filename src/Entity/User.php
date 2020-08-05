@@ -51,6 +51,11 @@ class User implements UserInterface, UserRolesInterface
     private $photo;
 
     /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private $is_confirmed = false;
+
+    /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $is_active = true;
@@ -228,6 +233,26 @@ class User implements UserInterface, UserRolesInterface
     public function setIsActive(bool $isActive): self
     {
         $this->is_active = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsConfirmed(): bool
+    {
+        return $this->is_confirmed;
+    }
+
+    /**
+     * @param bool $isConfirmed
+     *
+     * @return User
+     */
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->is_confirmed = $isConfirmed;
 
         return $this;
     }

@@ -60,6 +60,7 @@ login:
         error:
             email_or_password: Neteisingas elektroninis paštas arba slaptažodis
             blocked: Vartotojas užblokuotas
+            not_confirmed: Vartotojas nepatvirtino el. Pašto adreso
             user_create: Vartotojo kūrimo klaida
             csrf: Autentifikavimo duomenų patikros klaida
             vk_incorrect_response: Klaida gaunant duomenis iš VKontakte
