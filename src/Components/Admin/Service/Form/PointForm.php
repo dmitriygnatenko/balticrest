@@ -106,9 +106,7 @@ class PointForm extends AbstractType
                             return;
                         }
 
-                        $count = $em->getRepository(Point::class)->count(['url' => $value]);
-
-                        if ($count) {
+                        if ($em->getRepository(Point::class)->count(['url' => $value])) {
                             $context->buildViolation('Данный URL уже используется')
                                 ->atPath('url')
                                 ->addViolation();

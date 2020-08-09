@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Components\Security\Authenticator;
 
+use App\Components\Balticrest\Service\Auth\AuthManager;
+use App\Components\Balticrest\Service\Auth\AuthManagerInterface;
 use App\Components\Security\DTO\VkUserDTO;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Entity\User;
@@ -43,6 +45,9 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /** @var VkAuthProviderInterface */
     private $vkAuthProvider;
 
+    /** @var AuthManager */
+    private $authManager;
+
     /** @var Translator */
     private $translator;
 
@@ -53,6 +58,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
      * @param VkAuthProviderInterface $vkAuthProvider
+     * @param AuthManagerInterface $authManager
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -60,6 +66,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         VkAuthProviderInterface $vkAuthProvider,
+        AuthManagerInterface $authManager,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator
     )
@@ -69,6 +76,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         $this->vkAuthProvider = $vkAuthProvider;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
+        $this->authManager = $authManager;
     }
 
     /**
@@ -168,7 +176,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         }
 
         if ($user === null) {
-            $user = $this->createUser($dto);
+            $user = $this->authManager->createVkUser($dto);
 
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException(
@@ -179,57 +187,6 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
 
         return $user;
     }
-
-    /**
-     * @param VkUserDTO $dto
-     *
-     * @return User
-     */
-    private function createUser(VkUserDTO $dto): ?User
-    {
-        try {
-            $username = trim($dto->getFirstName() . ' ' . $dto->getLastName());
-
-            $user = new User();
-            $user->setVkId($dto->getId())
-                ->setUsername($username)
-                ->setEmail($dto->getEmail())
-                ->setPassword(null)
-                ->setRoles([User::ROLE_USER])
-                ->setIsActive(true)
-                ->setIsConfirmed(true)
-                ->setPhoto($this->getPhotoContent($dto));
-
-            $this->entityManager->persist($user);
-            $this->entityManager->flush($user);
-
-            return $user;
-        } catch (Throwable $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-
-            return null;
-        }
-    }
-
-    /**
-     * @param VkUserDTO $dto
-     *
-     * @return string|null
-     */
-    private function getPhotoContent(VkUserDTO $dto): ?string
-    {
-        $photo = $dto->getPhoto();
-
-        if ($photo) {
-            $photoContent = file_get_contents($photo);
-            if ($photoContent) {
-                return $photoContent;
-            }
-        }
-
-        return null;
-    }
-
 
     /**
      * @inheritDoc

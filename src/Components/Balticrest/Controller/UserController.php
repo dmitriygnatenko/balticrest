@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
-use App\Components\Balticrest\Service\Form\RegisterForm;
+use App\Components\Balticrest\Service\Auth\AuthManagerInterface;
+use App\Components\Balticrest\Service\Form\RegistrationForm;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Components\Security\Provider\FbAuthProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,24 +60,34 @@ class UserController extends AbstractController
      *
      * @param Request $request
      *
+     * @param AuthManagerInterface $authManager
      * @return Response
      */
-    public function registration(Request $request): Response
+    public function registration(Request $request, AuthManagerInterface $authManager): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
         }
 
-        $form = $this->createForm(RegisterForm::class);
+        $form = $this->createForm(RegistrationForm::class, null, ['em' => $this->getDoctrine()->getManager()]);
 
         $form->handleRequest($request);
 
+        $confirmEmail = null;
+
         if ($form->isSubmitted() && $form->isValid()) {
-            // TODO
+            $formData = $form->getData();
+
+            //$user = $authManager->createNotConfirmedUser($formData['email'], $formData['username']);
+
+            // TODO отправить письмо на почту с инструкцией по активации - событие
+
+            $confirmEmail = $formData['email'];
         }
 
         return $this->render('balticrest/user/registration.html.twig', [
             'form' => $form->createView(),
+            'confirm_email' => $confirmEmail
         ]);
     }
 

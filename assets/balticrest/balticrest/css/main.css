@@ -1482,10 +1482,15 @@ a.green_btn:hover {
 .login_form .social a:hover {
     filter: brightness(80%);
 }
-.login_form .errors {
+.login_form .errors, .login_form .success {
     margin: 20px 30px;
     font-size: 13px;
+}
+.login_form .errors {
     color: #a94442;
+}
+.login_form .success {
+    color: #3c763d;
 }
 
 /*------------------------------------------------------------------

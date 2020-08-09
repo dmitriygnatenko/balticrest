@@ -101,6 +101,24 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             $credentials['email']
         );
 
+        if (!$credentials['email']) {
+            throw new CustomUserMessageAuthenticationException(
+                $this->translator->trans('login.email_blank', [], 'validators'),
+                [
+                   'email' => false
+                ]
+            );
+        }
+
+        if (!$credentials['password']) {
+            throw new CustomUserMessageAuthenticationException(
+                $this->translator->trans('login.password_blank', [], 'validators'),
+                [
+                   'password' => false
+                ]
+            );
+        }
+
         return $credentials;
     }
 
@@ -122,6 +140,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             ->getRepository(User::class)
             ->findOneBy(['email' => $credentials['email']]);
 
+        if (!$user) {
+            throw new CustomUserMessageAuthenticationException(
+                $this->translator->trans('login.email_or_password', [], 'validators'),
+                [
+                    'email' => false,
+                    'password' => false,
+                ]
+            );
+        }
+
         if ($user && $user->getIsActive() === false) {
             throw new CustomUserMessageAuthenticationException(
                 $this->translator->trans('login.blocked', [], 'validators')
@@ -131,12 +159,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ($user && $user->getIsConfirmed() === false) {
             throw new CustomUserMessageAuthenticationException(
                 $this->translator->trans('login.not_confirmed', [], 'validators')
-            );
-        }
-
-        if (!$user) {
-            throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.email_or_password', [], 'validators')
             );
         }
 

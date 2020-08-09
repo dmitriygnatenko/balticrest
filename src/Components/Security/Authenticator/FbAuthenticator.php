@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Security\Authenticator;
 
+use App\Components\Balticrest\Service\Auth\AuthManagerInterface;
 use App\Components\Security\DTO\FbUserDTO;
 use App\Components\Security\Provider\FbAuthProviderInterface;
 use App\Entity\User;
@@ -49,10 +50,14 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /** @var UrlGenerator */
     private $urlGenerator;
 
+    /** @var AuthManagerInterface */
+    private $authManager;
+
     /**
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
      * @param FbAuthProviderInterface $fbAuthProvider
+     * @param AuthManagerInterface $authManager
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -60,6 +65,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         FbAuthProviderInterface $fbAuthProvider,
+        AuthManagerInterface $authManager,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator
     )
@@ -69,6 +75,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         $this->fbAuthProvider = $fbAuthProvider;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
+        $this->authManager = $authManager;
     }
 
     /**
@@ -168,7 +175,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         }
 
         if ($user === null) {
-            $user = $this->createUser($dto);
+            $user = $this->authManager->createFbUser($dto);
 
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException(
@@ -178,55 +185,6 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         }
 
         return $user;
-    }
-
-    /**
-     * @param FbUserDTO $dto
-     *
-     * @return User
-     */
-    private function createUser(FbUserDTO $dto): ?User
-    {
-        try {
-            $user = new User();
-
-            $user->setFbId($dto->getId())
-                ->setUsername($dto->getName())
-                ->setEmail($dto->getEmail())
-                ->setPassword(null)
-                ->setRoles([User::ROLE_USER])
-                ->setIsActive(true)
-                ->setIsConfirmed(true)
-                ->setPhoto($this->getPhotoContent($dto));
-
-            $this->entityManager->persist($user);
-            $this->entityManager->flush($user);
-
-            return $user;
-        } catch (Throwable $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-
-            return null;
-        }
-    }
-
-    /**
-     * @param FbUserDTO $dto
-     *
-     * @return string|null
-     */
-    private function getPhotoContent(FbUserDTO $dto): ?string
-    {
-        $photo = $dto->getPhoto();
-
-        if ($photo) {
-            $photoContent = file_get_contents($photo);
-            if ($photoContent) {
-                return $photoContent;
-            }
-        }
-
-        return null;
     }
 
     /**
