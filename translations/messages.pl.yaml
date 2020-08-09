@@ -44,24 +44,3 @@ navigation:
         privacy_policy: Polityka prywatności
         user_profile: Profil użytkownika
 
-login:
-    title: Zaloguj sie
-    form:
-        title: Zaloguj sie
-        label:
-            email: Adres e-mail
-            password: Hasło
-            vk: VKontakte
-            fb: Facebook
-        button:
-            login: Wejść
-            register: Zarejestruj się w serwisie
-            restore: Przywróć hasło
-        error:
-            email_or_password: Nieprawidłowy e-mail lub hasło
-            blocked: Użytkownik jest zablokowany
-            not_confirmed: Użytkownik nie zweryfikował adresu e-mail
-            user_create: Błąd tworzenia użytkownika
-            csrf: Błąd weryfikacji danych uwierzytelniających
-            vk_incorrect_response: Błąd podczas odbierania danych z ВКонтакте
-            fb_incorrect_response: Błąd podczas odbierania danych z Facebook

@@ -141,11 +141,12 @@ class TwigGlobalService
     private function getSeoTrans(string $tagType, string $pageType, string $city, string $category): string
     {
         return $this->translator->trans(
-            'seo.' . $pageType . '.' . ($category === '' ? 'default' : $category) . '.' . $tagType,
+            $pageType . '.' . ($category === '' ? 'default' : $category) . '.' . $tagType,
             [
                 '%city_gen%' => $this->translator->trans('cities_genitive.' . $city),
                 '%city%' => $this->translator->trans('cities.' . $city),
-            ]
+            ],
+            'seo'
         );
     }
 }

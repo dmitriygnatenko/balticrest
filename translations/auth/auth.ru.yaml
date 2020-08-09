@@ -1,0 +1,22 @@
+
+login:
+    title: Вход
+    form:
+        label:
+            email: Адрес электронной почты
+            password: Пароль
+            vk: ВКонтакте
+            fb: Facebook
+        button:
+            login: Войти
+            register: Зарегистрироваться
+            restore: Восстановить пароль
+
+registration:
+    title: Регистрация
+    form:
+        label:
+            username: Имя пользователя
+            email: Адрес электронной почты
+        button:
+            register: Зарегистрироваться

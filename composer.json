@@ -26,7 +26,6 @@
         "symfony/intl": "*",
         "symfony/mailer": "*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/notifier": "*",
         "symfony/process": "*",
         "symfony/security-bundle": "*",
         "symfony/serializer-pack": "*",

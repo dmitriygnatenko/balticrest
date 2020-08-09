@@ -1,0 +1,21 @@
+login:
+    title: Anmeldung
+    form:
+        title: Anmeldung
+        label:
+            email: Email
+            password: Passwort
+            vk: VKontakte
+            fb: Facebook
+        button:
+            login: Eintreten
+            register: Registrieren
+            restore: Passwort wiederherstellen
+        error:
+            email_or_password: Falsche Email oder Passwort
+            blocked: Benutzer ist gesperrt
+            not_confirmed: Der Benutzer hat die E-Mail-Adresse nicht überprüft
+            user_create: Benutzererstellungsfehler
+            csrf: Fehler bei der Überprüfung der Authentifizierungsdaten
+            vk_incorrect_response: Fehler beim Empfangen von Daten von VKontakte
+            fb_incorrect_response: Fehler beim Empfangen von Daten von Facebook

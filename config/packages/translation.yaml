@@ -2,7 +2,5 @@ framework:
     default_locale: ru
     translator:
         default_path: '%kernel.project_dir%/translations'
-        paths:
-            - '%kernel.project_dir%/translations/seo'
         fallbacks:
             - ru

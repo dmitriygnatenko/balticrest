@@ -77,7 +77,6 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
             'Symfony\\Component\\PropertyAccess\\' => 33,
             'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\OptionsResolver\\' => 34,
-            'Symfony\\Component\\Notifier\\' => 27,
             'Symfony\\Component\\Mime\\' => 23,
             'Symfony\\Component\\Mailer\\' => 25,
             'Symfony\\Component\\Intl\\' => 23,
@@ -316,10 +315,6 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         'Symfony\\Component\\OptionsResolver\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/options-resolver',
-        ),
-        'Symfony\\Component\\Notifier\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/notifier',
         ),
         'Symfony\\Component\\Mime\\' => 
         array (
