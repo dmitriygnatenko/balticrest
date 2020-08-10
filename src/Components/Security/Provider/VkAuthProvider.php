@@ -132,7 +132,7 @@ class VkAuthProvider implements VkAuthProviderInterface
      */
     private function getClientId(): int
     {
-        return (int) $this->parameters->get('vk_client_id');
+        return (int) $this->parameters->get('app.vk.client_id');
     }
 
     /**
@@ -140,6 +140,6 @@ class VkAuthProvider implements VkAuthProviderInterface
      */
     private function getClientSecret(): string
     {
-        return (string) $this->parameters->get('vk_client_secret');
+        return (string) $this->parameters->get('app.vk.client_secret');
     }
 }

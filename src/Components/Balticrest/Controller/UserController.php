@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
+use App\Components\Balticrest\Event\UserCreatedEvent;
 use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
 use App\Components\Balticrest\Service\Form\RegistrationForm;
 use App\Components\Security\Provider\VkAuthProviderInterface;
@@ -14,7 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use LogicException;
+use App\Entity\User;
 
 class UserController extends AbstractController
 {
@@ -61,10 +64,14 @@ class UserController extends AbstractController
      * @param Request $request
      *
      * @param UserCreatorInterface $userCreator
+     * @param EventDispatcherInterface $eventDispatcher
      * @return Response
      */
-    public function registration(Request $request, UserCreatorInterface $userCreator): Response
-    {
+    public function registration(
+        Request $request,
+        UserCreatorInterface $userCreator,
+        EventDispatcherInterface $eventDispatcher
+    ): Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
         }
@@ -75,20 +82,62 @@ class UserController extends AbstractController
 
         $confirmEmail = null;
 
+
+
+        // TEST
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $userCreatedEvent = new UserCreatedEvent($user);
+        $eventDispatcher->dispatch($userCreatedEvent);
+        // TEST
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
             //$user = $authManager->createNotConfirmedUser($formData['email'], $formData['username']);
+            $confirmEmail = $formData['email'];
+
 
             // TODO отправить письмо на почту с инструкцией по активации - событие
 
-            $confirmEmail = $formData['email'];
+
         }
 
         return $this->render('balticrest/user/registration.html.twig', [
             'form' => $form->createView(),
             'confirm_email' => $confirmEmail
         ]);
+    }
+
+    /**
+     * @Route(
+     *     "/registration/confirm/{id}/{hash}",
+     *      name="confirm",
+     *      requirements={"id"="\d+", "hash"="[0-9abcdef]{32}"}
+     * )
+     *
+     * @param int $id
+     * @param string $hash
+     *
+     * @return Response
+     */
+    public function confirm(int $id, string $hash): Response
+    {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main');
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**

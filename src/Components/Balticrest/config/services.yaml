@@ -1,5 +1,6 @@
 services:
 
-    App\Components\Balticrest\Controller\:
+    controllers:
+        namespace: App\Components\Balticrest\Controller\
         resource: '../Controller'
         tags: ['controller.service_arguments']

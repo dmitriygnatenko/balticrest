@@ -120,7 +120,7 @@ class FbAuthProvider implements FbAuthProviderInterface
      */
     private function getAppId(): int
     {
-        return (int) $this->parameters->get('fb_app_id');
+        return (int) $this->parameters->get('app.fb.app_id');
     }
 
     /**
@@ -128,6 +128,6 @@ class FbAuthProvider implements FbAuthProviderInterface
      */
     private function getAppSecret(): string
     {
-        return (string) $this->parameters->get('fb_app_secret');
+        return (string) $this->parameters->get('app.fb.app_secret');
     }
 }
