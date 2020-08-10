@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
-use App\Components\Balticrest\Service\Auth\AuthManagerInterface;
+use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
 use App\Components\Balticrest\Service\Form\RegistrationForm;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Components\Security\Provider\FbAuthProviderInterface;
@@ -60,10 +60,10 @@ class UserController extends AbstractController
      *
      * @param Request $request
      *
-     * @param AuthManagerInterface $authManager
+     * @param UserCreatorInterface $userCreator
      * @return Response
      */
-    public function registration(Request $request, AuthManagerInterface $authManager): Response
+    public function registration(Request $request, UserCreatorInterface $userCreator): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');

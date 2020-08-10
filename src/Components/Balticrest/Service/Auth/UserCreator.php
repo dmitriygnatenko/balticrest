@@ -13,7 +13,7 @@ use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class AuthManager implements AuthManagerInterface
+class UserCreator implements UserCreatorInterface
 {
     /** @var Logger */
     private $logger;

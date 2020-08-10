@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Balticrest\Service\Manager;
+namespace App\Components\Balticrest\Service\Provider;
 
 use Symfony\Component\HttpFoundation\Request;
 
-interface MapDataManagerInterface
+interface MapJsonDataProviderInterface
 {
     /** @var int */
-    const ICON_IMAGE_WIDTH = 27;
+    public const ICON_IMAGE_WIDTH = 27;
 
     /** @var int */
-    const ICON_IMAGE_HEIGHT = 48;
+    public const ICON_IMAGE_HEIGHT = 48;
 
     /**
      * @param Request $request

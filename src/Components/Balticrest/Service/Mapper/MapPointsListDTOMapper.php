@@ -8,7 +8,7 @@ use App\Components\Balticrest\Service\DTO\MapPointDTO;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use App\Components\Balticrest\Service\Helper\MapPointHelper;
 use App\Components\Balticrest\Service\Helper\MapPointHelperInterface;
-use App\Components\Balticrest\Service\Manager\MapDataManagerInterface;
+use App\Components\Balticrest\Service\Manager\MapJsonDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
 use App\Entity\City;
@@ -162,8 +162,8 @@ class MapPointsListDTOMapper
                         ->setLink($link)
                         ->setImage($this->mapPointHelper->getPointImage($point))
                         ->setIconImage($this->mapPointHelper->getPointIconImage($point))
-                        ->setIconImageWidth(MapDataManagerInterface::ICON_IMAGE_WIDTH)
-                        ->setIconImageHeight(MapDataManagerInterface::ICON_IMAGE_HEIGHT);
+                        ->setIconImageWidth(MapJsonDataProviderInterface::ICON_IMAGE_WIDTH)
+                        ->setIconImageHeight(MapJsonDataProviderInterface::ICON_IMAGE_HEIGHT);
 
                     $listDTO->addPoint($pointDTO);
                 }

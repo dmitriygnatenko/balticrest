@@ -8,7 +8,7 @@ use App\Components\Security\DTO\FbUserDTO;
 use App\Components\Security\DTO\VkUserDTO;
 use App\Entity\User;
 
-interface AuthManagerInterface
+interface UserCreatorInterface
 {
     /**
      * @param FbUserDTO $dto

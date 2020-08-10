@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Security\Authenticator;
 
-use App\Components\Balticrest\Service\Auth\AuthManagerInterface;
+use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
 use App\Components\Security\DTO\FbUserDTO;
 use App\Components\Security\Provider\FbAuthProviderInterface;
 use App\Entity\User;
@@ -50,14 +50,14 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /** @var UrlGenerator */
     private $urlGenerator;
 
-    /** @var AuthManagerInterface */
-    private $authManager;
+    /** @var UserCreatorInterface */
+    private $userCreator;
 
     /**
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
      * @param FbAuthProviderInterface $fbAuthProvider
-     * @param AuthManagerInterface $authManager
+     * @param UserCreatorInterface $userCreator
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -65,7 +65,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         FbAuthProviderInterface $fbAuthProvider,
-        AuthManagerInterface $authManager,
+        UserCreatorInterface $userCreator,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator
     )
@@ -75,7 +75,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         $this->fbAuthProvider = $fbAuthProvider;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
-        $this->authManager = $authManager;
+        $this->userCreator = $userCreator;
     }
 
     /**
@@ -175,7 +175,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         }
 
         if ($user === null) {
-            $user = $this->authManager->createFbUser($dto);
+            $user = $this->userCreator->createFbUser($dto);
 
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException(

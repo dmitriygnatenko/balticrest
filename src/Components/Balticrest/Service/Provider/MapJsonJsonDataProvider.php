@@ -2,22 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Balticrest\Service\Manager;
+namespace App\Components\Balticrest\Service\Provider;
 
 use App\Components\Balticrest\Service\Cache\CacheDefinitions;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use App\Components\Balticrest\Service\Mapper\MapPointsListDTOMapper;
-use App\Components\Balticrest\Service\Provider\PointDataProvider;
-use App\Components\Balticrest\Service\Provider\PointDataProviderInterface;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-class MapDataManager implements MapDataManagerInterface, CacheDefinitions
+class MapJsonJsonDataProvider implements MapJsonDataProviderInterface, CacheDefinitions
 {
     /** @var LoggerInterface */
     private $logger;
@@ -33,7 +31,6 @@ class MapDataManager implements MapDataManagerInterface, CacheDefinitions
 
     /** @var MapPointsListDTOMapper */
     private $mapPointsListDTOMapper;
-
 
     /**
      * @param LoggerInterface $logger

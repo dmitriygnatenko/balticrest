@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Components\Security\Authenticator;
 
-use App\Components\Balticrest\Service\Auth\AuthManager;
-use App\Components\Balticrest\Service\Auth\AuthManagerInterface;
+use App\Components\Balticrest\Service\Auth\UserCreator;
+use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
 use App\Components\Security\DTO\VkUserDTO;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Entity\User;
@@ -45,8 +45,8 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /** @var VkAuthProviderInterface */
     private $vkAuthProvider;
 
-    /** @var AuthManager */
-    private $authManager;
+    /** @var UserCreator */
+    private $userCreator;
 
     /** @var Translator */
     private $translator;
@@ -58,7 +58,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
      * @param VkAuthProviderInterface $vkAuthProvider
-     * @param AuthManagerInterface $authManager
+     * @param UserCreatorInterface $userCreator
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -66,7 +66,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         VkAuthProviderInterface $vkAuthProvider,
-        AuthManagerInterface $authManager,
+        UserCreatorInterface $userCreator,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator
     )
@@ -76,7 +76,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         $this->vkAuthProvider = $vkAuthProvider;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
-        $this->authManager = $authManager;
+        $this->userCreator = $userCreator;
     }
 
     /**
@@ -176,7 +176,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         }
 
         if ($user === null) {
-            $user = $this->authManager->createVkUser($dto);
+            $user = $this->userCreator->createVkUser($dto);
 
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException(
