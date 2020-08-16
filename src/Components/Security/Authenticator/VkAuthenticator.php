@@ -27,6 +27,8 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use App\Components\Balticrest\Event\UserCreatedEvent;
 use Throwable;
 
 class VkAuthenticator extends AbstractGuardAuthenticator implements AuthenticatorInterface
@@ -54,6 +56,9 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /** @var UrlGenerator */
     private $urlGenerator;
 
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
     /**
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
@@ -61,6 +66,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
      * @param UserCreatorInterface $userCreator
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         LoggerInterface $logger,
@@ -68,7 +74,8 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         VkAuthProviderInterface $vkAuthProvider,
         UserCreatorInterface $userCreator,
         TranslatorInterface $translator,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        EventDispatcherInterface $eventDispatcher
     )
     {
         $this->logger = $logger;
@@ -77,6 +84,7 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
         $this->userCreator = $userCreator;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -183,6 +191,8 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                     $this->translator->trans('login.user_create', [], 'validators')
                 );
             }
+
+            $this->eventDispatcher->dispatch(new UserCreatedEvent($user));
         }
 
         return $user;

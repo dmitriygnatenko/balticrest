@@ -71,7 +71,7 @@ class UserCreatedEventSubscriber implements EventSubscriberInterface
         } else if ($user->getFbId()) {
             $context['type'] = 'Facebook';
         } else {
-            $context['type'] = 'Login/Password';
+            $context['type'] = 'Логин/Пароль';
         }
 
         $this->historyLogger->log(HistoryLogger::USER_ADDED, $context, $user);

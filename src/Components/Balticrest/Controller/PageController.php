@@ -20,6 +20,6 @@ class PageController extends AbstractController
      */
     public function main(Request $request): Response
     {
-        // TODO
+        return new Response();
     }
 }

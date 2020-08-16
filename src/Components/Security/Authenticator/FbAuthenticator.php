@@ -26,6 +26,8 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use App\Components\Balticrest\Event\UserCreatedEvent;
 use Throwable;
 
 class FbAuthenticator extends AbstractGuardAuthenticator implements AuthenticatorInterface
@@ -53,6 +55,9 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
     /** @var UserCreatorInterface */
     private $userCreator;
 
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
     /**
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
@@ -67,7 +72,8 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         FbAuthProviderInterface $fbAuthProvider,
         UserCreatorInterface $userCreator,
         TranslatorInterface $translator,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        EventDispatcherInterface $eventDispatcher
     )
     {
         $this->logger = $logger;
@@ -76,6 +82,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
         $this->userCreator = $userCreator;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -182,6 +189,8 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                     $this->translator->trans('login.user_create', [], 'validators')
                 );
             }
+
+            $this->eventDispatcher->dispatch(new UserCreatedEvent($user));
         }
 
         return $user;

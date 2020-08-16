@@ -47,12 +47,12 @@ class HistoryLogger implements HistoryLoggerInterface, HistoryTypesInterface
             $user = $this->security->getUser();
         }
 
-        $history = (new History())
-            ->setUser($user)
-            ->setType($type)
-            ->setContext($context);
-
         try {
+            $history = (new History())
+                ->setUser($user)
+                ->setType($type)
+                ->setContext($context);
+
             $this->entityManager->persist($history);
 
             $this->entityManager->flush();
