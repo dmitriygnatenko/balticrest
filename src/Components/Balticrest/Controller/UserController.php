@@ -82,26 +82,23 @@ class UserController extends AbstractController
 
         $confirmEmail = null;
 
-
-
         // TEST
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
         $userCreatedEvent = new UserCreatedEvent($user);
         $eventDispatcher->dispatch($userCreatedEvent);
         // TEST
 
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
-            //$user = $authManager->createNotConfirmedUser($formData['email'], $formData['username']);
+            $user = $userCreator->createNotConfirmedUser($formData['email'], $formData['username']);
+
+            if ($user) {
+                $userCreatedEvent = new UserCreatedEvent($user);
+                $eventDispatcher->dispatch($userCreatedEvent);
+            }
+
             $confirmEmail = $formData['email'];
-
-
-            // TODO отправить письмо на почту с инструкцией по активации - событие
-
-
         }
 
         return $this->render('balticrest/user/registration.html.twig', [

@@ -5,29 +5,28 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\EventSubscriber;
 
 use App\Components\Balticrest\Event\UserCreatedEvent;
-use Psr\Log\LoggerInterface;
+use App\Components\Balticrest\Service\Log\HistoryLogger;
+use App\Components\Balticrest\Service\Log\HistoryLoggerInterface;
+use App\Components\Balticrest\Service\Mail\EmailSenderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use App\Entity\User;
-use Throwable;
 
 class UserCreatedEventSubscriber implements EventSubscriberInterface
 {
-    /** @var MailerInterface */
-    private $mailer;
+    /** @var HistoryLoggerInterface */
+    private $historyLogger;
 
-    /** @var LoggerInterface */
-    private $logger;
+    /** @var EmailSenderInterface */
+    private $emailSender;
 
     /**
-     * @param MailerInterface $mailer
-     * @param LoggerInterface $logger
+     * @param HistoryLoggerInterface $historyLogger
+     * @param EmailSenderInterface $emailSender
      */
-    public function __construct(MailerInterface $mailer, LoggerInterface $logger)
+    public function __construct(HistoryLoggerInterface $historyLogger, EmailSenderInterface $emailSender)
     {
-        $this->mailer = $mailer;
-        $this->logger = $logger;
+        $this->historyLogger = $historyLogger;
+        $this->emailSender = $emailSender;
     }
 
     /**
@@ -54,7 +53,7 @@ class UserCreatedEventSubscriber implements EventSubscriberInterface
             $user->getIsActive() === true
         ) {
             // Отправляем письмо с ссылкой на завершение регистрации
-            // $this->sendConfirmEmail($user);
+            $this->emailSender->sendConfirmEmail($user);
         }
 
         $this->saveHistory($user);
@@ -63,29 +62,18 @@ class UserCreatedEventSubscriber implements EventSubscriberInterface
     /**
      * @param User $user
      */
-    private function sendConfirmEmail(User $user)
-    {
-        $email = (new TemplatedEmail())
-            ->to($user->getEmail())
-            ->subject('Test')
-            ->htmlTemplate('balticrest/email/registration_confirm.html.twig')
-            ->context([
-                'expiration_date' => new \DateTime('+7 days'),
-                'username' => 'foo',
-            ]);
-
-        try {
-            $this->mailer->send($email);
-        } catch (Throwable $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-        }
-    }
-
-    /**
-     * @param User $user
-     */
     private function saveHistory(User $user)
     {
-        // TODO
+        $context = [];
+
+        if ($user->getVkId()) {
+            $context['type'] = 'ВКонтакте';
+        } else if ($user->getFbId()) {
+            $context['type'] = 'Facebook';
+        } else {
+            $context['type'] = 'Login/Password';
+        }
+
+        $this->historyLogger->log(HistoryLogger::USER_ADDED, $context, $user);
     }
 }

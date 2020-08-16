@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\HistoryTypesInterface;
 use App\Repository\HistoryRepository;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeInterface;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HistoryRepository", repositoryClass=HistoryRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
-class History
+class History implements HistoryTypesInterface
 {
     /**
      * @ORM\Id()
@@ -19,7 +21,7 @@ class History
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="histories")
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -38,6 +40,14 @@ class History
      * @ORM\Column(type="datetime_immutable")
      */
     private $created;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersistCreated(): void
+    {
+        $this->setCreated(new DateTimeImmutable());
+    }
 
     /**
      * @return int|null
@@ -108,19 +118,19 @@ class History
     }
 
     /**
-     * @return DateTimeInterface|null
+     * @return DateTimeImmutable|null
      */
-    public function getCreated(): ?DateTimeInterface
+    public function getCreated(): ?DateTimeImmutable
     {
         return $this->created;
     }
 
     /**
-     * @param DateTimeInterface $created
+     * @param DateTimeImmutable $created
      *
      * @return History
      */
-    public function setCreated(DateTimeInterface $created): self
+    public function setCreated(DateTimeImmutable $created): self
     {
         $this->created = $created;
 
