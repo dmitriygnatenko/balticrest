@@ -17,7 +17,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use LogicException;
-use App\Entity\User;
 
 class UserController extends AbstractController
 {
@@ -82,20 +81,13 @@ class UserController extends AbstractController
 
         $confirmEmail = null;
 
-        // TEST
-        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
-        $userCreatedEvent = new UserCreatedEvent($user);
-        $eventDispatcher->dispatch($userCreatedEvent);
-        // TEST
-
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
             $user = $userCreator->createNotConfirmedUser($formData['email'], $formData['username']);
 
             if ($user) {
-                $userCreatedEvent = new UserCreatedEvent($user);
-                $eventDispatcher->dispatch($userCreatedEvent);
+                $eventDispatcher->dispatch(new UserCreatedEvent($user));
             }
 
             $confirmEmail = $formData['email'];
@@ -109,32 +101,22 @@ class UserController extends AbstractController
 
     /**
      * @Route(
-     *     "/registration/confirm/{id}/{hash}",
+     *     "/registration/confirm/{code}",
      *      name="confirm",
-     *      requirements={"id"="\d+", "hash"="[0-9abcdef]{32}"}
+     *      requirements={"code"="[0-9a-z]{40}"}
      * )
      *
-     * @param int $id
-     * @param string $hash
+     * @param string $code
      *
      * @return Response
      */
-    public function confirm(int $id, string $hash): Response
+    public function confirm(string $code): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
         }
 
-
-
-
-
-
-
-
-
-
-
+        // TODO
     }
 
     /**
@@ -155,6 +137,6 @@ class UserController extends AbstractController
      */
     public function restore(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
-
+        // TODO
     }
 }

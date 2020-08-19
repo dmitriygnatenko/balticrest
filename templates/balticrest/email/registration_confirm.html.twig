@@ -1,11 +1,11 @@
-<h1>Welcome {{ email.toName }}!</h1>
+{% extends 'balticrest/base_email.html.twig' %}
+{% trans_default_domain 'email' %}
 
-<p>
-    You signed up as {{ username }} the following email:
-</p>
-<p><code>{{ email.to[0].address }}</code></p>
-
-<p>
-    <a href="#">Click here to activate your account</a>
-    (this link is valid until {{ expiration_date|date('F jS') }})
-</p>
+{% block content %}
+    {% trans %}confirm.header{% endtrans %}
+    <br><br>
+    <a style="color: green;" href="{{ confirm_url }}">{{ confirm_url }}</a>
+    <br><br>
+    {% trans with {'%expiration_date%':expiration_date|date('d.m.Y H:i')} %}confirm.expiration{% endtrans %}
+    <br><br>
+{% endblock %}

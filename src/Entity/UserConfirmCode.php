@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\UserConfirmCodeInterface;
 use App\Repository\UserConfirmCodeRepository;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeInterface;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserConfirmCodeRepository", repositoryClass=UserConfirmCodeRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
-class UserConfirmCode
+class UserConfirmCode implements UserConfirmCodeInterface
 {
     /**
      * @ORM\Id()
@@ -21,7 +23,7 @@ class UserConfirmCode
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -32,9 +34,17 @@ class UserConfirmCode
     private $code;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $created;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersistCreated(): void
+    {
+        $this->setCreated(new DateTimeImmutable());
+    }
 
     /**
      * @return int|null
@@ -85,19 +95,19 @@ class UserConfirmCode
     }
 
     /**
-     * @return DateTimeInterface|null
+     * @return DateTimeImmutable|null
      */
-    public function getCreated(): ?\DateTimeInterface
+    public function getCreated(): ?DateTimeImmutable
     {
         return $this->created;
     }
 
     /**
-     * @param DateTimeInterface $created
+     * @param DateTimeImmutable $created
      *
      * @return $this
      */
-    public function setCreated(DateTimeInterface $created): self
+    public function setCreated(DateTimeImmutable $created): self
     {
         $this->created = $created;
 

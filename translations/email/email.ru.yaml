@@ -1,0 +1,8 @@
+
+footer:
+    answer_is_not_required: Данное письмо создано автоматически и не требует ответа.
+
+confirm:
+    subject: Регистрация на сайте Balticrest.ru
+    header: Для завершения регистрации на сайте <b>Balticrest.ru</b> перейдите по ссылке
+    expiration: Ссылка действительна до %expiration_date%

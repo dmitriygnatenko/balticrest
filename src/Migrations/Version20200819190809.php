@@ -27,7 +27,7 @@ final class Version20200819190809 extends AbstractMigration
                 id INT AUTO_INCREMENT NOT NULL,
                 user_id INT NOT NULL,
                 code VARCHAR(50) NOT NULL,
-                created DATETIME NOT NULL,
+                created DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\',
                 UNIQUE INDEX UNIQ_6B857B0EA76ED395 (user_id),
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
