@@ -7,24 +7,17 @@ namespace App\Components\Balticrest\Service\Auth;
 use App\Entity\UserConfirmCode;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Monolog\Logger;
-use Psr\Log\LoggerInterface;
 
 class UserConfirmService implements UserConfirmServiceInterface
 {
-    /** @var Logger */
-    private $logger;
-
     /** @var EntityManager */
     private $entityManager;
 
     /**
-     * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(LoggerInterface $logger, EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->logger = $logger;
         $this->entityManager = $entityManager;
     }
 
