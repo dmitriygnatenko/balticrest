@@ -58,7 +58,7 @@ class EmailSender implements EmailSenderInterface
      */
     public function sendConfirmEmail(User $user)
     {
-        $confirmCode = $this->userConfirmCodeGenerator->generate($user);
+        $confirmCode = $this->userConfirmCodeGenerator->generate($user, UserConfirmCode::TYPE_CONFIRM_EMAIL);
 
         $confirmUrl = $this->urlGenerator->generate(
             'confirm',

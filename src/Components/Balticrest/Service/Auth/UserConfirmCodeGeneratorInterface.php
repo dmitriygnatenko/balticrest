@@ -11,8 +11,9 @@ interface UserConfirmCodeGeneratorInterface
 {
     /**
      * @param User $user
+     * @param int $type
      *
      * @return UserConfirmCode
      */
-    public function generate(User $user): UserConfirmCode;
+    public function generate(User $user, int $type): UserConfirmCode;
 }

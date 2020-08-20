@@ -129,7 +129,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
-        $userConfirmCode = $userConfirmService->getUserConfirmCode($code);
+        $userConfirmCode = $userConfirmService->getUserConfirmCode($code, UserConfirmCode::TYPE_CONFIRM_EMAIL);
 
         if ($userConfirmCode === null) {
             return $this->render($template, ['confirm_code_not_found' => true]);

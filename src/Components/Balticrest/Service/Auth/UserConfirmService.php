@@ -23,12 +23,14 @@ class UserConfirmService implements UserConfirmServiceInterface
 
     /**
      * @param string $code
+     * @param int $type
      *
      * @return UserConfirmCode|null
      */
-    public function getUserConfirmCode(string $code): ?UserConfirmCode
+    public function getUserConfirmCode(string $code, int $type): ?UserConfirmCode
     {
-        return $this->entityManager->getRepository(UserConfirmCode::class)->findOneBy(['code' => $code]);
+        return $this->entityManager->getRepository(UserConfirmCode::class)
+            ->findOneBy(['code' => $code, 'type' => $type]);
     }
 
     /**

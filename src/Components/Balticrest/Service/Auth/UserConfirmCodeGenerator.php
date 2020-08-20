@@ -18,12 +18,14 @@ class UserConfirmCodeGenerator implements UserConfirmCodeGeneratorInterface
         $this->entityManager = $entityManager;
     }
 
+
     /**
      * @param User $user
+     * @param int $type
      *
      * @return UserConfirmCode
      */
-    public function generate(User $user): UserConfirmCode
+    public function generate(User $user, int $type): UserConfirmCode
     {
         $confirmCode = $this->entityManager
             ->getRepository(UserConfirmCode::class)
@@ -38,7 +40,8 @@ class UserConfirmCodeGenerator implements UserConfirmCodeGeneratorInterface
 
         $userConfirmCode = (new UserConfirmCode())
             ->setUser($user)
-            ->setCode($code);
+            ->setCode($code)
+            ->setType($type);
 
         $this->entityManager->persist($userConfirmCode);
         $this->entityManager->flush();

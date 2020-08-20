@@ -10,10 +10,11 @@ interface UserConfirmServiceInterface
 {
     /**
      * @param string $code
+     * @param int $type
      *
      * @return UserConfirmCode|null
      */
-    public function getUserConfirmCode(string $code): ?UserConfirmCode;
+    public function getUserConfirmCode(string $code, int $type): ?UserConfirmCode;
 
     /**
      * @param UserConfirmCode $code

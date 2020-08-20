@@ -26,6 +26,7 @@ final class Version20200819190809 extends AbstractMigration
             CREATE TABLE user_confirm_code (
                 id INT AUTO_INCREMENT NOT NULL,
                 user_id INT NOT NULL,
+                type SMALLINT NOT NULL,
                 code VARCHAR(50) NOT NULL,
                 created DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\',
                 UNIQUE INDEX UNIQ_6B857B0EA76ED395 (user_id),

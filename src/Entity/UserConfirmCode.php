@@ -29,6 +29,11 @@ class UserConfirmCode implements UserConfirmCodeInterface
     private $user;
 
     /**
+     * @ORM\Column(type="smallint")
+     */
+    private $type;
+
+    /**
      * @ORM\Column(type="string", length=50)
      */
     private $code;
@@ -70,6 +75,26 @@ class UserConfirmCode implements UserConfirmCodeInterface
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return UserConfirmCode
+     */
+    public function setType(int $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
