@@ -21,13 +21,13 @@
 
                 {% set form_errors = form.vars.errors.form.getErrors(true) %}
 
-                <div class="errors">
-                    {% if form_errors|length %}
+                {% if form_errors|length %}
+                    <div class="errors">
                         {% for error in form_errors %}
                             {{ error.message|raw }}<br>
                         {% endfor %}
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
 
                 <div class="form-group {% if form_errors(form.username) %}has-error{% endif %}">
                     <label>

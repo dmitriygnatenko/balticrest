@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Controller;
 
 use App\Components\Balticrest\Event\UserCreatedEvent;
+use App\Components\Balticrest\Service\Auth\UserConfirmServiceInterface;
 use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
+use App\Components\Balticrest\Service\Form\PasswordForm;
 use App\Components\Balticrest\Service\Form\RegistrationForm;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Components\Security\Provider\FbAuthProviderInterface;
+use App\Entity\UserConfirmCode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -107,16 +111,65 @@ class UserController extends AbstractController
      * )
      *
      * @param string $code
+     * @param Request $request
+     * @param UserConfirmServiceInterface $userConfirmService
+     * @param UserPasswordEncoderInterface $userPasswordEncoder
      *
      * @return Response
      */
-    public function confirm(string $code): Response
-    {
+    public function confirm(
+        string $code,
+        Request $request,
+        UserConfirmServiceInterface $userConfirmService,
+        UserPasswordEncoderInterface $userPasswordEncoder
+    ): Response {
+        $template = 'balticrest/user/confirm.html.twig';
+
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
         }
 
-        // TODO
+        $userConfirmCode = $userConfirmService->getUserConfirmCode($code);
+
+        if ($userConfirmCode === null) {
+            return $this->render($template, ['confirm_code_not_found' => true]);
+        }
+
+        if ($userConfirmService->validateIsNotExpired($userConfirmCode) === false) {
+            return $this->render($template, ['confirm_code_expired' => true]);
+        }
+
+        $user = $userConfirmCode->getUser();
+
+        if ($user === null) {
+            return $this->render($template, ['confirm_code_not_found' => true]);
+        }
+
+        if ($user->getIsConfirmed() === true) {
+            return $this->render($template, ['user_is_confirmed' => true]);
+        }
+
+        $form = $this->createForm(PasswordForm::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $user->setPassword($userPasswordEncoder->encodePassword($user, $formData['password']));
+            $user->setIsConfirmed(true);
+
+            $entityManager->persist($user);
+            $entityManager->remove($userConfirmCode);
+
+            $entityManager->flush();
+
+            return $this->render($template, ['password_successfully_set' => true]);
+        }
+
+        return $this->render($template, ['form' => $form->createView()]);
     }
 
     /**

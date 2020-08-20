@@ -1,0 +1,96 @@
+{% extends 'balticrest/base_left_top_menu.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans from 'seo' %}confirm.title{% endtrans %}{% endblock %}
+{% block description %}{% trans from 'seo' %}confirm.desc{% endtrans %}{% endblock %}
+{% block keywords %}{% trans from 'seo' %}confirm.keywords{% endtrans %}{% endblock %}
+
+{% trans_default_domain 'auth' %}
+
+{% block body_attr %}class="innerpage"{% endblock %}
+
+{% block content %}
+    <div class="login_form">
+
+        {% if confirm_code_not_found is defined %}
+            <h3>
+                {% trans %}confirm.title.error{% endtrans %}
+                <span></span>
+            </h3>
+            <div class="errors">
+                {% trans %}confirm.code_not_found{% endtrans %}
+            </div>
+        {% elseif confirm_code_expired is defined %}
+            <h3>
+                {% trans %}confirm.title.error{% endtrans %}
+                <span></span>
+            </h3>
+            <div class="errors">
+                {% trans %}confirm.code_expired{% endtrans %}
+            </div>
+        {% elseif user_is_confirmed is defined %}
+            <h3>
+                {% trans %}confirm.title.error{% endtrans %}
+                <span></span>
+            </h3>
+            <div class="errors">
+                {% trans %}confirm.user_is_confirmed{% endtrans %}
+            </div>
+        {% elseif password_successfully_set is defined %}
+            <h3>
+                {% trans %}confirm.title.success{% endtrans %}
+                <span></span>
+            </h3>
+
+            <div class="success">
+                {% trans %}confirm.form.success_text{% endtrans %}
+            </div>
+
+            <a href="{{ path('login') }}" class="btn btn-primary">
+                {% trans %}confirm.form.button.back{% endtrans %}
+            </a>
+        {% else %}
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                {% set form_errors = form.vars.errors.form.getErrors(true) %}
+
+                <h3>
+                    {% trans %}confirm.title.success{% endtrans %}
+                    <span></span>
+                </h3>
+
+                {% if form_errors|length == 0 %}
+                    <div class="success">
+                        {% trans %}confirm.form.top_text{% endtrans %}
+                    </div>
+                {% else %}
+                    <div class="errors">
+                        {% for error in form_errors %}
+                            {{ error.message|raw }}<br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group {% if form_errors(form.password.first) %}has-error{% endif %}">
+                    <label>
+                        {{ form.password.first.vars.label|trans }}:
+                        {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                    </label>
+                </div>
+
+                <div class="form-group {% if form_errors(form.password.first) %}has-error{% endif %}">
+                    <label>
+                        {{ form.password.second.vars.label|trans }}:
+                        {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+                    </label>
+                </div>
+
+                <button class="btn btn-success" type="submit">
+                    {% trans %}confirm.form.button.save{% endtrans %}
+                </button>
+
+            {{ form_end(form) }}
+
+        {% endif %}
+
+    </div>
+{% endblock %}
