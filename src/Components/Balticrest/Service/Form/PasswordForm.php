@@ -21,9 +21,9 @@ class PasswordForm extends AbstractType
         $builder->add('password', RepeatedType::class, [
             'type' => PasswordType::class,
             'constraints' => array(
-                new NotBlank(['message' => 'email.passwords_blank']),
+                new NotBlank(['message' => 'password.passwords_blank']),
             ),
-            'invalid_message' => 'email.passwords_not_equal',
+            'invalid_message' => 'password.passwords_not_equal',
             'options' => ['attr' => ['class' => 'password-field']],
             'first_options'  => ['label' => 'confirm.form.label.password'],
             'second_options' => ['label' => 'confirm.form.label.password_repeat'],

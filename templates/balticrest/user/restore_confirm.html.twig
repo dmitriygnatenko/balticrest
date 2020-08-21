@@ -1,0 +1,74 @@
+{% extends 'balticrest/base_left_top_menu.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans from 'seo' %}restore.title{% endtrans %}{% endblock %}
+{% block description %}{% trans from 'seo' %}restore.desc{% endtrans %}{% endblock %}
+{% block keywords %}{% trans from 'seo' %}restore.keywords{% endtrans %}{% endblock %}
+
+{% trans_default_domain 'auth' %}
+
+{% block body_attr %}class="innerpage"{% endblock %}
+
+{% block content %}
+    <div class="login_form">
+
+        <h3>
+            {% trans %}restore.title{% endtrans %}
+            <span></span>
+        </h3>
+
+        {% if confirm_code_not_found is defined %}
+            <div class="errors">
+                {% trans %}restore.code_not_found{% endtrans %}
+            </div>
+        {% elseif confirm_code_expired is defined %}
+            <div class="errors">
+                {% trans %}restore.code_expired{% endtrans %}
+            </div>
+        {% elseif password_successfully_set is defined %}
+            <div class="success">
+                {% trans %}restore.form.success_text{% endtrans %}
+            </div>
+            <a href="{{ path('login') }}" class="btn btn-primary">
+                {% trans %}restore.form.button.back{% endtrans %}
+            </a>
+        {% else %}
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+            {% set form_errors = form.vars.errors.form.getErrors(true) %}
+
+            {% if form_errors|length == 0 %}
+                <div class="info">
+                    {% trans %}restore.form.top_text{% endtrans %}
+                </div>
+            {% else %}
+                <div class="errors">
+                    {% for error in form_errors %}
+                        {{ error.message|raw }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-group {% if form_errors(form.password.first) %}has-error{% endif %}">
+                <label>
+                    {{ form.password.first.vars.label|trans }}:
+                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                </label>
+            </div>
+
+            <div class="form-group {% if form_errors(form.password.first) %}has-error{% endif %}">
+                <label>
+                    {{ form.password.second.vars.label|trans }}:
+                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+                </label>
+            </div>
+
+            <button class="btn btn-success" type="submit">
+                {% trans %}restore.form.button.save{% endtrans %}
+            </button>
+
+            {{ form_end(form) }}
+
+        {% endif %}
+
+    </div>
+{% endblock %}

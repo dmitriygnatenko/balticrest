@@ -94,7 +94,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-
             $user = $userCreator->createNotConfirmedUser($formData['email'], $formData['username']);
 
             if ($user) {
@@ -205,7 +204,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-
             $entityManager = $this->getDoctrine()->getManager();
 
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $formData['email'] ?? '']);
@@ -252,7 +250,46 @@ class UserController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
-        // TODO
+        $template = 'balticrest/user/restore_confirm.html.twig';
+
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main');
+        }
+
+        $userConfirmCode = $userConfirmService->getUserConfirmCode($code, UserConfirmCode::TYPE_RESTORE_PASSWORD);
+
+        if ($userConfirmCode === null) {
+            return $this->render($template, ['confirm_code_not_found' => true]);
+        }
+
+        if ($userConfirmService->validateIsNotExpired($userConfirmCode) === false) {
+            return $this->render($template, ['confirm_code_expired' => true]);
+        }
+
+        $user = $userConfirmCode->getUser();
+
+        if ($user === null) {
+            return $this->render($template, ['confirm_code_not_found' => true]);
+        }
+
+        $form = $this->createForm(PasswordForm::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $user->setPassword($userPasswordEncoder->encodePassword($user, $formData['password']));
+
+            $entityManager->persist($user);
+            $entityManager->remove($userConfirmCode);
+            $entityManager->flush();
+
+            return $this->render($template, ['password_successfully_set' => true]);
+        }
+
+        return $this->render($template, ['form' => $form->createView()]);
     }
 
     /**
