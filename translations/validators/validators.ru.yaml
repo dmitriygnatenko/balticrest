@@ -1,20 +1,22 @@
-login:
-     email_blank: Заполните <b>Адрес электронной почты</b>
-     password_blank: Заполните <b>Пароль</b>
-     email_or_password: Неверный адрес электронной почты или пароль
-     blocked: Пользователь заблокирован
-     not_confirmed: Пользователь не подтвердил адрес электронной почты
-     user_create: Ошибка создания пользователя
-     csrf: Ошибка проверки аутентификационных данных
-     vk_incorrect_response: Ошибка получения данных от ВКонтакте
-     fb_incorrect_response: Ошибка получения данных от Facebook
+csrf: Ошибка проверки аутентификационных данных
 
-registration:
-     username_blank: Заполните <b>Имя пользователя</b>
+email:
      email_blank: Заполните <b>Адрес электронной почты</b>
      email_incorrect: Недопустимое значение <b>адреса электронной почты</b>
      email_unique: <b>Адрес электронной почты</b> уже существует
 
-confirm:
-     password_blank: Заполните поля <b>Пароль</b> и <b>Повтор пароля</b>
+password:
+     password_blank: Заполните <b>Пароль</b>
+     passwords_blank: Заполните поля <b>Пароль</b> и <b>Повтор пароля</b>
      passwords_not_equal: <b>Пароль</b> и <b>Повтор пароля</b> должны совпадать
+
+username:
+     username_blank: Заполните <b>Имя пользователя</b>
+
+login:
+     email_or_password: Неверный адрес электронной почты или пароль
+     blocked: Пользователь заблокирован
+     not_confirmed: Пользователь не подтвердил адрес электронной почты
+     user_create: Ошибка создания пользователя
+     vk_incorrect_response: Ошибка получения данных от ВКонтакте
+     fb_incorrect_response: Ошибка получения данных от Facebook

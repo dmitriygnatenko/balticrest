@@ -65,6 +65,7 @@ class FbAuthenticator extends AbstractGuardAuthenticator implements Authenticato
      * @param UserCreatorInterface $userCreator
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         LoggerInterface $logger,

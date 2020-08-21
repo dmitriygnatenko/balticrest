@@ -1482,7 +1482,7 @@ a.green_btn:hover {
 .login_form .social a:hover {
     filter: brightness(80%);
 }
-.login_form .errors, .login_form .success {
+.login_form .errors, .login_form .success, .login_form .info, .login_form .warning  {
     margin: 20px 30px;
     font-size: 13px;
 }
@@ -1491,6 +1491,12 @@ a.green_btn:hover {
 }
 .login_form .success {
     color: #3c763d;
+}
+.login_form .info {
+    color: #31708f;
+}
+.login_form .warning {
+    color: #8a6d3b;
 }
 
 /*------------------------------------------------------------------

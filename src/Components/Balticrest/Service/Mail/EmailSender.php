@@ -56,12 +56,12 @@ class EmailSender implements EmailSenderInterface
     /**
      * @param User $user
      */
-    public function sendConfirmEmail(User $user)
+    public function sendRegistrationConfirmEmail(User $user)
     {
         $confirmCode = $this->userConfirmCodeGenerator->generate($user, UserConfirmCode::TYPE_CONFIRM_EMAIL);
 
         $confirmUrl = $this->urlGenerator->generate(
-            'confirm',
+            'registration_confirm',
             [
                 'code' => $confirmCode->getCode()
             ],
@@ -77,6 +77,41 @@ class EmailSender implements EmailSenderInterface
                 ->to($user->getEmail())
                 ->subject($this->translator->trans('confirm.subject', [], 'email'))
                 ->htmlTemplate('balticrest/email/registration_confirm.html.twig')
+                ->context([
+                    'expiration_date' => $expirationDate,
+                    'confirm_url' => $confirmUrl,
+                ]);
+
+            $this->mailer->send($email);
+        } catch (Throwable $exception) {
+            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
+        }
+    }
+
+    /**
+     * @param User $user
+     */
+    public function sendRestoreConfirmEmail(User $user)
+    {
+        $confirmCode = $this->userConfirmCodeGenerator->generate($user, UserConfirmCode::TYPE_RESTORE_PASSWORD);
+
+        $confirmUrl = $this->urlGenerator->generate(
+            'restore_confirm',
+            [
+                'code' => $confirmCode->getCode()
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $expirationTimestamp = $confirmCode->getCreated()->getTimestamp() + UserConfirmCode::EXPIRATION_TIME;
+
+        $expirationDate = (new DateTimeImmutable())->setTimestamp($expirationTimestamp);
+
+        try {
+            $email = (new TemplatedEmail())
+                ->to($user->getEmail())
+                ->subject($this->translator->trans('restore.subject', [], 'email'))
+                ->htmlTemplate('balticrest/email/restore_confirm.html.twig')
                 ->context([
                     'expiration_date' => $expirationDate,
                     'confirm_url' => $confirmUrl,

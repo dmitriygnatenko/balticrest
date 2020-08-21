@@ -29,15 +29,15 @@ class RegistrationForm extends AbstractType
         $builder->add('username', TextType::class, [
             'label' => 'registration.form.label.username',
             'constraints' => [
-                new NotBlank(['message' => 'registration.username_blank']),
+                new NotBlank(['message' => 'username.username_blank']),
             ]
         ]);
 
         $builder->add('email', TextType::class, [
             'label' => 'registration.form.label.email',
             'constraints' => [
-                new NotBlank(['message' => 'registration.email_blank']),
-                new Email(['message' => 'registration.email_incorrect']),
+                new NotBlank(['message' => 'email.email_blank']),
+                new Email(['message' => 'email.email_incorrect']),
                 new Callback([
                     'callback' => function($value, $context) use ($em) {
                         if ($value === '' || $value === null) {
@@ -45,7 +45,7 @@ class RegistrationForm extends AbstractType
                         }
 
                         if ($em->getRepository(User::class)->count(['email' => $value])) {
-                            $context->buildViolation('registration.email_unique')
+                            $context->buildViolation('email.email_unique')
                                 ->atPath('email')
                                 ->addViolation();
                         }

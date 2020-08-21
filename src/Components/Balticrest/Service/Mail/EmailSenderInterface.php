@@ -11,5 +11,10 @@ interface EmailSenderInterface
     /**
      * @param User $user
      */
-    public function sendConfirmEmail(User $user);
+    public function sendRegistrationConfirmEmail(User $user);
+
+    /**
+     * @param User $user
+     */
+    public function sendRestoreConfirmEmail(User $user);
 }

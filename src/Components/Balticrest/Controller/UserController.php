@@ -9,8 +9,11 @@ use App\Components\Balticrest\Service\Auth\UserConfirmServiceInterface;
 use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
 use App\Components\Balticrest\Service\Form\PasswordForm;
 use App\Components\Balticrest\Service\Form\RegistrationForm;
+use App\Components\Balticrest\Service\Form\RestorePasswordForm;
+use App\Components\Balticrest\Service\Mail\EmailSenderInterface;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Components\Security\Provider\FbAuthProviderInterface;
+use App\Entity\User;
 use App\Entity\UserConfirmCode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +30,8 @@ class UserController extends AbstractController
     use TargetPathTrait;
 
     /**
+     * Страница авторизации
+     *
      * @Route("/login", name="login")
      *
      * @param Request $request
@@ -62,6 +67,8 @@ class UserController extends AbstractController
     }
 
     /**
+     * Страница регистрации
+     *
      * @Route("/registration", name="registration")
      *
      * @param Request $request
@@ -104,9 +111,11 @@ class UserController extends AbstractController
     }
 
     /**
+     * Страница установки нового пароля при регистрации
+     *
      * @Route(
      *     "/registration/confirm/{code}",
-     *      name="confirm",
+     *      name="registration_confirm",
      *      requirements={"code"="[0-9a-z]{40}"}
      * )
      *
@@ -117,13 +126,13 @@ class UserController extends AbstractController
      *
      * @return Response
      */
-    public function confirm(
+    public function registrationConfirm(
         string $code,
         Request $request,
         UserConfirmServiceInterface $userConfirmService,
         UserPasswordEncoderInterface $userPasswordEncoder
     ): Response {
-        $template = 'balticrest/user/confirm.html.twig';
+        $template = 'balticrest/user/registration_confirm.html.twig';
 
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
@@ -173,23 +182,84 @@ class UserController extends AbstractController
     }
 
     /**
+     * Страница восстановления пароля
+     *
+     * @Route("/restore", name="restore")
+     *
+     * @param Request $request
+     * @param EmailSenderInterface $emailSender
+     *
+     * @return Response
+     */
+    public function restore(Request $request, EmailSenderInterface $emailSender): Response
+    {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main');
+        }
+
+        $form = $this->createForm(RestorePasswordForm::class);
+
+        $form->handleRequest($request);
+
+        $sent = false;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $formData['email'] ?? '']);
+
+            if ($user !== null && $user->getIsActive() && $user->getIsConfirmed()) {
+                $emailSender->sendRestoreConfirmEmail($user);
+            }
+
+            $sent = true;
+        }
+
+        return $this->render(
+            'balticrest/user/restore.html.twig',
+            [
+                'form' => $form->createView(),
+                'sent' => $sent
+            ]
+        );
+    }
+
+    /**
+     * Страница установки нового пароля при сбросе
+     *
+     * @Route(
+     *     "/restore/confirm/{code}",
+     *      name="restore_confirm",
+     *      requirements={"code"="[0-9a-z]{40}"}
+     * )
+     *
+     * @param string $code
+     * @param Request $request
+     * @param UserConfirmServiceInterface $userConfirmService
+     * @param UserPasswordEncoderInterface $userPasswordEncoder
+     *
+     * @return Response
+     */
+    public function restoreConfirm(
+        string $code,
+        Request $request,
+        UserConfirmServiceInterface $userConfirmService,
+        UserPasswordEncoderInterface $userPasswordEncoder
+    ): Response {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main');
+        }
+
+        // TODO
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logout()
     {
         throw new LogicException('This method can be blank.');
-    }
-
-    /**
-     * @Route("/restore", name="restore")
-     *
-     * @param Request $request
-     * @param AuthenticationUtils $authenticationUtils
-     *
-     * @return Response
-     */
-    public function restore(Request $request, AuthenticationUtils $authenticationUtils): Response
-    {
-        // TODO
     }
 }

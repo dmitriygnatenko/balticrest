@@ -1,0 +1,11 @@
+{% extends 'balticrest/base_email.html.twig' %}
+{% trans_default_domain 'email' %}
+
+{% block content %}
+    {% trans %}restore.header{% endtrans %}
+    <br><br>
+    <a style="color: green;" href="{{ confirm_url }}">{{ confirm_url }}</a>
+    <br><br>
+    {% trans with {'%expiration_date%':expiration_date|date('d.m.Y H:i')} %}restore.expiration{% endtrans %}
+    <br><br>
+{% endblock %}

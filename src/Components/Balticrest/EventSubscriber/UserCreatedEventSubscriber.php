@@ -53,7 +53,7 @@ class UserCreatedEventSubscriber implements EventSubscriberInterface
             $user->getIsActive() === true
         ) {
             // Отправляем письмо с ссылкой на завершение регистрации
-            $this->emailSender->sendConfirmEmail($user);
+            $this->emailSender->sendRegistrationConfirmEmail($user);
         }
 
         $this->saveHistory($user);

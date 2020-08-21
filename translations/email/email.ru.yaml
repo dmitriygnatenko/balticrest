@@ -6,3 +6,8 @@ confirm:
     subject: Регистрация на сайте Balticrest.ru
     header: Для завершения регистрации на сайте <b>Balticrest.ru</b> перейдите по ссылке
     expiration: Ссылка действительна до %expiration_date%
+
+restore:
+    subject: Восстановление пароля на сайте Balticrest.ru
+    header: Для восстановления пароля на сайте <b>Balticrest.ru</b> перейдите по ссылке
+    expiration: Ссылка действительна до %expiration_date%

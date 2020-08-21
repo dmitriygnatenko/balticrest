@@ -9,8 +9,6 @@ use App\Entity\User;
 
 class UserCreatedEvent extends Event
 {
-    public const NAME = 'user.created';
-
     /** @var User */
     private $user;
 
