@@ -10,6 +10,8 @@ use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
 use App\Components\Balticrest\Service\Form\PasswordForm;
 use App\Components\Balticrest\Service\Form\RegistrationForm;
 use App\Components\Balticrest\Service\Form\RestorePasswordForm;
+use App\Components\Balticrest\Service\Log\HistoryLogger;
+use App\Components\Balticrest\Service\Log\HistoryLoggerInterface;
 use App\Components\Balticrest\Service\Mail\EmailSenderInterface;
 use App\Components\Security\Provider\VkAuthProviderInterface;
 use App\Components\Security\Provider\FbAuthProviderInterface;
@@ -122,6 +124,7 @@ class UserController extends AbstractController
      * @param Request $request
      * @param UserConfirmServiceInterface $userConfirmService
      * @param UserPasswordEncoderInterface $userPasswordEncoder
+     * @param HistoryLoggerInterface $historyLogger
      *
      * @return Response
      */
@@ -129,7 +132,8 @@ class UserController extends AbstractController
         string $code,
         Request $request,
         UserConfirmServiceInterface $userConfirmService,
-        UserPasswordEncoderInterface $userPasswordEncoder
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        HistoryLoggerInterface $historyLogger
     ): Response {
         $template = 'balticrest/user/registration_confirm.html.twig';
 
@@ -173,6 +177,8 @@ class UserController extends AbstractController
             $entityManager->remove($userConfirmCode);
 
             $entityManager->flush();
+
+            $historyLogger->log(HistoryLogger::USER_REGISTERED, [], $user);
 
             return $this->render($template, ['password_successfully_set' => true]);
         }
@@ -237,6 +243,7 @@ class UserController extends AbstractController
      * @param Request $request
      * @param UserConfirmServiceInterface $userConfirmService
      * @param UserPasswordEncoderInterface $userPasswordEncoder
+     * @param HistoryLoggerInterface $historyLogger
      *
      * @return Response
      */
@@ -244,7 +251,8 @@ class UserController extends AbstractController
         string $code,
         Request $request,
         UserConfirmServiceInterface $userConfirmService,
-        UserPasswordEncoderInterface $userPasswordEncoder
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        HistoryLoggerInterface $historyLogger
     ): Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
@@ -285,6 +293,8 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->remove($userConfirmCode);
             $entityManager->flush();
+
+            $historyLogger->log(HistoryLogger::USER_RESTORED_PASSWORD, [], $user);
 
             return $this->render($template, ['password_successfully_set' => true]);
         }
