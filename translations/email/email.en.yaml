@@ -1,0 +1,12 @@
+footer:
+    answer_is_not_required: This letter is created automatically and does not require a response.
+
+confirm:
+    subject: Registration on the Balticrest.ru
+    header: To complete registration on the website <b>Balticrest.ru</b> follow the link
+    expiration: The link is valid until %expiration_date%
+
+restore:
+    subject: Password recovery on the Balticrest.ru
+    header: To recover your password on the website <b>Balticrest.ru</b> follow the link
+    expiration: The link is valid until %expiration_date%
