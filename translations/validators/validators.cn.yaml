@@ -1,0 +1,22 @@
+csrf: 驗證數據驗證錯誤
+
+email:
+    email_blank: 填寫<b>電子郵件地址</b>
+    email_incorrect: <b>電子郵件地址</b>的值無效
+    email_unique: <b>電子郵件地址</b>已存在
+
+password:
+    password_blank: 填寫<b>密碼</b>
+    passwords_blank: 填寫<b>密碼</b>和<b>密碼重複</b>字段
+    passwords_not_equal: <b>密碼</b>和<b>密碼重複</b>必須匹配
+
+username:
+    username_blank: 填寫<b>用戶名</b>
+
+login:
+    email_or_password: 無效的電子郵件或密碼
+    blocked: 用戶被阻止
+    not_confirmed: 用戶尚未驗證電子郵件地址
+    user_create: 用戶創建錯誤
+    vk_incorrect_response: 從VKontakte檢索數據時出錯
+    fb_incorrect_response: 從Facebook檢索數據時出錯

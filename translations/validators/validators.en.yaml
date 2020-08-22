@@ -1,0 +1,22 @@
+csrf: Authentication data verification error
+
+email:
+    email_blank: Fill <b>Email Address</b>
+    email_incorrect: Invalid value for <b>email address</b>
+    email_unique: <b>Email address</b> already exists
+
+password:
+    password_blank: Fill <b>Password</b>
+    passwords_blank: Fill the <b>Password</b> and <b>Password Repeat</b> fields
+    passwords_not_equal: <b>Password</b> and <b>Password repeat</b> must match
+
+username:
+    username_blank: Fill <b>Username</b>
+
+login:
+    email_or_password: Incorrect email or password
+    blocked: User is blocked
+    not_confirmed: User has not verified email address
+    user_create: User creation error
+    vk_incorrect_response: Error receiving data from VKontakte
+    fb_incorrect_response: Error receiving data from Facebook

@@ -1,0 +1,22 @@
+csrf: Błąd weryfikacji danych uwierzytelniających
+
+email:
+    email_blank: Wypełnij <b>Adres e-mail</b>
+    email_incorrect: Nieprawidłowa wartość dla <b>adresu e-mail</b>
+    email_unique: <b>Adres e-mail</b> już istnieje
+
+password:
+    password_blank: Wypełnij <b>Hasło</b>
+    passwords_blank: Wypełnij pola <b>Hasło</b> i <b>Powtórz hasło</b>
+    passwords_not_equal: <b>Hasło</b> i <b>Powtórz hasło</b> muszą być zgodne
+
+username:
+    username_blank: Wpisz <b>nazwę użytkownika</b>
+
+login:
+    email_or_password: Nieprawidłowy e-mail lub hasło
+    blocked: Użytkownik jest zablokowany
+    not_confirmed: Użytkownik nie zweryfikował adresu e-mail
+    user_create: Błąd tworzenia użytkownika
+    vk_incorrect_response: Błąd podczas odbierania danych z ВКонтакте
+    fb_incorrect_response: Błąd podczas odbierania danych z Facebook

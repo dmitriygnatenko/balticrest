@@ -11,11 +11,3 @@ login:
             login: Login
             register: Register
             restore: Restore password
-        error:
-            email_or_password: Incorrect email or password
-            blocked: User is blocked
-            not_confirmed: User has not verified email address
-            user_create: User creation error
-            csrf: Authentication data verification error
-            vk_incorrect_response: Error receiving data from VKontakte
-            fb_incorrect_response: Error receiving data from Facebook

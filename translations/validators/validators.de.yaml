@@ -1,0 +1,22 @@
+csrf: Fehler bei der Überprüfung der Authentifizierungsdaten
+
+email:
+    email_blank: Geben Sie <b>E-Mail-Adresse</b> ein
+    email_incorrect: Ungültiger Wert für <b>E-Mail-Adresse</b>
+    email_unique: <b>E-Mail-Adresse</b> existiert bereits
+
+password:
+    password_blank: Geben Sie <b>Passwort</b> ein
+    passwords_blank: Füllen Sie die Felder <b>Passwort</b> und <b>Passwort wiederholen</b> aus
+    passwords_not_equal: <b>Passwort</b> und <b>Passwort wiederholen</b> müssen übereinstimmen
+
+username:
+    username_blank: Geben Sie <b>Benutzername</b> ein
+
+login:
+    email_or_password: Falsche Email oder Passwort
+    blocked: Benutzer ist gesperrt
+    not_confirmed: Der Benutzer hat die E-Mail-Adresse nicht überprüft
+    user_create: Benutzererstellungsfehler
+    vk_incorrect_response: Fehler beim Empfangen von Daten von VKontakte
+    fb_incorrect_response: Fehler beim Empfangen von Daten von Facebook
