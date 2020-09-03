@@ -1,6 +1,6 @@
 framework:
     messenger:
         transports:
-            async_normal:
-                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+            async: "%env(MESSENGER_TRANSPORT_DSN)%"
         routing:
+            'App\Components\Balticrest\Service\Message\EmailMessage':  async

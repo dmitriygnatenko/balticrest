@@ -5,21 +5,19 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Service\Mail;
 
 use App\Components\Balticrest\Service\Auth\UserConfirmCodeGeneratorInterface;
+use App\Components\Balticrest\Service\Message\EmailMessage;
 use App\Entity\User;
 use App\Entity\UserConfirmCode;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use DateTimeImmutable;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
+use Twig\Environment;
 
 class EmailSender implements EmailSenderInterface
 {
-    /** @var MailerInterface */
-    private $mailer;
-
     /** @var LoggerInterface */
     private $logger;
 
@@ -32,25 +30,34 @@ class EmailSender implements EmailSenderInterface
     /** @var UserConfirmCodeGeneratorInterface */
     private $userConfirmCodeGenerator;
 
+    /** @var MessageBusInterface */
+    private $bus;
+
+    /** @var Environment */
+    private $twig;
+
     /**
-     * @param MailerInterface $mailer
      * @param LoggerInterface $logger
      * @param UrlGeneratorInterface $urlGenerator
      * @param TranslatorInterface $translator
      * @param UserConfirmCodeGeneratorInterface $userConfirmCodeGenerator
+     * @param MessageBusInterface $bus
+     * @param Environment $twig
      */
     public function __construct(
-        MailerInterface $mailer,
         LoggerInterface $logger,
         UrlGeneratorInterface $urlGenerator,
         TranslatorInterface $translator,
-        UserConfirmCodeGeneratorInterface $userConfirmCodeGenerator
+        UserConfirmCodeGeneratorInterface $userConfirmCodeGenerator,
+        MessageBusInterface $bus,
+        Environment $twig
     ) {
-        $this->mailer = $mailer;
         $this->logger = $logger;
         $this->urlGenerator = $urlGenerator;
         $this->translator = $translator;
         $this->userConfirmCodeGenerator = $userConfirmCodeGenerator;
+        $this->bus = $bus;
+        $this->twig = $twig;
     }
 
     /**
@@ -73,16 +80,17 @@ class EmailSender implements EmailSenderInterface
         $expirationDate = (new DateTimeImmutable())->setTimestamp($expirationTimestamp);
 
         try {
-            $email = (new TemplatedEmail())
-                ->to($user->getEmail())
-                ->subject($this->translator->trans('confirm.subject', [], 'email'))
-                ->htmlTemplate('balticrest/email/registration_confirm.html.twig')
-                ->context([
-                    'expiration_date' => $expirationDate,
-                    'confirm_url' => $confirmUrl,
-                ]);
+            $content = $this->twig->render('balticrest/email/registration_confirm.html.twig', [
+                'expiration_date' => $expirationDate,
+                'confirm_url' => $confirmUrl,
+            ]);
 
-            $this->mailer->send($email);
+            $emailMessage = (new EmailMessage())
+                ->setEmail($user->getEmail())
+                ->setSubject($this->translator->trans('confirm.subject', [], 'email'))
+                ->setContent($content);
+
+            $this->bus->dispatch($emailMessage);
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
         }
@@ -108,16 +116,17 @@ class EmailSender implements EmailSenderInterface
         $expirationDate = (new DateTimeImmutable())->setTimestamp($expirationTimestamp);
 
         try {
-            $email = (new TemplatedEmail())
-                ->to($user->getEmail())
-                ->subject($this->translator->trans('restore.subject', [], 'email'))
-                ->htmlTemplate('balticrest/email/restore_confirm.html.twig')
-                ->context([
-                    'expiration_date' => $expirationDate,
-                    'confirm_url' => $confirmUrl,
-                ]);
+            $content = $this->twig->render('balticrest/email/restore_confirm.html.twig', [
+                'expiration_date' => $expirationDate,
+                'confirm_url' => $confirmUrl,
+            ]);
 
-            $this->mailer->send($email);
+            $emailMessage = (new EmailMessage())
+                ->setEmail($user->getEmail())
+                ->setSubject($this->translator->trans('restore.subject', [], 'email'))
+                ->setContent($content);
+
+            $this->bus->dispatch($emailMessage);
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
         }
