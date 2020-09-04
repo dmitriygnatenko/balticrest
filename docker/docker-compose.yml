@@ -56,3 +56,13 @@ services:
         volumes:
             - ./mysql/data:/var/lib/mysql
             - ./mysql/logs:/var/log/mysql
+
+    supervisor:
+        build: supervisor
+        image: ${DOCKER_PREFIX}-supervisor
+        container_name: ${DOCKER_PREFIX}-supervisor
+        volumes:
+            - ./../:/var/www/balticrest.ru
+            - ./supervisor/logs:/var/log/supervisor
+        depends_on:
+            - php-fpm
