@@ -11,3 +11,47 @@ login:
             login: Login
             register: Register
             restore: Restore password
+
+registration:
+    title: Registration
+    form:
+        label:
+            username: Fullname
+            email: Email
+        button:
+            register: Register
+            back: To login page
+    confirm_text: An email with a link to confirm registration was sent to <b>%email%</b>
+
+confirm:
+    title:
+        success: Password creation
+        error: Email confirmation
+    code_not_found: Email verification link is not valid
+    code_expired: Email verification link is inactive
+    user_is_confirmed: Email address has already been verified using this link
+    form:
+        label:
+            password: Password
+            password_repeat: Password repeat
+        button:
+            save: Save password
+            back: To login page
+        top_text: To complete registration on the site, create a password to enter
+        success_text: Your password has been successfully saved and your mail has been confirmed! You can log in to the site!
+
+restore:
+    title: Password recovery
+    info_text: An email will be sent to your specified email address with instructions on how to reset your password.
+    sent_text: If the address was specified correctly, then an email with instructions on how to recover your password was sent. Check your email and follow the steps in the email.
+    code_not_found: Password reset link is invalid
+    code_expired: Password recovery link is inactive
+    form:
+        label:
+            email: Email
+        button:
+            save: Save password
+            send: Send
+            back: To login page
+        top_text: Create a new password
+        success_text: New password has been successfully saved!
