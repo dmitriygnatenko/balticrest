@@ -1,0 +1,19 @@
+login:
+    title: '登錄'
+    desc: '進入波羅的海海岸旅遊指南'
+    keywords: '登錄，授權'
+
+registration:
+    title: '註冊'
+    desc: '在波羅的海海岸旅遊指南中註冊'
+    keywords: '註冊，登錄'
+
+confirm:
+    title: '驗證電子郵件地址'
+    desc: '確認波羅的海海岸旅遊指南中的電子郵件地址'
+    keywords: '註冊，登錄，確認'
+
+restore:
+    title: '密碼恢復'
+    desc: '波羅的海沿岸旅遊指南中的密碼恢復'
+    keywords: '密碼恢復，登錄'

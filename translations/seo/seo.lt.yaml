@@ -1,0 +1,19 @@
+login:
+    title: 'Prisijungti'
+    desc: 'Įėjimas į Baltijos pakrantės turizmo katalogą'
+    keywords: 'prisijungimas, autorizacija'
+
+registration:
+    title: 'Registracija'
+    desc: 'Registracija Baltijos pakrantės turizmo kataloge'
+    keywords: 'registracija, prisijungimas'
+
+confirm:
+    title: 'Patvirtinti el. pašto adresą'
+    desc: 'El. pašto adreso patvirtinimas Baltijos pakrantės turizmo kataloge'
+    keywords: 'registracija, prisijungimas, patvirtinimas'
+
+restore:
+    title: 'Slaptažodžio atkūrimas'
+    desc: 'Slaptažodžio atkūrimas Baltijos pakrantės turizmo gide'
+    keywords: 'slaptažodžio atkūrimas, prisijungimas'

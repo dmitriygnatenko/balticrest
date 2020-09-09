@@ -1,0 +1,19 @@
+login:
+    title: 'Login'
+    desc: 'Entry to the Baltic Coast Tourism Directory'
+    keywords: 'login, authorization'
+
+registration:
+    title: 'Registration'
+    desc: 'Registration in the Baltic Coast Tourism Directory'
+    keywords: 'registration, login'
+
+confirm:
+    title: 'Verify Email Address'
+    desc: 'Confirmation of the email address in the Baltic Coast Tourism Directory'
+    keywords: 'registration, login, confirmation'
+
+restore:
+    title: 'Password Recovery'
+    desc: 'Password recovery in the Baltic coast tourist guide'
+    keywords: 'password recovery, login'
