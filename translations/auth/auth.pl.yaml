@@ -3,7 +3,7 @@ login:
     form:
         title: Zaloguj sie
         label:
-            email: Adres e-mail
+            email: Email
             password: Hasło
             vk: VKontakte
             fb: Facebook
@@ -11,3 +11,47 @@ login:
             login: Wejść
             register: Zarejestruj się w serwisie
             restore: Przywróć hasło
+
+registration:
+    title: Rejestracja
+    form:
+        label:
+            username: Pełna nazwa
+            email: Email
+        button:
+            register: Zarejestrować
+            back: Do strony logowania
+    confirm_text: Wiadomość e-mail z linkiem do potwierdzenia rejestracji została wysłana na adres <b>%email%</b>
+
+confirm:
+    title:
+        success: Utworzenie hasła
+        error: Potwierdzenie e-mail
+    code_not_found: Link weryfikacyjny e-mail jest nieprawidłowy
+    code_expired: Link weryfikacyjny e-mail jest nieaktywny
+    user_is_confirmed: Adres e-mail został już zweryfikowany za pomocą tego linku
+    form:
+        label:
+            password: Hasło
+            password_repeat: Powtórzenie hasła
+        button:
+            save: Zapisz hasło
+            back: Do strony logowania
+        top_text: Aby zakończyć rejestrację na stronie, utwórz hasło do wejścia
+        success_text: Twoje hasło zostało pomyślnie zapisane, a Twoja poczta została potwierdzona! Możesz zalogować się do serwisu!
+
+restore:
+    title: Odzyskiwanie hasła
+    info_text: Na podany adres e-mail zostanie wysłana wiadomość e-mail z instrukcjami, jak zresetować hasło.
+    sent_text: Jeśli adres został podany poprawnie, został wysłany e-mail z instrukcjami, jak odzyskać hasło. Sprawdź swoją skrzynkę e-mail i postępuj zgodnie z instrukcjami w e-mailu.
+    code_not_found: Link do resetowania hasła jest nieprawidłowy
+    code_expired: Link do odzyskiwania hasła jest nieaktywny
+    form:
+        label:
+            email: Email
+        button:
+            save: Zapisz hasło
+            send: Wyślij
+            back: Do strony logowania
+        top_text: Utwórz nowe hasło
+        success_text: Nowe hasło zostało pomyślnie zapisane!

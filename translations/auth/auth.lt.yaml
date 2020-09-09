@@ -11,3 +11,47 @@ login:
             login: Įeiti
             register: Užsiregistruokite svetainėje
             restore: Atkurti slaptažodį
+
+registration:
+    title: Registracija
+    form:
+        label:
+            username: Pilnas vardas
+            email: El. paštas
+        button:
+            register: Rregistruotis
+            back: Norėdami prisijungti prie puslapio
+    confirm_text: El. Laiškas su nuoroda, patvirtinančia registraciją, buvo išsiųstas adresu <b>%email%</b>
+
+confirm:
+    title:
+        success: Slaptažodžio kūrimas
+        error: El. pašto patvirtinimas
+    code_not_found: El. pašto patvirtinimo nuoroda neteisinga
+    code_expired: El. pašto patvirtinimo nuoroda neaktyvi
+    user_is_confirmed: El. pašto adresas jau patvirtintas naudojant šią nuorodą
+    form:
+        label:
+            password: Slaptažodis
+            password_repeat: Slaptažodžio pakartojimas
+        button:
+            save: Išsaugoti slaptažodį
+            back: Norėdami prisijungti prie puslapio
+        top_text: Norėdami baigti registraciją svetainėje, sukurkite slaptažodį, kurį norite įvesti
+        success_text: Jūsų slaptažodis sėkmingai išsaugotas ir jūsų paštas patvirtintas! Galite prisijungti prie svetainės!
+
+restore:
+    title: Slaptažodžio atkūrimas
+    info_text: Jūsų nurodytu el. pašto adresu bus išsiųstas el. laiškas su instrukcijomis, kaip iš naujo nustatyti slaptažodį.
+    sent_text: Jei adresas buvo nurodytas teisingai, tada buvo išsiųstas el. laiškas su instrukcijomis, kaip atkurti slaptažodį. Patikrinkite savo el. Pašto adresą ir atlikite el. Laiške nurodytus veiksmus.
+    code_not_found: Slaptažodžio nustatymo iš naujo nuoroda neteisinga
+    code_expired: Slaptažodžio atkūrimo nuoroda neaktyvi
+    form:
+        label:
+            email: El. paštas
+        button:
+            save: Išsaugoti slaptažodį
+            send: Siųsti
+            back: Norėdami prisijungti prie puslapio
+        top_text: Sukurkite naują slaptažodį
+        success_text: Naujas slaptažodis sėkmingai išsaugotas!
