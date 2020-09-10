@@ -8,7 +8,7 @@ use App\Components\Balticrest\Service\DTO\MapPointDTO;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use App\Components\Balticrest\Service\Helper\MapPointHelper;
 use App\Components\Balticrest\Service\Helper\MapPointHelperInterface;
-use App\Components\Balticrest\Service\Manager\MapJsonDataProviderInterface;
+use App\Components\Balticrest\Service\Provider\MapJsonDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
 use App\Entity\City;

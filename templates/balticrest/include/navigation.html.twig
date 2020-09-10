@@ -21,6 +21,13 @@
                 <i class="fa fa-bookmark-o"></i>{% trans %}navigation.menu.main{% endtrans %}
             </a>
         </li>
+        {% if app.user %}
+            <li>
+                <a href="#">
+                    <i class="fa fa-user"></i>{% trans %}navigation.menu.user_profile{% endtrans %}
+                </a>
+            </li>
+        {% endif %}
         <li>
             <a href="#">
                 <i class="fa fa-map-marker"></i>{% trans %}navigation.menu.map{% endtrans %}
@@ -49,11 +56,6 @@
         <li>
             <a href="#">
                 <i class="fa fa-briefcase"></i>{% trans %}navigation.menu.privacy_policy{% endtrans %}
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-user"></i>{% trans %}navigation.menu.user_profile{% endtrans %}
             </a>
         </li>
     </ul>
