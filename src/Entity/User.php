@@ -198,9 +198,9 @@ class User implements UserInterface, UserRolesInterface
     }
 
     /**
-     * @return string|null
+     * @return resource|null
      */
-    public function getPhoto(): ?string
+    public function getPhoto()
     {
         return $this->photo;
     }

@@ -78,7 +78,7 @@ class FbAuthProvider implements FbAuthProviderInterface
 
             $accessToken = $oauth->getAccessTokenFromCode($code, $this->getRedirectUri());
 
-            $response = $fb->get('/me?fields=id,name,email,picture', $accessToken);
+            $response = $fb->get('/me?fields=id,name,email,picture.width(100).height(100)', $accessToken);
 
             $user = $response->getGraphUser();
 

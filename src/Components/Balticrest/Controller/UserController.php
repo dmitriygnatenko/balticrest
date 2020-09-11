@@ -10,6 +10,7 @@ use App\Components\Balticrest\Service\Auth\UserCreatorInterface;
 use App\Components\Balticrest\Service\Form\PasswordForm;
 use App\Components\Balticrest\Service\Form\RegistrationForm;
 use App\Components\Balticrest\Service\Form\RestorePasswordForm;
+use App\Components\Balticrest\Service\Image\UserImageServiceInterface;
 use App\Components\Balticrest\Service\Log\HistoryLogger;
 use App\Components\Balticrest\Service\Log\HistoryLoggerInterface;
 use App\Components\Balticrest\Service\Mail\EmailSenderInterface;
@@ -18,6 +19,7 @@ use App\Components\Security\Provider\FbAuthProviderInterface;
 use App\Entity\User;
 use App\Entity\UserConfirmCode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +31,9 @@ use LogicException;
 
 class UserController extends AbstractController
 {
+
+    const DEFAULT_USER_ICON = '';
+
     use TargetPathTrait;
 
     /**
@@ -308,5 +313,31 @@ class UserController extends AbstractController
     public function logout()
     {
         throw new LogicException('This method can be blank.');
+    }
+
+    /**
+     * API для получения аватара пользователя
+     *
+     * @Route(
+     *     "/api/user/avatar/{id}",
+     *      methods={"GET"},
+     *      requirements={"page"="\d+"},
+     *      name="api.user_avatar"
+     * )
+     *
+     * @param UserImageServiceInterface $userImageService
+     * @param int|null $id
+     *
+     * @return Response
+     */
+    public function getUserImage(UserImageServiceInterface $userImageService, ?int $id = null): Response
+    {
+        $avatarContent = $userImageService->getUserAvatarContent($id);
+
+        $response = new Response();
+        $response->headers->set('Content-Type', mime_content_type($avatarContent));
+        $response->setContent(stream_get_contents($avatarContent));
+
+        return $response;
     }
 }

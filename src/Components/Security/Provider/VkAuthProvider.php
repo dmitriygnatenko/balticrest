@@ -92,7 +92,7 @@ class VkAuthProvider implements VkAuthProviderInterface
 
             $usersResponse = $vk->users()->get($accessTokenResponse['access_token'], [
                 'user_ids'  => [$accessTokenResponse['user_id']],
-                'fields'    => ['photo_50'],
+                'fields'    => ['photo_100'],
             ]);
 
             if (is_array($usersResponse) && isset($usersResponse[0])) {
@@ -105,7 +105,7 @@ class VkAuthProvider implements VkAuthProviderInterface
                         ->setEmail($accessTokenResponse['email'] ?? null)
                         ->setFirstName($userResponse['first_name'] ?? null)
                         ->setLastName($userResponse['last_name'] ?? null)
-                        ->setPhoto($userResponse['photo_50'] ?? null);
+                        ->setPhoto($userResponse['photo_100'] ?? null);
                 }
             }
         } catch (Exception $exception) {

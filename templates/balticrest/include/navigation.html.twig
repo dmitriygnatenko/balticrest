@@ -4,7 +4,7 @@
     <div class="profile">
         {% if app.user %}
             <div class="avatar">
-                <img src="{{ asset('static/balticrest/img/avatar/ava_2.jpg') }}" alt="#">
+                <img src="{{ path('api.user_avatar') }}">
             </div>
             <h3>
                 <a href="#">{{ app.user.username }}</a>
