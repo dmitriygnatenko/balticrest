@@ -17,3 +17,41 @@ restore:
     title: 'Passwortwiederherstellung'
     desc: 'Passwortwiederherstellung im Reiseführer der Ostseeküst'
     keywords: 'Passwortwiederherstellung, Login'
+
+map:
+    default:
+        title: 'Reiseführer der Ostseeküste - %city_gen% auf der Karte'
+        desc: '%city% in der Region Kaliningrad sind eingeladen, ihren Urlaub am Meer zu verbringen. Hotels und Sanatorien %city_gen% auf der Karte der Städte in der Region Kaliningrad'
+        keywords: '%city%, Erholung am Meer, Region Kaliningrad, Karte, Sanatorien, Hotels, Hotels, Geschäfte, Cafés, Restaurants, Museen, Sport, Banken, Geldautomaten, Wetter, Bahnhöfe, Zug, Nachrichten'
+    hotels:
+        title: '%city_gen% Hotels auf der Karte'
+        desc: '%city_gen% Hotels auf der Karte. %city% in der Region Kaliningrad lädt zum Entspannen in Hotels und Hotels an der Küste ein.'
+        keywords: '%city%, Karte, Hotels, Hotels, Pensionen, Region Kaliningrad, Erholung, Dienstleistungen, Ostsee'
+    medicine:
+        title: '%city_gen% Sanatorien und Pensionen auf der Karte'
+        desc: '%city_gen% Sanatorien und Pensionen, die Entspannung und Behandlung an den Ufern der Ostsee bieten.'
+        keywords: '%city%, Karte, Sanatorien, Pensionen, Ruhe, Dienstleistungen, Wellness, Ostsee, Meer, Krankheiten, Behandlung'
+    cafes:
+        title: '%city_gen% Cafés, Restaurants, Pizzerien und Bars auf der Karte'
+        desc: '%city_gen% beliebte Cafés, die besten Restaurants und Bars.'
+        keywords: '%city%, Karte, Cafés, Restaurants, Bars, Pizzerien'
+    shops:
+        title: '%city_gen% Geschäfte auf der Karte'
+        desc: '%city_gen% Geschäfte auf der Karte. Finden Sie das nächstgelegene und bequemste Geschäft in der Stadt.'
+        keywords: '%city%, Karte, Geschäfte, Einkaufsmöglichkeiten, Supermarkt'
+    banks:
+        title: '%city_gen% Banken und Geldautomaten auf der Karte'
+        desc: '%city_gen% nächstgelegene Banken und Geldautomaten, die Geldwechsel durchführen, Zahlungen akzeptieren, Bankkonten eröffnen und pflegen.'
+        keywords: '%city%, Karte, Banken, Geldautomaten, Geld'
+    museums:
+        title: '%city_gen% Attraktionen auf der Karte'
+        desc: '%city_gen% Attraktionen auf der Karte. Sehenswürdigkeiten mit Beschreibungen, wo Sie das Wochenende in der Region Kaliningrad verbringen können.'
+        keywords: '%city%, Karte, карта, Sehenswürdigkeiten, Museen'
+    sport:
+        title: '%city_gen% Sportobjekte auf der Karte'
+        desc: '%city_gen% Sportobjekte auf der Karte. Sportanlagen, Schwimmbäder, Sportplätze und vieles mehr. Alles, um eine athletische Figur und eine fröhliche Stimmung zu bewahren.'
+        keywords: '%city%, Karte, Sport, Fußball, Fitness'
+    transport:
+        title: '%city_gen% Parkplatz, Stationen auf der Karte'
+        desc: '%city_gen% parken, Stationen auf der Karte. Finde heraus, wie du vom Bahnhof zum Meer kommst.'
+        keywords: '%city%, Karte, Bahnhöfe, Bus, Parkplatz, elektrischer Zug, Vorort, Züge'

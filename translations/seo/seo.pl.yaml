@@ -17,3 +17,41 @@ restore:
     title: 'Odzyskiwanie hasła'
     desc: 'Odzyskiwanie hasła w przewodniku turystycznym wybrzeża Bałtyku'
     keywords: 'odzyskiwanie hasła, logowanie'
+
+map:
+    default:
+        title: 'Przewodnik po Wybrzeżu Bałtyckim - mapa %city_gen%'
+        desc: '%city% w obwodzie kaliningradzkim zaprasza na wakacje na morzu.'
+        keywords: '%city%, wakacje na morzu, obwód kaliningradzki, mapa, sanatoria, hotele, hotele, sklepy, kawiarnie, restauracje, muzea, sport, banki, bankomaty, pogoda, stacje, rozkład jazdy, pociąg, aktualności'
+    hotels:
+        title: 'Hotele %city_gen% na mapie'
+        desc: 'Hotels %city_gen% na mapie. %city% w obwodzie kaliningradzkim zaprasza do wypoczynku w hotelach i hotelach nad morzem. Mapa turystyczna %city_gen% jest twoim najlepszym przewodnikiem.'
+        keywords: '%city%, mapa, hotele, hotele, pensjonaty, obwód kaliningradzki, rekreacja, usługi, Bałtyk'
+    medicine:
+        title: 'Sanatoria i pensjonaty %city_gen% na mapie'
+        desc: 'Sanatoria i pensjonaty %city_gen%, które oferują relaks i leczenie nad brzegiem Bałtyku.'
+        keywords: '%city%, mapa, sanatoria, pensjonaty, gdzie, Kaliningradskaya, wypoczynek, usługi, wellness, Bałtyk, morze, choroby, leczenie'
+    cafes:
+        title: 'Kawiarnie, restauracje, pizzerie i bary %city_gen% na mapie'
+        desc: 'Popularne kawiarnie %city_gen% na mapie, najlepsze restauracje i bary.'
+        keywords: '%city%, mapa, kawiarnie, restauracje, bary, pizzerie'
+    shops:
+        title: 'Sklepy %city_gen% na mapie'
+        desc: 'Sklepy %city_gen% na mapie. Znajdź najbliższy i najwygodniejszy sklep w mieście.'
+        keywords: '%city%, mapa, sklepy, zakupy, supermarket'
+    banks:
+        title: 'Banki i bankomaty %city_gen% na mapie'
+        desc: 'Najbliższe banki i bankomaty %city_gen%, które dokonują wymiany walut, akceptują płatności, otwierają i prowadzą rachunki bankowe, transakcje metalami szlachetnymi i monetami na karcie.'
+        keywords: '%city%, karta, banki, bankomaty, pieniądze'
+    museums:
+        title: 'Atrakcje %city_gen% na mapie'
+        desc: 'Mapa %city_gen% z punktami orientacyjnymi. Atrakcje z opisami, w których można spędzić weekend w obwodzie kaliningradzkim.'
+        keywords: '%city%, mapa, atrakcje, muzea'
+    sport:
+        title: 'Obiekty sportowe %city_gen% na mapie'
+        desc: 'Obiekty sportowe %city_gen%. Kompleksy sportowe, baseny, boiska sportowe i wiele więcej. Wszystko po to, by zachować atletyczną sylwetkę i wesoły nastrój.'
+        keywords: '%city%, mapa, sport, piłka nożna, fitness'
+    transport:
+        title: 'Parking, stacje kolejowe %city_gen% na mapie'
+        desc: 'Parkingi, stacje kolejowe %city_gen%. Dowiedz się, jak dostać się ze stacji kolejowej nad morze.'
+        keywords: '%city%, mapa, stacje, autobusy, parking, pociąg elektryczny, podmiejskie, pociągi'

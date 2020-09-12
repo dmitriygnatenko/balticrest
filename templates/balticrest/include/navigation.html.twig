@@ -1,26 +1,6 @@
 <div class="menu-btn">&#9776;</div>
 <nav class="pushy pushy-left">
-
-    <div class="profile">
-        {% if app.user %}
-            <div class="avatar">
-                <img src="{{ path('api.user_avatar') }}">
-            </div>
-            <h3>
-                <a href="#">{{ app.user.username }}</a>
-            </h3>
-            <a href="{{ path('logout') }}" class="logout_btn">{% trans %}profile.logout{% endtrans %}</a>
-        {% else %}
-            <a href="{{ path('login') }}" class="login_btn">{% trans %}profile.login{% endtrans %}</a>
-        {% endif %}
-    </div>
-
     <ul class="side_menu">
-        <li>
-            <a href="#">
-                <i class="fa fa-bookmark-o"></i>{% trans %}navigation.menu.main{% endtrans %}
-            </a>
-        </li>
         {% if app.user %}
             <li>
                 <a href="#">
@@ -28,6 +8,11 @@
                 </a>
             </li>
         {% endif %}
+        <li>
+            <a href="#">
+                <i class="fa fa-bookmark-o"></i>{% trans %}navigation.menu.main{% endtrans %}
+            </a>
+        </li>
         <li>
             <a href="#">
                 <i class="fa fa-map-marker"></i>{% trans %}navigation.menu.map{% endtrans %}
