@@ -191,8 +191,6 @@ class VkAuthenticator extends AbstractGuardAuthenticator implements Authenticato
                     $this->translator->trans('login.user_create', [], 'validators')
                 );
             }
-
-            $this->eventDispatcher->dispatch(new UserCreatedEvent($user));
         }
 
         return $user;

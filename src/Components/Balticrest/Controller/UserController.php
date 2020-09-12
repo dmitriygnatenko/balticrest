@@ -103,10 +103,6 @@ class UserController extends AbstractController
             $formData = $form->getData();
             $user = $userCreator->createNotConfirmedUser($formData['email'], $formData['username']);
 
-            if ($user) {
-                $eventDispatcher->dispatch(new UserCreatedEvent($user));
-            }
-
             $confirmEmail = $formData['email'];
         }
 
