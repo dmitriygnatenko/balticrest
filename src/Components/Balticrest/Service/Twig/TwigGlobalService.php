@@ -11,7 +11,6 @@ use App\Components\Balticrest\Service\Provider\LanguageDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\PointTypeProvider;
 use App\Components\Balticrest\Service\Provider\PointTypeProviderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Psr\Log\LoggerInterface;
 
 class TwigGlobalService
 {
@@ -39,19 +38,14 @@ class TwigGlobalService
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var LoggerInterface */
-    private $logger;
-
     /**
      * @param TranslatorInterface $translator
-     * @param LoggerInterface $logger
      * @param PointTypeProviderInterface $pointTypeProvider
      * @param CityDataProviderInterface $cityDataProvider
      * @param LanguageDataProviderInterface $languageDataProvider
      */
     public function __construct(
         TranslatorInterface $translator,
-        LoggerInterface $logger,
         PointTypeProviderInterface $pointTypeProvider,
         CityDataProviderInterface $cityDataProvider,
         LanguageDataProviderInterface $languageDataProvider
@@ -60,7 +54,6 @@ class TwigGlobalService
         $this->cityDataProvider = $cityDataProvider;
         $this->languageDataProvider = $languageDataProvider;
         $this->translator = $translator;
-        $this->logger = $logger;
     }
 
     /**

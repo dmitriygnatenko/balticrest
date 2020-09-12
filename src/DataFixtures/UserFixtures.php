@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Entity\Interfaces\UserRolesInterface;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -30,12 +31,10 @@ class UserFixtures extends Fixture
         $user = new User();
 
         $user
-            ->setRoles([User::ROLE_SUPER_ADMIN])
+            ->setRoles([UserRolesInterface::ROLE_USER])
             ->setEmail('test@balticrest.ru')
-            ->setUsername('Super admin')
             ->setIsActive(true)
-            ->setIsConfirmed(true)
-            ->setPassword($this->passwordEncoder->encodePassword($user, '12345'));
+             ->setPassword($this->passwordEncoder->encodePassword($user, '12345'));
 
         $manager->persist($user);
         $manager->flush();

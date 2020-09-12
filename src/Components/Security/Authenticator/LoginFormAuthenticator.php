@@ -24,10 +24,12 @@ use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
-    implements PasswordAuthenticatedInterface, AuthenticatorInterface
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
+
+    /** @var string */
+    private const LOGIN_ROUTE = 'login';
 
     /** @var EntityManagerInterface */
     private $entityManager;
@@ -153,12 +155,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ($user && $user->getIsActive() === false) {
             throw new CustomUserMessageAuthenticationException(
                 $this->translator->trans('login.blocked', [], 'validators')
-            );
-        }
-
-        if ($user && $user->getIsConfirmed() === false) {
-            throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('login.not_confirmed', [], 'validators')
             );
         }
 

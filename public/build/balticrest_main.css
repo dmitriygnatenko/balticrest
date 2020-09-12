@@ -7860,25 +7860,6 @@ a.green_btn:hover {
 .login_form .btn:hover, .login_form .btn:focus {
     box-shadow: none;
 }
-.login_form .social {
-    text-align: center;
-    padding: 5px 0 20px 0;
-}
-.login_form .social a {
-    width: 32px;
-    height: 32px;
-    display: inline-block;
-    margin: 0 10px;
-}
-.login_form .social a.vk {
-    background: url(/static/balticrest/images/icons/vk_32.png);
-}
-.login_form .social a.fb {
-    background: url(/static/balticrest/images/icons/fb_32.png);
-}
-.login_form .social a:hover {
-    filter: brightness(80%);
-}
 .login_form .errors, .login_form .success, .login_form .info, .login_form .warning  {
     margin: 20px 30px;
     font-size: 13px;

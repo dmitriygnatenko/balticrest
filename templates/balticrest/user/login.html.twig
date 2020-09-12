@@ -19,13 +19,6 @@
             <div class="errors">{{ error.message|raw }}</div>
         {% endif %}
 
-        {% if not error %}
-            <div class="social">
-                <a href="{{ vk_url }}" class="vk" title="{% trans %}login.form.label.vk{% endtrans %}"></a>
-                <a href="{{ fb_url }}" class="fb" title="{% trans %}login.form.label.fb{% endtrans %}"></a>
-            </div>
-        {% endif %}
-
         <form method="post">
             <div class="form-group {% if error.messageData.email is defined %}has-error{% endif %}">
                 <label>
@@ -45,10 +38,6 @@
             <button class="btn btn-primary" type="submit">
                 {% trans %}login.form.button.login{% endtrans %}
             </button>
-
-            <a href="{{ path('registration') }}" class="btn btn-success">
-                {% trans %}login.form.button.register{% endtrans %}
-            </a>
 
             {% if error %}
                 <a href="{{ path('restore') }}" class="btn btn-success">

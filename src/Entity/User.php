@@ -21,39 +21,14 @@ class User implements UserInterface, UserRolesInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
+     * @ORM\Column(type="string", unique=true, nullable=true)
      */
     private $email;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $username;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="bigint", unique=true, nullable=true)
-     */
-    private $vk_id;
-
-    /**
-     * @ORM\Column(type="bigint", unique=true, nullable=true)
-     */
-    private $fb_id;
-
-    /**
-     * @ORM\Column(type="blob", nullable=true)
-     */
-    private $photo;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default": false})
-     */
-    private $is_confirmed = false;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
@@ -76,47 +51,15 @@ class User implements UserInterface, UserRolesInterface
     /**
      * @return string|null
      */
-    public function getVkId(): ?string
-    {
-        return $this->vk_id;
-    }
-
-    /**
-     * @param string|null $vkId
-     *
-     * @return User
-     */
-    public function setVkId(?string $vkId): self
-    {
-        $this->vk_id = $vkId;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getFbId(): ?string
-    {
-        return $this->fb_id;
-    }
-
-    /**
-     * @param string|null $fbId
-     *
-     * @return User
-     */
-    public function setFbId(?string $fbId): self
-    {
-        $this->fb_id = $fbId;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
     {
         return $this->email;
     }
@@ -129,26 +72,6 @@ class User implements UserInterface, UserRolesInterface
     public function setEmail(?string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->username;
-    }
-
-    /**
-     * @param string $username
-     *
-     * @return $this
-     */
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }
@@ -198,26 +121,6 @@ class User implements UserInterface, UserRolesInterface
     }
 
     /**
-     * @return resource|null
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    /**
-     * @param string|null $photo
-     *
-     * @return User
-     */
-    public function setPhoto(?string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
      * @return bool
      */
     public function getIsActive(): bool
@@ -233,26 +136,6 @@ class User implements UserInterface, UserRolesInterface
     public function setIsActive(bool $isActive): self
     {
         $this->is_active = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsConfirmed(): bool
-    {
-        return $this->is_confirmed;
-    }
-
-    /**
-     * @param bool $isConfirmed
-     *
-     * @return User
-     */
-    public function setIsConfirmed(bool $isConfirmed): self
-    {
-        $this->is_confirmed = $isConfirmed;
 
         return $this;
     }
