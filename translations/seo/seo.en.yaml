@@ -17,3 +17,41 @@ restore:
     title: 'Password Recovery'
     desc: 'Password recovery in the Baltic coast tourist guide'
     keywords: 'password recovery, login'
+
+map:
+    default:
+        title: 'Tourist guide of the Baltic coast - %city_gen% map'
+        desc: '%city% in the Kaliningrad region are invited to spend their holidays at the sea. Hotels and sanatoriums %city_gen% on the map of cities in the Kaliningrad region'
+        keywords: '%city%, seaside recreation, Kaliningrad region, map, sanatoriums, hotels, hotels, shops, cafes, restaurants, museums, sports, banks, ATMs, weather, train stations, train, news'
+    hotels:
+        title: '%city_gen% hotels on the map'
+        desc: '%city_gen% hotels on the map. %city% in the Kaliningrad region invites you to relax in hotels and hotels on the seashore. The tourist map %city_gen% is your best guide.'
+        keywords: '%city%, map, hotels, hotels, guest houses, Kaliningrad region, recreation, services, Baltic Sea'
+    medicine:
+        title: '%city_gen% sanatoriums and boarding houses on the map'
+        desc: '%city_gen% sanatoriums and boarding houses, which offer relaxation and treatment on the shores of the Baltic Sea.'
+        keywords: '%city%, map, sanatoriums, boarding houses, rest, services, wellness, Baltic, sea, diseases, treatment'
+    cafes:
+        title: '%city_gen% cafes, restaurants, pizzerias and bars on the map'
+        desc: '%city_gen% popular cafes, the best restaurants and bars.'
+        keywords: '%city%, map, cafes, restaurants, bars, pizzerias'
+    shops:
+        title: '%city_gen% shops on the map'
+        desc: '%city_gen% shops on the map. Find the closest and most convenient store in the city.'
+        keywords: '%city%, map, shops, shopping, supermarket'
+    banks:
+        title: '%city_gen% banks and ATMs on the map'
+        desc: '%city_gen% nearest banks and ATMs, who perform currency exchange, accept payments, open and maintain bank accounts.'
+        keywords: '%city%, map, banks, ATMs, money'
+    museums:
+        title: '%city_gen% attractions on the map'
+        desc: '%city_gen% attractions on the map. Attractions with descriptions, where you can spend the weekend in the Kaliningrad region.'
+        keywords: '%city%, map, карта, attractions, museums'
+    sport:
+        title: '%city_gen% sports objects on the map'
+        desc: '%city_gen% sports objects on the map. Sports complexes, swimming pools, sports grounds and much more. Everything to maintain an athletic figure and cheerful mood.'
+        keywords: '%city%, map, sports, football, fitness'
+    transport:
+        title: '%city_gen% parking, stations on the map'
+        desc: '%city_gen% parking, stations on the map. Find out how to get from the station to the sea.'
+        keywords: '%city%, map, stations, bus, parking, electric train, suburban, trains'
