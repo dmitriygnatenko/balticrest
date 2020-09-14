@@ -5,48 +5,52 @@
 
 /* Menu Appearance */
 .menu-btn {
-display: block;
-position: fixed;
-top: 30px;
-left: 30px;
-font-size: 21px;
-color: #E73931;
-width: 40px;
-height: 40px;
-padding: 4px 9px;
-border-radius: 100px;
-transition:0.3s;
-z-index: 99999999;
+    display: block;
+    position: fixed;
+    top: 30px;
+    left: 5px;
+    font-size: 21px;
+    color: #E73931;
+    width: 40px;
+    height: 40px;
+    padding: 4px 9px;
+    border-radius: 100px;
+    transition: 0.3s;
+    z-index: 99999999;
 }
+
 .menu-btn span {
-position: absolute;
-font-size: 11px;
-background: #E73931;
-width: 20px;
-height: 20px;
-border-radius: 100px;
-padding: 0px 5px;
-border: 2px solid;
-left: 19px;
-color: #ffffff;
+    position: absolute;
+    font-size: 11px;
+    background: #E73931;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    padding: 0px 5px;
+    border: 2px solid;
+    left: 19px;
+    color: #ffffff;
 }
-.menu-btn:hover span {display: none;}
+
+.menu-btn:hover span {
+    display: none;
+}
+
 .menu-btn:hover {
-display: block;
-position: fixed;
-top: 30px;
-left: 30px;
-font-size: 21px;
-color: #ffffff;
-background: #E73931;
-width: 40px;
-cursor: pointer;
-height: 40px;
-padding: 4px 9px;
-border-radius: 100px;
-transition:0.3s;
+    display: block;
+    position: fixed;
+    font-size: 21px;
+    color: #ffffff;
+    background: #E73931;
+    width: 40px;
+    cursor: pointer;
+    height: 40px;
+    padding: 4px 9px;
+    border-radius: 100px;
+    transition: 0.3s;
 }
-.pushy{
+
+.pushy {
     position: fixed;
     width: 250px;
     height: 100%;
@@ -59,29 +63,29 @@ transition:0.3s;
 
 /* Menu Movement */
 
-.pushy-left{
-    -webkit-transform: translate3d(-250px,0,0);
-    -moz-transform: translate3d(-250px,0,0);
-    -ms-transform: translate3d(-250px,0,0);
-    -o-transform: translate3d(-250px,0,0);
-    transform: translate3d(-250px,0,0);
+.pushy-left {
+    -webkit-transform: translate3d(-250px, 0, 0);
+    -moz-transform: translate3d(-250px, 0, 0);
+    -ms-transform: translate3d(-250px, 0, 0);
+    -o-transform: translate3d(-250px, 0, 0);
+    transform: translate3d(-250px, 0, 0);
 }
 
-.pushy-open{
-    -webkit-transform: translate3d(0,0,0);
-    -moz-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    -o-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
+.pushy-open {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
-.container-push, .push-push{
+.container-push, .push-push {
 
 }
 
 /* Menu Transitions */
 
-.pushy, #container, .push{
+.pushy, #container, .push {
     -webkit-transition: -webkit-transform .2s cubic-bezier(.16, .68, .43, .99);
     -moz-transition: -moz-transform .2s cubic-bezier(.16, .68, .43, .99);
     -o-transition: -o-transform .2s cubic-bezier(.16, .68, .43, .99);
@@ -90,11 +94,11 @@ transition:0.3s;
 
 /* Site Overlay */
 
-.site-overlay{
+.site-overlay {
     display: none;
 }
 
-.pushy-active .site-overlay{
+.pushy-active .site-overlay {
     display: block;
     position: fixed;
     top: 0;
@@ -103,36 +107,44 @@ transition:0.3s;
     left: 0;
     z-index: 9998;
     background-color: rgba(16, 7, 29, 0.72);
-    -webkit-animation: fade 500ms; 
-    -moz-animation: fade 500ms; 
+    -webkit-animation: fade 500ms;
+    -moz-animation: fade 500ms;
     -o-animation: fade 500ms;
     animation: fade 500ms;
 }
 
-@keyframes fade{
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-@-moz-keyframes fade{
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+@-moz-keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-@-webkit-keyframes fade{
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+@-webkit-keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-@-o-keyframes fade{
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-/* Example Media Query */
-
-@media screen and (max-width: 768px){
-    .pushy{
-        font-size: 1.0em;
+@-o-keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

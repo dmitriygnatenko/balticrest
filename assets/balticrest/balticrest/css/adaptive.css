@@ -335,9 +335,6 @@
         padding-top: 26px !important;
         margin-left: 40px;
     }
-    .innerpage .menu-btn, .innerpage .menu-btn:hover {
-        left: 18px;
-    }
     .menu li a, .menu li a:hover {
         font-size: 16px;
         padding: 20px 0;
