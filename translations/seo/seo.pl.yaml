@@ -3,26 +3,12 @@ login:
     desc: 'Wejście do Baltic Coast Tourism Directory'
     keywords: 'login, autoryzacja'
 
-registration:
-    title: 'Rejestracja'
-    desc: 'Rejestracja w Baltic Coast Tourism Directory'
-    keywords: 'rejestracja, logowanie'
-
-confirm:
-    title: 'Zweryfikuj adres e-mail'
-    desc: 'Potwierdzenie adresu e-mail w Baltic Coast Tourism Directory'
-    keywords: 'rejestracja, logowanie, potwierdzenie'
-
 restore:
     title: 'Odzyskiwanie hasła'
     desc: 'Odzyskiwanie hasła w przewodniku turystycznym wybrzeża Bałtyku'
     keywords: 'odzyskiwanie hasła, logowanie'
 
 map:
-    default:
-        title: 'Przewodnik po Wybrzeżu Bałtyckim - mapa %city_gen%'
-        desc: '%city% w obwodzie kaliningradzkim zaprasza na wakacje na morzu.'
-        keywords: '%city%, wakacje na morzu, obwód kaliningradzki, mapa, sanatoria, hotele, hotele, sklepy, kawiarnie, restauracje, muzea, sport, banki, bankomaty, pogoda, stacje, rozkład jazdy, pociąg, aktualności'
     hotels:
         title: 'Hotele %city_gen% na mapie'
         desc: 'Hotels %city_gen% na mapie. %city% w obwodzie kaliningradzkim zaprasza do wypoczynku w hotelach i hotelach nad morzem. Mapa turystyczna %city_gen% jest twoim najlepszym przewodnikiem.'

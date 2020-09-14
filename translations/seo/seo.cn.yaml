@@ -3,17 +3,41 @@ login:
     desc: '進入波羅的海海岸旅遊指南'
     keywords: '登錄，授權'
 
-registration:
-    title: '註冊'
-    desc: '在波羅的海海岸旅遊指南中註冊'
-    keywords: '註冊，登錄'
-
-confirm:
-    title: '驗證電子郵件地址'
-    desc: '確認波羅的海海岸旅遊指南中的電子郵件地址'
-    keywords: '註冊，登錄，確認'
-
 restore:
     title: '密碼恢復'
     desc: '波羅的海沿岸旅遊指南中的密碼恢復'
     keywords: '密碼恢復，登錄'
+
+map:
+    hotels:
+        title: '地圖上的酒店 %city_gen%'
+        desc: '地圖上的 %city_gen%. 加里寧格勒地區的 ％city％ 邀請您在海濱酒店放鬆'
+        keywords: '%city% ，地圖，酒店，酒店，旅館，加里寧格勒地區，娛樂，服務，波羅的海，天氣'
+    medicine:
+        title: '地圖上的療養院和寄宿房 %city_gen%'
+        desc: '療養院和寄宿房 %city_gen% ，可在波羅的海沿岸提供放鬆和護理'
+        keywords: '%city%，地圖，療養院，寄宿房，哪裡，加里寧格勒州，休息，服務，健康，波羅的海，海洋，疾病，治療，天氣'
+    cafes:
+        title: '地圖上的咖啡廳，餐館，比薩餅店和酒吧 %city_gen%'
+        desc: '地圖上最受歡迎的咖啡館， %city_gen% ，最佳餐廳和酒吧'
+        keywords: '%city%，地圖，咖啡館，餐館，酒吧，比薩店'
+    shops:
+        title: '商店在地圖上的 %city_gen%'
+        desc: '在地圖上存儲 %city_gen% 。 查找鎮上最近和最方便的商店'
+        keywords: '%city%, 地圖，商店，購物，超級市場'
+    banks:
+        title: '地圖上的銀行和 %city_gen%'
+        desc: '最近的銀行和 %city_gen% ，它們可以進行貨幣兌換，接受付款，開設和維護銀行帳戶，使用卡上的貴金屬和硬幣進行交易'
+        keywords: '%city%, ，卡，銀行，自動取款機，錢'
+    museums:
+        title: '地圖上的 %city_gen%'
+        desc: '使用地標來映射 %city_gen% 。 帶有描述的景點，您可以在這裡在加里寧格勒地區度過一個週末'
+        keywords: '%city%，地圖，景點，博物館'
+    sport:
+        title: '地圖上的體育設施 %city_gen%'
+        desc: '體育設施 %city_gen% 運動場，游泳池，運動場等等。 一切都保持運動身材和愉悅的心情'
+        keywords: '%city%，地圖，體育，足球，健身'
+    transport:
+        title: '停車，火車站在地圖上 ％city_gen％'
+        desc: '停車場，火車站 %city_gen% 。 了解如何從火車站到達大海'
+        keywords: '%city%，地圖，車站，公共汽車，停車場，電動火車，通勤者，火車'

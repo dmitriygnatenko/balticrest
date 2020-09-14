@@ -12,34 +12,6 @@ login:
             register: 現在註冊
             restore: 恢復密碼
 
-registration:
-    title: 註冊
-    form:
-        label:
-            username: 全名
-            email: 電子郵件地址
-        button:
-            register: 寄存器
-            back: 登錄頁面
-    confirm_text: 包含確認註冊鏈接的電子郵件已發送到 <b>％email％</b>
-
-confirm:
-    title:
-        success: 密碼創建
-        error: 電子郵件確認
-    code_not_found: 電子郵件驗證鏈接無效
-    code_expired: 電子郵件驗證鏈接無效
-    user_is_confirmed: 電子郵件地址已經通過此鏈接驗證
-    form:
-        label:
-            password: 密碼
-            password_repeat: 重複密碼
-        button:
-            save: 保存密碼
-            back: 登錄頁面
-        top_text: 要在網站上完成註冊，請輸入密碼以輸入
-        success_text: 您的密碼已成功保存，您的郵件已被確認！ 您可以登錄該網站！
-
 restore:
     title: 密碼恢復
     info_text: 將會向您指定的電子郵件地址發送一封電子郵件，其中包含有關如何重設密碼的說明。

@@ -12,34 +12,6 @@ login:
             register: Zarejestruj się w serwisie
             restore: Przywróć hasło
 
-registration:
-    title: Rejestracja
-    form:
-        label:
-            username: Pełna nazwa
-            email: Email
-        button:
-            register: Zarejestrować
-            back: Do strony logowania
-    confirm_text: Wiadomość e-mail z linkiem do potwierdzenia rejestracji została wysłana na adres <b>%email%</b>
-
-confirm:
-    title:
-        success: Utworzenie hasła
-        error: Potwierdzenie e-mail
-    code_not_found: Link weryfikacyjny e-mail jest nieprawidłowy
-    code_expired: Link weryfikacyjny e-mail jest nieaktywny
-    user_is_confirmed: Adres e-mail został już zweryfikowany za pomocą tego linku
-    form:
-        label:
-            password: Hasło
-            password_repeat: Powtórzenie hasła
-        button:
-            save: Zapisz hasło
-            back: Do strony logowania
-        top_text: Aby zakończyć rejestrację na stronie, utwórz hasło do wejścia
-        success_text: Twoje hasło zostało pomyślnie zapisane, a Twoja poczta została potwierdzona! Możesz zalogować się do serwisu!
-
 restore:
     title: Odzyskiwanie hasła
     info_text: Na podany adres e-mail zostanie wysłana wiadomość e-mail z instrukcjami, jak zresetować hasło.

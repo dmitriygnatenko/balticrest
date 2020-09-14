@@ -16,7 +16,3 @@ username:
 login:
     email_or_password: Falsche Email oder Passwort
     blocked: Benutzer ist gesperrt
-    not_confirmed: Der Benutzer hat die E-Mail-Adresse nicht überprüft
-    user_create: Benutzererstellungsfehler
-    vk_incorrect_response: Fehler beim Empfangen von Daten von VKontakte
-    fb_incorrect_response: Fehler beim Empfangen von Daten von Facebook

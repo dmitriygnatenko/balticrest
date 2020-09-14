@@ -16,7 +16,3 @@ username:
 login:
      email_or_password: Неверный адрес электронной почты или пароль
      blocked: Пользователь заблокирован
-     not_confirmed: Пользователь не подтвердил адрес электронной почты
-     user_create: Ошибка создания пользователя
-     vk_incorrect_response: Ошибка получения данных от ВКонтакте
-     fb_incorrect_response: Ошибка получения данных от Facebook

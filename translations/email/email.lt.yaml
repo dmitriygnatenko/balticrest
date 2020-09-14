@@ -1,11 +1,6 @@
 footer:
     answer_is_not_required: Ši raidė sukuriama automatiškai ir nereikalauja atsakymo.
 
-confirm:
-    subject: Registracija portale Balticrest.ru
-    header: Norėdami baigti registraciją svetainėje <b>Balticrest.ru</b>, spustelėkite nuorodą
-    expiration: Nuoroda galioja iki %expiration_date%
-
 restore:
     subject: Slaptažodžio atkūrimas tinklalapyje Balticrest.ru
     header: Norėdami atkurti slaptažodį svetainėje <b>Balticrest.ru</b>, spustelėkite nuorodą

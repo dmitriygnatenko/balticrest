@@ -12,34 +12,6 @@ login:
             register: Registrieren
             restore: Passwort wiederherstellen
 
-registration:
-    title: Registrierung
-    form:
-        label:
-            username: Benutzername Vollständiger Name
-            email: Email
-        button:
-            register: Registrieren
-            back: Zum Anmelden
-    confirm_text: Eine E-Mail mit einem Link zur Bestätigung der Registrierung wurde an <b>%email%</b> gesendet
-
-confirm:
-    title:
-        success: Passworterstellung
-        error: E-Mail-Bestätigung
-    code_not_found: Der Link zur E-Mail-Bestätigung ist ungültig
-    code_expired: Der Link zur E-Mail-Bestätigung ist inaktiv
-    user_is_confirmed: Die E-Mail-Adresse wurde bereits über diesen Link überprüft
-    form:
-        label:
-            password: Passwort
-            password_repeat: Passwort wiederholen
-        button:
-            save: Passwort speichern
-            back: Zum Anmelden
-        top_text: Um die Registrierung auf der Site abzuschließen, erstellen Sie ein Passwort zur Eingabe
-        success_text: Ihr Passwort wurde erfolgreich gespeichert und Ihre Mail wurde bestätigt! Sie können sich auf der Website anmelden!
-
 restore:
     title: Passwortwiederherstellung
     info_text: Eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts wird an Ihre angegebene E-Mail-Adresse gesendet.

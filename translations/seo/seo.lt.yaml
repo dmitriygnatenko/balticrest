@@ -3,17 +3,41 @@ login:
     desc: 'Įėjimas į Baltijos pakrantės turizmo katalogą'
     keywords: 'prisijungimas, autorizacija'
 
-registration:
-    title: 'Registracija'
-    desc: 'Registracija Baltijos pakrantės turizmo kataloge'
-    keywords: 'registracija, prisijungimas'
-
-confirm:
-    title: 'Patvirtinti el. pašto adresą'
-    desc: 'El. pašto adreso patvirtinimas Baltijos pakrantės turizmo kataloge'
-    keywords: 'registracija, prisijungimas, patvirtinimas'
-
 restore:
     title: 'Slaptažodžio atkūrimas'
     desc: 'Slaptažodžio atkūrimas Baltijos pakrantės turizmo gide'
     keywords: 'slaptažodžio atkūrimas, prisijungimas'
+
+map:
+    hotels:
+        title: 'Viešbučiai žemėlapyje %city_gen% žemėlapyje'
+        desc: 'Viešbučiai %city_gen% žemėlapyje. % miesto% Kaliningrado srityje kviečia atsipalaiduoti viešbučiuose ir viešbučiuose pajūryje. Turistinis žemėlapis %city_gen% yra geriausias jūsų vadovas.'
+        keywords: '%city%, žemėlapis, viešbučiai, viešbučiai, svečių namai, Kaliningrado sritis, poilsis, paslaugos, Baltijos jūra'
+    medicine:
+        title: 'Sanatorijos ir pensionatai %city_gen% žemėlapyje'
+        desc: 'Sanatorijos ir pensionatai %city_gen%, kurie siūlo poilsį ir gydymą Baltijos jūros pakrantėje'
+        keywords: '%city%, žemėlapis, žemėlapis, sanatorijos, pensionatai, kur, Kaliningradskaya, poilsis, paslaugos, sveikatingumas, Baltijos jūra, ligos, gydymas, orai'
+    cafes:
+        title: 'Kavinės, restoranai, picerijos ir barai %city_gen% vietoje'
+        desc: 'Populiarios kavinės %city_gen% žemėlapyje, geriausi restoranai ir barai.'
+        keywords: '%city%, žemėlapis, kavinės, restoranai, barai, picerijos'
+    shops:
+        title: 'Parduotuvės %city_gen% žemėlapyje'
+        desc: 'Parduotuvės %city_gen% žemėlapyje. Raskite artimiausią ir patogiausią parduotuvę mieste.'
+        keywords: '%city%, žemėlapis, parduotuvės, parduotuvės, prekybos centras'
+    banks:
+        title: 'Bankai ir bankomatai %city_gen% žemėlapyje'
+        desc: 'Artimiausi bankai ir bankomatai %city_gen%, kurie vykdo valiutos keitimą, priima mokėjimus, atidaro ir tvarko banko sąskaitas.'
+        keywords: '%city%, žemėlapis, bankai, bankomatai, pinigai'
+    museums:
+        title: 'Lankytinos vietos %city_gen% žemėlapyje'
+        desc: 'Žemėlapis %city_gen% su orientyrais. Atrakcijos su aprašymais, kur savaitgalį galėsite praleisti Kaliningrado srityje.'
+        keywords: '%city%, žemėlapis, lankytinos vietos, muziejai'
+    sport:
+        title: 'Sporto bazės %city_gen% žemėlapyjeе'
+        desc: 'Sporto bazės %city_gen%. Sporto kompleksai, baseinai, sporto aikštelės.'
+        keywords: '%city%, žemėlapis, sportas, futbolas, fitnesas'
+    transport:
+        title: 'Automobilių stovėjimo aikštelė, traukinių stotys %city_gen% žemėlapyje'
+        desc: 'Automobilių stovėjimo aikštelė %city_gen%. Sužinokite, kaip nuvykti iš stoties į jūrą.'
+        keywords: '%city%, žemėlapis, stotys, autobusas, automobilių stovėjimo aikštelė, elektrinis traukinys, priemiestis, traukiniai'

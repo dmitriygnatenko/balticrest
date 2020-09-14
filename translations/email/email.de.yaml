@@ -1,11 +1,6 @@
 footer:
     answer_is_not_required: Dieser Brief wird automatisch erstellt und erfordert keine Antwort.
 
-confirm:
-    subject: Registrierung auf der Balticrest.ru
-    header: Um die Registrierung auf der Website <b>Balticrest.ru</b> abzuschließen, folgen Sie dem Link
-    expiration: Der Link ist gültig bis %expiration_date%
-
 restore:
     subject: Passwortwiederherstellung auf Balticrest.ru
     header: Um Ihr Passwort auf der Website <b>Balticrest.ru</b> wiederherzustellen, folgen Sie dem Link
