@@ -32,7 +32,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs && \
-    npm install yarn -g
+    npm install --global gulp-cli
 
 COPY config/cli/php.ini /etc/php/7.3/cli/php.ini
 COPY config/fpm/php.ini /etc/php/7.3/fpm/php.ini
