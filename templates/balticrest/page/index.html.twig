@@ -1,0 +1,580 @@
+{% extends 'balticrest/base.html.twig' %}
+
+{% block body_attr %}class="promo"{% endblock %}
+
+{% block title %}{{ parent() }} {% trans from 'seo' %}index.title{% endtrans %}{% endblock %}
+{% block description %}{% trans from 'seo' %}index.desc{% endtrans %}{% endblock %}
+{% block keywords %}{% trans from 'seo' %}index.keywords{% endtrans %}{% endblock %}
+
+{% block body %}
+
+
+    <!-- Site Overlay -->
+    <div class="site-overlay"></div>
+    <div id="container">
+        <div class="top_promo_block" id="promo_head">
+
+            {{ include('balticrest/include/navigation.html.twig') }}
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header_promo">
+                            <img src="static/balticrest/images/start/logo.png" alt="#">
+                            <a href="#" class="log_btn ">Log in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="start_descrition">
+                <h1>welcome to my city guide!<span></span></h1>
+                <span>See and visit interesting places. Share experiences with your friends. Simply.</span>
+                <div class="search_promo">
+                    <div class="input-group">
+                        <input type="text" class="form-control" aria-label="...">
+                        <div class="input-group-btn btn_cat">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span><i class="fa fa-shopping-cart"></i>Market<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right place_dd" role="menu">
+                                <li><a href="01.html" class="cinema"><i class="fa fa-film"></i>Cinema</a></li>
+                                <li><a href="01.html" class="club"><i class="fa fa-beer"></i>Club</a></li>
+                                <li><a href="01.html" class="cafe"><i class="fa fa-cutlery"></i>Cafe</a></li>
+                                <li><a href="01.html" class="sport"><i class="fa fa-futbol-o"></i>Sport</a></li>
+                                <li><a href="01.html" class="port"><i class="fa fa-life-ring"></i>Port</a></li>
+                                <li><a href="01.html" class="bank"><i class="fa fa-university"></i>Bank</a></li>
+                                <li><a href="01.html" class="post"><i class="fa fa-envelope-o"></i>Post</a></li>
+                                <li><a href="01.html" class="showplace"><i class="fa fa-eye"></i>Showplace</a></li>
+                                <li><a href="01.html" class="park"><i class="fa fa-leaf"></i>Park</a></li>
+                            </ul>
+                        </div>
+                        <div class="input-group-btn btn_promo_search">
+                            <button type="button" class="btn btn-success">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll_block">
+                <img src="static/balticrest/images/start/scroll.png" class="animated infinite bounce" alt="#">
+            </div>
+        </div>
+
+        <!--Features block-->
+        <div class="fea_block container-fluid">
+            <div class="fixed_w">
+                <h2>Features My City</h2>
+                <div class="row">
+                    <div class="col-md-4 fea_item wow bounceInUp">
+                        <h3><i class="fa fa-picture-o"></i>Slider Revolution included</h3>
+                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                    </div>
+                    <div class="col-md-4 fea_item wow bounceInUp">
+                        <h3><i class="fa fa-globe"></i>Google maps API support</h3>
+                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                    </div>
+                    <div class="col-md-4 fea_item wow bounceInUp">
+                        <h3><i class="fa fa-video-camera"></i>Simple animation css3 framework</h3>
+                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                    </div>
+                    <div class="col-md-4 fea_item wow bounceInUp">
+                        <h3><i class="fa fa-twitter"></i>Twitter bootstrap 3</h3>
+                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                    </div>
+                    <div class="col-md-4 fea_item wow bounceInUp">
+                        <h3><i class="fa fa-html5"></i>Valid HTML pages</h3>
+                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                    </div>
+                    <div class="col-md-4 fea_item wow bounceInUp">
+                        <h3><i class="fa fa-mobile"></i>Adaptive design</h3>
+                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        #################################
+        - Slider revolution -
+        #################################
+        -->
+        <div class="tp-banner-container">
+            <div class="tp-banner" >
+                <ul>
+                    <!-- SLIDE  -->
+                    <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
+                        <!-- MAIN IMAGE -->
+                        <img src="static/balticrest/images/start/sl1/sl_bg.png"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lfb fadeout rs-parallaxlevel-10"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="1000"
+                             data-start="400"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/map.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-8"
+                             data-x="-10"
+                             data-y="280"
+                             data-speed="500"
+                             data-start="1200"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/dott.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-8"
+                             data-x="-10"
+                             data-y="320"
+                             data-speed="600"
+                             data-start="1300"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/dott.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-8"
+                             data-x="-30"
+                             data-y="295"
+                             data-speed="700"
+                             data-start="1400"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/dott.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-8"
+                             data-x="right"
+                             data-y="480"
+                             data-speed="800"
+                             data-start="1500"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/dott.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-8"
+                             data-x="950"
+                             data-y="510"
+                             data-speed="900"
+                             data-start="1600"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/dott.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-6"
+                             data-x="20"
+                             data-y="480"
+                             data-speed="1000"
+                             data-start="1700"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/marker.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-6"
+                             data-x="1030"
+                             data-y="260"
+                             data-speed="1100"
+                             data-start="1800"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/marker.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-6"
+                             data-x="855"
+                             data-y="450"
+                             data-speed="1200"
+                             data-start="1900"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/marker.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-6"
+                             data-x="990"
+                             data-y="560"
+                             data-speed="1300"
+                             data-start="2000"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/marker.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-4"
+                             data-x="-3"
+                             data-y="432"
+                             data-speed="1400"
+                             data-start="2100"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/bubble.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-4"
+                             data-x="965"
+                             data-y="510"
+                             data-speed="1500"
+                             data-start="2300"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl1/bubble.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-1"
+                             data-x="center"
+                             data-y="center"
+                             data-speed="1600"
+                             data-start="2400"
+                             data-easing="Power4.easeOut">
+                            <div class="sl_descrition">
+                                <a href="#" class="start_logo"><img src="static/balticrest/images/start/logo.png" alt="#"></a>
+                                <h1>welcome to my city guide!<span></span></h1>
+                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+    galley of type and scrambled it to make a type specimen book. </span>
+                                <div class="btns"><a href="01.html" class="btn btn-success">Get started</a></div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- SLIDE  -->
+                    <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
+                        <!-- MAIN IMAGE -->
+                        <img src="static/balticrest/images/start/sl1/sl_bg.png"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lfb fadeout rs-parallaxlevel-1"
+                             data-x="60"
+                             data-y="200"
+                             data-speed="1000"
+                             data-start="400"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl2/imac.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-3"
+                             data-x="170"
+                             data-y="350"
+                             data-speed="500"
+                             data-start="1200"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl2/macbok.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-7"
+                             data-x="-10"
+                             data-y="340"
+                             data-speed="700"
+                             data-start="1500"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl2/ipad.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-1"
+                             data-x="500"
+                             data-y="center"
+                             data-speed="1000"
+                             data-start="2000"
+                             data-easing="Power4.easeOut">
+                            <div class="sl_descrition right">
+                                <h1>Fully adaptive design<span></span></h1>
+                                <span>Design looks good on phones, computers and tablets</span>
+                                <img src="static/balticrest/images/start/sl2/qr.png" alt="#">
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- SLIDE  -->
+                    <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
+                        <!-- MAIN IMAGE -->
+                        <img src="static/balticrest/images/start/sl1/sl_bg.png"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lfb fadeout rs-parallaxlevel-5"
+                             data-x="center"
+                             data-y="320"
+                             data-speed="1000"
+                             data-start="400"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl3/h1.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lfb fadeout rs-parallaxlevel-1"
+                             data-x="center"
+                             data-y="340"
+                             data-speed="1500"
+                             data-start="700"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl3/h2.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lfb fadeout rs-parallaxlevel-10"
+                             data-x="center"
+                             data-y="560"
+                             data-speed="2000"
+                             data-start="1000"
+                             data-easing="Power4.easeOut">
+                            <img src="static/balticrest/images/start/sl3/h3.png" alt="#">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption lft fadeout rs-parallaxlevel-1"
+                             data-x="center"
+                             data-y="top"
+                             data-speed="2500"
+                             data-start="1200"
+                             data-easing="Power4.easeOut">
+                            <div class="sl_descrition top">
+                                <h1><b>1000+</b> places<span></span></h1>
+                                <span>Design looks good on phones, computers and tablets</span>
+                                <div class="btns"><a href="01.html" class="btn btn-success">Get started</a></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Categori blocks-->
+        <div class="categori_block container-fluid">
+            <div class="fixed_w">
+                <h2>We know all the places in your city</h2>
+                <div class="row">
+                    <div class="col-md-3 cat_item wow bounceInLeft">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-university"></i>
+                            <h4>Bank</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInLeft">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-futbol-o"></i>
+                            <h4>Sport</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInRight">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-beer"></i>
+                            <h4>Bar</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInRight">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-cutlery"></i>
+                            <h4>Restaurant</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInLeft">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-film"></i>
+                            <h4>Cinema</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInLeft">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-shopping-cart"></i>
+                            <h4>Shop</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInRight">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-life-ring"></i>
+                            <h4>Port</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInRight">
+                        <div onclick="location.href='01.html';">
+                            <i class="fa fa-envelope-o"></i>
+                            <h4>Post</h4>
+                        </div>
+                    </div>
+                </div>
+                <a href="01.html" class="btn btn-success va">View all places</a>
+            </div>
+        </div>
+
+        <!--Map block-->
+        <div class="map_block container-fluid">
+            <div class="map_descr"><span>View full place catalog<a href="01.html">View all places</a></span></div>
+            <div class="index_map" id="map"></div>
+        </div>
+
+        <!--promo block-->
+        <div class="promo_block container-fluid">
+            <div class="fixed_w promka">
+                <img src="static/balticrest/images/start/logo.png" alt="#">
+                <span>See and visit interesting places. Share experiences with your friends. Simply</span>
+            </div>
+            <div class="anim_bg"></div>
+        </div>
+
+        <!--place block-->
+        <div class="places_index_block container-fluid">
+            <div class="fixed_w">
+                <h2>The best places weekly</h2>
+                <div class="row">
+                    <div class="col-md-4 place_index_item  wow bounceInLeft">
+                        <div class="place_inn">
+                            <img src="static/balticrest/images/start/p1.png" alt="#">
+                            <div class="pl_descr">
+                                <a href="02.html">Slider Revolution included</a>
+                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                <ul class="rate">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 place_index_item  wow bounceInUp">
+                        <div class="place_inn">
+                            <img src="static/balticrest/images/start/p2.png" alt="#">
+                            <div class="pl_descr">
+                                <a href="02.html">Slider Revolution included</a>
+                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                <ul class="rate">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star no"></i></li>
+                                    <li><i class="fa fa-star no"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 place_index_item  wow bounceInRight">
+                        <div class="place_inn">
+                            <img src="static/balticrest/images/start/p3.png" alt="#">
+                            <div class="pl_descr">
+                                <a href="02.html">Slider Revolution included</a>
+                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                <ul class="rate">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star no"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="01.html" class="btn btn-success va">View all places</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block balticrest_js_body %}
+
+    {% if app.request.locale == 'ru' %}
+        {% set yandex_maps_locale = 'ru' %}
+    {% else %}
+        {% set yandex_maps_locale = 'en' %}
+    {% endif %}
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_maps_api_key }}&lang={{ yandex_maps_locale }}" type="text/javascript"></script>
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('static/balticrest/src/jquery/js/jquery.parallax-0.2-min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/balticrest/src/jquery/js/jquery.themepunch.revolution.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/balticrest/src/jquery/js/jquery.themepunch.tools.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/balticrest/src/wow/js/wow.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            new WOW().init();
+
+            $('.tp-banner').show().revolution(
+                {
+                    dottedOverlay:"none",
+                    delay:16000,
+                    startwidth:1170,
+                    startheight:700,
+                    hideThumbs:200,
+                    thumbWidth:100,
+                    thumbHeight:50,
+                    thumbAmount:5,
+                    navigationType:"bullet",
+                    navigationArrows:"solo",
+                    navigationStyle:"preview4",
+                    touchenabled:"on",
+                    onHoverStop:"on",
+                    swipe_velocity: 0.7,
+                    swipe_min_touches: 1,
+                    swipe_max_touches: 1,
+                    drag_block_vertical: false,
+                    parallax:"scroll",
+                    parallaxBgFreeze:"on",
+                    parallaxLevels:[10,7,4,3,2,5,4,3,2,1],
+                    keyboardNavigation:"off",
+                    navigationHAlign:"center",
+                    navigationVAlign:"bottom",
+                    navigationHOffset:0,
+                    navigationVOffset:20,
+                    soloArrowLeftHalign:"left",
+                    soloArrowLeftValign:"center",
+                    soloArrowLeftHOffset:20,
+                    soloArrowLeftVOffset:0,
+                    soloArrowRightHalign:"right",
+                    soloArrowRightValign:"center",
+                    soloArrowRightHOffset:20,
+                    soloArrowRightVOffset:0,
+                    shadow:0,
+                    fullWidth:"on",
+                    fullScreen:"off",
+                    spinner:"spinner4",
+                    stopLoop:"off",
+                    stopAfterLoops:-1,
+                    stopAtSlide:-1,
+                    shuffle:"off",
+                    autoHeight:"off",
+                    forceFullWidth:"off",
+                    hideThumbsOnMobile:"off",
+                    hideNavDelayOnMobile:1500,
+                    hideBulletsOnMobile:"off",
+                    hideArrowsOnMobile:"off",
+                    hideThumbsUnderResolution:0,
+                    hideSliderAtLimit:0,
+                    hideCaptionAtLimit:0,
+                    hideAllCaptionAtLilmit:0,
+                    startWithSlide:0,
+                    videoJsPath:"rs-plugin/videojs/",
+                    fullScreenOffsetContainer: ""
+                }
+            );
+        });
+    </script>
+
+    <!--Parallax house-->
+    <script type="text/javascript">
+        "use strict";
+        $('.categori_block').parallax({
+
+            'elements': [
+                {
+                    'selector': '.categori_block',
+                    'properties': {
+                        'x': {
+                            'background-position-x': {
+                                'initial': 0,
+                                'multiplier': 0.1,
+                                'invert': true
+                            }
+                        },
+                        'y': {
+                            'background-position-y': {
+                                'initial': -780,
+                                'multiplier': 0.1,
+                                'invert': true
+                            }
+                        }
+                    }
+                }
+            ]
+        });
+    </script>
+
+    <script type="text/javascript">
+        "use strict";
+         setHeiHeight();
+        $(window).resize( setHeiHeight );
+    </script>
+
+{% endblock %}

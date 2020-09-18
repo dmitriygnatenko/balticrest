@@ -8,18 +8,34 @@
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="keywords" content="{% block keywords %}{% endblock %}">
     {% block balticrest_css_head %}
-        {{ encore_entry_link_tags('balticrest_main') }}
+        {% if app.environment == 'dev' %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/bootstrap/css/bootstrap.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/pushy/css/pushy.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/animate/css/animate.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/font-awesome/css/font-awesome.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/balticrest/css/main.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/balticrest/css/adaptive.css') }}">
+        {% else %}
+
+        {% endif %}
     {% endblock %}
     {% block balticrest_js_head %}
     <!--[if lt IE 9]>
-        {{ encore_entry_script_tags('balticrest_ie9') }}
+        <script src="{{ asset('static/balticrest/src/html5shiv/js/html5shiv.min.js') }}"></script>
+        <script src="{{ asset('static/balticrest/src/respond/js/respond.min.js') }}"></script>
     <![endif]-->
     {% endblock %}
 </head>
 <body {% block body_attr %}{% endblock %}>
     {% block body %}{% endblock %}
     {% block balticrest_js_body %}
-        {{ encore_entry_script_tags('balticrest_main') }}
+        {% if app.environment == 'dev' %}
+            <script src="{{ asset('static/balticrest/src/jquery/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('static/balticrest/src/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('static/balticrest/src/balticrest/js/all_scr.js') }}"></script>
+        {% else %}
+
+        {% endif %}
     {% endblock %}
 </body>
 </html>

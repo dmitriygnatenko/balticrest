@@ -67,9 +67,12 @@
     {% endif %}
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_maps_api_key }}&lang={{ yandex_maps_locale }}" type="text/javascript"></script>
+
     {{ parent() }}
+
     <script type="text/javascript">
         const map_data = {{ map_data|raw }};
     </script>
-    {{ encore_entry_script_tags('balticrest_map') }}
+
+    <script type="text/javascript" src="{{ asset('static/balticrest/src/balticrest/js/map.js') }}"></script>
 {% endblock %}

@@ -20,6 +20,6 @@ class PageController extends AbstractController
      */
     public function main(Request $request): Response
     {
-        return new Response();
+        return $this->render('balticrest/page/index.html.twig', []);
     }
 }

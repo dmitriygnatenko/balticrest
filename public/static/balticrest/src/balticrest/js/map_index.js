@@ -150,5 +150,3 @@ const initializeMap = function() {
 	}
 
 };
-
-export default initializeMap;

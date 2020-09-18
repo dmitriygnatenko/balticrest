@@ -223,14 +223,14 @@ body.inner_page .bg_parallax {
 }
 
 .top_promo_block {
-    background: url(/static/balticrest/img/start/bg.jpg);
+    background: url(/static/balticrest/images/start/bg.jpg);
     width: 100%;
     background-position: center;
     position: relative;
 }
 
 .top_promo_block .bg_img {
-    background: url(/static/balticrest/img/start/bg2.png);
+    background: url(/static/balticrest/images/start/bg2.png);
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -566,7 +566,7 @@ body.inner_page .bg_parallax {
 .categori_block {
     padding: 110px 0px;
     background-color: #ffffff;
-    background-image: url(/static/balticrest/img/start/houses.png);
+    background-image: url(/static/balticrest/images/start/houses.png);
 
     background-repeat: repeat-x;
 
@@ -872,7 +872,7 @@ body.inner_page .bg_parallax {
 }
 
 .promo_block .anim_bg {
-    background: url("/static/balticrest/img/start/promo_bg.jpg");
+    background: url("/static/balticrest/images/start/promo_bg.jpg");
     position: absolute;
     left: 0;
     top: 0;
