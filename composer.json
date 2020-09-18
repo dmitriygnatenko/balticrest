@@ -11,7 +11,6 @@
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
-        "facebook/graph-sdk": "^5.7",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "*",
@@ -36,9 +35,7 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "*",
         "symfony/web-link": "*",
-        "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "*",
-        "vkcom/vk-php-sdk": "^5.101"
+        "symfony/yaml": "*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
