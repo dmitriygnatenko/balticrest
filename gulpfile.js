@@ -6,7 +6,7 @@ const uglify       = require('gulp-uglify');
 const minifycss    = require('gulp-minify-css');
 
 const adminPath = 'public/static/admin/';
-const appPath = 'public/static/balticrest/';
+const balticrestPath = 'public/static/balticrest/';
 
 // ==================================================== Admin CSS ======================================================
 
@@ -37,9 +37,44 @@ gulp.task('admin:js', function() {
         .pipe(gulp.dest(adminPath + 'build'));
 });
 
+// ==================================================== Balticrest CSS ======================================================
+
+gulp.task('balticrest:css:main', function() {
+    return gulp.src([
+        balticrestPath + 'src/bootstrap/css/bootstrap.css',
+        balticrestPath + 'src/pushy/css/pushy.css',
+        balticrestPath + 'src/animate/css/animate.css',
+        balticrestPath + 'src/font-awesome/css/font-awesome.css',
+        balticrestPath + 'src/balticrest/css/main.css',
+        balticrestPath + 'src/balticrest/css/adaptive.css'
+    ])
+        .pipe(minifycss())
+        .pipe(concat('balticrest_main.css'))
+        .pipe(gulp.dest(balticrestPath + 'build'));
+});
+
+// ==================================================== Balticrest JS =======================================================
+
+gulp.task('balticrest:js:main', function() {
+    return gulp.src([
+        balticrestPath + 'src/jquery/js/jquery.min.js',
+        balticrestPath + 'src/bootstrap/js/bootstrap.min.js',
+        balticrestPath + 'src/balticrest/js/all_scr.js'
+    ])
+        .pipe(uglify())
+        .pipe(concat('balticrest_main.js'))
+        .pipe(gulp.dest(balticrestPath + 'build'));
+});
+
+gulp.task('balticrest:js:map', function() {
+    return gulp.src([balticrestPath + 'src/balticrest/js/map.js'])
+        .pipe(uglify())
+        .pipe(concat('balticrest_map.js'))
+        .pipe(gulp.dest(balticrestPath + 'build'));
+});
 
 // ===================================================== Main ==========================================================
 
-gulp.task('prod', gulp.parallel('admin:css', 'admin:js'));
+gulp.task('prod', gulp.parallel('admin:css', 'admin:js', 'balticrest:css:main', 'balticrest:js:main', 'balticrest:js:map'));
 
 gulp.task('default', gulp.series('prod'));

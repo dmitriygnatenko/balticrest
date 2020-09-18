@@ -1,13 +1,13 @@
 
-const initializeMap = function() {
+ function initializeMap() {
 
-    let activePoint;
+    var activePoint;
 
     ymaps.ready(init);
 
     function init() {
 
-        const map = new ymaps.Map("map", {
+        var map = new ymaps.Map("map", {
             center: [map_data.center.lat, map_data.center.lon],
             zoom: map_data.zoom,
             controls: getControls()
@@ -20,7 +20,7 @@ const initializeMap = function() {
         });
 
         map_data.points.forEach(function (item) {
-            let point = new ymaps.Placemark([item.lat, item.lon], {
+            var point = new ymaps.Placemark([item.lat, item.lon], {
                 hintContent: item.hint,
             }, {
                 balloonShadow: false,
@@ -89,7 +89,7 @@ const initializeMap = function() {
                     });
                 },
                 getShape: function () {
-                    let position = this._$element.position();
+                    var position = this._$element.position();
 
                     return new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([
                         [position.left, position.top - 30],
@@ -105,7 +105,7 @@ const initializeMap = function() {
 
     function getControls() {
 
-        const typeSelector = new ymaps.control.TypeSelector({
+        var typeSelector = new ymaps.control.TypeSelector({
             options: {
                 float: 'none',
                 position: {
@@ -115,7 +115,7 @@ const initializeMap = function() {
             }
         });
 
-        const zoomControl = new ymaps.control.ZoomControl({
+        var zoomControl = new ymaps.control.ZoomControl({
             options: {
                 float: 'none',
                 position: {
@@ -125,7 +125,7 @@ const initializeMap = function() {
             }
         });
 
-        const geolocationControl = new ymaps.control.GeolocationControl({
+        var geolocationControl = new ymaps.control.GeolocationControl({
             options: {
                 float: 'none',
                 position: {
@@ -135,7 +135,7 @@ const initializeMap = function() {
             }
         });
 
-        const rulerControl = new ymaps.control.RulerControl({
+        var rulerControl = new ymaps.control.RulerControl({
             options: {
                 float: 'none',
                 position: {
@@ -149,4 +149,4 @@ const initializeMap = function() {
         return [geolocationControl, typeSelector, rulerControl, zoomControl];
     }
 
-};
+}

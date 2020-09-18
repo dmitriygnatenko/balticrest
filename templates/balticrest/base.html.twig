@@ -16,7 +16,7 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/balticrest/css/main.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/balticrest/css/adaptive.css') }}">
         {% else %}
-
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/build/balticrest_main.css') }}">
         {% endif %}
     {% endblock %}
     {% block balticrest_js_head %}
@@ -34,7 +34,7 @@
             <script src="{{ asset('static/balticrest/src/bootstrap/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('static/balticrest/src/balticrest/js/all_scr.js') }}"></script>
         {% else %}
-
+            <script src="{{ asset('static/balticrest/build/balticrest_main.js') }}"></script>
         {% endif %}
     {% endblock %}
 </body>
