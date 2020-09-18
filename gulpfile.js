@@ -53,6 +53,13 @@ gulp.task('balticrest:css:main', function() {
         .pipe(gulp.dest(balticrestPath + 'build'));
 });
 
+gulp.task('balticrest:css:index', function() {
+    return gulp.src([balticrestPath + 'src/jquery/css/settings.css'])
+        .pipe(minifycss())
+        .pipe(concat('balticrest_index.css'))
+        .pipe(gulp.dest(balticrestPath + 'build'));
+});
+
 // ==================================================== Balticrest JS =======================================================
 
 gulp.task('balticrest:js:main', function() {
@@ -73,8 +80,25 @@ gulp.task('balticrest:js:map', function() {
         .pipe(gulp.dest(balticrestPath + 'build'));
 });
 
+gulp.task('balticrest:js:index', function() {
+    return gulp.src([
+        balticrestPath + 'src/jquery/js/jquery.parallax-0.2-min.js',
+        balticrestPath + 'src/jquery/js/jquery.themepunch.revolution.min.js',
+        balticrestPath + 'src/jquery/js/jquery.themepunch.tools.min.js',
+        balticrestPath + 'src/wow/js/wow.min.js'
+    ])
+        .pipe(uglify())
+        .pipe(concat('balticrest_index.js'))
+        .pipe(gulp.dest(balticrestPath + 'build'));
+});
+
 // ===================================================== Main ==========================================================
 
-gulp.task('prod', gulp.parallel('admin:css', 'admin:js', 'balticrest:css:main', 'balticrest:js:main', 'balticrest:js:map'));
+gulp.task('prod', gulp.parallel(
+    'admin:css', 'admin:js',
+    'balticrest:css:main', 'balticrest:js:main',
+    'balticrest:js:map',
+    'balticrest:css:index', 'balticrest:js:index'
+));
 
 gulp.task('default', gulp.series('prod'));
