@@ -8,7 +8,6 @@
 
 {% block body %}
 
-
     <!-- Site Overlay -->
     <div class="site-overlay"></div>
     <div id="container">
@@ -460,6 +459,15 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block balticrest_css_head %}
+    {{ parent() }}
+    {% if app.environment == 'dev' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/jquery/css/settings.css') }}">
+    {% else %}
+
+    {% endif %}
 {% endblock %}
 
 {% block balticrest_js_body %}
