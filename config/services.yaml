@@ -5,10 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.mailer.from: '%env(MAILER_FROM)%'
-    app.vk.client_id: '%env(VKONTAKTE_CLIENT_ID)%'
-    app.vk.client_secret: '%env(VKONTAKTE_CLIENT_SECRET)%'
-    app.fb.app_id: '%env(FACEBOOK_APP_ID)%'
-    app.fb.app_secret: '%env(FACEBOOK_APP_SECRET)%'
 
 services:
     _defaults:

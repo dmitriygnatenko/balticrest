@@ -11,7 +11,7 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/font-awesome/css/font-awesome.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/light-bootstrap/css/light-bootstrap-dashboard.css') }}">
         {% else %}
-
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/build/admin.css') }}">
         {% endif %}
     {% endblock %}
 </head>
@@ -32,7 +32,7 @@
         <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap-switch.js') }}"></script>
         <script src="{{ asset('static/admin/src/light-bootstrap/js/light-bootstrap-dashboard.js') }}"></script>
     {% else %}
-
+        <script src="{{ asset('static/admin/build/admin.js') }}"></script>
     {% endif %}
 {% endblock %}
 </body>
