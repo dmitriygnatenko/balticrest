@@ -74,7 +74,7 @@
     .animation {
         display: none;
     }
-    .categori_block .cat_item {
+    .category_block .cat_item {
         width: 50%;
         float: left;
     }
@@ -242,7 +242,7 @@
     .tp-banner-container {
         display: none !important;
     }
-    .categori_block .cat_item {
+    .category_block .cat_item {
         width: 50%;
         float: left;
     }
@@ -254,7 +254,7 @@
         width: 20%;
         float: left;
     }
-    .categori_block {
+    .category_block {
         padding-top: 0;
         background-position: bottom !important;
     }
@@ -694,10 +694,10 @@
     .fea_block {
         padding: 80px 0 48px;
     }
-    .categori_block {
+    .category_block {
         padding: 0 0 50px;
     }
-    .categori_block .cat_item {
+    .category_block .cat_item {
         width: 100%;
         float: none;
     }

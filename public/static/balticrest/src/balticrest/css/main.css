@@ -561,21 +561,14 @@ body.inner_page .bg_parallax {
 .sl_descrition.top .btns {
 }
 
-
-/*Category block*/
-.categori_block {
+.category_block {
     padding: 110px 0px;
     background-color: #ffffff;
     background-image: url(/static/balticrest/images/start/houses.png);
-
     background-repeat: repeat-x;
-
 }
 
-.categori_block .cat_item {
-}
-
-.categori_block .cat_item div {
+.category_block .cat_item div {
     border: 1px solid #cfdde6;
     border-radius: 3px;
     margin-bottom: 35px;
@@ -585,7 +578,7 @@ body.inner_page .bg_parallax {
     transition: 0.3s;
 }
 
-.categori_block .cat_item div i {
+.category_block .cat_item div i {
     display: block;
     font-size: 32px;
     text-align: center;
@@ -593,7 +586,7 @@ body.inner_page .bg_parallax {
     transition: 0.3s;
 }
 
-.categori_block .cat_item div h4 {
+.category_block .cat_item div h4 {
     color: #e73931;
     font-size: 18px;
     font-weight: 500;
@@ -603,7 +596,6 @@ body.inner_page .bg_parallax {
     transition: 0.3s;
 }
 
-
 .va {
     padding: 14px;
     width: 160px;
@@ -612,7 +604,7 @@ body.inner_page .bg_parallax {
     text-align: center;
 }
 
-.categori_block .cat_item div:hover {
+.category_block .cat_item div:hover {
     background: #E73931;
     border-color: #e73931;
     box-shadow: none;
@@ -620,20 +612,56 @@ body.inner_page .bg_parallax {
     transition: 0.3s;
 }
 
-.categori_block .cat_item div:hover i {
+.category_block .cat_item.hotels div:hover {
+    background: #FFAC00;
+    border-color: #FFAC00;
+}
+
+.category_block .cat_item.medicine div:hover {
+    background: #56db40;
+    border-color: #56db40;
+}
+
+.category_block .cat_item.cafes div:hover {
+    background: #e26cc3;
+    border-color: #e26cc3;
+}
+.category_block .cat_item.shops div:hover {
+    background: #e6761b;
+    border-color: #e6761b;
+}
+.category_block .cat_item.banks div:hover {
+    background: #177bc9;
+    border-color: #177bc9;
+}
+
+.category_block .cat_item.museums div:hover {
+    background: #97a100;
+    border-color: #97a100;
+}
+
+.category_block .cat_item.sport div:hover {
+    background: #1bad03;
+    border-color: #1bad03;
+}
+
+.category_block .cat_item.transport div:hover {
+    background: #ed4543;
+    border-color: #ed4543;
+}
+
+.category_block .cat_item div:hover i {
     color: #ffffff;
     transition: 0.3s;
 }
 
-.categori_block .cat_item div:hover h4 {
+.category_block .cat_item div:hover h4 {
     color: #ffffff;
     transition: 0.3s;
 }
 
-
-/*map*/
 .map_block {
-    padding: 0px;
+    padding: 0;
     position: relative;
 }
 
@@ -644,7 +672,7 @@ body.inner_page .bg_parallax {
 
 .map_block .map_descr {
     position: absolute;
-    top: 0px;
+    top: 0;
     z-index: 9;
     background: rgba(29, 20, 43, 0.9);
     width: 100%;

@@ -370,64 +370,59 @@
             </div>
         </div>
 
-
-
-
-        <!--Categori blocks-->
-        <div class="categori_block container-fluid">
+        <div class="category_block container-fluid">
             <div class="fixed_w">
-                <h2>We know all the places in your city</h2>
+                <h2>{% trans %}category.text{% endtrans %}</h2>
                 <div class="row">
-                    <div class="col-md-3 cat_item wow bounceInLeft">
-                        <div onclick="location.href='01.html';">
-                            <i class="fa fa-university"></i>
-                            <h4>Bank</h4>
+                    <div class="col-md-3 cat_item wow bounceInLeft hotels">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'hotels'}) }}';">
+                            <i class="fa fa-hotel"></i>
+                            <h4>{% trans from "messages" %}categories.hotels{% endtrans %}</h4>
                         </div>
                     </div>
-                    <div class="col-md-3 cat_item wow bounceInLeft">
-                        <div onclick="location.href='01.html';">
-                            <i class="fa fa-futbol-o"></i>
-                            <h4>Sport</h4>
+                    <div class="col-md-3 cat_item wow bounceInLeft medicine">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'medicine'}) }}';">
+                            <i class="fa fa-plus-square"></i>
+                            <h4>{% trans from "messages" %}categories.medicine{% endtrans %}</h4>
                         </div>
                     </div>
-                    <div class="col-md-3 cat_item wow bounceInRight">
-                        <div onclick="location.href='01.html';">
-                            <i class="fa fa-beer"></i>
-                            <h4>Bar</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 cat_item wow bounceInRight">
-                        <div onclick="location.href='01.html';">
+                    <div class="col-md-3 cat_item wow bounceInRight cafes">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'cafes'}) }}';">
                             <i class="fa fa-cutlery"></i>
-                            <h4>Restaurant</h4>
+                            <h4>{% trans from "messages" %}categories.cafes{% endtrans %}</h4>
                         </div>
                     </div>
-                    <div class="col-md-3 cat_item wow bounceInLeft">
-                        <div onclick="location.href='01.html';">
-                            <i class="fa fa-film"></i>
-                            <h4>Cinema</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 cat_item wow bounceInLeft">
-                        <div onclick="location.href='01.html';">
+                    <div class="col-md-3 cat_item wow bounceInRight shops">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'shops'}) }}';">
                             <i class="fa fa-shopping-cart"></i>
-                            <h4>Shop</h4>
+                            <h4>{% trans from "messages" %}categories.shops{% endtrans %}</h4>
                         </div>
                     </div>
-                    <div class="col-md-3 cat_item wow bounceInRight">
-                        <div onclick="location.href='01.html';">
-                            <i class="fa fa-life-ring"></i>
-                            <h4>Port</h4>
+                    <div class="col-md-3 cat_item wow bounceInLeft banks">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'banks'}) }}';">
+                            <i class="fa fa-usd"></i>
+                            <h4>{% trans from "messages" %}categories.banks{% endtrans %}</h4>
                         </div>
                     </div>
-                    <div class="col-md-3 cat_item wow bounceInRight">
-                        <div onclick="location.href='01.html';">
-                            <i class="fa fa-envelope-o"></i>
-                            <h4>Post</h4>
+                    <div class="col-md-3 cat_item wow bounceInLeft museums">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'museums'}) }}';">
+                            <i class="fa fa-university"></i>
+                            <h4>{% trans from "messages" %}categories.museums{% endtrans %}</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInRight sport">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'sport'}) }}';">
+                            <i class="fa fa-futbol-o"></i>
+                            <h4>{% trans from "messages" %}categories.sport{% endtrans %}</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 cat_item wow bounceInRight transport">
+                        <div onclick="location.href='{{ path('point_list', {city: default_city, category: 'transport'}) }}';">
+                            <i class="fa fa-bus"></i>
+                            <h4>{% trans from "messages" %}categories.transport{% endtrans %}</h4>
                         </div>
                     </div>
                 </div>
-                <a href="01.html" class="btn btn-success va">View all places</a>
             </div>
         </div>
 

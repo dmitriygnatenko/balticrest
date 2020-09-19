@@ -168,11 +168,11 @@ $(function() {
 	);
 });
 
-$('.categori_block').parallax({
+$('.category_block').parallax({
 
 	'elements': [
 		{
-			'selector': '.categori_block',
+			'selector': '.category_block',
 			'properties': {
 				'x': {
 					'background-position-x': {
