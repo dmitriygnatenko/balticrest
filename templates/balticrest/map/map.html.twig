@@ -74,10 +74,10 @@
         const map_data = {{ map_data|raw }};
     </script>
 
-    {% if app.environment == 'dev' %}
-        <script type="text/javascript" src="{{ asset('static/balticrest/src/balticrest/js/map.js') }}"></script>
-    {% else %}
+    {% if build_assets %}
         <script src="{{ asset('static/balticrest/build/balticrest_map.js') }}"></script>
+    {% else %}
+        <script type="text/javascript" src="{{ asset('static/balticrest/src/balticrest/js/map.js') }}"></script>
     {% endif %}
 
 {% endblock %}

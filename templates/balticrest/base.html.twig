@@ -8,15 +8,15 @@
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="keywords" content="{% block keywords %}{% endblock %}">
     {% block balticrest_css_head %}
-        {% if app.environment == 'dev' %}
+        {% if build_assets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/build/balticrest_main.css') }}">
+        {% else %}
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/bootstrap/css/bootstrap.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/pushy/css/pushy.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/animate/css/animate.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/font-awesome/css/font-awesome.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/balticrest/css/main.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/balticrest/css/adaptive.css') }}">
-        {% else %}
-            <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/build/balticrest_main.css') }}">
         {% endif %}
     {% endblock %}
     {% block balticrest_js_head %}
@@ -29,12 +29,12 @@
 <body {% block body_attr %}{% endblock %}>
     {% block body %}{% endblock %}
     {% block balticrest_js_body %}
-        {% if app.environment == 'dev' %}
+        {% if build_assets %}
+            <script src="{{ asset('static/balticrest/build/balticrest_main.js') }}"></script>
+        {% else %}
             <script src="{{ asset('static/balticrest/src/jquery/js/jquery.min.js') }}"></script>
             <script src="{{ asset('static/balticrest/src/bootstrap/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('static/balticrest/src/balticrest/js/all_scr.js') }}"></script>
-        {% else %}
-            <script src="{{ asset('static/balticrest/build/balticrest_main.js') }}"></script>
         {% endif %}
     {% endblock %}
 </body>

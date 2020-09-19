@@ -48,6 +48,6 @@ class MailerEventSubscriber implements EventSubscriberInterface
      */
     private function getFrom(): string
     {
-        return $this->parameters->get('app.mailer.from');
+        return $this->parameters->get('app.mailer_from');
     }
 }

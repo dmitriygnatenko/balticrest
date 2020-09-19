@@ -6,12 +6,12 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <title>Администрирование {{ app_name }}</title>
     {% block admin_css_head %}
-        {% if app.environment == 'dev' %}
+        {% if build_assets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/build/admin.css') }}">
+        {% else %}
             <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/bootstrap/css/bootstrap.min.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/font-awesome/css/font-awesome.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/light-bootstrap/css/light-bootstrap-dashboard.css') }}">
-        {% else %}
-            <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/build/admin.css') }}">
         {% endif %}
     {% endblock %}
 </head>
@@ -24,15 +24,15 @@
     </div>
 </div>
 {% block admin_js_body %}
-    {% if app.environment == 'dev' %}
+    {% if build_assets %}
+        <script src="{{ asset('static/admin/build/admin.js') }}"></script>
+    {% else %}
         <script src="{{ asset('static/admin/src/jquery/js/jquery.min.js') }}"></script>
         <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap-notify.js') }}"></script>
         <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap-switch.js') }}"></script>
         <script src="{{ asset('static/admin/src/light-bootstrap/js/light-bootstrap-dashboard.js') }}"></script>
-    {% else %}
-        <script src="{{ asset('static/admin/build/admin.js') }}"></script>
     {% endif %}
 {% endblock %}
 </body>
