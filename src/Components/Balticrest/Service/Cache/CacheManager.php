@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Service\Cache;
 
 use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Psr\Log\LoggerInterface;
 
@@ -58,16 +57,15 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions
     }
 
     /**
-     * @param Request $request
+     * @param string $city
+     * @param string $category
+     * @param string $locale
      *
      * @return string
      */
-    public function getMapPointsCacheKey(Request $request): string
+    public function getMapPointsCacheKey(string $city, string $category, string $locale): string
     {
-        return self::MAP_POINTS_CACHE_KEY
-            . $request->get('city', '')
-            . $request->get('category', '')
-            . $request->getLocale();
+        return self::MAP_POINTS_CACHE_KEY . $city . $category . $locale;
     }
 
     /**

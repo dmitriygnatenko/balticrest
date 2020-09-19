@@ -1,17 +1,19 @@
 
-const initializeMap = function() {
+function initializeMap() {
 
-	let activePoint;
+	var activePoint;
 
 	ymaps.ready(init);
 
 	function init() {
 
-		const map = new ymaps.Map("map", {
+		var map = new ymaps.Map("map", {
 			center: [map_data.center.lat, map_data.center.lon],
 			zoom: map_data.zoom,
-			controls: getControls()
+			controls: []
 		});
+
+		map.behaviors.disable(['scrollZoom']);
 
 		map.events.add('click', function (e) {
 			if (activePoint !== undefined) {
@@ -20,12 +22,12 @@ const initializeMap = function() {
 		});
 
 		map_data.points.forEach(function (item) {
-			let point = new ymaps.Placemark([item.lat, item.lon], {
+			var point = new ymaps.Placemark([item.lat, item.lon], {
 				hintContent: item.hint,
 			}, {
 				balloonShadow: false,
 				balloonPanelMaxMapArea: 0,
- 				balloonContentLayout: getBalloonContent(item),
+				balloonContentLayout: getBalloonContent(item),
 				balloonLayout: getBalloonLayout(),
 				iconLayout: 'default#image',
 				iconImageHref: item.icon.image,
@@ -64,11 +66,11 @@ const initializeMap = function() {
 	function getBalloonLayout() {
 		return ymaps.templateLayoutFactory.createClass(
 			'<div class="marker_info">' +
-				'<div class="info">'+
-					'<button type="button" class="close"><span>&times;</span></button>' +
-					'$[[options.contentLayout]]' +
-					'<span class="arrow"></span>' +
-				'</div>' +
+			'<div class="info">'+
+			'<button type="button" class="close"><span>&times;</span></button>' +
+			'$[[options.contentLayout]]' +
+			'<span class="arrow"></span>' +
+			'</div>' +
 			'</div>',
 			{
 				build: function () {
@@ -89,10 +91,10 @@ const initializeMap = function() {
 					});
 				},
 				getShape: function () {
-					let position = this._$element.position();
+					var position = this._$element.position();
 
 					return new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([
-						[position.left, position.top - 30],
+						[position.left, position.top - 110],
 						[
 							position.left + this._$element[0].offsetWidth,
 							position.top + this._$element[0].offsetHeight
@@ -102,51 +104,4 @@ const initializeMap = function() {
 			}
 		);
 	}
-
-	function getControls() {
-
-		const typeSelector = new ymaps.control.TypeSelector({
-			options: {
-				float: 'none',
-				position: {
-					top: '15px',
-					left: '12px'
-				}
-			}
-		});
-
-		const zoomControl = new ymaps.control.ZoomControl({
-			options: {
-				float: 'none',
-				position: {
-					top: '57px',
-					left: '12px'
-				},
-			}
-		});
-
-		const geolocationControl = new ymaps.control.GeolocationControl({
-			options: {
-				float: 'none',
-				position: {
-					top: '275px',
-					left: '12px'
-				}
-			}
-		});
-
-		const rulerControl = new ymaps.control.RulerControl({
-			options: {
-				float: 'none',
-				position: {
-					top: '315px',
-					left: '12px'
-				},
-				scaleLine: false,
-			}
-		});
-
-		return [geolocationControl, typeSelector, rulerControl, zoomControl];
-	}
-
-};
+}

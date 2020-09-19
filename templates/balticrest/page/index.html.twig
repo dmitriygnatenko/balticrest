@@ -1,6 +1,8 @@
 {% extends 'balticrest/base.html.twig' %}
 
-{% block body_attr %}class="promo"{% endblock %}
+{% trans_default_domain 'promo' %}
+
+{% block body_attr %}onload="initializeMap()" class="promo"{% endblock %}
 
 {% block title %}{{ parent() }} {% trans from 'seo' %}index.title{% endtrans %}{% endblock %}
 {% block description %}{% trans from 'seo' %}index.desc{% endtrans %}{% endblock %}
@@ -8,7 +10,6 @@
 
 {% block body %}
 
-    <!-- Site Overlay -->
     <div class="site-overlay"></div>
     <div id="container">
         <div class="top_promo_block" id="promo_head">
@@ -19,12 +20,28 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="header_promo">
-                            <img src="static/balticrest/images/start/logo.png" alt="#">
+
+
+
+                            Balticrest
+
+
+
                             <a href="#" class="log_btn ">Log in</a>
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
 
             <div class="start_descrition">
                 <h1>welcome to my city guide!<span></span></h1>
@@ -55,9 +72,35 @@
                 </div>
             </div>
             <div class="scroll_block">
-                <img src="static/balticrest/images/start/scroll.png" class="animated infinite bounce" alt="#">
+                <img src="/static/balticrest/images/start/scroll.png" class="animated infinite bounce" alt="#">
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!--Features block-->
         <div class="fea_block container-fluid">
@@ -385,9 +428,12 @@
             </div>
         </div>
 
-        <!--Map block-->
         <div class="map_block container-fluid">
-            <div class="map_descr"><span>View full place catalog<a href="01.html">View all places</a></span></div>
+            <div class="map_descr">
+                <span>{% trans %}map.text{% endtrans %}
+                    <a href="{{ path('map', {city: default_city}) }}">{% trans %}map.btn{% endtrans %}</a>
+                </span>
+            </div>
             <div class="index_map" id="map"></div>
         </div>
 
@@ -482,6 +528,10 @@
 
     {{ parent() }}
 
+    <script type="text/javascript">
+        const map_data = {{ map_data|raw }};
+    </script>
+
     {% if build_assets %}
         <script type="text/javascript" src="{{ asset('static/balticrest/build/balticrest_index.js') }}"></script>
     {% else %}
@@ -489,6 +539,7 @@
         <script type="text/javascript" src="{{ asset('static/balticrest/src/jquery/js/jquery.themepunch.revolution.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('static/balticrest/src/jquery/js/jquery.themepunch.tools.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('static/balticrest/src/wow/js/wow.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('static/balticrest/src/balticrest/js/map_index.js') }}"></script>
     {% endif %}
 
     <script type="text/javascript">

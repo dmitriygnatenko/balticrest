@@ -9,97 +9,89 @@ use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use App\Components\Balticrest\Service\Helper\MapPointHelper;
 use App\Components\Balticrest\Service\Helper\MapPointHelperInterface;
 use App\Components\Balticrest\Service\Provider\MapJsonDataProviderInterface;
-use App\Components\Balticrest\Service\Provider\CityDataProvider;
-use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
-use App\Entity\City;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
 use App\Entity\Point;
 use App\Entity\PointLangData;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MapPointsListDTOMapper
 {
+    /** @var RequestStack */
+    private $requestStack;
+
     /** @var TranslatorInterface */
     private $translator;
 
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var CityDataProvider */
-    private $cityDataProvider;
-
     /** @var MapPointHelper */
     private $mapPointHelper;
 
     /**
+     * @param RequestStack $requestStack
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
-     * @param CityDataProviderInterface $cityManager
      * @param MapPointHelperInterface $mapPointHelper
      */
     public function __construct(
+        RequestStack $requestStack,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator,
-        CityDataProviderInterface $cityManager,
         MapPointHelperInterface $mapPointHelper
     )
     {
+        $this->requestStack = $requestStack;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
-        $this->cityDataProvider = $cityManager;
         $this->mapPointHelper = $mapPointHelper;
     }
 
     /**
      * @param MapPointsListDTO $listDTO
-     * @param Request $request
      * @param array $points
      *
      * @return MapPointsListDTO
      */
-    public function fill(MapPointsListDTO $listDTO, Request $request, array $points): MapPointsListDTO
+    public function fill(MapPointsListDTO $listDTO, array $points): MapPointsListDTO
     {
-        $city = $request->get('city', '');
-        $locale = $request->getLocale();
-
-        $cities = $this->cityDataProvider->getCachedActiveCitiesList();
+        $locale = $this->requestStack->getMasterRequest()->getLocale();
 
         $listDTO->setTransPointButton($this->translator->trans('map.point.btn_title'));
 
-        // Центр карты и масштаб
-        if (isset($cities[$city])) {
-            /** @var City $cityEntity */
-            $cityEntity = $cities[$city];
-
-            $listDTO->setCenterLat($cityEntity->getLat())
-                ->setCenterLon($cityEntity->getLon())
-                ->setZoom($cityEntity->getZoom());
-        }
-
         // Объекты
         if (!empty($points)) {
+            /** @var Point $firstPoint */
+            $firstPoint = $points[0];
+            if ($firstPoint->getCity() !== null) {
+                // Центр карты и масштаб
+                $listDTO->setCenterLat($firstPoint->getCity()->getLat())
+                    ->setCenterLon($firstPoint->getCity()->getLon())
+                    ->setZoom($firstPoint->getCity()->getZoom());
+            }
+
             foreach ($points as $point) {
                 /** @var Point $point */
                 /** @var PointLangData|null $pointLangData */
                 $pointLangData = null;
 
-                if ($locale == 'ru') {
+                if ($locale === 'ru') {
                     // Данные на русском всегда присутствуют, не проверяем другие языки
                     $result = $point->getPointLangData()->filter(function($item) {
                         /** @var PointLangData $item */
-                        return $item->getLanguage()->getCode() == 'ru';
+                        return $item->getLanguage()->getCode() === 'ru';
                     });
 
                     if (!$result->isEmpty()) {
                         $pointLangData = $result->first();
                     }
-                } else if ($locale == 'en') {
+                } else if ($locale === 'en') {
                     // Данные на английском всегда присутствуют, не проверяем другие языки
                     $result = $point->getPointLangData()->filter(function($item) {
                         /** @var PointLangData $item */
-                        return $item->getLanguage()->getCode() == 'en';
+                        return $item->getLanguage()->getCode() === 'en';
                     });
 
                     if (!$result->isEmpty()) {
@@ -112,13 +104,13 @@ class MapPointsListDTOMapper
 
                     $result = $pointLangDataCollection->filter(function($item) use ($locale) {
                         /** @var PointLangData $item */
-                        return $item->getLanguage()->getCode() == $locale;
+                        return $item->getLanguage()->getCode() === $locale;
                     });
 
                     if (!$result->isEmpty()) {
                         $pointLangData = $result->first();
 
-                        if (trim($pointLangData->getTitle()) == '') {
+                        if (trim($pointLangData->getTitle()) === '') {
                             $pointLangData = null;
                         }
                     }
@@ -126,7 +118,7 @@ class MapPointsListDTOMapper
                     if ($pointLangData === null) {
                         $result = $pointLangDataCollection->filter(function($item) {
                             /** @var PointLangData $item */
-                            return $item->getLanguage()->getCode() == 'en';
+                            return $item->getLanguage()->getCode() === 'en';
                         });
 
                         if (!$result->isEmpty()) {
@@ -143,7 +135,7 @@ class MapPointsListDTOMapper
                             'point',
                             [
                                 '_locale' => $locale,
-                                'city' => $city,
+                                'city' => $point->getCity()->getCode(),
                                 'category' => $point->getType()->getCode(),
                                 'url' => $point->getUrl(),
                             ],
