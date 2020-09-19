@@ -86,7 +86,7 @@ gulp.task('balticrest:js:index', function() {
         balticrestPath + 'src/jquery/js/jquery.themepunch.revolution.min.js',
         balticrestPath + 'src/jquery/js/jquery.themepunch.tools.min.js',
         balticrestPath + 'src/wow/js/wow.min.js',
-        balticrestPath + 'src/balticrest/js/map_index.js'
+        balticrestPath + 'src/balticrest/js/index.js'
     ])
         .pipe(uglify())
         .pipe(concat('balticrest_index.js'))
