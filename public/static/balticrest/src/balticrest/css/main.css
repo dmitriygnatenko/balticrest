@@ -54,6 +54,30 @@ a:hover {
     transition: 0.3s;
 }
 
+.icon-ru {
+    background-image: url("/static/balticrest/images/flags/ru.png");
+}
+
+.icon-en {
+    background-image: url("/static/balticrest/images/flags/gb.png");
+}
+
+.icon-pl {
+    background-image: url("/static/balticrest/images/flags/pl.png");
+}
+
+.icon-cn {
+    background-image: url("/static/balticrest/images/flags/cn.png");
+}
+
+.icon-lt {
+    background-image: url("/static/balticrest/images/flags/lt.png");
+}
+
+.icon-de {
+    background-image: url("/static/balticrest/images/flags/de.png");
+}
+
 .to_left {
     left: 250px;
     transition: 0.3s;
@@ -155,8 +179,6 @@ body.inner_page .bg_parallax {
     box-shadow: none;
 }
 
-/*////////////////////////Side menu//////////////////////*/
-
 .pushy .side_menu {
     margin: 50px 0;
     padding: 0;
@@ -210,10 +232,6 @@ body.inner_page .bg_parallax {
     background: #FFFFFF;
 }
 
-
-/* TODO REFACTORING */
-
-
 /*------------------------------------------------------------------
 [2. Promo Index Page styles / #Promo Index Page styles]
 */
@@ -233,6 +251,7 @@ body.inner_page .bg_parallax {
     color: #ffffff;
     background: #e73931;
     left: 30px;
+    top: 40px;
     padding: 5px 0 4px 11px;
 }
 
@@ -262,18 +281,42 @@ body.pushy-active .top_promo_block .menu-btn {
     margin-top: 36px;
 }
 
-.header_promo a {
+.header_promo .language-selector span.language {
+    float: left;
+    height: 20px;
+    width: 30px;
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid #cecece;
+}
+
+.header_promo .language-selector button {
     color: #ffffff;
     border: 2px solid;
-    padding: 10px 40px;
+    padding: 10px 20px;
     border-radius: 3px;
     font-size: 15px;
     float: right;
+    background: transparent;
+    z-index: 100;
+}
+.header_promo .language-selector .dropdown-menu > li > a {
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
-.header_promo a:hover {
+.header_promo .language-selector button:hover {
     color: #e73931;
 }
+.header_promo .language-selector button:hover .caret {
+    color: #e73931;
+}
+
+
+
+
+
+
 
 .search_promo {
     max-width: 900px;
@@ -394,7 +437,7 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .start_description h1 {
-    font-size: 50px;
+    font-size: 42px;
     text-transform: uppercase;
     font-weight: 300;
     font-family: 'Roboto', sans-serif;
@@ -1351,29 +1394,6 @@ a.green_btn:hover {
 }
 
 /* ------------------------------------- Language selector ------------------------------------ */
-.flag.ru {
-    background-image: url("/static/balticrest/images/flags/ru.png");
-}
-
-.flag.en {
-    background-image: url("/static/balticrest/images/flags/gb.png");
-}
-
-.flag.pl {
-    background-image: url("/static/balticrest/images/flags/pl.png");
-}
-
-.flag.cn {
-    background-image: url("/static/balticrest/images/flags/cn.png");
-}
-
-.flag.lt {
-    background-image: url("/static/balticrest/images/flags/lt.png");
-}
-
-.flag.de {
-    background-image: url("/static/balticrest/images/flags/de.png");
-}
 
 .language-selector {
     display: block;
