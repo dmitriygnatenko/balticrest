@@ -35,16 +35,6 @@ class CityFixtures extends Fixture
 
         $manager->persist($svetlogorsk);
 
-        $otradnoe = (new City())
-            ->setCode('otradnoe')
-            ->setImage('/static/balticrest/images/cities/otradnoe.png')
-            ->setLat(54.940869)
-            ->setLon(20.111269)
-            ->setZoom(15)
-            ->setIsActive(true);
-
-        $manager->persist($otradnoe);
-
         $manager->flush();
     }
 }

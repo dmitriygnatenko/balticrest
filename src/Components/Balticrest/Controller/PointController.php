@@ -15,7 +15,7 @@ class PointController extends AbstractController
      * @Route(
      *     "/{city}/{category}/list",
      *     requirements={
-     *         "city": "svetlogorsk|zelenogradsk|otradnoe",
+     *         "city": "svetlogorsk|zelenogradsk",
      *         "category": "hotels|medicine|cafes|shops|banks|museums|sport|transport"
      *     },
      *     methods={"GET"},
@@ -35,7 +35,7 @@ class PointController extends AbstractController
      * @Route(
      *     "/{city}/{category}/point/{url}",
      *     requirements={
-     *         "city": "svetlogorsk|zelenogradsk|otradnoe",
+     *         "city": "svetlogorsk|zelenogradsk",
      *         "category": "hotels|medicine|cafes|shops|banks|museums|sport|transport"
      *     },
      *     methods={"GET"},

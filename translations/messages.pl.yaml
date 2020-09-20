@@ -1,12 +1,10 @@
 cities:
     zelenogradsk: Zelenogradsk
     svetlogorsk: Svetlogorsk
-    otradnoe: Otradnoe
 
 cities_genitive:
     zelenogradsk: Zelenogradsk
     svetlogorsk: Svetlogorsk
-    otradnoe: Otradnoe
 
 header:
     search:
