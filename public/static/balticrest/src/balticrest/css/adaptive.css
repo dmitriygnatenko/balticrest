@@ -2,7 +2,7 @@
 [1. 1280 / 1280]
 */
 @media (max-width: 1280px) {
-    .start_descrition {
+    .start_description {
         z-index: 9;
         text-align: center;
         position: absolute;
@@ -54,7 +54,7 @@
 [4. 1030 / 1030]
 */
 @media (max-width: 1030px) {
-    .start_descrition {
+    .start_description {
         z-index: 9;
         text-align: center;
         position: absolute;
@@ -207,7 +207,7 @@
 [8. 860 / 860]
 */
 @media (max-width: 860px) {
-    .start_descrition {
+    .start_description {
         z-index: 9;
         text-align: center;
         position: absolute;
@@ -236,7 +236,7 @@
     .btn_cat button {
         border-radius: 3px;
     }
-    .start_descrition {
+    .start_description {
         margin-top: -250px;
     }
     .tp-banner-container {
@@ -604,7 +604,7 @@
     .menu.mobile .mobile_menu {
         display: block;
     }
-    .start_descrition {
+    .start_description {
         z-index: 9;
         text-align: center;
         position: relative;
@@ -615,7 +615,7 @@
         left: 50%;
         margin-left: -40%;
     }
-    .start_descrition .btns a {
+    .start_description .btns a {
         float: none;
         width: 100%;
         display: block;
@@ -624,17 +624,17 @@
     .bgg {
         display: none;
     }
-    .start_descrition h1 {
+    .start_description h1 {
         font-size: 30px;
         text-transform: uppercase;
         font-weight: 300;
         font-family: 'Roboto', sans-serif;
         color: #ffffff;
     }
-    .start_descrition h1 span {
+    .start_description h1 span {
         background: #E73931;
     }
-    .start_descrition span {
+    .start_description span {
         font-family: 'Roboto', sans-serif;
         font-size: 18px;
         font-weight: 300;
@@ -671,10 +671,10 @@
     .header_promo a {
         display: none;
     }
-    .start_descrition {
+    .start_description {
         margin-top: 20px;
     }
-    .start_descrition h1 span {
+    .start_description h1 span {
         margin: 20px auto;
     }
     .btn_cat {
