@@ -24,8 +24,8 @@ final class Version20200504204259 extends AbstractMigration
 
         $this->addSql('CREATE TABLE user (
             id INT AUTO_INCREMENT NOT NULL,
-            email VARCHAR(255) DEFAULT NULL,
-            password VARCHAR(255) DEFAULT NULL,
+            email VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL,
             roles JSON NOT NULL,
             is_active TINYINT(1) DEFAULT \'1\' NOT NULL,
             UNIQUE INDEX UNIQ_8D93D649E7927C74 (email),
