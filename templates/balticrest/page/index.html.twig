@@ -54,25 +54,27 @@
                 <span>Гостям и жителям Калининградской области сайт рассказывает об интересных местах проведения незабываемых выходных и отдыха на Балтийском море.</span>
                 <div class="search_promo">
                     <div class="input-group">
-                        <input type="text" class="form-control" aria-label="...">
-                        <div class="input-group-btn btn_cat">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <span><i class="fa fa-shopping-cart"></i>Market<span class="caret"></span></span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-right place_dd" role="menu">
-                                <li><a href="01.html" class="cinema"><i class="fa fa-film"></i>Cinema</a></li>
-                                <li><a href="01.html" class="club"><i class="fa fa-beer"></i>Club</a></li>
-                                <li><a href="01.html" class="cafe"><i class="fa fa-cutlery"></i>Cafe</a></li>
-                                <li><a href="01.html" class="sport"><i class="fa fa-futbol-o"></i>Sport</a></li>
-                                <li><a href="01.html" class="port"><i class="fa fa-life-ring"></i>Port</a></li>
-                                <li><a href="01.html" class="bank"><i class="fa fa-university"></i>Bank</a></li>
-                                <li><a href="01.html" class="post"><i class="fa fa-envelope-o"></i>Post</a></li>
-                                <li><a href="01.html" class="showplace"><i class="fa fa-eye"></i>Showplace</a></li>
-                                <li><a href="01.html" class="park"><i class="fa fa-leaf"></i>Park</a></li>
-                            </ul>
+                        {% set cities = global_service.cities %}
+                        <div>
+                            <select class="form-control city">
+                                {% for key, values in cities %}
+                                    {% set city_title = 'cities.' ~ values.code  %}
+                                    <option value="{{ key }}">{{ city_title|trans({}, 'messages') }}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="form-control category">
+                                <option value="hotels">{% trans from "messages" %}categories.hotels{% endtrans %}</option>
+                                <option value="medicine">{% trans from "messages" %}categories.medicine{% endtrans %}</option>
+                                <option value="cafes">{% trans from "messages" %}categories.cafes{% endtrans %}</option>
+                                <option value="shops">{% trans from "messages" %}categories.shops{% endtrans %}</option>
+                                <option value="banks">{% trans from "messages" %}categories.banks{% endtrans %}</option>
+                                <option value="museums">{% trans from "messages" %}categories.museums{% endtrans %}</option>
+                                <option value="sport">{% trans from "messages" %}categories.sport{% endtrans %}</option>
+                                <option value="transport">{% trans from "messages" %}categories.transport{% endtrans %}</option>
+                            </select>
                         </div>
                         <div class="input-group-btn btn_promo_search">
-                            <button type="button" class="btn btn-success">Search</button>
+                            <button type="button" class="btn btn-success">Поиск</button>
                         </div>
                     </div>
                 </div>
