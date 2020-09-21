@@ -36,9 +36,9 @@ class PointDTO
         $this->city = $point->getCity()->getCode();
         $this->type = $point->getType()->getCode();
 
-        $pointRuData = $point->getPointLangData()->filter(function($pointLangData) {
+        $pointRuData = $point->getPointLangData()->filter(static function($pointLangData) {
             /** @var PointLangData $pointLangData */
-            return $pointLangData->getLanguage()->getCode() == 'ru';
+            return $pointLangData->getLanguage()->getCode() === 'ru';
         });
 
         if (!$pointRuData->isEmpty()) {

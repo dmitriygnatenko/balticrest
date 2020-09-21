@@ -70,20 +70,20 @@ class PointFormDataMapper
     public function mapFormToPoint(array $form, Point $point): void
     {
         $pointExtData = [
-            Fields::FIELD_EMAIl => (string) $form['email'] ?? '',
-            Fields::FIELD_WEBSITE => (string) $form['website'] ?? '',
-            Fields::FIELD_PHONES => (string) $form['phones'] ?? '',
-            Fields::FIELD_COMMENT => (string) $form['comment'] ?? '',
-            Fields::FIELD_SERVICES => (array) $form['services'] ?? [],
-            Fields::FIELD_DETAILED_TYPE => (string) $form['detailed_type'] ?? '',
+            Fields::FIELD_EMAIl => (string) ($form['email'] ?? ''),
+            Fields::FIELD_WEBSITE => (string) ($form['website'] ?? ''),
+            Fields::FIELD_PHONES => (string) ($form['phones'] ?? ''),
+            Fields::FIELD_COMMENT => (string) ($form['comment'] ?? ''),
+            Fields::FIELD_SERVICES => (array) ($form['services'] ?? []),
+            Fields::FIELD_DETAILED_TYPE => (string) ($form['detailed_type'] ?? ''),
         ];
 
         /** @var Point $point */
-        $point->setLat((float) $form['lat'] ?? 0)
-            ->setLon((float) $form['lon'] ?? 0)
-            ->setLogo((string) $form['logo'] ?? '')
-            ->setUrl($form['url'] ? $form['url'] : null)
-            ->setIsActive((bool) $form['is_active'] ?? true)
+        $point->setLat((float) ($form['lat'] ?? 0))
+            ->setLon((float) ($form['lon'] ?? 0))
+            ->setLogo((string) ($form['logo'] ?? ''))
+            ->setUrl($form['url'] ?? null)
+            ->setIsActive((bool) ($form['is_active'] ?? true))
             ->setCity($form['city'] ?? null)
             ->setType($form['type'] ?? null)
             ->setData($pointExtData);
@@ -107,12 +107,12 @@ class PointFormDataMapper
                 $point->addPointLangData($pointLangData);
             }
 
-            $pointLangData->setTitle((string) $form['lang_' . $language->getId() . '_title'] ?? '');
+            $pointLangData->setTitle((string) ($form['lang_' . $language->getId() . '_title'] ?? ''));
 
             $pointLangExtData = [
-                LangFields::FIELD_DESC => (string) $form['lang_' . $language->getId() . '_desc'] ?? '',
-                LangFields::FIELD_SHORT_DESC => (string) $form['lang_' . $language->getId() . '_short_desc'] ?? '',
-                LangFields::FIELD_ADDRESS => (string) $form['lang_' . $language->getId() . '_address'] ?? '',
+                LangFields::FIELD_DESC => (string) ($form['lang_' . $language->getId() . '_desc'] ?? ''),
+                LangFields::FIELD_SHORT_DESC => (string) ($form['lang_' . $language->getId() . '_short_desc'] ?? ''),
+                LangFields::FIELD_ADDRESS => (string) ($form['lang_' . $language->getId() . '_address'] ?? ''),
             ];
 
             $pointLangData->setData($pointLangExtData);

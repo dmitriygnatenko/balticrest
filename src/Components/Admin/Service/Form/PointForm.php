@@ -58,12 +58,12 @@ class PointForm extends AbstractType
 
         $builder->setRequired(false);
 
-        $isTypeDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups);
+        $isTypeDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups, true);
         $builder->add('type', PointFormType::class, ['disabled' => $isTypeDisabled]);
 
         $builder->add('detailed_type', DetailedPointFormType::class);
 
-        $isCityDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups);
+        $isCityDisabled = in_array(self::VALIDATION_GROUP_UPDATE, $validationGroups, true);
         $builder->add('city', CityFormType::class,  ['disabled' => $isCityDisabled]);
 
         $builder->add('is_active', IsActiveFormType::class);
@@ -144,7 +144,7 @@ class PointForm extends AbstractType
 
             $builder->add('lang_' . $language->getId() . '_title', TextType::class, [
                 'label' => 'Название',
-                'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES)
+                'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES, true)
                     ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
                     : []
             ]);

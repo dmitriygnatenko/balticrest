@@ -47,7 +47,8 @@ class PointController extends AbstractController
      *
      * @return Response
      */
-    public function pointList(Request $request): Response {
+    public function pointList(Request $request): Response
+    {
         $points = [];
 
         try {
@@ -70,14 +71,15 @@ class PointController extends AbstractController
     }
 
     /**
-     * @Route("/point/add", name="point_add", methods={"GET","POST"})
+     * @Route("/point/add", name="admin.point_add", methods={"GET","POST"})
      *
      * @param Request $request
      * @param PointFormDataMapper $pointFormDataMapper
      *
      * @return Response
      */
-    public function addPoint(Request $request, PointFormDataMapper $pointFormDataMapper): Response {
+    public function addPoint(Request $request, PointFormDataMapper $pointFormDataMapper): Response
+    {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -117,7 +119,7 @@ class PointController extends AbstractController
     }
 
     /**
-     * @Route("/point/edit/{id}", name="point_edit", methods={"GET","POST"})
+     * @Route("/point/edit/{id}", name="admin.point_edit", methods={"GET","POST"})
      *
      * @param Point $point
      * @param Request $request
@@ -171,14 +173,15 @@ class PointController extends AbstractController
     }
 
     /**
-     * @Route("/point/delete/{id}", name="point_delete", methods={"GET","POST"})
+     * @Route("/point/delete/{id}", name="admin.point_delete", methods={"GET","POST"})
      *
      * @param Point $point
      * @param Request $request
      *
      * @return Response
      */
-    public function deletePoint(Point $point, Request $request): Response {
+    public function deletePoint(Point $point, Request $request): Response
+    {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -202,7 +205,7 @@ class PointController extends AbstractController
 
         $pointRuData = $point->getPointLangData()->filter(function($pointLangData) {
             /** @var PointLangData $pointLangData */
-            return $pointLangData->getLanguage()->getCode() == 'ru';
+            return $pointLangData->getLanguage()->getCode() === 'ru';
         });
 
         $title = !$pointRuData->isEmpty() ? $pointRuData->first()->getTitle() : '';

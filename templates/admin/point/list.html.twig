@@ -13,7 +13,7 @@
                             <h4 class="card-title">Список объектов</h4>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary btn-fill btn-icon" href="{{ path('point_add') }}" role="button" title="Добавить">
+                            <a class="btn btn-primary btn-fill btn-icon" href="{{ path('admin.point_add') }}" role="button" title="Добавить">
                                 <i class="fa fa-plus"></i>
                             </a>
                         </div>
@@ -69,10 +69,10 @@
                                         <td class="text-danger">Нет</td>
                                     {% endif %}
                                     <td style="width: 110px">
-                                        <a class="btn btn-primary btn-fill btn-icon" href="{{ path('point_edit', {id: point.id}) }}" role="button" title="Редактировать">
+                                        <a class="btn btn-primary btn-fill btn-icon" href="{{ path('admin.point_edit', {id: point.id}) }}" role="button" title="Редактировать">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a class="btn btn-danger btn-fill btn-icon" href="{{ path('point_delete', {id: point.id}) }}" role="button" title="Удалить">
+                                        <a class="btn btn-danger btn-fill btn-icon" href="{{ path('admin.point_delete', {id: point.id}) }}" role="button" title="Удалить">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
                                     </td>

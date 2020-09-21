@@ -4735,3 +4735,38 @@ h5.form-lang-header img {
 .btn.btn-icon {
     padding: 4px 8px;
 }
+
+span.language {
+    height: 20px;
+    width: 30px;
+    display: inline-block;
+    border: 1px solid #cecece;
+}
+span.language.left {
+    float: left;
+    margin-right: 10px;
+}
+
+span.language.lang-ru {
+    background-image: url('/static/admin/images/flags/ru.png');
+}
+
+span.language.lang-en {
+    background-image: url('/static/admin/images/flags/en.png');
+}
+
+span.language.lang-lt {
+    background-image: url('/static/admin/images/flags/lt.png');
+}
+
+span.language.lang-pl {
+    background-image: url('/static/admin/images/flags/pl.png');
+}
+
+span.language.lang-cn {
+    background-image: url('/static/admin/images/flags/cn.png');
+}
+
+span.language.lang-de {
+    background-image: url('/static/admin/images/flags/de.png');
+}
