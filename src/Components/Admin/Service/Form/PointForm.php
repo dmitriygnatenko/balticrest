@@ -97,7 +97,7 @@ class PointForm extends AbstractType
             'constraints' => [
                 new Callback([
                     'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
-                    'callback' => function($value, $context) use ($em, $point) {
+                    'callback' => static function($value, $context) use ($em, $point) {
                         if ($value === '' || $value === null) {
                             return;
                         }
@@ -155,6 +155,7 @@ class PointForm extends AbstractType
 
             $builder->add('lang_' . $language->getId() . '_desc', CKEditorFormType::class, [
                 'label' => 'Описание',
+                'config' => ['height' => 500]
             ]);
 
             $builder->add('lang_' . $language->getId() . '_short_desc', CKEditorFormType::class, [

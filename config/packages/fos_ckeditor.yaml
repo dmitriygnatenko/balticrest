@@ -5,6 +5,7 @@ twig:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 
 fos_ck_editor:
+    default_config: my_standart
     configs:
         my_standart:
             toolbar: "my_standart"

@@ -59,8 +59,8 @@ class PointController extends AbstractController
                 $points[] = (new PointDTO())->fillByPoint($point);
             }
         } catch (Exception $exception) {
-            $pointPaginator = null;
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
+            $pointPaginator = null;
         }
 
         return $this->render('admin/point/list.html.twig', [

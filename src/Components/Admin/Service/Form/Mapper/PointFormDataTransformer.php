@@ -88,8 +88,7 @@ class PointFormDataTransformer implements DataTransformer
             ->setType($form['type'] ?? null)
             ->setData($pointExtData);
 
-        $languages = $this->em->getRepository(Language::class)
-            ->findBy(['is_active' => true]);
+        $languages = $this->em->getRepository(Language::class)->findBy(['is_active' => true]);
 
         $pointLangDataRepository = $this->em->getRepository(PointLangData::class);
 
