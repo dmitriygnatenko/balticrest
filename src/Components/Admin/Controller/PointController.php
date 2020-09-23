@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Components\Admin\Controller;
 
 use App\Components\Admin\Service\DTO\PointDTO;
-use App\Components\Admin\Service\Form\Mapper\PointFormDataMapper;
+use App\Components\Admin\Service\Form\Mapper\PointFormDataTransformer;
 use App\Components\Admin\Service\Form\PointForm;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
@@ -74,11 +74,11 @@ class PointController extends AbstractController
      * @Route("/point/add", name="admin.point_add", methods={"GET","POST"})
      *
      * @param Request $request
-     * @param PointFormDataMapper $pointFormDataMapper
+     * @param PointFormDataTransformer $pointFormDataTransformer
      *
      * @return Response
      */
-    public function addPoint(Request $request, PointFormDataMapper $pointFormDataMapper): Response
+    public function addPoint(Request $request, PointFormDataTransformer $pointFormDataTransformer): Response
     {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
@@ -92,7 +92,7 @@ class PointController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $point = new Point();
-            $pointFormDataMapper->mapFormToPoint($form->getData(), $point);
+            $pointFormDataTransformer->transformToDatabase($form->getData(), $point);
 
             try {
                 $entityManager->persist($point);
@@ -123,19 +123,19 @@ class PointController extends AbstractController
      *
      * @param Point $point
      * @param Request $request
-     * @param PointFormDataMapper $pointFormDataMapper
+     * @param PointFormDataTransformer $pointFormDataTransformer
      *
      * @return Response
      */
     public function editPoint(
         Point $point,
         Request $request,
-        PointFormDataMapper $pointFormDataMapper
+        PointFormDataTransformer $pointFormDataTransformer
     ): Response {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
-        $formData = $pointFormDataMapper->mapPointToForm($point);
+        $formData = $pointFormDataTransformer->transformFromDatabase($point);
 
         $form = $this->createForm(PointForm::class, $formData, [
             'em' => $entityManager,
@@ -146,7 +146,7 @@ class PointController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $pointFormDataMapper->mapFormToPoint($form->getData(), $point);
+            $pointFormDataTransformer->transformToDatabase($form->getData(), $point);
 
             try {
                 $entityManager->persist($point);
@@ -203,7 +203,7 @@ class PointController extends AbstractController
             return $this->redirectToRoute('admin.point_list');
         }
 
-        $pointRuData = $point->getPointLangData()->filter(function($pointLangData) {
+        $pointRuData = $point->getPointLangData()->filter(static function($pointLangData) {
             /** @var PointLangData $pointLangData */
             return $pointLangData->getLanguage()->getCode() === 'ru';
         });

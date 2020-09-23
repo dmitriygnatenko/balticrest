@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
 
-class PointFormDataMapper
+class PointFormDataTransformer implements DataTransformer
 {
     /** @var EntityManager */
     private $em;
@@ -30,7 +30,7 @@ class PointFormDataMapper
      *
      * @return array
      */
-    public function mapPointToForm(Point $point): array
+    public function transformFromDatabase($point): array
     {
         $pointExtData = $point->getData();
 
@@ -67,7 +67,7 @@ class PointFormDataMapper
      * @param array $form
      * @param Point $point
      */
-    public function mapFormToPoint(array $form, Point $point): void
+    public function transformToDatabase(array $form, $point): void
     {
         $pointExtData = [
             Fields::FIELD_EMAIl => (string) ($form['email'] ?? ''),
