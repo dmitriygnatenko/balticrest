@@ -42,6 +42,16 @@ class ArticleLangData
     private $text;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $meta_keywords;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $meta_description;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -125,6 +135,46 @@ class ArticleLangData
     public function setText(string $text): self
     {
         $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMetaKeywords(): ?string
+    {
+        return $this->meta_keywords;
+    }
+
+    /**
+     * @param string|null $meta_keywords
+     *
+     * @return $this
+     */
+    public function setMetaKeywords(?string $meta_keywords): self
+    {
+        $this->meta_keywords = $meta_keywords;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMetaDescription(): ?string
+    {
+        return $this->meta_description;
+    }
+
+    /**
+     * @param string|null $meta_description
+     *
+     * @return $this
+     */
+    public function setMetaDescription(?string $meta_description): self
+    {
+        $this->meta_description = $meta_description;
 
         return $this;
     }

@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PointFormDataTransformer implements DataTransformer
 {
@@ -29,9 +30,15 @@ class PointFormDataTransformer implements DataTransformer
      * @param Point $point
      *
      * @return array
+     *
+     * @throws BadRequestHttpException
      */
     public function transformFromDatabase($point): array
     {
+        if (!($point instanceof Point)) {
+            throw new BadRequestHttpException('First argument must be Point entity');
+        }
+
         $pointExtData = $point->getData();
 
         $data = [
@@ -66,9 +73,15 @@ class PointFormDataTransformer implements DataTransformer
     /**
      * @param array $form
      * @param Point $point
+     *
+     * @throws BadRequestHttpException
      */
     public function transformToDatabase(array $form, $point): void
     {
+        if (!($point instanceof Point)) {
+            throw new BadRequestHttpException('Second argument must be Point entity');
+        }
+
         $pointExtData = [
             Fields::FIELD_EMAIl => (string) ($form['email'] ?? ''),
             Fields::FIELD_WEBSITE => (string) ($form['website'] ?? ''),

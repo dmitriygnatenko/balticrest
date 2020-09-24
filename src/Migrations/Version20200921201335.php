@@ -40,6 +40,8 @@ final class Version20200921201335 extends AbstractMigration
                 language_id INT NOT NULL,
                 title VARCHAR(255) NOT NULL,
                 text LONGTEXT NOT NULL,
+                meta_keywords VARCHAR(255) NOT NULL,
+                meta_description VARCHAR(255) NOT NULL,
                 INDEX IDX_62A6EA207294869C (article_id),
                 INDEX IDX_62A6EA2082F1BAF4 (language_id),
                 PRIMARY KEY(id)

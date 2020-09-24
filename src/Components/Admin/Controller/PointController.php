@@ -47,7 +47,7 @@ class PointController extends AbstractController
      *
      * @return Response
      */
-    public function pointList(Request $request): Response
+    public function list(Request $request): Response
     {
         $points = [];
 
@@ -78,7 +78,7 @@ class PointController extends AbstractController
      *
      * @return Response
      */
-    public function addPoint(Request $request, PointFormDataTransformer $pointFormDataTransformer): Response
+    public function add(Request $request, PointFormDataTransformer $pointFormDataTransformer): Response
     {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
@@ -127,7 +127,7 @@ class PointController extends AbstractController
      *
      * @return Response
      */
-    public function editPoint(
+    public function edit(
         Point $point,
         Request $request,
         PointFormDataTransformer $pointFormDataTransformer
@@ -180,7 +180,7 @@ class PointController extends AbstractController
      *
      * @return Response
      */
-    public function deletePoint(Point $point, Request $request): Response
+    public function delete(Point $point, Request $request): Response
     {
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
