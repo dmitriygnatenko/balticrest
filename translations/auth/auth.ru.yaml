@@ -21,6 +21,8 @@ restore:
     form:
         label:
             email: Адрес электронной почты
+            password: Пароль
+            password_repeat: Повтор пароля
         button:
             save: Сохранить пароль
             send: Отправить

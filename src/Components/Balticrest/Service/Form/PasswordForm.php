@@ -25,8 +25,8 @@ class PasswordForm extends AbstractType
             ),
             'invalid_message' => 'password.passwords_not_equal',
             'options' => ['attr' => ['class' => 'password-field']],
-            'first_options'  => ['label' => 'confirm.form.label.password'],
-            'second_options' => ['label' => 'confirm.form.label.password_repeat'],
+            'first_options'  => ['label' => 'restore.form.label.password'],
+            'second_options' => ['label' => 'restore.form.label.password_repeat'],
         ]);
     }
 }

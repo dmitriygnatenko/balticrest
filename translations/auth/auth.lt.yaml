@@ -21,6 +21,8 @@ restore:
     form:
         label:
             email: El. paštas
+            password: Slaptažodis
+            password_repeat: Slaptažodžio pakartojimas
         button:
             save: Išsaugoti slaptažodį
             send: Siųsti

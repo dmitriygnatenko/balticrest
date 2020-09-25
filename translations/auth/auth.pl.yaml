@@ -21,6 +21,8 @@ restore:
     form:
         label:
             email: Email
+            password: Hasło
+            password_repeat: Powtórz hasło
         button:
             save: Zapisz hasło
             send: Wyślij
