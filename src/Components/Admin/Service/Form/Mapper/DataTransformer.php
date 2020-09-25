@@ -11,11 +11,11 @@ interface DataTransformer
      *
      * @return array
      */
-    public function transformFromDatabase($entity): array;
+    public function transformFromEntity($entity): array;
 
     /**
      * @param array $form
      * @param object $entity
      */
-    public function transformToDatabase(array $form, $entity): void;
+    public function transformToEntity(array $form, $entity): void;
 }

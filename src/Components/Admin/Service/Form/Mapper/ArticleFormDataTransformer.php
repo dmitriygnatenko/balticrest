@@ -31,7 +31,7 @@ class ArticleFormDataTransformer implements DataTransformer
      *
      * @throws BadRequestHttpException
      */
-    public function transformFromDatabase($article): array
+    public function transformFromEntity($article): array
     {
         if (!($article instanceof Article)) {
             throw new BadRequestHttpException('First argument must be Article entity');
@@ -59,7 +59,7 @@ class ArticleFormDataTransformer implements DataTransformer
      *
      * @throws BadRequestHttpException
      */
-    public function transformToDatabase(array $form, $article): void
+    public function transformToEntity(array $form, $article): void
     {
         if (!($article instanceof Article)) {
             throw new BadRequestHttpException('Second argument must be Article entity');

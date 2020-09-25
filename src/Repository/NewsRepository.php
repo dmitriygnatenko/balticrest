@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Components\Admin\Service\Pager\Paginator;
-use App\Entity\Article;
+use App\Entity\News;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method Article|null find($id, $lockMode = null, $lockVersion = null)
- * @method Article|null findOneBy(array $criteria, array $orderBy = null)
- * @method Article[]    findAll()
- * @method Article[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method News|null find($id, $lockMode = null, $lockVersion = null)
+ * @method News|null findOneBy(array $criteria, array $orderBy = null)
+ * @method News[]    findAll()
+ * @method News[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ArticleRepository extends ServiceEntityRepository
+class NewsRepository extends ServiceEntityRepository
 {
     /**
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Article::class);
+        parent::__construct($registry, News::class);
     }
 
     /**
@@ -32,12 +32,12 @@ class ArticleRepository extends ServiceEntityRepository
      *
      * @return Paginator
      */
-    public function getPaginatedArticles(Request $request, int $max = 100): Paginator
+    public function getPaginatedNews(Request $request, int $max = 100): Paginator
     {
         $page = $request->query->getInt('page', 1);
 
-        $qb = $this->createQueryBuilder('a')
-            ->orderBy('a.id', 'DESC');
+        $qb = $this->createQueryBuilder('n')
+            ->orderBy('n.publish_date', 'DESC');
 
         return new Paginator($qb->getQuery(), $page, $max);
     }

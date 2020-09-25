@@ -33,7 +33,7 @@ class PointFormDataTransformer implements DataTransformer
      *
      * @throws BadRequestHttpException
      */
-    public function transformFromDatabase($point): array
+    public function transformFromEntity($point): array
     {
         if (!($point instanceof Point)) {
             throw new BadRequestHttpException('First argument must be Point entity');
@@ -76,7 +76,7 @@ class PointFormDataTransformer implements DataTransformer
      *
      * @throws BadRequestHttpException
      */
-    public function transformToDatabase(array $form, $point): void
+    public function transformToEntity(array $form, $point): void
     {
         if (!($point instanceof Point)) {
             throw new BadRequestHttpException('Second argument must be Point entity');

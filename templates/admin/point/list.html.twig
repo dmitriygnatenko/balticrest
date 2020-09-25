@@ -4,104 +4,105 @@
     {% set city_filter = app.request.get('city') %}
     {% set category_filter = app.request.get('category') %}
     <div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <h4 class="card-title">Список объектов</h4>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Список объектов</h4>
+                            </div>
+                            <div class="float-right">
+                                <a class="btn btn-primary btn-fill btn-icon" href="{{ path('admin.point_add') }}" role="button" title="Добавить">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary btn-fill btn-icon" href="{{ path('admin.point_add') }}" role="button" title="Добавить">
-                                <i class="fa fa-plus"></i>
-                            </a>
+                        <div class="card-body">
+                            {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info', 'primary']) %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ label }}">
+                                        <span>{{ message }}</span>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>
+                                        {% set cities = global_service.cities %}
+                                        <select class="form-control city-filter">
+                                            <option value="0">---</option>
+                                            {% for key, value in cities %}
+                                                {% set city_title = 'cities.' ~ value.code  %}
+                                                <option value="{{ value.id }}" {% if value.id == city_filter %}selected{% endif %}>{{ city_title|trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </th>
+                                    <th>
+                                        {% set categories = global_service.pointTypes %}
+                                        <select class="form-control category-filter">
+                                            <option value="0">---</option>
+                                            {% for value in categories %}
+                                                {% set category_title = 'categories.' ~ value.code  %}
+                                                <option value="{{ value.id }}" {% if value.id == category_filter %}selected{% endif %}>{{ category_title|trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </th>
+                                    <th>Название</th>
+                                    <th>Активен</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                {% for point in points %}
+                                    {% set city_title = 'cities.' ~ point.city %}
+                                    {% set type_title = 'categories.' ~ point.type %}
+                                    <tr>
+                                        <td>{{ point.id }}</td>
+                                        <td>{{ city_title|trans }}</td>
+                                        <td>{{ type_title|trans }}</td>
+                                        <td>{{ point.title }}</td>
+                                        {% if point.is_active %}
+                                            <td class="text-success">Да</td>
+                                        {% else %}
+                                            <td class="text-danger">Нет</td>
+                                        {% endif %}
+                                        <td style="width: 110px">
+                                            <a class="btn btn-primary btn-fill btn-icon" href="{{ path('admin.point_edit', {id: point.id}) }}" role="button" title="Редактировать">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-fill btn-icon" href="{{ path('admin.point_delete', {id: point.id}) }}" role="button" title="Удалить">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <br>
+                            <ul class="pagination justify-content-center">
+                                {% if prev_page %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('admin.point_list', {
+                                            page: prev_page,
+                                            city: city_filter,
+                                            category: category_filter
+                                        }) }}">Предыдущая страница</a>
+                                    </li>
+                                {% endif %}
+                                {% if next_page %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('admin.point_list', {
+                                            page: next_page,
+                                            city: city_filter,
+                                            category: category_filter
+                                        }) }}">Следующая страница</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info', 'primary']) %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ label }}">
-                                    <span>{{ message }}</span>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-
-                        <table class="table table-hover table-bordered">
-                            <thead>
-                                <th>ID</th>
-                                <th>
-                                    {% set cities = global_service.cities %}
-                                    <select class="form-control city-filter">
-                                        <option value="0">---</option>
-                                        {% for key, value in cities %}
-                                            {% set city_title = 'cities.' ~ value.code  %}
-                                            <option value="{{ value.id }}" {% if value.id == city_filter %}selected{% endif %}>{{ city_title|trans }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </th>
-                                <th>
-                                    {% set categories = global_service.pointTypes %}
-                                    <select class="form-control category-filter">
-                                        <option value="0">---</option>
-                                        {% for value in categories %}
-                                            {% set category_title = 'categories.' ~ value.code  %}
-                                            <option value="{{ value.id }}" {% if value.id == category_filter %}selected{% endif %}>{{ category_title|trans }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </th>
-                                <th>Название</th>
-                                <th>Активен</th>
-                                <th></th>
-                            </thead>
-                            <tbody>
-                            {% for point in points %}
-                                {% set city_title = 'cities.' ~ point.city %}
-                                {% set type_title = 'categories.' ~ point.type %}
-                                <tr>
-                                    <td>{{ point.id }}</td>
-                                    <td>{{ city_title|trans }}</td>
-                                    <td>{{ type_title|trans }}</td>
-                                    <td>{{ point.title }}</td>
-                                    {% if point.is_active %}
-                                        <td class="text-success">Да</td>
-                                    {% else %}
-                                        <td class="text-danger">Нет</td>
-                                    {% endif %}
-                                    <td style="width: 110px">
-                                        <a class="btn btn-primary btn-fill btn-icon" href="{{ path('admin.point_edit', {id: point.id}) }}" role="button" title="Редактировать">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a class="btn btn-danger btn-fill btn-icon" href="{{ path('admin.point_delete', {id: point.id}) }}" role="button" title="Удалить">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-
-                        <br>
-                        <ul class="pagination justify-content-center">
-                            {% if prev_page %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ path('admin.point_list', {
-                                        page: prev_page,
-                                        city: city_filter,
-                                        category: category_filter
-                                    }) }}">Предыдущая страница</a>
-                                </li>
-                            {% endif %}
-                            {% if next_page %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ path('admin.point_list', {
-                                        page: next_page,
-                                        city: city_filter,
-                                        category: category_filter
-                                    }) }}">Следующая страница</a>
-                                </li>
-                            {% endif %}
-                        </ul>
                     </div>
                 </div>
             </div>

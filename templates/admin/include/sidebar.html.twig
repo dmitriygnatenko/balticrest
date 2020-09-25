@@ -12,46 +12,18 @@
                     <p>Объекты</p>
                 </a>
             </li>
+            <li class="nav-item {% if app.request.requestUri starts with '/admin/news' %}active{% endif %}">
+                <a class="nav-link" href="{{ path('admin.news_list') }}">
+                    <i class="fa fa-newspaper-o"></i>
+                    <p>Новости</p>
+                </a>
+            </li>
             <li class="nav-item {% if app.request.requestUri starts with '/admin/article' %}active{% endif %}">
                 <a class="nav-link" href="{{ path('admin.article_list') }}">
                     <i class="fa fa-file-text"></i>
                     <p>Статьи</p>
                 </a>
             </li>
-
-            <!--
-            <li>
-                <a class="nav-link" href="dashboard.html">
-                    <i class="nc-icon nc-chart-pie-35"></i>
-                    <p>Статистика</p>
-                </a>
-            </li>
-            <li >
-                <a class="nav-link" href="./user.html">
-                    <i class="nc-icon nc-circle-09"></i>
-                    <p>User Profile</p>
-                </a>
-            </li>
-
-            <li>
-                <a class="nav-link" href="./typography.html">
-                    <i class="nc-icon nc-paper-2"></i>
-                    <p>Typography</p>
-                </a>
-            </li>
-            <li>
-                <a class="nav-link" href="./icons.html">
-                    <i class="nc-icon nc-atom"></i>
-                    <p>Icons</p>
-                </a>
-            </li>
-            <li>
-                <a class="nav-link" href="./notifications.html">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>Notifications</p>
-                </a>
-            </li>
-            -->
         </ul>
     </div>
 </div>

@@ -6,19 +6,19 @@ namespace App\Components\Admin\Service\Form;
 
 use App\Components\Admin\Service\Form\Type\CKEditorFormType;
 use App\Components\Admin\Service\Form\Type\IsActiveFormType;
-use App\Entity\Article;
+use App\Components\Admin\Service\Form\Type\NewsTagsFormType;
 use App\Entity\Language;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ArticleForm extends AbstractType
+class NewsForm extends AbstractType
 {
     /** @var string */
     public const VALIDATION_GROUP_CREATE = 'create';
@@ -40,39 +40,27 @@ class ArticleForm extends AbstractType
         /** @var EntityManager $em */
         $em = $options['em'];
 
-        /** @var Article|null $article */
-        $article = $options['article'] ?? null;
-
         $languages = $em->getRepository(Language::class)->findBy(['is_active' => true]);
 
         $builder->setRequired(false);
 
         $builder->add('is_active', IsActiveFormType::class);
 
-        $builder->add('url', TextType::class, [
-            'label' => 'URL',
+        $builder->add('image', TextType::class, [
+            'label' => 'Картинка',
             'constraints' => [
-                new Callback([
-                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
-                    'callback' => static function($value, $context) use ($em, $article) {
-                        if ($value === '' || $value === null) {
-                            return;
-                        }
-
-                        if ($article !== null && $article->getUrl() === $value) {
-                            return;
-                        }
-
-                        if ($em->getRepository(Article::class)->count(['url' => $value])) {
-                            $context->buildViolation('Данный URL уже используется')
-                                ->atPath('url')
-                                ->addViolation();
-                        }
-                    }
-                ]),
                 new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
             ]
         ]);
+
+        $builder->add('publish_date', DateType::class, [
+            'label' => 'Дата публикации',
+            'constraints' => [
+                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
+            ]
+        ]);
+
+        $builder->add('tags', NewsTagsFormType::class);
 
         /** @var Language $language */
         foreach ($languages as $language) {
@@ -87,14 +75,6 @@ class ArticleForm extends AbstractType
                 'label' => 'Текст',
                 'config' => ['height' => 800]
             ]);
-
-            $builder->add('lang_' . $language->getId() . '_meta_keywords', TextType::class, [
-                'label' => 'Meta keywords'
-            ]);
-
-            $builder->add('lang_' . $language->getId() . '_meta_description', TextType::class, [
-                'label' => 'Meta description'
-            ]);
         }
     }
 
@@ -106,7 +86,6 @@ class ArticleForm extends AbstractType
         $resolver
             ->setRequired('em')
             ->addAllowedTypes('em', EntityManagerInterface::class)
-            ->setDefault('article', null)
             ->setRequired('validation_groups');
     }
 }

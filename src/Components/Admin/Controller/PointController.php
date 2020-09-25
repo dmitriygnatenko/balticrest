@@ -65,8 +65,8 @@ class PointController extends AbstractController
 
         return $this->render('admin/point/list.html.twig', [
             'points' => $points,
-            'next_page' => $pointPaginator->getNextPage(),
-            'prev_page' => $pointPaginator->getPrevPage(),
+            'next_page' => $pointPaginator ? $pointPaginator->getNextPage() : null,
+            'prev_page' => $pointPaginator ? $pointPaginator->getPrevPage() : null,
         ]);
     }
 
@@ -92,7 +92,7 @@ class PointController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $point = new Point();
-            $pointFormDataTransformer->transformToDatabase($form->getData(), $point);
+            $pointFormDataTransformer->transformToEntity($form->getData(), $point);
 
             try {
                 $entityManager->persist($point);
@@ -135,7 +135,7 @@ class PointController extends AbstractController
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
-        $formData = $pointFormDataTransformer->transformFromDatabase($point);
+        $formData = $pointFormDataTransformer->transformFromEntity($point);
 
         $form = $this->createForm(PointForm::class, $formData, [
             'em' => $entityManager,
@@ -146,7 +146,7 @@ class PointController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $pointFormDataTransformer->transformToDatabase($form->getData(), $point);
+            $pointFormDataTransformer->transformToEntity($form->getData(), $point);
 
             try {
                 $entityManager->persist($point);

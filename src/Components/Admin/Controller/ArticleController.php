@@ -7,7 +7,6 @@ namespace App\Components\Admin\Controller;
 use App\Components\Admin\Service\DTO\ArticleDTO;
 use App\Components\Admin\Service\Form\ArticleForm;
 use App\Components\Admin\Service\Form\Mapper\ArticleFormDataTransformer;
-use App\Components\Admin\Service\Form\PointForm;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
@@ -55,20 +54,20 @@ class ArticleController extends AbstractController
 
         try {
             $articlePaginator = $this->getDoctrine()->getRepository(Article::class)
-                ->getPaginatedFilteredArticles($request);
+                ->getPaginatedArticles($request);
 
             foreach ($articlePaginator->getIterator() as $article) {
                 $articles[] = (new ArticleDTO())->fillByArticle($article);
             }
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-            $pointPaginator = null;
+            $articlePaginator = null;
         }
 
         return $this->render('admin/article/list.html.twig', [
             'articles' => $articles,
-            'next_page' => $articlePaginator->getNextPage(),
-            'prev_page' => $articlePaginator->getPrevPage(),
+            'next_page' => $articlePaginator ? $articlePaginator->getNextPage() : null,
+            'prev_page' => $articlePaginator ? $articlePaginator->getPrevPage() : null,
         ]);
     }
 
@@ -87,14 +86,14 @@ class ArticleController extends AbstractController
 
         $form = $this->createForm(ArticleForm::class, [], [
             'em' => $entityManager,
-            'validation_groups' => PointForm::VALIDATION_GROUP_CREATE
+            'validation_groups' => ArticleForm::VALIDATION_GROUP_CREATE
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article = new Article();
-            $articleFormDataTransformer->transformToDatabase($form->getData(), $article);
+            $articleFormDataTransformer->transformToEntity($form->getData(), $article);
 
             try {
                 $entityManager->persist($article);
@@ -137,18 +136,18 @@ class ArticleController extends AbstractController
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
-        $formData = $articleFormDataTransformer->transformFromDatabase($article);
+        $formData = $articleFormDataTransformer->transformFromEntity($article);
 
         $form = $this->createForm(ArticleForm::class, $formData, [
             'em' => $entityManager,
             'article' => $article,
-            'validation_groups' => PointForm::VALIDATION_GROUP_UPDATE
+            'validation_groups' => ArticleForm::VALIDATION_GROUP_UPDATE
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $articleFormDataTransformer->transformToDatabase($form->getData(), $article);
+            $articleFormDataTransformer->transformToEntity($form->getData(), $article);
 
             try {
                 $entityManager->persist($article);
