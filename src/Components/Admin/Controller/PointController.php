@@ -9,6 +9,7 @@ use App\Components\Admin\Service\Form\Mapper\PointFormDataTransformer;
 use App\Components\Admin\Service\Form\PointForm;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
+use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Entity\Point;
 use App\Entity\PointLangData;
 use Doctrine\ORM\EntityManager;
@@ -101,7 +102,7 @@ class PointController extends AbstractController
                 }
                 $entityManager->flush();
 
-                $this->cacheManager->clearByTag($point->getCity()->getCode());
+                $this->cacheManager->clearByTag(CacheTagInterface::TAG_POINTS);
 
                 $this->addFlash('success', 'Объект успешно добавлен');
             } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
@@ -155,7 +156,7 @@ class PointController extends AbstractController
                 }
                 $entityManager->flush();
 
-                $this->cacheManager->clearByTag($point->getCity()->getCode());
+                $this->cacheManager->clearByTag(CacheTagInterface::TAG_POINTS);
 
                 $this->addFlash('success', 'Объект успешно сохранен');
 
@@ -187,12 +188,10 @@ class PointController extends AbstractController
 
         if ($request->isMethod('post')) {
             try {
-                $city = $point->getCity()->getCode();
-
                 $entityManager->remove($point);
                 $entityManager->flush();
 
-                $this->cacheManager->clearByTag($city);
+                $this->cacheManager->clearByTag(CacheTagInterface::TAG_POINTS);
 
                 $this->addFlash('success', 'Объект успешно удален');
             } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {

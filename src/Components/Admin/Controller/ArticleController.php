@@ -102,7 +102,7 @@ class ArticleController extends AbstractController
                 }
                 $entityManager->flush();
 
-                $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLE);
+                $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLES);
 
                 $this->addFlash('success', 'Статья успешно добавлена');
             } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
@@ -156,7 +156,7 @@ class ArticleController extends AbstractController
                 }
                 $entityManager->flush();
 
-                $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLE);
+                $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLES);
 
                 $this->addFlash('success', 'Статья успешно сохранена');
 
@@ -191,7 +191,7 @@ class ArticleController extends AbstractController
                 $entityManager->remove($article);
                 $entityManager->flush();
 
-                $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLE);
+                $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLES);
 
                 $this->addFlash('success', 'Статья успешно удалена');
             } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {

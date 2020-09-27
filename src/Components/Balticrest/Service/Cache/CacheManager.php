@@ -8,7 +8,7 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Psr\Log\LoggerInterface;
 
-class CacheManager implements CacheManagerInterface, CacheDefinitions
+class CacheManager implements CacheManagerInterface, CacheDefinitions, CacheTagInterface
 {
     /** @var TagAwareCacheInterface */
     private $cache;
@@ -36,7 +36,12 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions
             $this->cache->delete(self::LANGUAGE_LIST_CACHE_KEY);
             $this->cache->delete(self::POINT_TYPES_CACHE_KEY);
 
-            $this->cache->invalidateTags([self::MAP_POINTS_TAG]);
+            $this->cache->invalidateTags([
+                self::TAG_NEWS,
+                self::TAG_ARTICLES,
+                self::TAG_POINTS,
+                self::MAP_POINTS_TAG
+            ]);
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
         }
