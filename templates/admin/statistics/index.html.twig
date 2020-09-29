@@ -1,0 +1,246 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество уникальных пользователей (по дням)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="users30days" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество новых пользователей (по дням)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="newUsers30days" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество просмотренных страниц (по дням)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="hits30days" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество сессий (по дням)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="sessions30days" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Средняя длительность сессии в минутах (по дням)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="avgSessionDuration30days" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Показатель отказов в % (по дням)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="bounceRate30days" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>`
+{% endblock %}
+
+{% block admin_js_body %}
+    {{ parent() }}
+    <script src="{{ asset('static/admin/src/chart/Chart.min.js') }}"></script>
+
+    <script>
+    function getOptions(max) {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: { display: false },
+            scales: {
+                yAxes: [{
+                    ticks: { beginAtZero: true, min: 0, suggestedMax: max }
+                }]
+            },
+            tooltips: {
+                displayColors: false,
+                callbacks: {
+                    title: function(tooltipItem, data) {
+                        return '';
+                    },
+                    label: function(tooltipItem, data) {
+                        return tooltipItem.yLabel.toString();
+                    }
+                }
+            }
+        };
+    }
+
+    {% if statistics['day']['users'] is defined %}
+        const users30daysContext = document.getElementById('users30days').getContext('2d');
+
+        const users30daysChart = new Chart(users30daysContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['day']['users']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['day']['users']['values']|join(',') }}],
+                    backgroundColor: ['rgba(58, 235, 137, 0.2)'],
+                    borderColor: ['rgba(58, 235, 137, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['day']['users']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['day']['newUsers'] is defined %}
+        const newUsers30daysContext = document.getElementById('newUsers30days').getContext('2d');
+
+        const newUsers30daysChart = new Chart(newUsers30daysContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['day']['newUsers']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['day']['newUsers']['values']|join(',') }}],
+                    backgroundColor: ['rgba(219, 220, 85, 0.2)'],
+                    borderColor: ['rgba(219, 220, 85, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['day']['newUsers']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['day']['hits'] is defined %}
+        const hits30daysContext = document.getElementById('hits30days').getContext('2d');
+
+        const hits30daysChart = new Chart(hits30daysContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['day']['hits']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['day']['hits']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(54, 162, 235, 0.2)' ],
+                    borderColor: [ 'rgba(54, 162, 235, 1)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['day']['hits']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['day']['sessions'] is defined %}
+        const sessions30daysContext = document.getElementById('sessions30days').getContext('2d');
+
+        const sessions30daysChart = new Chart(sessions30daysContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['day']['sessions']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['day']['sessions']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(188, 62, 236, 0.2)' ],
+                    borderColor: [ 'rgba(188, 62, 236, 1)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['day']['sessions']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['day']['avgSessionDuration'] is defined %}
+        const avgSessionDuration30daysContext = document.getElementById('avgSessionDuration30days').getContext('2d');
+
+        const avgSessionDuration30daysChart = new Chart(avgSessionDuration30daysContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['day']['avgSessionDuration']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['day']['avgSessionDuration']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(131, 235, 58, 0.2)' ],
+                    borderColor: [ 'rgba(131, 235, 58, 1)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['day']['avgSessionDuration']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['day']['bounceRate'] is defined %}
+        const bounceRate30daysContext = document.getElementById('bounceRate30days').getContext('2d');
+
+        const bounceRate30daysChart = new Chart(bounceRate30daysContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['day']['bounceRate']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['day']['bounceRate']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(237, 67, 64, 0.1)' ],
+                    borderColor: [ 'rgba(237, 67, 64, 0.8)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['day']['bounceRate']['values']) }})
+        });
+    {% endif %}
+
+    </script>
+
+{% endblock %}

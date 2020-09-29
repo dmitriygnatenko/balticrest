@@ -6,6 +6,12 @@
             </a>
         </div>
         <ul class="nav">
+            <li class="nav-item {% if app.request.requestUri == '/' %}active{% endif %}">
+                <a class="nav-link" href="{{ path('admin.statistics_index') }}">
+                    <i class="fa fa-bar-chart"></i>
+                    <p>Статистика</p>
+                </a>
+            </li>
             <li class="nav-item {% if app.request.requestUri starts with '/admin/point' %}active{% endif %}">
                 <a class="nav-link" href="{{ path('admin.point_list') }}">
                     <i class="fa fa-map-marker"></i>
