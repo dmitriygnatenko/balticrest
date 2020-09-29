@@ -27,27 +27,6 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions, CacheTagI
     }
 
     /**
-     * @return void
-     */
-    public function clearAllCache(): void
-    {
-        try {
-            $this->cache->delete(self::CITY_LIST_CACHE_KEY);
-            $this->cache->delete(self::LANGUAGE_LIST_CACHE_KEY);
-            $this->cache->delete(self::POINT_TYPES_CACHE_KEY);
-
-            $this->cache->invalidateTags([
-                self::TAG_NEWS,
-                self::TAG_ARTICLES,
-                self::TAG_POINTS,
-                self::MAP_POINTS_TAG
-            ]);
-        } catch (InvalidArgumentException $exception) {
-            $this->logger->error($exception);
-        }
-    }
-
-    /**
      * @param string $tag
      *
      * @return void
