@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Collator' => $vendorDir . '/symfony/intl/Resources/stubs/Collator.php',
+    'Google_Service_Exception' => $vendorDir . '/google/apiclient/src/Google/Service/Exception.php',
+    'Google_Service_Resource' => $vendorDir . '/google/apiclient/src/Google/Service/Resource.php',
     'IntlDateFormatter' => $vendorDir . '/symfony/intl/Resources/stubs/IntlDateFormatter.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'Locale' => $vendorDir . '/symfony/intl/Resources/stubs/Locale.php',
