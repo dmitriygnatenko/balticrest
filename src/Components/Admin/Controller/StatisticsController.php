@@ -29,7 +29,7 @@ class StatisticsController extends AbstractController
      */
     public function list(): Response
     {
-        $statistics = $this->googleAnalyticsStatistics->getStatistics();
+        $statistics = $this->googleAnalyticsStatistics->getCachedStatistics();
 
         return $this->render('admin/statistics/index.html.twig', [
             'statistics' => $statistics

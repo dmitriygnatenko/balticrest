@@ -13,7 +13,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="users30days" height="300"></canvas>
+                            <canvas id="usersDay" height="300"></canvas>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="newUsers30days" height="300"></canvas>
+                            <canvas id="newUsersDay" height="300"></canvas>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="hits30days" height="300"></canvas>
+                            <canvas id="hitsDay" height="300"></canvas>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="sessions30days" height="300"></canvas>
+                            <canvas id="sessionsDay" height="300"></canvas>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="avgSessionDuration30days" height="300"></canvas>
+                            <canvas id="avgSessionDurationDay" height="300"></canvas>
                         </div>
                     </div>
                 </div>
@@ -88,14 +88,104 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="bounceRate30days" height="300"></canvas>
+                            <canvas id="bounceRateDay" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество уникальных пользователей (по неделям)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="usersWeek" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество новых пользователей (по неделям)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="newUsersWeek" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество просмотренных страниц (по неделям)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="hitsWeek" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Количество сессий (по неделям)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="sessionsWeek" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Средняя длительность сессии в минутах (по неделям)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="avgSessionDurationWeek" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 class="card-title">Показатель отказов в % (по неделям)</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="bounceRateWeek" height="300"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>`
+    </div>
 {% endblock %}
 
 {% block admin_js_body %}
@@ -128,9 +218,8 @@
     }
 
     {% if statistics['day']['users'] is defined %}
-        const users30daysContext = document.getElementById('users30days').getContext('2d');
-
-        const users30daysChart = new Chart(users30daysContext, {
+        const usersDayContext = document.getElementById('usersDay').getContext('2d');
+        const usersDayChart = new Chart(usersDayContext, {
             type: 'line',
             data: {
                 labels: [{{ statistics['day']['users']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
@@ -147,9 +236,8 @@
     {% endif %}
 
     {% if statistics['day']['newUsers'] is defined %}
-        const newUsers30daysContext = document.getElementById('newUsers30days').getContext('2d');
-
-        const newUsers30daysChart = new Chart(newUsers30daysContext, {
+        const newUsersDayContext = document.getElementById('newUsersDay').getContext('2d');
+        const newUsersDayChart = new Chart(newUsersDayContext, {
             type: 'line',
             data: {
                 labels: [{{ statistics['day']['newUsers']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
@@ -166,9 +254,8 @@
     {% endif %}
 
     {% if statistics['day']['hits'] is defined %}
-        const hits30daysContext = document.getElementById('hits30days').getContext('2d');
-
-        const hits30daysChart = new Chart(hits30daysContext, {
+        const hitsDayContext = document.getElementById('hitsDay').getContext('2d');
+        const hitsDayChart = new Chart(hitsDayContext, {
             type: 'line',
             data: {
                 labels: [{{ statistics['day']['hits']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
@@ -185,9 +272,8 @@
     {% endif %}
 
     {% if statistics['day']['sessions'] is defined %}
-        const sessions30daysContext = document.getElementById('sessions30days').getContext('2d');
-
-        const sessions30daysChart = new Chart(sessions30daysContext, {
+        const sessionsDayContext = document.getElementById('sessionsDay').getContext('2d');
+        const sessionsDayChart = new Chart(sessionsDayContext, {
             type: 'line',
             data: {
                 labels: [{{ statistics['day']['sessions']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
@@ -204,9 +290,8 @@
     {% endif %}
 
     {% if statistics['day']['avgSessionDuration'] is defined %}
-        const avgSessionDuration30daysContext = document.getElementById('avgSessionDuration30days').getContext('2d');
-
-        const avgSessionDuration30daysChart = new Chart(avgSessionDuration30daysContext, {
+        const avgSessionDurationDayContext = document.getElementById('avgSessionDurationDay').getContext('2d');
+        const avgSessionDurationDayChart = new Chart(avgSessionDurationDayContext, {
             type: 'line',
             data: {
                 labels: [{{ statistics['day']['avgSessionDuration']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
@@ -223,9 +308,8 @@
     {% endif %}
 
     {% if statistics['day']['bounceRate'] is defined %}
-        const bounceRate30daysContext = document.getElementById('bounceRate30days').getContext('2d');
-
-        const bounceRate30daysChart = new Chart(bounceRate30daysContext, {
+        const bounceRateDayContext = document.getElementById('bounceRateDay').getContext('2d');
+        const bounceRateDayChart = new Chart(bounceRateDayContext, {
             type: 'line',
             data: {
                 labels: [{{ statistics['day']['bounceRate']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
@@ -238,6 +322,120 @@
                 }]
             },
             options: getOptions({{ max(statistics['day']['bounceRate']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['week']['users'] is defined %}
+        const usersWeekContext = document.getElementById('usersWeek').getContext('2d');
+
+        const usersWeekChart = new Chart(usersWeekContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['week']['users']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['week']['users']['values']|join(',') }}],
+                    backgroundColor: ['rgba(58, 235, 137, 0.2)'],
+                    borderColor: ['rgba(58, 235, 137, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['week']['users']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['week']['newUsers'] is defined %}
+        const newUsersWeekContext = document.getElementById('newUsersWeek').getContext('2d');
+
+        const newUsersWeekChart = new Chart(newUsersWeekContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['week']['newUsers']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['week']['newUsers']['values']|join(',') }}],
+                    backgroundColor: ['rgba(219, 220, 85, 0.2)'],
+                    borderColor: ['rgba(219, 220, 85, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['week']['newUsers']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['week']['hits'] is defined %}
+        const hitsWeekContext = document.getElementById('hitsWeek').getContext('2d');
+
+        const hitsWeekChart = new Chart(hitsWeekContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['week']['hits']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['week']['hits']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(54, 162, 235, 0.2)' ],
+                    borderColor: [ 'rgba(54, 162, 235, 1)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['week']['hits']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['week']['sessions'] is defined %}
+        const sessionsWeekContext = document.getElementById('sessionsWeek').getContext('2d');
+
+        const sessionsWeekChart = new Chart(sessionsWeekContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['week']['sessions']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['week']['sessions']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(188, 62, 236, 0.2)' ],
+                    borderColor: [ 'rgba(188, 62, 236, 1)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['week']['sessions']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['week']['avgSessionDuration'] is defined %}
+        const avgSessionDurationWeekContext = document.getElementById('avgSessionDurationWeek').getContext('2d');
+
+        const avgSessionDurationWeekChart = new Chart(avgSessionDurationWeekContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['week']['avgSessionDuration']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['week']['avgSessionDuration']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(131, 235, 58, 0.2)' ],
+                    borderColor: [ 'rgba(131, 235, 58, 1)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['week']['avgSessionDuration']['values']) }})
+        });
+    {% endif %}
+
+    {% if statistics['week']['bounceRate'] is defined %}
+        const bounceRateWeekContext = document.getElementById('bounceRateWeek').getContext('2d');
+
+        const bounceRateWeekChart = new Chart(bounceRateWeekContext, {
+            type: 'line',
+            data: {
+                labels: [{{ statistics['week']['bounceRate']['labels']|map((elem) => "'#{elem}'")|join(',')|raw }}],
+                datasets: [{
+                    label: '',
+                    data: [{{ statistics['week']['bounceRate']['values']|join(',') }}],
+                    backgroundColor: [ 'rgba(237, 67, 64, 0.1)' ],
+                    borderColor: [ 'rgba(237, 67, 64, 0.8)' ],
+                    borderWidth: 2
+                }]
+            },
+            options: getOptions({{ max(statistics['week']['bounceRate']['values']) }})
         });
     {% endif %}
 
