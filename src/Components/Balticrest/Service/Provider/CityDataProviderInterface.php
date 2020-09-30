@@ -9,10 +9,10 @@ interface CityDataProviderInterface
     /**
      * @return array
      */
-    public function getCachedActiveCitiesList(): array;
+    public function getCachedCitiesList(): array;
 
     /**
      * @return array
      */
-    public function getActiveCitiesList(): array;
+    public function getCitiesList(): array;
 }

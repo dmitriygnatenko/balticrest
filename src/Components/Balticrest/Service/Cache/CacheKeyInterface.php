@@ -11,4 +11,10 @@ interface CacheKeyInterface
 
     /** @var string */
     public const KEY_CITY_POINT_TYPES = 'city_point_types';
+
+    /** @var string */
+    public const KEY_CITIES = 'cities';
+
+    /** @var string */
+    public const KEY_LANGUAGES = 'languages';
 }

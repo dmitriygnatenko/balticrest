@@ -21,12 +21,12 @@ interface PointTypeProviderInterface
      *
      * @return array
      */
-    public function getCachedCityPointTypes(string $city): array;
+    public function getCachedCityPointTypesList(string $city): array;
 
     /**
      * @param string $city
      *
      * @return array
      */
-    public function getCityPointTypes(string $city): array;
+    public function getCityPointTypesList(string $city): array;
 }

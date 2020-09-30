@@ -79,7 +79,7 @@ class PointTypeProvider implements PointTypeProviderInterface
      *
      * @return array
      */
-    public function getCachedCityPointTypes(string $city): array
+    public function getCachedCityPointTypesList(string $city): array
     {
         $cacheKey = $this->cacheManager->getCityPointTypesCacheKey($city);
 
@@ -88,12 +88,12 @@ class PointTypeProvider implements PointTypeProviderInterface
                 $item->expiresAfter(CacheExpireInterface::EXPIRE_WEEK);
                 $item->tag([$city, CacheTagInterface::TAG_POINTS]);
 
-                return $this->getCityPointTypes($city);
+                return $this->getCityPointTypesList($city);
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
 
-            return $this->getCityPointTypes($city);
+            return $this->getCityPointTypesList($city);
         }
     }
 
@@ -102,11 +102,11 @@ class PointTypeProvider implements PointTypeProviderInterface
      *
      * @return array
      */
-    public function getCityPointTypes(string $city): array
+    public function getCityPointTypesList(string $city): array
     {
         $formattedResults = [];
 
-        $results = $this->em->getRepository(PointType::class)->findCityPointTypes($city);
+        $results = $this->em->getRepository(PointType::class)->getCityPointTypes($city);
 
         foreach ($results as $result) {
             $formattedResults[$result->getCode()] = true;

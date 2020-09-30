@@ -9,10 +9,10 @@ interface LanguageDataProviderInterface
     /**
      * @return array
      */
-    public function getCachedActiveLanguagesList(): array;
+    public function getCachedLanguagesList(): array;
 
     /**
      * @return array
      */
-    public function getActiveLanguagesList(): array;
+    public function getLanguagesList(): array;
 }

@@ -61,7 +61,7 @@ class TwigGlobalService
      */
     public function getCities(): array
     {
-        return $this->cityDataProvider->getCachedActiveCitiesList();
+        return $this->cityDataProvider->getCachedCitiesList();
     }
 
     /**
@@ -69,7 +69,7 @@ class TwigGlobalService
      */
     public function getLanguages(): array
     {
-        return $this->languageDataProvider->getCachedActiveLanguagesList();
+        return $this->languageDataProvider->getCachedLanguagesList();
     }
 
     /**
@@ -87,7 +87,7 @@ class TwigGlobalService
      */
     public function getActivePointTypes(string $city): array
     {
-        return $this->pointTypeProvider->getCachedCityPointTypes($city);
+        return $this->pointTypeProvider->getCachedCityPointTypesList($city);
     }
 
     /**
