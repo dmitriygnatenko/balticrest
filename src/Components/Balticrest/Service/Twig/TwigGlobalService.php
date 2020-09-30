@@ -87,7 +87,7 @@ class TwigGlobalService
      */
     public function getActivePointTypes(string $city): array
     {
-        return $this->pointTypeProvider->getCachedActivePointTypesList($city);
+        return $this->pointTypeProvider->getCachedCityPointTypes($city);
     }
 
     /**

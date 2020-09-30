@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Provider;
 
-use App\Components\Balticrest\Service\Cache\CacheDefinitions;
+use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
+use App\Components\Balticrest\Service\Cache\CacheKeyInterface;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
+use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Entity\PointType;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\InvalidArgumentException;
@@ -14,7 +16,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-class PointTypeProvider implements PointTypeProviderInterface, CacheDefinitions
+class PointTypeProvider implements PointTypeProviderInterface
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -52,12 +54,14 @@ class PointTypeProvider implements PointTypeProviderInterface, CacheDefinitions
     public function getCachedPointTypes(): array
     {
         try {
-            return $this->cache->get(self::POINT_TYPES_CACHE_KEY, function (ItemInterface $item) {
-                $item->expiresAfter(self::POINT_TYPES_CACHE_EXPIRE_TIME);
+            return $this->cache->get(CacheKeyInterface::KEY_POINT_TYPES, function (ItemInterface $item) {
+                $item->expiresAfter(CacheExpireInterface::EXPIRE_WEEK);
+
                 return $this->getPointTypes();
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
+
             return $this->getPointTypes();
         }
     }
@@ -75,19 +79,21 @@ class PointTypeProvider implements PointTypeProviderInterface, CacheDefinitions
      *
      * @return array
      */
-    public function getCachedActivePointTypesList(string $city): array
+    public function getCachedCityPointTypes(string $city): array
     {
-        $cacheKey = $this->cacheManager->getActivePointsCacheKey($city);
+        $cacheKey = $this->cacheManager->getCityPointTypesCacheKey($city);
 
         try {
             return $this->cache->get($cacheKey, function (ItemInterface $item) use ($city) {
-                $item->expiresAfter(self::ACTIVE_POINT_TYPES_CACHE_EXPIRE_TIME);
-                $item->tag([$city]);
-                return $this->getActivePointTypesList($city);
+                $item->expiresAfter(CacheExpireInterface::EXPIRE_WEEK);
+                $item->tag([$city, CacheTagInterface::TAG_POINTS]);
+
+                return $this->getCityPointTypes($city);
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
-            return $this->getActivePointTypesList($city);
+
+            return $this->getCityPointTypes($city);
         }
     }
 
@@ -96,11 +102,11 @@ class PointTypeProvider implements PointTypeProviderInterface, CacheDefinitions
      *
      * @return array
      */
-    public function getActivePointTypesList(string $city): array
+    public function getCityPointTypes(string $city): array
     {
         $formattedResults = [];
 
-        $results = $this->em->getRepository(PointType::class)->findActivePointTypes($city);
+        $results = $this->em->getRepository(PointType::class)->findCityPointTypes($city);
 
         foreach ($results as $result) {
             $formattedResults[$result->getCode()] = true;

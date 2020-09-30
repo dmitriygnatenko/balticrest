@@ -13,11 +13,13 @@ class UserConfirmCodeGenerator implements UserConfirmCodeGeneratorInterface
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
-
 
     /**
      * @param User $user

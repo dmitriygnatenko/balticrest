@@ -35,7 +35,7 @@ class MailerEventSubscriber implements EventSubscriberInterface
     /**
      * @param MessageEvent $event
      */
-    public function onMessage(MessageEvent $event)
+    public function onMessage(MessageEvent $event): void
     {
         /** @var Email $email */
         $email = $event->getMessage();

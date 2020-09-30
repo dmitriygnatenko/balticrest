@@ -8,7 +8,7 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Psr\Log\LoggerInterface;
 
-class CacheManager implements CacheManagerInterface, CacheDefinitions, CacheTagInterface
+class CacheManager implements CacheManagerInterface, CacheTagInterface, CacheKeyInterface
 {
     /** @var TagAwareCacheInterface */
     private $cache;
@@ -42,6 +42,16 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions, CacheTagI
 
     /**
      * @param string $city
+     *
+     * @return string
+     */
+    public function getCityPointTypesCacheKey(string $city): string
+    {
+        return self::KEY_CITY_POINT_TYPES . $city;
+    }
+
+    /**
+     * @param string $city
      * @param string $category
      * @param string $locale
      *
@@ -50,15 +60,5 @@ class CacheManager implements CacheManagerInterface, CacheDefinitions, CacheTagI
     public function getMapPointsCacheKey(string $city, string $category, string $locale): string
     {
         return self::MAP_POINTS_CACHE_KEY . $city . $category . $locale;
-    }
-
-    /**
-     * @param string $city
-     *
-     * @return string
-     */
-    public function getActivePointsCacheKey(string $city): string
-    {
-        return self::ACTIVE_POINT_TYPES_CACHE_KEY . $city;
     }
 }

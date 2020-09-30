@@ -29,7 +29,7 @@ class PointTypeRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function findActivePointTypes(string $city): array
+    public function findCityPointTypes(string $city): array
     {
         $qb = $this->createQueryBuilder('t');
 
