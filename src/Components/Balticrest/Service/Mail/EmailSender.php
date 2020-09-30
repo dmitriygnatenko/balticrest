@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use DateTimeImmutable;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
+use Exception;
 use Twig\Environment;
 
 class EmailSender implements EmailSenderInterface
@@ -62,44 +63,10 @@ class EmailSender implements EmailSenderInterface
 
     /**
      * @param User $user
+     *
+     * @throws Exception
      */
-    public function sendRegistrationConfirmEmail(User $user)
-    {
-        $confirmCode = $this->userConfirmCodeGenerator->generate($user, UserConfirmCode::TYPE_CONFIRM_EMAIL);
-
-        $confirmUrl = $this->urlGenerator->generate(
-            'registration_confirm',
-            [
-                'code' => $confirmCode->getCode()
-            ],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
-
-        $expirationTimestamp = $confirmCode->getCreated()->getTimestamp() + UserConfirmCode::EXPIRATION_TIME;
-
-        $expirationDate = (new DateTimeImmutable())->setTimestamp($expirationTimestamp);
-
-        try {
-            $content = $this->twig->render('balticrest/email/registration_confirm.html.twig', [
-                'expiration_date' => $expirationDate,
-                'confirm_url' => $confirmUrl,
-            ]);
-
-            $emailMessage = (new EmailMessage())
-                ->setEmail($user->getEmail())
-                ->setSubject($this->translator->trans('confirm.subject', [], 'email'))
-                ->setContent($content);
-
-            $this->bus->dispatch($emailMessage);
-        } catch (Throwable $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-        }
-    }
-
-    /**
-     * @param User $user
-     */
-    public function sendRestoreConfirmEmail(User $user)
+    public function sendRestoreConfirmEmail(User $user): void
     {
         $confirmCode = $this->userConfirmCodeGenerator->generate($user, UserConfirmCode::TYPE_RESTORE_PASSWORD);
 

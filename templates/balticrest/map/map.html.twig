@@ -7,7 +7,7 @@
 {% block description %}{{ global_service.mapPageDescription(city, category) }}{% endblock %}
 {% block keywords %}{{ global_service.mapPageKeywords(city, category) }}{% endblock %}
 
-{% set activePointTypes = global_service.activePointTypes(city, category) %}
+{% set cityPointTypes = global_service.cityPointTypes(city) %}
 
 {% block body_attr %}onload="initializeMap()" class="inmap innerpage"{% endblock %}
 
@@ -19,35 +19,35 @@
                 <span>{% trans %}categories.category{% endtrans %}</span>
                 <i class="fa fa-times" id="close_menu"></i>
                 <ul>
-                    {% if activePointTypes['hotels'] is defined %}
+                    {% if cityPointTypes['hotels'] is defined %}
                         <li><a title="{% trans %}categories.hotels{% endtrans %}" href="{% if category == 'hotels'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'hotels'}) }}{% endif %}" class="hotel {% if category == 'hotels' %}active{% endif %}"><i class="fa fa-hotel"></i></a></li>
                     {% endif %}
 
-                    {% if activePointTypes['medicine'] is defined %}
+                    {% if cityPointTypes['medicine'] is defined %}
                         <li><a title="{% trans %}categories.medicine{% endtrans %}" href="{% if category == 'medicine'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'medicine'}) }}{% endif %}" class="medicine {% if category == 'medicine' %}active{% endif %}"><i class="fa fa-plus-square"></i></a></li>
                     {% endif %}
 
-                    {% if activePointTypes['cafes'] is defined %}
+                    {% if cityPointTypes['cafes'] is defined %}
                         <li><a title="{% trans %}categories.cafes{% endtrans %}" href="{% if category == 'cafes'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'cafes'}) }}{% endif %}" class="cafe {% if category == 'cafes' %}active{% endif %}"><i class="fa fa-cutlery"></i></a></li>
                     {% endif %}
 
-                    {% if activePointTypes['shops'] is defined %}
+                    {% if cityPointTypes['shops'] is defined %}
                         <li><a title="{% trans %}categories.shops{% endtrans %}" href="{% if category == 'shops'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'shops'}) }}{% endif %}" class="shop {% if category == 'shops' %}active{% endif %}"><i class="fa fa-shopping-cart"></i></a></li>
                     {% endif %}
 
-                    {% if activePointTypes['banks'] is defined %}
+                    {% if cityPointTypes['banks'] is defined %}
                         <li><a title="{% trans %}categories.banks{% endtrans %}" href="{% if category == 'banks'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'banks'}) }}{% endif %}" class="bank {% if category == 'banks' %}active{% endif %}"><i class="fa fa-usd"></i></a></li>
                     {% endif %}
 
-                    {% if activePointTypes['museums'] is defined %}
+                    {% if cityPointTypes['museums'] is defined %}
                         <li><a title="{% trans %}categories.museums{% endtrans %}" href="{% if category == 'museums'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'museums'}) }}{% endif %}" class="museum {% if category == 'museums' %}active{% endif %}"><i class="fa fa-university"></i></a></li>
                     {% endif %}
 
-                    {% if activePointTypes['sport'] is defined %}
+                    {% if cityPointTypes['sport'] is defined %}
                         <li><a title="{% trans %}categories.sport{% endtrans %}" href="{% if category == 'sport'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'sport'}) }}{% endif %}" class="sport {% if category == 'sport' %}active{% endif %}"><i class="fa fa-futbol-o"></i></a></li>
                     {% endif %}
 
-                    {% if activePointTypes['transport'] is defined %}
+                    {% if cityPointTypes['transport'] is defined %}
                         <li><a title="{% trans %}categories.transport{% endtrans %}" href="{% if category == 'transport'%}{{ path('map', {city: city}) }}{% else %}{{ path('map', {city: city, category: 'transport'}) }}{% endif %}" class="transport {% if category == 'transport' %}active{% endif %}"><i class="fa fa-bus"></i></a></li>
                     {% endif %}
 
