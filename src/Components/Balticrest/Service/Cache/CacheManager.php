@@ -59,6 +59,6 @@ class CacheManager implements CacheManagerInterface, CacheTagInterface, CacheKey
      */
     public function getMapPointsCacheKey(string $city, string $category, string $locale): string
     {
-        return self::MAP_POINTS_CACHE_KEY . $city . $category . $locale;
+        return self::KEY_MAP_POINTS . $city . $category . $locale;
     }
 }

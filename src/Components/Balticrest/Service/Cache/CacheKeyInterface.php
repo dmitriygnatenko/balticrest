@@ -17,4 +17,7 @@ interface CacheKeyInterface
 
     /** @var string */
     public const KEY_LANGUAGES = 'languages';
+
+    /** @var string */
+    public const KEY_MAP_POINTS = 'map_points';
 }

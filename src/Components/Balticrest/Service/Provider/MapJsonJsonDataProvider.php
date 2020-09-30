@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Provider;
 
-use App\Components\Balticrest\Service\Cache\CacheDefinitions;
+use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
+use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use App\Components\Balticrest\Service\Mapper\MapPointsListDTOMapper;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-class MapJsonJsonDataProvider implements MapJsonDataProviderInterface, CacheDefinitions
+class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
 {
     /** @var RequestStack */
     private $requestStack;
@@ -62,19 +62,6 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface, CacheDefi
     }
 
     /**
-     * @param Request $request
-     *
-     * @return string
-     */
-    public function generateCityMapJsonDataFromRequest(Request $request): string
-    {
-        $city = $request->get('city', '');
-        $category = $request->get('category', '');
-
-        return $this->getCachedCityMapJsonData($city, $category);
-    }
-
-    /**
      * @param string $city
      * @param string $category
      *
@@ -93,19 +80,23 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface, CacheDefi
      */
     private function getCachedCityMapJsonData(string $city, string $category = ''): string
     {
+        return $this->getCityMapJsonData($city, $category); // TODO REMOVE
+
+
         $cacheKey = $this->cacheManager->getMapPointsCacheKey(
             $city, $category, $this->requestStack->getMasterRequest()->getLocale()
         );
 
         try {
             return $this->cache->get($cacheKey, function (ItemInterface $item) use ($city, $category) {
-                $item->tag([$city, self::MAP_POINTS_TAG]);
-                $item->expiresAfter(self::MAP_POINTS_CACHE_EXPIRE_TIME);
+                $item->tag([$city, CacheTagInterface::TAG_POINTS]);
+                $item->expiresAfter(CacheExpireInterface::EXPIRE_WEEK);
 
                 return $this->getCityMapJsonData($city, $category);
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
+
             return $this->getCityMapJsonData($city, $category);
         }
     }
@@ -120,7 +111,7 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface, CacheDefi
     {
         $points = $this->pointDataProvider->getPointsByCityAndCategory($city, $category);
 
-        $dto = $this->mapPointsListDTOMapper->fill(new MapPointsListDTO(), $points);
+        $dto = $this->mapPointsListDTOMapper->fill($city, $points);
 
         return $dto->getJsonResult();
     }
