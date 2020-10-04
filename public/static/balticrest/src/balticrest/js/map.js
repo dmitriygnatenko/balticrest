@@ -1,13 +1,12 @@
+function initializeMap() {
 
- function initializeMap() {
-
-    var activePoint;
+    let activePoint;
 
     ymaps.ready(init);
 
     function init() {
 
-        var map = new ymaps.Map("map", {
+        let map = new ymaps.Map("map", {
             center: [map_data.center.lat, map_data.center.lon],
             zoom: map_data.zoom,
             controls: getControls()
@@ -47,16 +46,16 @@
         if (item.link !== '') {
             return ymaps.templateLayoutFactory.createClass(
                 '<img src="' + item.image + '" class="logotype">' +
-                '<h3>'+ item.title +'<span></span></h3>' +
-                '<span>'+ item.description +'</span>' +
-                '<a href="'+ item.link + '" class="green_btn">' + map_data.trans.point_button + '</a>'
+                '<h3>' + item.title + '<span></span></h3>' +
+                '<span>' + item.description + '</span>' +
+                '<a href="' + item.link + '" class="green_btn">' + map_data.trans.point_button + '</a>'
             );
 
         } else {
             return ymaps.templateLayoutFactory.createClass(
                 '<img src="' + item.image + '" class="logotype">' +
-                '<h3>'+ item.title +'</h3>' +
-                '<span>'+ item.description +'</span>'
+                '<h3>' + item.title + '</h3>' +
+                '<span>' + item.description + '</span>'
             );
         }
     }
@@ -64,7 +63,7 @@
     function getBalloonLayout() {
         return ymaps.templateLayoutFactory.createClass(
             '<div class="marker_info">' +
-            '<div class="info">'+
+            '<div class="info">' +
             '<button type="button" class="close"><span>&times;</span></button>' +
             '$[[options.contentLayout]]' +
             '<span class="arrow"></span>' +
@@ -105,7 +104,7 @@
 
     function getControls() {
 
-        var typeSelector = new ymaps.control.TypeSelector({
+        let typeSelector = new ymaps.control.TypeSelector({
             options: {
                 float: 'none',
                 position: {
@@ -115,7 +114,7 @@
             }
         });
 
-        var zoomControl = new ymaps.control.ZoomControl({
+        let zoomControl = new ymaps.control.ZoomControl({
             options: {
                 float: 'none',
                 position: {
@@ -125,7 +124,8 @@
             }
         });
 
-        var geolocationControl = new ymaps.control.GeolocationControl({
+        let geolocationControl = new ymaps.control.GeolocationControl({
+
             options: {
                 float: 'none',
                 position: {
@@ -135,7 +135,7 @@
             }
         });
 
-        var rulerControl = new ymaps.control.RulerControl({
+        let rulerControl = new ymaps.control.RulerControl({
             options: {
                 float: 'none',
                 position: {

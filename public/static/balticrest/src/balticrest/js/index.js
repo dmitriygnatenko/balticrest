@@ -1,13 +1,13 @@
 
 function initializeMap() {
 
-	var activePoint;
+	let activePoint;
 
 	ymaps.ready(init);
 
 	function init() {
 
-		var map = new ymaps.Map("map", {
+		let map = new ymaps.Map("map", {
 			center: [map_data.center.lat, map_data.center.lon],
 			zoom: map_data.zoom,
 			controls: []
