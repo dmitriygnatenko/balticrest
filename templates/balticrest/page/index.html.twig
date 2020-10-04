@@ -509,7 +509,7 @@
     {{ parent() }}
 
     <script type="text/javascript">
-        const map_data = {{ map_data|raw }};
+        let map_data = {{ map_data|raw }};
     </script>
 
     {% if build_assets %}
@@ -524,15 +524,13 @@
 
     <script type="text/javascript">
 
-        $('#promo_head').css({
-            height: $(window).height() + 'px'
+        setIndexHeight();
+
+        $(window).resize(setIndexHeight);
+
+        $(function() {
+            new WOW().init();
         });
-
-         $(window).resize(setHeiHeight);
-
-         $(function() {
-             new WOW().init();
-         });
     </script>
 
 {% endblock %}

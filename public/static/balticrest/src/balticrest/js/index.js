@@ -1,4 +1,11 @@
 
+function setIndexHeight() {
+	"use strict";
+	$('#promo_head').css({
+		height: $(window).height() + 'px'
+	});
+}
+
 function initializeMap() {
 
 	let activePoint;

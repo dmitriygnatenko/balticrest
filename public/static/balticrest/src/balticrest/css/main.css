@@ -1316,7 +1316,60 @@ a.green_btn:hover {
     margin: 9px;
 }
 
-.language-selector div.flag {
+
+
+
+
+
+
+
+
+
+
+
+
+.header .language-selector span.language {
+    float: left;
+    height: 20px;
+    width: 30px;
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid #cecece;
+}
+
+.header .language-selector button {
+    color: #ffffff;
+    border: 2px solid;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 15px;
+    float: right;
+    background: transparent;
+    z-index: 100;
+}
+.header .language-selector .dropdown-menu > li > a {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.header .language-selector button:hover {
+    color: #e73931;
+}
+.header .language-selector button:hover .caret {
+    color: #e73931;
+}
+
+
+
+
+
+
+
+
+
+
+
+.header .language-selector div.flag {
     display: inline-block;
     margin-right: 5px;
     float: left;
@@ -1325,40 +1378,40 @@ a.green_btn:hover {
     border: 1px solid #ffffff;
 }
 
-.language-selector .btn-default {
+.header .language-selector .btn-default {
     padding: 6px 9px 6px 10px;
     background: transparent;
     border-radius: 4px !important;
 }
 
-.language-selector .caret {
+.header .language-selector .caret {
     color: #ffffff;
     border-top: 8px solid;
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
 }
 
-.language-selector .btn-default:hover,
-.language-selector .btn-default:focus,
-.language-selector .btn-default:active,
-.language-selector.open > .dropdown-toggle.btn-default {
+.header .language-selector .btn-default:hover,
+.header .language-selector .btn-default:focus,
+.header .language-selector .btn-default:active,
+.header .language-selector.open > .dropdown-toggle.btn-default {
     background-color: #ca332c;
     transition: 0.3s;
 }
 
-.language-selector.open .caret {
+.header .language-selector.open .caret {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-bottom: 8px solid;
     border-top: none;
 }
 
-.language-selector .dropdown-menu {
+.header .language-selector .dropdown-menu {
     top: 39px;
     min-width: 30px;
 }
 
-.language-selector .dropdown-menu li a.flag {
+.header .language-selector .dropdown-menu li a.flag {
     margin: 12px 15px;
     padding: 0;
     height: 20px;

@@ -1,4 +1,3 @@
-//////Index one block height//////
 
 $(document).ready(function () {
     //////Add place//////
