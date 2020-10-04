@@ -12,9 +12,11 @@
         left: 50%;
         margin-left: -500px;
     }
+
     .header_promo {
         padding-left: 30px;
     }
+
     .city-selector {
         margin-left: 60px;
     }
@@ -35,6 +37,7 @@
         left: auto;
         margin-left: auto;
     }
+
     .user_avatar span {
         font-size: 20px;
     }
@@ -64,24 +67,30 @@
         left: 50%;
         margin-left: -400px;
     }
+
     .bgg {
         display: none;
     }
+
     .promo {
         background: url(/static/balticrest/img/start/bg.jpg);
         background-position: center bottom;
     }
+
     .animation {
         display: none;
     }
+
     .category_block .cat_item {
         width: 50%;
         float: left;
     }
+
     .user_cover {
         width: 50%;
         float: left;
     }
+
     .place_index_item {
         width: 33%;
         float: left;
@@ -95,14 +104,17 @@
     .user_block .user_item {
         height: 250px;
     }
+
     .user_sm {
         width: 11%;
         margin-bottom: 50px;
         float: left;
     }
+
     .header_promo img {
         padding-left: 30px;
     }
+
     .user_block .user_item .user_item_cont a.names {
         font-size: 16px;
     }
@@ -115,12 +127,15 @@
     .mobile_place {
         display: block;
     }
+
     .mobile_none {
         display: none;
     }
+
     .sidebar {
         display: none !important;
     }
+
     .flickr_photo ul li {
         list-style: none;
         display: inline-block;
@@ -130,13 +145,16 @@
         border-radius: 3px;
         height: 85px;
     }
+
     .profile_mobile_vis {
         display: block;
     }
+
     .user_btn {
         margin: 70px 0px 0px 210px;
         position: relative;
     }
+
     .user_btn a {
         display: block;
         padding: 10px;
@@ -155,49 +173,61 @@
         width: 140px;
         border-radius: 3px;
     }
+
     .place_li_cont .style_list .con {
         border-top: 1px solid #E5E5E5;
         border-bottom: 1px solid #E5E5E5;
         height: auto;
         padding: 0 0 30px 0;
     }
+
     .content_li {
         float: none;
         margin-left: 200px;
         padding-right: 30px;
         margin-top: 28px;
     }
+
     .place_li_cont .style_list div h2 {
         max-width: 100%;
     }
+
     .list_dia {
         top: 100px;
         left: 190px;
         width: 100%;
     }
+
     .list_dia .ld {
         float: left;
     }
+
     .list_dia span {
         margin-top: 0 !important;
     }
+
     .post.p_style_one {
         padding: 30px;
     }
+
     .post_content {
         padding: 10px 60px 30px;
     }
+
     .author {
         background: #f1f1f1;
         padding: 20px 60px;
         overflow: hidden;
     }
+
     .reviews.open .rev {
         padding: 30px 60px;
     }
+
     .reviews.open h4 {
         padding: 50px 60px 0;
     }
+
     .reviews.open .add_comment {
         padding: 0 60px 40px;
     }
@@ -217,6 +247,7 @@
         left: 50%;
         margin-left: -40%;
     }
+
     .green_btn_header, .green_btn_header:hover {
         margin-top: 9px;
     }
@@ -229,31 +260,39 @@
     .search_promo .input-group {
         display: block;
     }
+
     .search_promo .input-group .form-control {
         border-radius: 3px;
         margin-bottom: 30px;
     }
+
     .btn_cat button {
         border-radius: 3px;
     }
+
     .start_description {
         margin-top: -250px;
     }
+
     .tp-banner-container {
         display: none !important;
     }
+
     .category_block .cat_item {
         width: 50%;
         float: left;
     }
+
     .user_cover {
         width: 50%;
         float: left;
     }
+
     .user_sm {
         width: 20%;
         float: left;
     }
+
     .category_block {
         padding-top: 0;
         background-position: bottom !important;
@@ -269,9 +308,11 @@
         float: none;
         margin: 0 auto 40px;
     }
+
     .profile_mobile_vis {
         display: block;
     }
+
     .user_avatar {
         position: relative;
         width: 100%;
@@ -279,6 +320,7 @@
         margin: 0;
         padding: 0 30px;
     }
+
     .user_avatar img {
         width: 100px;
         border-radius: 3px;
@@ -286,6 +328,7 @@
         float: none;
         margin: 0 auto;
     }
+
     .user_avatar span {
         width: 100%;
         padding: 30px 30px;
@@ -293,20 +336,24 @@
         float: none;
         text-align: center;
     }
+
     .user_friends {
         display: block;
         float: left;
         margin: 10px 20px 40px;
     }
+
     .user_friends h4 {
         color: #000000;
         font-size: 20px;
         padding: 20px 10px 0;
     }
+
     .user_btn {
         margin: 0 0 20px;
         position: relative;
     }
+
     .user_btn a {
         display: block;
         padding: 10px;
@@ -323,6 +370,7 @@
     .header {
         height: 110px;
     }
+
     .header .search {
         width: 90%;
         max-width: none;
@@ -331,14 +379,17 @@
         left: 55%;
         margin-left: -50%;
     }
+
     .logo {
         padding-top: 26px !important;
         margin-left: 40px;
     }
+
     .menu li a, .menu li a:hover {
         font-size: 16px;
         padding: 20px 0;
     }
+
     .menu li a.hotel.active,
     .menu li a.medicine.active,
     .menu li a.cafe.active,
@@ -349,9 +400,11 @@
     .menu li a.transport.active {
         background-image: linear-gradient(transparent 99%, transparent 1%);
     }
+
     .page_info {
         padding: 190px 15px 60px;
     }
+
     .map {
         padding-top: 110px;
     }
@@ -375,17 +428,21 @@
         float: none;
         margin: 0 auto;
     }
+
     .icon_descr_block .bubble {
         float: left;
         width: 100%;
     }
+
     .icon_descr_block .bubble div span {
         display: none;
     }
+
     .features_block div {
         width: 100%;
         float: none;
     }
+
     .share_block div {
         width: 100%;
         float: left;
@@ -399,13 +456,16 @@
     .menu li {
         width: 20%;
     }
+
     .menu {
         height: 128px;
         max-height: none;
     }
+
     .menu ul {
         padding: 0;
     }
+
     .map {
         padding-bottom: 128px;
     }
@@ -428,59 +488,74 @@
     .map {
         padding-bottom: 68px;
     }
+
     .place_li_cont .style_list img {
         display: block;
         float: none;
         margin: 30px auto;
     }
+
     .content_li {
         margin-left: 0;
     }
+
     .place_li_cont .style_list .con {
         border-top: 1px solid #E5E5E5;
         border-bottom: 1px solid #E5E5E5;
         height: auto;
         padding: 0 30px 30px;
     }
+
     .list_dia {
         top: 100px;
         left: 20px;
         width: 100%;
     }
+
     .post.p_style_two .post_info {
         width: 100%;
     }
+
     .post.p_style_two .post_info .arrow {
         display: none;
     }
+
     .Subscribe div form input {
         min-width: 200px;
         display: block;
         margin-bottom: 20px;
     }
+
     .post.p_style_one.open {
         padding-left: 0;
         padding-right: 0;
     }
+
     .open.post_info h1 {
         font-size: 30px;
         line-height: 42px;
     }
+
     .post_content {
         padding: 10px 30px 30px;
     }
+
     .author {
         padding: 20px 30px;
     }
+
     .reviews.open .rev {
         padding: 30px 30px;
     }
+
     .reviews.open h4 {
         padding: 50px 30px 0;
     }
+
     .icon_descr_block .cols {
         width: 90%;
     }
+
     .header_section {
         background: url(/static/balticrest/img/c_interior.png) no-repeat;
         margin: 0;
@@ -490,11 +565,13 @@
         position: relative;
         width: 100%;
     }
+
     .header_section img {
         float: none;
         margin: 34px auto;
         display: block;
     }
+
     .header_section h1 {
         color: #ffffff;
         font-weight: 300;
@@ -503,42 +580,54 @@
         font-size: 24px;
         text-align: center;
     }
+
     .header_section ul {
         text-align: center;
         padding: 0;
     }
+
     .header_section ul li {
         list-style: none;
         display: inline-block;
         margin: 0 10px 0 0;
     }
-    .header_section ul li a {}
+
+    .header_section ul li a {
+    }
+
     .dia {
         display: none;
     }
+
     .page_info h1 {
         font-size: 25px;
         padding-top: 20px;
     }
+
     .flickr_photo ul li {
         margin: 1%;
         width: 30%;
         height: 100px;
     }
+
     .mobile_place .similar div {
         width: 100%;
         margin: 0 0 20px;
     }
+
     body.inner_page .bg_parallax {
         background-position: center !important;
     }
+
     .header .search {
         display: inline-table;
     }
+
     .green_btn_header, .green_btn_header:hover {
         width: 100%;
         margin: 20px 0;
     }
+
     .logo {
         margin: 0 auto;
         width: 100%;
@@ -547,12 +636,14 @@
         text-align: center;
         padding: 20px 0px 0px !important;
     }
+
     .menu {
         height: 100%;
         overflow-y: scroll;
         transition: 0.3s linear;
         z-index: 99999999;
     }
+
     .menu span {
         display: block !important;
         color: #FFFFFF;
@@ -562,6 +653,7 @@
         text-align: center;
         margin-top: 20px;
     }
+
     #close_menu {
         color: #ffffff;
         font-size: 22px;
@@ -570,40 +662,51 @@
         right: 40px;
         display: block;
     }
+
     #close_menu:hover {
-        cursor:pointer;
+        cursor: pointer;
     }
+
     .menu ul {
         bottom: 0;
         margin-top: 30px;
     }
+
     .menu ul li {
         width: 100%;
     }
+
     .menu ul li a, .menu ul li a:hover {
         font-size: 20px;
     }
+
     .menu.mobile {
         height: 65px;
         overflow: hidden;
         transition: 0.3s linear;
     }
+
     .menu.mobile span {
         display: none !important;
     }
+
     .menu.mobile i.icon-menu {
         display: block !important;
         font-size: 14px;
     }
+
     .menu.mobile ul {
         margin-top: 0;
     }
+
     .menu.mobile ul li {
         display: none;
     }
+
     .menu.mobile .mobile_menu {
         display: block;
     }
+
     .start_description {
         z-index: 9;
         text-align: center;
@@ -615,15 +718,18 @@
         left: 50%;
         margin-left: -40%;
     }
+
     .start_description .btns a {
         float: none;
         width: 100%;
         display: block;
         margin: 30px 0 !important;
     }
+
     .bgg {
         display: none;
     }
+
     .start_description h1 {
         font-size: 30px;
         text-transform: uppercase;
@@ -631,9 +737,11 @@
         font-family: 'Roboto', sans-serif;
         color: #ffffff;
     }
+
     .start_description h1 span {
         background: #E73931;
     }
+
     .start_description span {
         font-family: 'Roboto', sans-serif;
         font-size: 18px;
@@ -641,16 +749,20 @@
         color: #ffffff;
         line-height: 28px;
     }
+
     .search {
         display: none;
     }
+
     .logout_btn, .login_btn {
         margin-top: -10px;
     }
+
     .user_cover {
         width: 100%;
         float: none;
     }
+
     .user_sm {
         width: 25%;
     }
@@ -663,27 +775,34 @@
     .top_promo_block {
         min-height: 560px;
     }
+
     .header_promo img {
         padding-left: 0;
         display: block;
         margin: 0 auto;
     }
+
     .header_promo a {
         display: none;
     }
+
     .start_description {
         margin-top: 20px;
     }
+
     .start_description h1 span {
         margin: 20px auto;
     }
+
     .btn_cat {
         width: 100%;
         display: block;
     }
+
     .scroll_block {
         display: none;
     }
+
     .btn_promo_search button {
         height: 55px;
         font-size: 18px;
@@ -691,19 +810,24 @@
         width: 100%;
         margin-top: 30px;
     }
+
     .fea_block {
         padding: 80px 0 48px;
     }
+
     .category_block {
         padding: 0 0 50px;
     }
+
     .category_block .cat_item {
         width: 100%;
         float: none;
     }
+
     .user_block {
         padding: 80px 0;
     }
+
     .place_index_item {
         width: 100%;
     }
@@ -719,24 +843,29 @@
         height: 50px;
         font-size: 19px;
     }
+
     .icon_descr_block .cols .icons .num {
         width: 46px;
         padding: 3px;
         text-align: center;
     }
+
     .mobile_place .address {
         width: 200px;
     }
+
     .page_info img {
         width: 100px;
         float: none;
         margin: 0 auto;
         display: block;
     }
+
     .page_info h1 {
         text-align: center;
         margin-bottom: 30px;
     }
+
     .page_info .status {
         display: block;
         text-align: center;
@@ -750,9 +879,11 @@
     .green_btn_header {
         display: none;
     }
+
     .header {
         height: 60px;
     }
+
     .innerpage .menu-btn, .innerpage .menu-btn:hover {
         top: 10px;
         left: 18px;

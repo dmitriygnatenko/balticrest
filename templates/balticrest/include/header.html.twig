@@ -36,24 +36,28 @@
                 {% endif %}
 
                 {% set language = app.request.locale %}
-                <div class="dropdown language-selector">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {% if languages[language] is defined %}
-                            <div class="flag {{ language }}" title="{{ languages[language].title }}"></div>
-                        {% endif %}
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        {% for key, values in languages %}
-                            {% if key != language %}
-                                {% set route_params = app.request.attributes.get('_route_params')|merge({'_locale': key}) %}
-                                <li>
-                                    <a class="flag {{ key }}" href="{{ path(app.request.attributes.get('_route'), route_params) }}" title="{{ values.title }}"></a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
+
+                {% if languages[language] is defined %}
+                    <div class="btn-group language-selector">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                            <span class="language icon-{{ language }}"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% for key, values in languages %}
+                                {% if key != language %}
+                                    {% set route_params = app.request.attributes.get('_route_params')|merge({'_locale': key}) %}
+                                    <li>
+                                        <a href="{{ path(app.request.attributes.get('_route'), route_params) }}">
+                                            <span class="language icon-{{ key }}"></span>
+                                            {{ values.title }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
 
                 <div class="input-group search">
                     <input type="text" class="form-control" placeholder="{% trans %}header.search.text_placeholder{% endtrans %}">
