@@ -1,13 +1,18 @@
+{% set city = app.request.get('city') %}
+{% if not city %}
+    {% set city = 'svetlogorsk' %}
+{% endif %}
+
 <div class="menu-btn">&#9776;</div>
 <nav class="pushy pushy-left">
     <ul class="side_menu">
         <li>
-            <a href="#">
+            <a href="{{ path('main') }}">
                 <i class="fa fa-bookmark-o"></i>{% trans %}navigation.menu.main{% endtrans %}
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ path('map', {city: city}) }}">
                 <i class="fa fa-map-marker"></i>{% trans %}navigation.menu.map{% endtrans %}
             </a>
         </li>
