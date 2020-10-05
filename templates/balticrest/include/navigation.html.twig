@@ -1,7 +1,9 @@
 {% set city = app.request.get('city') %}
 {% if not city %}
-    {% set city = 'svetlogorsk' %}
+    {% set city = global_service.defaultCity %}
 {% endif %}
+
+{% set category = global_service.defaultCategory %}
 
 <div class="menu-btn">&#9776;</div>
 <nav class="pushy pushy-left">
@@ -17,7 +19,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ path('point_list', {city: city, category: category}) }}">
                 <i class="fa fa-list"></i>{% trans %}navigation.menu.point_list{% endtrans %}
             </a>
         </li>

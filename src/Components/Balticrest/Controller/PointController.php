@@ -28,7 +28,12 @@ class PointController extends AbstractController
      */
     public function pointList(Request $request): Response
     {
-        // TODO
+        $city = $request->get('city', '');
+        $category = $request->get('category', '');
+
+        return $this->render('balticrest/point/list.html.twig', [
+            //'map_data' => $this->mapJsonDataProvider->generateCityMapJsonData($city, $category)
+        ]);
     }
 
     /**
@@ -48,6 +53,6 @@ class PointController extends AbstractController
      */
     public function point(Request $request): Response
     {
-        // TODO
+        return $this->render('balticrest/point/point.html.twig');
     }
 }

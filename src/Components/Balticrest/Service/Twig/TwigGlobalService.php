@@ -15,6 +15,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class TwigGlobalService
 {
     /** @var string */
+    private const DEFAULT_CITY = 'svetlogorsk';
+
+    /** @var string */
+    private const DEFAULT_CATEGORY = 'hotels';
+
+    /** @var string */
     private const TAG_TYPE_TITLE = 'title';
 
     /** @var string */
@@ -57,6 +63,22 @@ class TwigGlobalService
     }
 
     /**
+     * @return string
+     */
+    public function getDefaultCity(): string
+    {
+        return self::DEFAULT_CITY;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultCategory(): string
+    {
+        return self::DEFAULT_CATEGORY;
+    }
+
+    /**
      * @return array
      */
     public function getCities(): array
@@ -85,9 +107,9 @@ class TwigGlobalService
      *
      * @return array
      */
-    public function getCityPointTypes(string $city): array
+    public function getMapPointTypes(string $city): array
     {
-        return $this->pointTypeProvider->getCachedCityPointTypesList($city);
+        return $this->pointTypeProvider->getCachedMapPointTypesList($city);
     }
 
     /**

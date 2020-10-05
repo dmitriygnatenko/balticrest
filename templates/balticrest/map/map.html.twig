@@ -7,7 +7,7 @@
 {% block description %}{{ global_service.mapPageDescription(city, category) }}{% endblock %}
 {% block keywords %}{{ global_service.mapPageKeywords(city, category) }}{% endblock %}
 
-{% set cityPointTypes = global_service.cityPointTypes(city) %}
+{% set cityPointTypes = global_service.mapPointTypes(city) %}
 
 {% block body_attr %}onload="initializeMap()" class="inmap innerpage"{% endblock %}
 

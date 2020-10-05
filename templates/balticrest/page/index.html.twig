@@ -10,6 +10,7 @@
 
 {% block body %}
 
+    {% set default_city = global_service.defaultCity %}
     {% set languages = global_service.languages %}
     {% set language = app.request.locale %}
 
