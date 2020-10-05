@@ -1368,18 +1368,12 @@ a.green_btn:hover {
 }
 
 .city-selector .btn-default {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     background-color: transparent;
     color: #ffffff;
-    padding: 3px 8px 4px 8px;
-}
-
-.city-selector .btn-default img {
-    height: 37px;
-    border-radius: 20px;
-    border: 2px solid #ffffff;
-    margin-right: 3px;
+    padding: 4px 8px;
+    margin-top: 2px;
 }
 
 .city-selector .caret {
@@ -1389,14 +1383,6 @@ a.green_btn:hover {
     border-left: 5px solid transparent;
 }
 
-.city-selector .btn-default:hover,
-.city-selector .btn-default:focus,
-.city-selector .btn-default:active,
-.city-selector.open > .dropdown-toggle.btn-default {
-    background-color: #ca332c;
-    transition: 0.3s;
-}
-
 .city-selector.open .caret {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -1404,34 +1390,16 @@ a.green_btn:hover {
     border-top: none;
 }
 
-.city-selector .btn-default:hover img {
-    border: 2px solid #ffffff;
-}
-
 .city-selector .dropdown-menu {
     left: -1px;
     top: 43px;
-    min-width: 211px;
+    min-width: 170px;
 }
 
 .city-selector .dropdown-menu li a {
-    padding: 2px;
-    margin: 3px 15px 3px 5px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: transparent;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
-
-.city-selector .dropdown-menu li a img {
-    height: 39px;
-    border-radius: 20px;
-    margin-right: 5px;
-}
-
-.city-selector .dropdown-menu li a:hover {
-    background-color: transparent;
-}
-
 
 .inner_head .menu-btn {
     color: #ffffff;

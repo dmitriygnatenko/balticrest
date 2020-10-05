@@ -8,14 +8,11 @@
             <div class="col-md-12">
 
                 {% set city = app.request.get('city') %}
-                {% if city %}
-                    <div class="dropdown city-selector">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            {% if cities[city] is defined %}
-                                {% set city_title = 'cities.' ~ cities[city].code  %}
-                                <img src="{{ asset(cities[city].image) }}">
-                                {{ city_title|trans }}
-                            {% endif %}
+                {% if city and cities[city] is defined %}
+                    <div class="btn-group city-selector">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                            {% set city_title = 'cities.' ~ cities[city].code  %}
+                            {{ city_title|trans }}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
@@ -25,7 +22,6 @@
                                     {% set city_title = 'cities.' ~ values.code  %}
                                     <li>
                                         <a href="{{ path(app.request.attributes.get('_route'), route_params) }}">
-                                            <img src="{{ asset(values.image) }}">
                                             {{ city_title|trans }}
                                         </a>
                                     </li>
@@ -36,7 +32,6 @@
                 {% endif %}
 
                 {% set language = app.request.locale %}
-
                 {% if languages[language] is defined %}
                     <div class="btn-group language-selector">
                         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
