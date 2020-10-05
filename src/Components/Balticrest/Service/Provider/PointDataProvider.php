@@ -48,10 +48,10 @@ class PointDataProvider implements PointDataProviderInterface
         $pointData = $point->getData();
 
         if ($pointData[PointFields::FIELD_DETAILED_TYPE] ?? '') {
-            return self::IMAGES_PATH . 'logo/default/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
+            return self::IMAGES_PATH . 'logo/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
         }
 
-        return self::IMAGES_PATH . 'logo/default/'  . $point->getType()->getCode() . '.png';
+        return self::IMAGES_PATH . 'logo/'  . $point->getType()->getCode() . '.png';
     }
 
     /**

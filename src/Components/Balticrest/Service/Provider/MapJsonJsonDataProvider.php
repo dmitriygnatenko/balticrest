@@ -80,9 +80,6 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
      */
     private function getCachedCityMapJsonData(string $city, string $category = ''): string
     {
-        return $this->getCityMapJsonData($city, $category); // TODO REMOVE
-
-
         $cacheKey = $this->cacheManager->getMapPointsCacheKey(
             $city, $category, $this->requestStack->getMasterRequest()->getLocale()
         );
