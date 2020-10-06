@@ -12,5 +12,13 @@ interface MapJsonDataProviderInterface
      *
      * @return string
      */
-    public function generateCityMapJsonData(string $city, string $category = ''): string;
+    public function getCachedCityMapJsonData(string $city, string $category = ''): string;
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return string
+     */
+    public function getCityMapJsonData(string $city, string $category = ''): string;
 }

@@ -20,4 +20,7 @@ interface CacheKeyInterface
 
     /** @var string */
     public const KEY_MAP_POINTS = 'map_points';
+
+    /** @var string */
+    public const KEY_ARTICLES = 'articles';
 }

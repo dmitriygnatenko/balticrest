@@ -89,9 +89,11 @@ class MapPointsListDTOMapper
                 /** @var PointLangData|null $pointLangData */
                 $pointLangData = null;
 
+                $pointLangDataCollection = $point->getPointLangData();
+
                 if ($locale === 'ru') {
                     // Данные на русском всегда присутствуют, не проверяем другие языки
-                    $result = $point->getPointLangData()->filter(static function($item) {
+                    $result = $pointLangDataCollection->filter(static function($item) {
                         /** @var PointLangData $item */
                         return $item->getLanguage()->getCode() === 'ru';
                     });
@@ -101,7 +103,7 @@ class MapPointsListDTOMapper
                     }
                 } else if ($locale === 'en') {
                     // Данные на английском всегда присутствуют, не проверяем другие языки
-                    $result = $point->getPointLangData()->filter(static function($item) {
+                    $result =$pointLangDataCollection->filter(static function($item) {
                         /** @var PointLangData $item */
                         return $item->getLanguage()->getCode() === 'en';
                     });
@@ -112,8 +114,6 @@ class MapPointsListDTOMapper
                 } else {
                     // Вначале проверяем данные на запрошенном языке
                     // Если они отсутствуют то берем английскую версию
-                    $pointLangDataCollection = $point->getPointLangData();
-
                     $result = $pointLangDataCollection->filter(static function($item) use ($locale) {
                         /** @var PointLangData $item */
                         return $item->getLanguage()->getCode() === $locale;

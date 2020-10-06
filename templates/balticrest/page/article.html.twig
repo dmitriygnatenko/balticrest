@@ -1,0 +1,27 @@
+{% extends 'balticrest/base_left_top_menu.html.twig' %}
+
+{% block body_attr %}class="innerpage"{% endblock %}
+
+{% block title %}{{ parent() }} {{ article.title }}{% endblock %}
+{% block description %}{{ article.metaDescription }}{% endblock %}
+{% block keywords %}{{ article.metaKeywords }}{% endblock %}
+
+{% block content %}
+
+    <div class="container page_info">
+        <div class="col_md_12">
+            <h1>{{ article.title }}</h1>
+        </div>
+    </div>
+
+    <div class="container contant">
+        <div class="row">
+            <div class="col-md-12 basic">
+                <div class="post_content">
+                    {{ article.text|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

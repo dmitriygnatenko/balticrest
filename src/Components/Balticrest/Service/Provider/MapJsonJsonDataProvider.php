@@ -67,18 +67,7 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
      *
      * @return string
      */
-    public function generateCityMapJsonData(string $city, string $category = ''): string
-    {
-        return $this->getCachedCityMapJsonData($city, $category);
-    }
-
-    /**
-     * @param string $city
-     * @param string $category
-     *
-     * @return string
-     */
-    private function getCachedCityMapJsonData(string $city, string $category = ''): string
+    public function getCachedCityMapJsonData(string $city, string $category = ''): string
     {
         $cacheKey = $this->cacheManager->getMapPointsCacheKey(
             $city, $category, $this->requestStack->getMasterRequest()->getLocale()
@@ -104,7 +93,7 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
      *
      * @return string
      */
-    private function getCityMapJsonData(string $city, string $category = ''): string
+    public function getCityMapJsonData(string $city, string $category = ''): string
     {
         $points = $this->pointDataProvider->getPointsByCityAndCategory($city, $category);
 
