@@ -104,16 +104,6 @@ class TwigGlobalService
 
     /**
      * @param string $city
-     *
-     * @return array
-     */
-    public function getMapPointTypes(string $city): array
-    {
-        return $this->pointTypeProvider->getCachedMapPointTypesList($city);
-    }
-
-    /**
-     * @param string $city
      * @param string $category
      *
      * @return string

@@ -16,6 +16,10 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
+    App\Components\Balticrest\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
 imports:
     - { resource: '../src/Components/Admin/config/services.yaml'}
     - { resource: '../src/Components/Balticrest/config/services.yaml'}
