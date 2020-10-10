@@ -55,7 +55,16 @@ class MapController extends AbstractController
         $category = $request->get('category', '');
 
         return $this->render('balticrest/map/map.html.twig', [
-            'point_types' => $this->pointTypeProvider->getCachedMapPointTypesList($city),
+            'point_types' => [
+                'hotels' => 1,
+                'medicine' => 1,
+                'cafes' => 1,
+                'shops' => 1,
+                'banks' => 1,
+                'museums' => 1,
+                'sport' => 1,
+                'transport' => 1,
+            ],
             'map_data' => $this->mapJsonDataProvider->getCachedCityMapJsonData($city, $category)
         ]);
     }

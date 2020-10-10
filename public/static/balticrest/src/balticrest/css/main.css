@@ -592,8 +592,8 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .category_block .cat_item.medicine div:hover {
-    background: #56db40;
-    border-color: #56db40;
+    background: #1bad03;
+    border-color: #1bad03;
 }
 
 .category_block .cat_item.cafes div:hover {
@@ -607,8 +607,8 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .category_block .cat_item.banks div:hover {
-    background: #177bc9;
-    border-color: #177bc9;
+    background: #1c6eae;
+    border-color: #1c6eae;
 }
 
 .category_block .cat_item.museums div:hover {
@@ -617,8 +617,8 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .category_block .cat_item.sport div:hover {
-    background: #1bad03;
-    border-color: #1bad03;
+    background: #00a6e5;
+    border-color: #00a6e5;
 }
 
 .category_block .cat_item.transport div:hover {
@@ -1055,11 +1055,11 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .menu li a.medicine.active {
-    background-image: linear-gradient(transparent 85%, #56db40 15%);
+    background-image: linear-gradient(transparent 85%, #1bad03 15%);
 }
 
 .menu li a.medicine:hover, .menu li a.medicine:focus {
-    background: #56db40;
+    background: #1bad03;
     transition: 0.3s;
 }
 
@@ -1082,11 +1082,11 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .menu li a.bank.active {
-    background-image: linear-gradient(transparent 85%, #177bc9 15%);
+    background-image: linear-gradient(transparent 85%, #1c6eae 15%);
 }
 
 .menu li a.bank:hover, .menu li a.bank:focus {
-    background: #177bc9;
+    background: #1c6eae;
     transition: 0.3s;
 }
 
@@ -1100,11 +1100,11 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .menu li a.sport.active {
-    background-image: linear-gradient(transparent 85%, #1bad03 15%);
+    background-image: linear-gradient(transparent 85%, #00a6e5 15%);
 }
 
 .menu li a.sport:hover, .menu li a.sport:focus {
-    background: #1bad03;
+    background: #00a6e5;
     transition: 0.3s;
 }
 
