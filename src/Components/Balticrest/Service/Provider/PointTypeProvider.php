@@ -114,4 +114,45 @@ class PointTypeProvider implements PointTypeProviderInterface
 
         return $formattedResults;
     }
+
+    /**
+     * @param string $city
+     *
+     * @return array
+     */
+    public function getCachedListPointTypesList(string $city): array
+    {
+        $cacheKey = $this->cacheManager->getListPointTypesCacheKey($city);
+
+        try {
+            return $this->cache->get($cacheKey, function (ItemInterface $item) use ($city) {
+                $item->expiresAfter(CacheExpireInterface::EXPIRE_WEEK);
+                $item->tag([$city, CacheTagInterface::TAG_POINTS]);
+
+                return $this->getListPointTypesList($city);
+            });
+        } catch (InvalidArgumentException $exception) {
+            $this->logger->error($exception);
+
+            return $this->getListPointTypesList($city);
+        }
+    }
+
+    /**
+     * @param string $city
+     *
+     * @return array
+     */
+    public function getListPointTypesList(string $city): array
+    {
+        $formattedResults = [];
+
+        $results = $this->em->getRepository(PointType::class)->getCityPointWithUrlsTypes($city);
+
+        foreach ($results as $result) {
+            $formattedResults[$result->getCode()] = true;
+        }
+
+        return $formattedResults;
+    }
 }

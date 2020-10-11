@@ -13,6 +13,9 @@ interface CacheKeyInterface
     public const KEY_CITY_POINT_TYPES = 'city_point_types';
 
     /** @var string */
+    public const KEY_CITY_POINT_WITH_URL_TYPES = 'city_point_with_url_types';
+
+    /** @var string */
     public const KEY_CITIES = 'cities';
 
     /** @var string */

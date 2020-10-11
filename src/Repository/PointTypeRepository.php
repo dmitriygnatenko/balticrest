@@ -42,4 +42,24 @@ class PointTypeRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param string $city
+     *
+     * @return array
+     */
+    public function getCityPointWithUrlsTypes(string $city): array
+    {
+        $qb = $this->createQueryBuilder('t');
+
+        $qb->distinct()
+            ->join('t.points', 'p')
+            ->join('p.city', 'c')
+            ->andWhere('p.is_active = 1')
+            ->andWhere('c.code = :city')
+            ->andWhere('p.url IS NOT NULL')
+            ->setParameter('city', $city);
+
+        return $qb->getQuery()->getResult();
+    }
 }

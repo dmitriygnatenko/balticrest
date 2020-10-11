@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
+use App\Components\Balticrest\Service\Provider\PointTypeProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,15 +24,17 @@ class PointController extends AbstractController
      * )
      *
      * @param Request $request
+     * @param PointTypeProviderInterface $pointTypeProvider
      *
      * @return Response
      */
-    public function pointList(Request $request): Response
+    public function pointList(Request $request, PointTypeProviderInterface $pointTypeProvider): Response
     {
         $city = $request->get('city', '');
         $category = $request->get('category', '');
 
         return $this->render('balticrest/point/list.html.twig', [
+            'point_types' => $pointTypeProvider->getCachedListPointTypesList($city),
             //'map_data' => $this->mapJsonDataProvider->generateCityMapJsonData($city, $category)
         ]);
     }

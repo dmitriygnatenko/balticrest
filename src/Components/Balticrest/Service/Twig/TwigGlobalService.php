@@ -32,6 +32,9 @@ class TwigGlobalService
     /** @var string */
     private const PAGE_TYPE_MAP = 'map';
 
+    /** @var string */
+    private const PAGE_TYPE_LIST = 'list';
+
     /** @var PointTypeProvider */
     private $pointTypeProvider;
 
@@ -133,6 +136,40 @@ class TwigGlobalService
     public function getMapPageKeywords(string $city, string $category): string
     {
         return $this->getSeoTrans(self::TAG_TYPE_KEYWORDS, self::PAGE_TYPE_MAP, $city, $category);
+    }
+
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return string
+     */
+    public function getListPageTitle(string $city, string $category): string
+    {
+        return $this->getSeoTrans(self::TAG_TYPE_TITLE, self::PAGE_TYPE_LIST, $city, $category);
+    }
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return string
+     */
+    public function getListPageDescription(string $city, string $category): string
+    {
+        return $this->getSeoTrans(self::TAG_TYPE_DESC, self::PAGE_TYPE_LIST, $city, $category);
+    }
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return string
+     */
+    public function getListPageKeywords(string $city, string $category): string
+    {
+        return $this->getSeoTrans(self::TAG_TYPE_KEYWORDS, self::PAGE_TYPE_LIST, $city, $category);
     }
 
     /**

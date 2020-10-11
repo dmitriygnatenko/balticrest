@@ -595,7 +595,6 @@ body.pushy-active .top_promo_block .menu-btn {
     background: #1bad03;
     border-color: #1bad03;
 }
-
 .category_block .cat_item.cafes div:hover {
     background: #e26cc3;
     border-color: #e26cc3;
@@ -2457,6 +2456,11 @@ a.green_btn:hover {
     display: block;
     padding: 12px 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    color: #ffffff;
+}
+
+.places_cat li a.active {
+    color: #E73931;
 }
 
 .places_cat li a:hover {
