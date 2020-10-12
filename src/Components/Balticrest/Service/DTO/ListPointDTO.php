@@ -18,9 +18,6 @@ class ListPointDTO
     /** @var string */
     private $image;
 
-    /** @var array */
-    private $services = [];
-
     /**
      * @param string $title
      *
@@ -70,18 +67,6 @@ class ListPointDTO
     }
 
     /**
-     * @param array $services
-     *
-     * @return ListPointDTO
-     */
-    public function setServices(array $services): ListPointDTO
-    {
-        $this->services = $services;
-
-        return $this;
-    }
-
-    /**
      * @return string|null
      */
     public function getTitle(): ?string
@@ -111,13 +96,5 @@ class ListPointDTO
     public function getImage(): ?string
     {
         return $this->image;
-    }
-
-    /**
-     * @return array
-     */
-    public function getServices(): array
-    {
-        return $this->services;
     }
 }

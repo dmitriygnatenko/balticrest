@@ -6,7 +6,6 @@ namespace App\Components\Balticrest\Service\Mapper;
 
 use App\Components\Balticrest\Service\DTO\ListPointDTO;
 use App\Components\Balticrest\Service\Provider\PointDataProviderInterface;
-use App\Entity\Interfaces\PointDataFieldsInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
 use App\Entity\Point;
 use App\Entity\PointLangData;
@@ -137,12 +136,9 @@ class ListPointDTOMapper
                 $link = '';
             }
 
-            $pointDataArray = $point->getData();
-
             $dto->setTitle($pointLangData->getTitle())
                 ->setLink($link)
                 ->setDescription($pointLangDataArray[PointLangFields::FIELD_SHORT_DESC] ?? '')
-                ->setServices($pointDataArray[PointDataFieldsInterface::FIELD_SERVICES] ?? [])
                 ->setImage($this->pointDataProvider->getPointImage($point));
         }
 

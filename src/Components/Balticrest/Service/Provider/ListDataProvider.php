@@ -65,7 +65,7 @@ class ListDataProvider implements ListDataProviderInterface
      */
     public function getCachedData(string $city, string $category): array
     {
-        $cacheKey = $this->cacheManager->getMapPointsCacheKey(
+        $cacheKey = $this->cacheManager->getListPointsCacheKey(
             $city, $category, $this->requestStack->getMasterRequest()->getLocale()
         );
 

@@ -68,7 +68,7 @@ class MapDataProvider implements MapDataProviderInterface
      */
     public function getCachedData(string $city, string $category = ''): string
     {
-        $cacheKey = $this->cacheManager->getListPointsCacheKey(
+        $cacheKey = $this->cacheManager->getMapPointsCacheKey(
             $city, $category, $this->requestStack->getMasterRequest()->getLocale()
         );
 

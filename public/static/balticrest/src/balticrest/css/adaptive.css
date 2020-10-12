@@ -168,11 +168,6 @@
 [7. 990 / 990]
 */
 @media (max-width: 990px) {
-    .place_li_cont .style_list img {
-        margin: 30px;
-        width: 140px;
-        border-radius: 3px;
-    }
 
     .place_li_cont .style_list .con {
         border-top: 1px solid #E5E5E5;
@@ -183,7 +178,7 @@
 
     .content_li {
         float: none;
-        margin-left: 200px;
+        margin-left: 150px;
         padding-right: 30px;
         margin-top: 28px;
     }

@@ -99,97 +99,28 @@
 
             <div class="col-md-9 basic">
                 <div class="place_li_cont">
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl3.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Top of The Rock Observation Deck</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
+
+                    {% for point in list_data %}
+                        <div class="pg style_list">
+                            <div class="con">
+                                <img src="{{ point.image }}" alt="">
+
+
+
+                                <div class="content_li">
+                                    <h2>
+                                        <a href="{{ point.link }}">{{ point.title }}</a>
+                                        <span></span>
+                                    </h2>
+                                    <div>
+                                        {{ point.description|raw }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl2.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Pizza Rico</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl1.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Madison Square Park</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl3.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Strand Book Store</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl3.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Top of The Rock Observation Deck</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl2.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Pizza Rico</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl1.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Madison Square Park</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--place style list-->
-                    <div class="pg style_list">
-                        <div class="con">
-                            <img src="img/pl3.jpg" alt="">
-                            <div class="content_li">
-                                <h2><a href="02.html">Strand Book Store</a><span></span></h2>
-                                <span>You can use all Bootstrap plugins purely through the markup API without writing a single line of JavaScript. This is Bootstrap's first-class API and should be your first consideration when using a plugin.</span>
-                                <a href="02.html" class="comm"><i class="fa fa-comment-o"></i>234 Comments</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
 
                 </div>
-
             </div>
         </div>
     </div>
