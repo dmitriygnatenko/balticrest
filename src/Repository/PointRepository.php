@@ -66,17 +66,37 @@ class PointRepository extends ServiceEntityRepository
 
         $qb->where('p.is_active = true');
 
-        if ($city) {
-            $qb->join('p.city', 'c')
-                ->andWhere('c.code = :city')
-                ->setParameter('city', $city);
-        }
+        $qb->join('p.city', 'c')
+            ->andWhere('c.code = :city')
+            ->setParameter('city', $city);
 
-        if ($category) {
-            $qb->join('p.type', 't')
-                ->andWhere('t.code = :category')
-                ->setParameter('category', $category);
-        }
+        $qb->join('p.type', 't')
+            ->andWhere('t.code = :category')
+            ->setParameter('category', $category);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return array
+     */
+    public function getPointsWithUrlByCityAndCategory(string $city, string $category): array
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->where('p.is_active = true')
+            ->andWhere('p.url IS NOT NULL');
+
+        $qb->join('p.city', 'c')
+            ->andWhere('c.code = :city')
+            ->setParameter('city', $city);
+
+        $qb->join('p.type', 't')
+            ->andWhere('t.code = :category')
+            ->setParameter('category', $category);
 
         return $qb->getQuery()->getResult();
     }

@@ -33,6 +33,17 @@ class PointDataProvider implements PointDataProviderInterface
     }
 
     /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return array
+     */
+    public function getPointsWithUrlByCityAndCategory(string $city, string $category): array
+    {
+        return $this->em->getRepository(Point::class)->getPointsWithUrlByCityAndCategory($city, $category);
+    }
+
+    /**
      * @param Point $point
      *
      * @return string

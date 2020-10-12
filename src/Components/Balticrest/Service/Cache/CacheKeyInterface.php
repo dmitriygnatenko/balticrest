@@ -25,5 +25,8 @@ interface CacheKeyInterface
     public const KEY_MAP_POINTS = 'map_points';
 
     /** @var string */
+    public const KEY_LIST_POINTS = 'list_points';
+
+    /** @var string */
     public const KEY_ARTICLES = 'articles';
 }

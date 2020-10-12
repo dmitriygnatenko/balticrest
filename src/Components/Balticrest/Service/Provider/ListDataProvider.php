@@ -8,15 +8,14 @@ use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
-use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
-use App\Components\Balticrest\Service\Mapper\MapPointsListDTOMapper;
+use App\Components\Balticrest\Service\Mapper\ListPointDTOMapper;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
+class ListDataProvider implements ListDataProviderInterface
 {
     /** @var RequestStack */
     private $requestStack;
@@ -33,8 +32,8 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
     /** @var PointDataProvider */
     private $pointDataProvider;
 
-    /** @var MapPointsListDTOMapper */
-    private $mapPointsListDTOMapper;
+    /** @var ListPointDTOMapper */
+    private $pointsListDTOMapper;
 
     /**
      * @param RequestStack $requestStack
@@ -42,7 +41,7 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
      * @param TagAwareCacheInterface $cache
      * @param CacheManagerInterface $cacheManager
      * @param PointDataProviderInterface $pointManager
-     * @param MapPointsListDTOMapper $mapPointsListDTOMapper
+     * @param ListPointDTOMapper $pointsListDTOMapper
      */
     public function __construct(
         RequestStack $requestStack,
@@ -50,7 +49,7 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
         TagAwareCacheInterface $cache,
         CacheManagerInterface $cacheManager,
         PointDataProviderInterface $pointManager,
-        MapPointsListDTOMapper $mapPointsListDTOMapper
+        ListPointDTOMapper $pointsListDTOMapper
     )
     {
         $this->requestStack = $requestStack;
@@ -58,16 +57,13 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
         $this->cache = $cache;
         $this->cacheManager = $cacheManager;
         $this->pointDataProvider = $pointManager;
-        $this->mapPointsListDTOMapper = $mapPointsListDTOMapper;
+        $this->pointsListDTOMapper = $pointsListDTOMapper;
     }
 
     /**
-     * @param string $city
-     * @param string $category
-     *
-     * @return string
+     * @inheritDoc
      */
-    public function getCachedCityMapJsonData(string $city, string $category = ''): string
+    public function getCachedData(string $city, string $category): array
     {
         $cacheKey = $this->cacheManager->getMapPointsCacheKey(
             $city, $category, $this->requestStack->getMasterRequest()->getLocale()
@@ -78,27 +74,45 @@ class MapJsonJsonDataProvider implements MapJsonDataProviderInterface
                 $item->tag([$city, CacheTagInterface::TAG_POINTS]);
                 $item->expiresAfter(CacheExpireInterface::EXPIRE_WEEK);
 
-                return $this->getCityMapJsonData($city, $category);
+                return $this->getData($city, $category);
             });
         } catch (InvalidArgumentException $exception) {
             $this->logger->error($exception);
 
-            return $this->getCityMapJsonData($city, $category);
+            return $this->getData($city, $category);
         }
     }
 
     /**
-     * @param string $city
-     * @param string $category
-     *
-     * @return string
+     * @inheritDoc
      */
-    public function getCityMapJsonData(string $city, string $category = ''): string
+    public function getData(string $city, string $category): array
     {
-        $points = $this->pointDataProvider->getPointsByCityAndCategory($city, $category);
+        $points = $this->pointDataProvider->getPointsWithUrlByCityAndCategory($city, $category);
 
-        $dto = $this->mapPointsListDTOMapper->fill($city, $points);
+        $dtoList = $this->pointsListDTOMapper->fillAll($points);
 
-        return $dto->getJsonResult();
+        return $this->sort($dtoList);
+    }
+
+    /**
+     * @param array $dtoList
+     *
+     * @return array
+     */
+    private function sort(array $dtoList): array
+    {
+        usort($dtoList, static function ($a, $b) {
+            $aTitle = $a->getTitle();
+            $bTitle = $b->getTitle();
+
+            if ($aTitle === $bTitle) {
+                return 0;
+            }
+
+            return ($aTitle < $bTitle) ? -1 : 1;
+        });
+
+        return $dtoList;
     }
 }

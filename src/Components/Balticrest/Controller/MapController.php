@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
-use App\Components\Balticrest\Service\Provider\MapJsonDataProviderInterface;
+use App\Components\Balticrest\Service\Provider\MapDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\PointTypeProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,18 +13,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MapController extends AbstractController
 {
-    /** @var MapJsonDataProviderInterface  */
+    /** @var MapDataProviderInterface  */
     private $mapJsonDataProvider;
 
     /** @var PointTypeProviderInterface */
     public $pointTypeProvider;
 
     /**
-     * @param MapJsonDataProviderInterface $mapJsonDataProvider
+     * @param MapDataProviderInterface $mapJsonDataProvider
      * @param PointTypeProviderInterface $pointTypeProvider
      */
     public function __construct(
-        MapJsonDataProviderInterface $mapJsonDataProvider,
+        MapDataProviderInterface $mapJsonDataProvider,
         PointTypeProviderInterface $pointTypeProvider
     ) {
         $this->mapJsonDataProvider = $mapJsonDataProvider;
@@ -56,7 +56,7 @@ class MapController extends AbstractController
 
         return $this->render('balticrest/map/map.html.twig', [
             'point_types' => $this->pointTypeProvider->getCachedMapPointTypesList($city),
-            'map_data' => $this->mapJsonDataProvider->getCachedCityMapJsonData($city, $category)
+            'map_data' => $this->mapJsonDataProvider->getCachedData($city, $category)
         ]);
     }
 }

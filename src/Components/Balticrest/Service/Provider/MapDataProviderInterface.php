@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Provider;
 
-interface MapJsonDataProviderInterface
+interface MapDataProviderInterface
 {
     /**
      * @param string $city
@@ -12,7 +12,7 @@ interface MapJsonDataProviderInterface
      *
      * @return string
      */
-    public function getCachedCityMapJsonData(string $city, string $category = ''): string;
+    public function getCachedData(string $city, string $category = ''): string;
 
     /**
      * @param string $city
@@ -20,5 +20,5 @@ interface MapJsonDataProviderInterface
      *
      * @return string
      */
-    public function getCityMapJsonData(string $city, string $category = ''): string;
+    public function getData(string $city, string $category = ''): string;
 }

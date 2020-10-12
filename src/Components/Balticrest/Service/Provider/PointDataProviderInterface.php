@@ -26,6 +26,14 @@ interface PointDataProviderInterface
     public function getPointsByCityAndCategory(string $city, string $category): array;
 
     /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return array
+     */
+    public function getPointsWithUrlByCityAndCategory(string $city, string $category): array;
+
+    /**
      * @param Point $point
      *
      * @return string
