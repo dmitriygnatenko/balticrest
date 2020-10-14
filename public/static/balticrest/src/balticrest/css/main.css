@@ -2520,6 +2520,10 @@ a.green_btn:hover {
     position: relative;
 }
 
+.place_li_cont {
+    margin-bottom: 50px;
+}
+
 .place_li_cont .style_list {
     margin-bottom: -1px;
     position: relative;

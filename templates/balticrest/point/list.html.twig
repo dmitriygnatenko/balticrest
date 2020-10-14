@@ -103,14 +103,13 @@
                     {% for point in list_data %}
                         <div class="pg style_list">
                             <div class="con">
-                                <img src="{{ point.image }}" alt="">
-
-
-
+                                <img src="{{ point.image }}">
                                 <div class="content_li">
                                     <h2>
                                         <a href="{{ point.link }}">{{ point.title }}</a>
-                                        <span></span>
+                                        {% if point.description != false %}
+                                            <span></span>
+                                        {% endif %}
                                     </h2>
                                     <div>
                                         {{ point.description|raw }}
