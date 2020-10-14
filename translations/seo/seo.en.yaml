@@ -41,3 +41,37 @@ map:
         title: '%city_gen% parking, stations on the map'
         desc: '%city_gen% parking, stations on the map. Find out how to get from the station to the sea.'
         keywords: '%city%, map, stations, bus, parking, electric train, suburban, trains'
+
+list:
+    hotels:
+        title: '%city_gen% hotels'
+        desc: 'List of hotels in %city_gen%'
+        keywords: '%city%, list, hotels, hotels, guest houses, rest, services'
+    medicine:
+        title: '%city_gen% sanatoriums and boarding houses'
+        desc: 'List of sanatoriums and boarding houses in %city_gen%'
+        keywords: '%city%, sanatoriums, boarding houses, rest, services, wellness, Baltic, sea, diseases, treatment'
+    cafes:
+        title: '%city_gen% cafes, restaurants, pizzerias and bars'
+        desc: 'List of cafes, restaurants, pizzerias and bars in %city_gen%'
+        keywords: '%city%, cafes, restaurants, bars, pizzerias'
+    shops:
+        title: '%city_gen% shops'
+        desc: 'List of shops in %city_gen%'
+        keywords: '%city%, shops, shopping, supermarket'
+    banks:
+        title: '%city_gen% banks and ATMs'
+        desc: 'List of banks and ATMs in %city_gen%'
+        keywords: '%city%, banks, ATMs, money'
+    museums:
+        title: '%city_gen% attractions'
+        desc: 'List of attractions in %city_gen%'
+        keywords: '%city%, attractions, museums'
+    sport:
+        title: '%city_gen% sports facilities'
+        desc: 'List of sports facilities in %city_gen%. Sports complexes, swimming pools, sports grounds and much more'
+        keywords: '%city%, sports, football, fitness'
+    transport:
+        title: '%city_gen% parking and train stations'
+        desc: 'List of parking and train stations in %city_gen%'
+        keywords: '%city%, railway stations, bus, parking, electric train, commuter, trains'

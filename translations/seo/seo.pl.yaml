@@ -41,3 +41,37 @@ map:
         title: 'Parking, stacje kolejowe %city_gen% na mapie'
         desc: 'Parkingi, stacje kolejowe %city_gen%. Dowiedz się, jak dostać się ze stacji kolejowej nad morze.'
         keywords: '%city%, mapa, stacje, autobusy, parking, pociąg elektryczny, podmiejskie, pociągi'
+
+list:
+    hotels:
+        title: 'Lista hoteli w %city_gen%'
+        desc: 'Lista hoteli w %city_gen%'
+        keywords: '%city%, lista, hotele, hotele, pensjonaty, odpoczynek, usługi'
+    medicine:
+        title: 'Lista sanatoriów i pensjonatów w %city_gen%'
+        desc: 'Lista sanatoriów i pensjonatów w %city_gen%'
+        keywords: '%city%, sanatoria, pensjonaty, wypoczynek, usługi, wellness, Bałtyk, morze, choroby, leczenie'
+    cafes:
+        title: 'Kawiarnie, restauracje i bary w %city_gen%'
+        desc: 'Lista kawiarni, restauracji, pizzerii i barów w %city_gen%'
+        keywords: '%city%, kawiarnie, restauracje, bary, pizzerie'
+    shops:
+        title: 'Lista sklepów w %city_gen%'
+        desc: 'Lista sklepów w %city_gen%'
+        keywords: '%city%, sklepy, zakupy, supermarket'
+    banks:
+        title: 'Lista banków i bankomatów w %city_gen%'
+        desc: 'Lista banków i bankomatów w %city_gen%'
+        keywords: '%city%, banki, bankomaty, pieniądze'
+    museums:
+        title: 'Lista atrakcji w %city_gen%'
+        desc: 'Lista atrakcji w %city_gen%'
+        keywords: '%city%, atrakcje, muzea'
+    sport:
+        title: 'Lista obiektów sportowych w %city_gen%'
+        desc: 'Lista obiektów sportowych w %city_gen%'
+        keywords: '%city%, sport, piłka nożna, fitness'
+    transport:
+        title: 'Lista parkingów i stacji kolejowych w %city_gen%'
+        desc: 'Lista parkingów i stacji kolejowych w %city_gen%'
+        keywords: '%city%, stacje kolejowe, autobusy, parking, pociąg elektryczny, podmiejski, pociągi'
