@@ -41,3 +41,7 @@ navigation:
         about: About
         privacy_policy: Privacy policy
 
+error:
+    404:
+        header: Page not found
+        text: We could not find the page you were looking for... <br> While we are looking for it, you may find something interesting on the  <a href="%link%">map of %city_gen%</a>

@@ -41,3 +41,7 @@ navigation:
         about: Apie projektą
         privacy_policy: Privatumo politika
 
+error:
+    404:
+        header: Puslapis nerastas
+        text: Nepavyko rasti jūsų ieškomo puslapio... <br> Kol mes jo ieškome, <a href="%link%">%city_gen%</a> žemėlapyje galite rasti ką nors įdomaus

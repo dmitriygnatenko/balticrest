@@ -41,3 +41,7 @@ navigation:
         about: O projekcie
         privacy_policy: Polityka prywatności
 
+error:
+    404:
+        header: Strona nie znaleziona
+        text: Nie znaleźliśmy strony, której szukasz... <br> Podczas gdy my jej szukamy, być może na <a href="%link%">mapie %city_gen%</a> znajdziesz coś interesującego

@@ -40,3 +40,8 @@ navigation:
         contacts: 聯絡資料
         about: 關於項目
         privacy_policy: 隱私政策
+
+error:
+    404:
+        header: 找不到網頁
+        text: 我們找不到您要查找的頁面... <br>當我們尋找它時，您可能會在 <a href="%link%">地圖 %city_gen%</a>
