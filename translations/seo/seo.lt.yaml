@@ -41,3 +41,37 @@ map:
         title: 'Automobilių stovėjimo aikštelė, traukinių stotys %city_gen% žemėlapyje'
         desc: 'Automobilių stovėjimo aikštelė %city_gen%. Sužinokite, kaip nuvykti iš stoties į jūrą.'
         keywords: '%city%, žemėlapis, stotys, autobusas, automobilių stovėjimo aikštelė, elektrinis traukinys, priemiestis, traukiniai'
+
+list:
+    hotels:
+        title: 'Viešbučiai %city_gen%'
+        desc: 'Viešbučiai %city_gen% sąrašas'
+        keywords: '%city%, sąrašas, viešbučiai, viešbučiai, svečių namai, Kaliningrado sritis, poilsis, paslaugos'
+    medicine:
+        title: 'Sanatorijos ir pensionatai %city_gen%'
+        desc: 'Sanatorijų ir pensionatų %city_gen% sąrašas'
+        keywords: '%city%, sanatorijos, pensionatai, poilsis, paslaugos, sveikatingumas, Baltijos, jūra, ligos, gydymas'
+    cafes:
+        title: 'Kavinės, restoranai, picerijos ir barai %city_gen%'
+        desc: 'Kavinės, restoranai, picerijos ir barai %city_gen%'
+        keywords: '%city%, kavinės, restoranai, barai, picerijos'
+    shops:
+        title: 'Parduotuvės %city_gen%'
+        desc: 'Parduotuvės %city_gen%'
+        keywords: '%city%, parduotuvės, parduotuvės, prekybos centrai'
+    banks:
+        title: 'Bankai ir bankomatai %city_gen%'
+        desc: 'Bankai ir bankomatai %city_gen%'
+        keywords: '%city%, bankai, bankomatai, pinigai'
+    museums:
+        title: 'Atrakcionai %city_gen%'
+        desc: 'Atrakcionai %city_gen%'
+        keywords: '%city%, lankytinos vietos, muziejai'
+    sport:
+        title: 'Sporto priemonės %city_gen%'
+        desc: 'Sporto objektų %city_gen% sąrašas. Sporto kompleksai, baseinai, sporto aikštelės ir daug daugiau'
+        keywords: '%city%, sportas, futbolas, fitnesas'
+    transport:
+        title: 'Automobilių stovėjimo aikštelės ir stotys %city_gen%'
+        desc: 'Automobilių stovėjimo aikštelės ir stotys %city_gen%'
+        keywords: '%city%, geležinkelio stotys, autobusai, automobilių stovėjimo aikštelė, elektrinis traukinys, priemiestis'

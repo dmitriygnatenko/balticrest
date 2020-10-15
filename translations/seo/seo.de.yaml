@@ -41,3 +41,37 @@ map:
         title: '%city_gen% Parkplatz, Stationen auf der Karte'
         desc: '%city_gen% parken, Stationen auf der Karte. Finde heraus, wie du vom Bahnhof zum Meer kommst.'
         keywords: '%city%, Karte, Bahnhöfe, Bus, Parkplatz, elektrischer Zug, Vorort, Züge'
+
+list:
+    hotels:
+        title: 'Liste der Hotels in %city_gen%'
+        desc: 'Liste der Hotels in %city_gen%'
+        keywords: '%city%, Liste, Hotels, Hotels, Pensionen, Region Kaliningrad, Ruhe, Dienstleistungen'
+    medicine:
+        title: 'Liste der Sanatorien und Pensionen in %city_gen%'
+        desc: 'Liste der Sanatorien und Pensionen in %city_gen%'
+        keywords: '%city%, Sanatorien, Pensionen, Ruhe, Dienstleistungen, Wellness, Ostsee, Meer, Krankheiten, Behandlung'
+    cafes:
+        title: 'Liste der Cafés in %city_gen%'
+        desc: 'Liste der Cafés in %city_gen%, der besten Restaurants und Bar'
+        keywords: '%city%, Cafés, Restaurants, Bars, Pizzerien'
+    shops:
+        title: 'Geschäfte in %city_gen%'
+        desc: 'Geschäfte in %city_gen%'
+        keywords: '%city%, Geschäfte, Einkaufsmöglichkeiten, Supermarkt'
+    banks:
+        title: 'Banken und Geldautomaten in %city_gen%'
+        desc: 'Banken und Geldautomaten in %city_gen%'
+        keywords: '%city%, Banken, Geldautomaten, Geld'
+    museums:
+        title: 'Liste der Sehenswürdigkeiten von %city_gen%'
+        desc: 'Liste der Sehenswürdigkeiten von %city_gen%'
+        keywords: '%city%, Sehenswürdigkeiten, Museen'
+    sport:
+        title: 'Liste der Sportanlagen in %city_gen%'
+        desc: 'Liste der Sportanlagen in %city_gen%'
+        keywords: '%city%, Sport, Fußball, Fitness'
+    transport:
+        title: 'Liste der Parkplätze und Bahnhöfe in %city_gen%'
+        desc: 'Liste der Parkplätze und Bahnhöfe in %city_gen%'
+        keywords: '%city%, Bahnhöfe, Bus, Parkplatz, elektrischer Zug, Vorort, Züge'
