@@ -60,7 +60,7 @@ class PointRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function getPointsByCityAndCategory(string $city, string $category): array
+    public function getPointsByCityAndCategory(string $city, string $category = ''): array
     {
         $qb = $this->createQueryBuilder('p');
 
@@ -70,9 +70,11 @@ class PointRepository extends ServiceEntityRepository
             ->andWhere('c.code = :city')
             ->setParameter('city', $city);
 
-        $qb->join('p.type', 't')
-            ->andWhere('t.code = :category')
-            ->setParameter('category', $category);
+        if ($category) {
+            $qb->join('p.type', 't')
+                ->andWhere('t.code = :category')
+                ->setParameter('category', $category);
+        }
 
         return $qb->getQuery()->getResult();
     }
@@ -83,7 +85,7 @@ class PointRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function getPointsWithUrlByCityAndCategory(string $city, string $category): array
+    public function getPointsWithUrlByCityAndCategory(string $city, string $category = ''): array
     {
         $qb = $this->createQueryBuilder('p');
 
@@ -94,9 +96,11 @@ class PointRepository extends ServiceEntityRepository
             ->andWhere('c.code = :city')
             ->setParameter('city', $city);
 
-        $qb->join('p.type', 't')
-            ->andWhere('t.code = :category')
-            ->setParameter('category', $category);
+        if ($category) {
+            $qb->join('p.type', 't')
+                ->andWhere('t.code = :category')
+                ->setParameter('category', $category);
+        }
 
         return $qb->getQuery()->getResult();
     }
