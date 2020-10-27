@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Mapper;
 
+use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
+use App\Components\Balticrest\Service\Helper\PointLangDataHelperInterface;
 use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
 use App\Components\Balticrest\Service\DTO\PointDTO;
-use App\Components\Balticrest\Service\Provider\PointsDataProviderInterface;
-use App\Entity\PointLangData;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Entity\Point;
@@ -21,23 +21,29 @@ class PointDTOMapper
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var PointsDataProviderInterface */
-    private $pointsDataProvider;
+    /** @var PointLangDataHelperInterface */
+    private $pointLangDataHelper;
+
+    /** @var PointImageHelperInterface */
+    private $pointImageHelper;
 
     /**
      * @param RequestStack $requestStack
      * @param UrlGeneratorInterface $urlGenerator
-     * @param PointsDataProviderInterface $pointsDataProvider
+     * @param PointLangDataHelperInterface $pointLangDataHelper
+     * @param PointImageHelperInterface $pointImageHelper
      */
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
-        PointsDataProviderInterface $pointsDataProvider
+        PointLangDataHelperInterface $pointLangDataHelper,
+        PointImageHelperInterface $pointImageHelper
     )
     {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
-        $this->pointsDataProvider = $pointsDataProvider;
+        $this->pointLangDataHelper = $pointLangDataHelper;
+        $this->pointImageHelper = $pointImageHelper;
     }
 
     /**
@@ -54,7 +60,7 @@ class PointDTOMapper
         $dto->setId($point->getId())
             ->setLat($point->getLat())
             ->setLon($point->getLon())
-            ->setImage($this->pointsDataProvider->getPointImage($point));
+            ->setImage($this->pointImageHelper->getPointImage($point));
 
         if ($point->getUrl()) {
             $link = $this->urlGenerator->generate(
@@ -78,64 +84,7 @@ class PointDTOMapper
             ->setPhones($pointData[Fields::FIELD_PHONES] ?? '')
             ->setServices($pointData[Fields::FIELD_SERVICES] ?? []);
 
-
-
-        $pointLangData = null;
-
-        $pointLangDataCollection = $point->getPointLangData();
-
-        if ($locale === 'ru') {
-            // Данные на русском всегда присутствуют, не проверяем другие языки
-            $result = $pointLangDataCollection->filter(static function($item) {
-                /** @var PointLangData $item */
-                return $item->getLanguage()->getCode() === 'ru';
-            });
-
-            if (!$result->isEmpty()) {
-                $pointLangData = $result->first();
-            }
-        } else if ($locale === 'en') {
-            // Данные на английском всегда присутствуют, не проверяем другие языки
-            $result =$pointLangDataCollection->filter(static function($item) {
-                /** @var PointLangData $item */
-                return $item->getLanguage()->getCode() === 'en';
-            });
-
-            if (!$result->isEmpty()) {
-                $pointLangData = $result->first();
-            }
-        } else {
-            // Вначале проверяем данные на запрошенном языке
-            // Если они отсутствуют то берем английскую версию
-            $result = $pointLangDataCollection->filter(static function($item) use ($locale) {
-                /** @var PointLangData $item */
-                return $item->getLanguage()->getCode() === $locale;
-            });
-
-            if (!$result->isEmpty()) {
-                $pointLangData = $result->first();
-
-                if (trim($pointLangData->getTitle()) === '') {
-                    $pointLangData = null;
-                }
-            }
-
-            if ($pointLangData === null) {
-                $result = $pointLangDataCollection->filter(static function($item) {
-                    /** @var PointLangData $item */
-                    return $item->getLanguage()->getCode() === 'en';
-                });
-
-                if (!$result->isEmpty()) {
-                    $pointLangData = $result->first();
-                }
-            }
-        }
-
-
-
-
-
+        $pointLangData = $this->pointLangDataHelper->getLangPointData($point, $locale);
 
         if ($pointLangData !== null) {
             $pointLangDataArray = $pointLangData->getData();

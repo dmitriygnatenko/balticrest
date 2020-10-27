@@ -6,9 +6,10 @@ namespace App\Components\Balticrest\Service\Mapper;
 
 use App\Components\Balticrest\Service\DTO\MapPointDTO;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
+use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
+use App\Components\Balticrest\Service\Helper\PointLangDataHelperInterface;
 use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
-use App\Components\Balticrest\Service\Provider\PointsDataProviderInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
 use App\Entity\City;
 use App\Entity\Point;
@@ -31,29 +32,35 @@ class MapPointsListDTOMapper
     /** @var CityDataProvider */
     private $cityDataProvider;
 
-    /** @var PointsDataProviderInterface */
-    private $pointDataProvider;
+    /** @var PointLangDataHelperInterface */
+    private $pointLangDataHelper;
+
+    /** @var PointImageHelperInterface */
+    private $pointImageHelper;
 
     /**
      * @param RequestStack $requestStack
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      * @param CityDataProviderInterface $cityDataProvider
-     * @param PointsDataProviderInterface $pointDataProvider
+     * @param PointLangDataHelperInterface $pointLangDataHelper
+     * @param PointImageHelperInterface $pointImageHelper
      */
     public function __construct(
         RequestStack $requestStack,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator,
         CityDataProviderInterface $cityDataProvider,
-        PointsDataProviderInterface $pointDataProvider
+        PointLangDataHelperInterface $pointLangDataHelper,
+        PointImageHelperInterface $pointImageHelper
     )
     {
         $this->requestStack = $requestStack;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
         $this->cityDataProvider = $cityDataProvider;
-        $this->pointDataProvider = $pointDataProvider;
+        $this->pointLangDataHelper = $pointLangDataHelper;
+        $this->pointImageHelper = $pointImageHelper;
     }
 
     /**
@@ -87,57 +94,7 @@ class MapPointsListDTOMapper
             foreach ($points as $point) {
                 /** @var Point $point */
                 /** @var PointLangData|null $pointLangData */
-                $pointLangData = null;
-
-                $pointLangDataCollection = $point->getPointLangData();
-
-                if ($locale === 'ru') {
-                    // Данные на русском всегда присутствуют, не проверяем другие языки
-                    $result = $pointLangDataCollection->filter(static function($item) {
-                        /** @var PointLangData $item */
-                        return $item->getLanguage()->getCode() === 'ru';
-                    });
-
-                    if (!$result->isEmpty()) {
-                        $pointLangData = $result->first();
-                    }
-                } else if ($locale === 'en') {
-                    // Данные на английском всегда присутствуют, не проверяем другие языки
-                    $result =$pointLangDataCollection->filter(static function($item) {
-                        /** @var PointLangData $item */
-                        return $item->getLanguage()->getCode() === 'en';
-                    });
-
-                    if (!$result->isEmpty()) {
-                        $pointLangData = $result->first();
-                    }
-                } else {
-                    // Вначале проверяем данные на запрошенном языке
-                    // Если они отсутствуют то берем английскую версию
-                    $result = $pointLangDataCollection->filter(static function($item) use ($locale) {
-                        /** @var PointLangData $item */
-                        return $item->getLanguage()->getCode() === $locale;
-                    });
-
-                    if (!$result->isEmpty()) {
-                        $pointLangData = $result->first();
-
-                        if (trim($pointLangData->getTitle()) === '') {
-                            $pointLangData = null;
-                        }
-                    }
-
-                    if ($pointLangData === null) {
-                        $result = $pointLangDataCollection->filter(static function($item) {
-                            /** @var PointLangData $item */
-                            return $item->getLanguage()->getCode() === 'en';
-                        });
-
-                        if (!$result->isEmpty()) {
-                            $pointLangData = $result->first();
-                        }
-                    }
-                }
+                $pointLangData = $this->pointLangDataHelper->getLangPointData($point, $locale);
 
                 if ($pointLangData !== null) {
                     $pointData = $pointLangData->getData();
@@ -164,10 +121,10 @@ class MapPointsListDTOMapper
                         ->setHint($pointLangData->getTitle())
                         ->setDescription($pointData[PointLangFields::FIELD_SHORT_DESC] ?? '')
                         ->setLink($link)
-                        ->setImage($this->pointDataProvider->getPointImage($point))
-                        ->setIconImage($this->pointDataProvider->getPointIconImage($point))
-                        ->setIconImageWidth(PointsDataProviderInterface::ICON_IMAGE_WIDTH)
-                        ->setIconImageHeight(PointsDataProviderInterface::ICON_IMAGE_HEIGHT);
+                        ->setImage($this->pointImageHelper->getPointImage($point))
+                        ->setIconImage($this->pointImageHelper->getPointIconImage($point))
+                        ->setIconImageWidth($this->pointImageHelper->getIconImageWidth())
+                        ->setIconImageHeight($this->pointImageHelper->getIconImageHeight());
 
                     $listDTO->addPoint($pointDTO);
                 }
