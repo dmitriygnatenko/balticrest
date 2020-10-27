@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Controller;
 
+use App\Components\Balticrest\Service\DTO\PointDTO;
+use App\Components\Balticrest\Service\Provider\PointDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\ListDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\PointTypeProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,11 +58,21 @@ class PointController extends AbstractController
      * )
      *
      * @param Request $request
+     * @param PointDataProviderInterface $pointDataProvider
      *
      * @return Response
      */
-    public function point(Request $request): Response
+    public function point(Request $request, PointDataProviderInterface $pointDataProvider): Response
     {
-        return $this->render('balticrest/point/point.html.twig');
+        $url = $request->get('url', '');
+
+        /** @var PointDTO|null $point */
+        $point = $pointDataProvider->getCachedPointData($url);
+
+        if ($point === null) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('balticrest/point/point.html.twig', ['point' => $point]);
     }
 }

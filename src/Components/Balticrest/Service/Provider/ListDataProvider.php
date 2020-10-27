@@ -29,8 +29,8 @@ class ListDataProvider implements ListDataProviderInterface
     /** @var CacheManager */
     private $cacheManager;
 
-    /** @var PointDataProvider */
-    private $pointDataProvider;
+    /** @var PointsDataProvider */
+    private $pointsDataProvider;
 
     /** @var ListPointDTOMapper */
     private $pointsListDTOMapper;
@@ -40,7 +40,7 @@ class ListDataProvider implements ListDataProviderInterface
      * @param LoggerInterface $logger
      * @param TagAwareCacheInterface $cache
      * @param CacheManagerInterface $cacheManager
-     * @param PointDataProviderInterface $pointManager
+     * @param PointsDataProviderInterface $pointsDataProvider
      * @param ListPointDTOMapper $pointsListDTOMapper
      */
     public function __construct(
@@ -48,7 +48,7 @@ class ListDataProvider implements ListDataProviderInterface
         LoggerInterface $logger,
         TagAwareCacheInterface $cache,
         CacheManagerInterface $cacheManager,
-        PointDataProviderInterface $pointManager,
+        PointsDataProviderInterface $pointsDataProvider,
         ListPointDTOMapper $pointsListDTOMapper
     )
     {
@@ -56,7 +56,7 @@ class ListDataProvider implements ListDataProviderInterface
         $this->logger = $logger;
         $this->cache = $cache;
         $this->cacheManager = $cacheManager;
-        $this->pointDataProvider = $pointManager;
+        $this->pointsDataProvider = $pointsDataProvider;
         $this->pointsListDTOMapper = $pointsListDTOMapper;
     }
 
@@ -88,7 +88,7 @@ class ListDataProvider implements ListDataProviderInterface
      */
     public function getData(string $city, string $category): array
     {
-        $points = $this->pointDataProvider->getPointsWithUrlByCityAndCategory($city, $category);
+        $points = $this->pointsDataProvider->getPointsWithUrlByCityAndCategory($city, $category);
 
         $dtoList = $this->pointsListDTOMapper->fillAll($points);
 

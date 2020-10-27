@@ -29,8 +29,8 @@ class MapDataProvider implements MapDataProviderInterface
     /** @var CacheManager */
     private $cacheManager;
 
-    /** @var PointDataProvider */
-    private $pointDataProvider;
+    /** @var PointsDataProvider */
+    private $pointsDataProvider;
 
     /** @var MapPointsListDTOMapper */
     private $mapPointsListDTOMapper;
@@ -40,7 +40,7 @@ class MapDataProvider implements MapDataProviderInterface
      * @param LoggerInterface $logger
      * @param TagAwareCacheInterface $cache
      * @param CacheManagerInterface $cacheManager
-     * @param PointDataProviderInterface $pointManager
+     * @param PointsDataProviderInterface $pointsDataProvider
      * @param MapPointsListDTOMapper $mapPointsListDTOMapper
      */
     public function __construct(
@@ -48,7 +48,7 @@ class MapDataProvider implements MapDataProviderInterface
         LoggerInterface $logger,
         TagAwareCacheInterface $cache,
         CacheManagerInterface $cacheManager,
-        PointDataProviderInterface $pointManager,
+        PointsDataProviderInterface $pointsDataProvider,
         MapPointsListDTOMapper $mapPointsListDTOMapper
     )
     {
@@ -56,7 +56,7 @@ class MapDataProvider implements MapDataProviderInterface
         $this->logger = $logger;
         $this->cache = $cache;
         $this->cacheManager = $cacheManager;
-        $this->pointDataProvider = $pointManager;
+        $this->pointsDataProvider = $pointsDataProvider;
         $this->mapPointsListDTOMapper = $mapPointsListDTOMapper;
     }
 
@@ -94,7 +94,7 @@ class MapDataProvider implements MapDataProviderInterface
      */
     public function getData(string $city, string $category = ''): string
     {
-        $points = $this->pointDataProvider->getPointsByCityAndCategory($city, $category);
+        $points = $this->pointsDataProvider->getPointsByCityAndCategory($city, $category);
 
         $dto = $this->mapPointsListDTOMapper->fill($city, $points);
 

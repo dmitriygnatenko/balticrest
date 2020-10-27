@@ -8,7 +8,7 @@ use App\Components\Balticrest\Service\DTO\MapPointDTO;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
-use App\Components\Balticrest\Service\Provider\PointDataProviderInterface;
+use App\Components\Balticrest\Service\Provider\PointsDataProviderInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
 use App\Entity\City;
 use App\Entity\Point;
@@ -31,7 +31,7 @@ class MapPointsListDTOMapper
     /** @var CityDataProvider */
     private $cityDataProvider;
 
-    /** @var PointDataProviderInterface */
+    /** @var PointsDataProviderInterface */
     private $pointDataProvider;
 
     /**
@@ -39,14 +39,14 @@ class MapPointsListDTOMapper
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      * @param CityDataProviderInterface $cityDataProvider
-     * @param PointDataProviderInterface $pointDataProvider
+     * @param PointsDataProviderInterface $pointDataProvider
      */
     public function __construct(
         RequestStack $requestStack,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator,
         CityDataProviderInterface $cityDataProvider,
-        PointDataProviderInterface $pointDataProvider
+        PointsDataProviderInterface $pointDataProvider
     )
     {
         $this->requestStack = $requestStack;
@@ -166,8 +166,8 @@ class MapPointsListDTOMapper
                         ->setLink($link)
                         ->setImage($this->pointDataProvider->getPointImage($point))
                         ->setIconImage($this->pointDataProvider->getPointIconImage($point))
-                        ->setIconImageWidth(PointDataProviderInterface::ICON_IMAGE_WIDTH)
-                        ->setIconImageHeight(PointDataProviderInterface::ICON_IMAGE_HEIGHT);
+                        ->setIconImageWidth(PointsDataProviderInterface::ICON_IMAGE_WIDTH)
+                        ->setIconImageHeight(PointsDataProviderInterface::ICON_IMAGE_HEIGHT);
 
                     $listDTO->addPoint($pointDTO);
                 }

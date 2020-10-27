@@ -4,80 +4,98 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Provider;
 
-use App\Entity\Interfaces\PointDataFieldsInterface as PointFields;
+use App\Components\Balticrest\Service\Cache\CacheManager;
+use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
+use App\Components\Balticrest\Service\DTO\PointDTO;
+use App\Components\Balticrest\Service\Mapper\PointDTOMapper;
+use Psr\Cache\InvalidArgumentException;
 use App\Entity\Point;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class PointDataProvider implements PointDataProviderInterface
 {
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var LoggerInterface */
+    private $logger;
+
     /** @var EntityManagerInterface */
     private $em;
 
+    /** @var TagAwareCacheInterface */
+    private $cache;
+
+    /** @var CacheManager */
+    private $cacheManager;
+
+    /** @var PointDTOMapper */
+    private $pointDTOMapper;
+
     /**
+     * @param RequestStack $requestStack
+     * @param LoggerInterface $logger
      * @param EntityManagerInterface $em
+     * @param TagAwareCacheInterface $cache
+     * @param CacheManagerInterface $cacheManager
+     * @param PointDTOMapper $pointDTOMapper
      */
-    public function __construct(EntityManagerInterface $em)
-    {
+    public function __construct(
+        RequestStack $requestStack,
+        LoggerInterface $logger,
+        EntityManagerInterface $em,
+        TagAwareCacheInterface $cache,
+        CacheManagerInterface $cacheManager,
+        PointDTOMapper $pointDTOMapper
+    ) {
+        $this->requestStack = $requestStack;
+        $this->logger = $logger;
         $this->em = $em;
+        $this->cache = $cache;
+        $this->cacheManager = $cacheManager;
+        $this->pointDTOMapper = $pointDTOMapper;
     }
 
     /**
-     * @param string $city
-     * @param string $category
+     * @param string $url
      *
-     * @return array
+     * @return PointDTO|null
      */
-    public function getPointsByCityAndCategory(string $city, string $category): array
+    public function getCachedPointData(string $url): ?PointDTO
     {
-        return $this->em->getRepository(Point::class)->getPointsByCityAndCategory($city, $category);
-    }
+        return $this->getPointData($url);
 
-    /**
-     * @param string $city
-     * @param string $category
-     *
-     * @return array
-     */
-    public function getPointsWithUrlByCityAndCategory(string $city, string $category): array
-    {
-        return $this->em->getRepository(Point::class)->getPointsWithUrlByCityAndCategory($city, $category);
-    }
+        $cacheKey = $this->cacheManager->getPointCacheKey(
+            $url, $this->requestStack->getMasterRequest()->getLocale()
+        );
 
-    /**
-     * @param Point $point
-     *
-     * @return string
-     */
-    public function getPointImage(Point $point): string
-    {
-        $pointLogo = $point->getLogo();
+        try {
+            return $this->cache->get($cacheKey, function (ItemInterface $item) use ($url) {
+                $item->tag([CacheTagInterface::TAG_POINTS]);
+                $item->expiresAfter(CacheExpireInterface::EXPIRE_WEEK);
 
-        if ($pointLogo) {
-            return $pointLogo;
+                return $this->getPointData($url);
+            });
+        } catch (InvalidArgumentException $exception) {
+            $this->logger->error($exception);
+
+            return $this->getPointData($url);
         }
-
-        $pointData = $point->getData();
-
-        if ($pointData[PointFields::FIELD_DETAILED_TYPE] ?? '') {
-            return self::IMAGES_PATH . 'logo/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
-        }
-
-        return self::IMAGES_PATH . 'logo/'  . $point->getType()->getCode() . '.png';
     }
 
     /**
-     * @param Point $point
+     * @param string $url
      *
-     * @return string
+     * @return PointDTO|null
      */
-    public function getPointIconImage(Point $point): string
+    public function getPointData(string $url): ?PointDTO
     {
-        $pointData = $point->getData();
+        $point = $this->em->getRepository(Point::class)->findOneBy(['url' => $url, 'is_active' => true]);
 
-        if ($pointData[PointFields::FIELD_DETAILED_TYPE] ?? '') {
-            return self::IMAGES_PATH . 'markers/'  . $pointData[PointFields::FIELD_DETAILED_TYPE] . '.png';
-        }
-
-        return self::IMAGES_PATH . 'markers/'  . $point->getType()->getCode() . '.png';
+        return $point === null ? null : $this->pointDTOMapper->fill($point);
     }
 }

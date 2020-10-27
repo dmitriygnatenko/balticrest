@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Mapper;
 
-use App\Components\Balticrest\Service\DTO\ListPointDTO;
+use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
+use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
+use App\Components\Balticrest\Service\DTO\PointDTO;
 use App\Components\Balticrest\Service\Provider\PointsDataProviderInterface;
-use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
-use App\Entity\Point;
 use App\Entity\PointLangData;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use App\Entity\Point;
 
-class ListPointDTOMapper
+class PointDTOMapper
 {
     /** @var RequestStack */
     private $requestStack;
@@ -21,50 +22,63 @@ class ListPointDTOMapper
     private $urlGenerator;
 
     /** @var PointsDataProviderInterface */
-    private $pointDataProvider;
+    private $pointsDataProvider;
 
     /**
      * @param RequestStack $requestStack
      * @param UrlGeneratorInterface $urlGenerator
-     * @param PointsDataProviderInterface $pointDataProvider
+     * @param PointsDataProviderInterface $pointsDataProvider
      */
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
-        PointsDataProviderInterface $pointDataProvider
+        PointsDataProviderInterface $pointsDataProvider
     )
     {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
-        $this->pointDataProvider = $pointDataProvider;
-    }
-
-    /**
-     * @param array $points
-     *
-     * @return array
-     */
-    public function fillAll(array $points): array
-    {
-        $dto = [];
-
-        foreach ($points as $point) {
-            $dto[] = $this->fill($point);
-        }
-
-        return $dto;
+        $this->pointsDataProvider = $pointsDataProvider;
     }
 
     /**
      * @param Point $point
      *
-     * @return ListPointDTO
+     * @return PointDTO
      */
-    public function fill(Point $point): ListPointDTO
+    public function fill(Point $point): PointDTO
     {
-        $dto = new ListPointDTO();
+        $dto = new PointDTO();
 
         $locale = $this->requestStack->getMasterRequest()->getLocale();
+
+        $dto->setId($point->getId())
+            ->setLat($point->getLat())
+            ->setLon($point->getLon())
+            ->setImage($this->pointsDataProvider->getPointImage($point));
+
+        if ($point->getUrl()) {
+            $link = $this->urlGenerator->generate(
+                'point',
+                [
+                    '_locale' => $locale,
+                    'city' => $point->getCity()->getCode(),
+                    'category' => $point->getType()->getCode(),
+                    'url' => $point->getUrl(),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+
+            $dto->setLink($link);
+        }
+
+        $pointData = $point->getData();
+
+        $dto->setEmail($pointData[Fields::FIELD_EMAIl] ?? '')
+            ->setWebsite($pointData[Fields::FIELD_WEBSITE] ?? '')
+            ->setPhones($pointData[Fields::FIELD_PHONES] ?? '')
+            ->setServices($pointData[Fields::FIELD_SERVICES] ?? []);
+
+
 
         $pointLangData = null;
 
@@ -118,28 +132,17 @@ class ListPointDTOMapper
             }
         }
 
+
+
+
+
+
         if ($pointLangData !== null) {
             $pointLangDataArray = $pointLangData->getData();
 
-            if ($point->getUrl()) {
-                $link = $this->urlGenerator->generate(
-                    'point',
-                    [
-                        '_locale' => $locale,
-                        'city' => $point->getCity()->getCode(),
-                        'category' => $point->getType()->getCode(),
-                        'url' => $point->getUrl(),
-                    ],
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                );
-            } else {
-                $link = '';
-            }
-
             $dto->setTitle($pointLangData->getTitle())
-                ->setLink($link)
-                ->setDescription($pointLangDataArray[PointLangFields::FIELD_SHORT_DESC] ?? '')
-                ->setImage($this->pointDataProvider->getPointImage($point));
+                ->setDescription($pointLangDataArray[LangFields::FIELD_DESC] ?? '')
+                ->setAddress($pointLangDataArray[LangFields::FIELD_ADDRESS] ?? '');
         }
 
         return $dto;

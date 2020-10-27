@@ -1,0 +1,15 @@
+{% extends 'balticrest/base_left_top_menu.html.twig' %}
+
+{% set city = app.request.attributes.get('city', '') %}
+{% set category = app.request.attributes.get('category', '') %}
+
+{% block title %}{{ parent() }} {{ global_service.listPageTitle(city, category) }}{% endblock %}
+{% block description %}{{ global_service.listPageDescription(city, category) }}{% endblock %}
+{% block keywords %}{{ global_service.listPageKeywords(city, category) }}{% endblock %}
+
+{% block body_attr %}class="innerpage"{% endblock %}
+
+{% block content %}
+
+   
+{% endblock %}

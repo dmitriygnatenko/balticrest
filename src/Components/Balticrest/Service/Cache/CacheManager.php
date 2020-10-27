@@ -94,4 +94,15 @@ class CacheManager implements CacheManagerInterface, CacheTagInterface, CacheKey
     {
         return self::KEY_ARTICLES . $url . $locale;
     }
+
+    /**
+     * @param string $url
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getPointCacheKey(string $url, string $locale): string
+    {
+        return self::KEY_POINTS . $url . $locale;
+    }
 }
