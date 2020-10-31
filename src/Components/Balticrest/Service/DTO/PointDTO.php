@@ -42,6 +42,12 @@ class PointDTO
     /** @var array */
     private $services = [];
 
+    /** @var string|null */
+    private $category;
+
+    /** @var string|null */
+    private $city;
+
     /**
      * @return int|null
      */
@@ -278,6 +284,46 @@ class PointDTO
     public function setPhones(?string $phones): PointDTO
     {
         $this->phones = $phones;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string|null $category
+     *
+     * @return PointDTO
+     */
+    public function setCategory(?string $category): PointDTO
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string|null $city
+     *
+     * @return PointDTO
+     */
+    public function setCity(?string $city): PointDTO
+    {
+        $this->city = $city;
 
         return $this;
     }

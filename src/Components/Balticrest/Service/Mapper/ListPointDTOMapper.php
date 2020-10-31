@@ -92,8 +92,10 @@ class ListPointDTOMapper
                 $link = '';
             }
 
-            $dto->setTitle($pointLangData->getTitle())
+            $dto->setId($point->getId())
+                ->setTitle($pointLangData->getTitle())
                 ->setLink($link)
+                ->setAddress($pointLangDataArray[PointLangFields::FIELD_ADDRESS] ?? '')
                 ->setDescription($pointLangDataArray[PointLangFields::FIELD_SHORT_DESC] ?? '')
                 ->setImage($this->pointImageHelper->getPointImage($point));
         }

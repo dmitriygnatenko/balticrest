@@ -6,6 +6,8 @@ namespace App\Components\Balticrest\Service\Provider;
 
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
+use App\Components\Balticrest\Service\Cache\CacheTagInterface;
+use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\DTO\PointDTO;
 use App\Components\Balticrest\Service\Mapper\PointDTOMapper;
 use Psr\Cache\InvalidArgumentException;
@@ -67,8 +69,6 @@ class PointDataProvider implements PointDataProviderInterface
      */
     public function getCachedPointData(string $url): ?PointDTO
     {
-        return $this->getPointData($url);
-
         $cacheKey = $this->cacheManager->getPointCacheKey(
             $url, $this->requestStack->getMasterRequest()->getLocale()
         );

@@ -59,11 +59,15 @@ class PointController extends AbstractController
      *
      * @param Request $request
      * @param PointDataProviderInterface $pointDataProvider
+     * @param ListDataProviderInterface $listDataProvider
      *
      * @return Response
      */
-    public function point(Request $request, PointDataProviderInterface $pointDataProvider): Response
-    {
+    public function point(
+        Request $request,
+        PointDataProviderInterface $pointDataProvider,
+        ListDataProviderInterface $listDataProvider
+    ): Response {
         $url = $request->get('url', '');
 
         /** @var PointDTO|null $point */
@@ -73,6 +77,9 @@ class PointController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        return $this->render('balticrest/point/point.html.twig', ['point' => $point]);
+        return $this->render('balticrest/point/point.html.twig', [
+            'point' => $point,
+            'similar_points' => $listDataProvider->getCachedSimilarPointsData($point)
+        ]);
     }
 }

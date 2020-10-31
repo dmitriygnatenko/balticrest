@@ -8,6 +8,8 @@ use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
+use App\Components\Balticrest\Service\DTO\ListPointDTO;
+use App\Components\Balticrest\Service\DTO\PointDTO;
 use App\Components\Balticrest\Service\Mapper\ListPointDTOMapper;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -93,6 +95,48 @@ class ListDataProvider implements ListDataProviderInterface
         $dtoList = $this->pointsListDTOMapper->fillAll($points);
 
         return $this->sort($dtoList);
+    }
+
+    /**
+     * @param PointDTO $point
+     *
+     * @return array
+     */
+    public function getCachedSimilarPointsData(PointDTO $point): array
+    {
+        $list = $this->getCachedData($point->getCity(), $point->getCategory());
+
+        return $this->getSimilarPointsFromList($list, $point);
+    }
+
+    /**
+     * @param PointDTO $point
+     *
+     * @return array
+     */
+    public function getSimilarPointsData(PointDTO $point): array
+    {
+        $list = $this->getData($point->getCity(), $point->getCategory());
+
+        return $this->getSimilarPointsFromList($list, $point);
+    }
+
+    /**
+     * @param array $list
+     * @param PointDTO $point
+     *
+     * @return array
+     */
+    private function getSimilarPointsFromList(array $list, PointDTO $point): array
+    {
+        $excludedId = $point->getId();
+
+        $list = array_filter($list, static function ($elem) use ($excludedId) {
+            /** @var $elem ListPointDTO */
+            return $elem->getId() !== $excludedId;
+        });
+
+        return array_slice($list, 0, self::SIMILAR_POINTS_COUNT);
     }
 
     /**

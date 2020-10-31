@@ -11,5 +11,94 @@
 
 {% block content %}
 
-   
+    {% set similar_trans = 'point.similar.' ~ point.category %}
+
+    <div class="container page_info">
+        <div class="col_md_12">
+            <img src="{{ point.image }}">
+            <h1>{{ point.title }}</h1>
+            <ul>
+                <li>
+                    <a href="{{ path('point_list', {city: point.city, category: point.category}) }}">
+                        {{ similar_trans|trans }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% set show_similar = similar_points is not empty %}
+
+    <div class="container contant">
+        <div class="row cont">
+
+            {% if show_similar %}
+                <div class="col-md-3 mobile_none sidebar">
+                    <div>
+                        <div class="similar">
+                            <h3>{{ similar_trans|trans }}:</h3>
+
+                            {% for similar_point in similar_points %}
+                                <div>
+                                    <a href="{{ similar_point.link }}">{{ similar_point.title }}</a>
+                                    {{ similar_point.address }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="col-md-{% if show_similar %}9{% else %}12{% endif %} basic">
+
+                {% if point.address %}
+                    <div class="phone_email">
+                        <span>
+                            <i class="fa fa-map-marker"></i>
+                            {{ point.address }}
+                        </span>
+                    </div>
+                {% endif %}
+
+                {% if point.description %}
+                    <div class="point_desc">
+                        {{ point.description|raw }}
+                    </div>
+                {% endif %}
+
+                {% if point.phones or point.website or point.email or point.services %}
+                    <div class="features_block">
+                        <div>
+                            <ul>
+                                {% if point.website %}
+                                    <li>
+                                        <b>{% trans %}point.website{% endtrans %}</b>:
+                                        <a href="{{ point.website }}" target="_blank">{{ point.website }}</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if point.email %}
+                                    <li>
+                                        <b>{% trans %}point.email{% endtrans %}</b>:
+                                        <a href="mailto:{{ point.email }}" target="_blank">{{ point.email }}</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if point.phones %}
+                                    <li><b>{% trans %}point.phones{% endtrans %}</b>: {{ point.phones }}</li>
+                                {% endif %}
+
+                                {% if point.services %}
+                                    <li>
+                                        <b>{% trans %}point.services{% endtrans %}</b>: {{ point.services|join(', ') }}
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

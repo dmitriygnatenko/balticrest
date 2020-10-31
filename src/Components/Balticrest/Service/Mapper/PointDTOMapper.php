@@ -11,6 +11,7 @@ use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
 use App\Components\Balticrest\Service\DTO\PointDTO;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Entity\Point;
 
 class PointDTOMapper
@@ -21,6 +22,9 @@ class PointDTOMapper
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var PointLangDataHelperInterface */
     private $pointLangDataHelper;
 
@@ -30,18 +34,21 @@ class PointDTOMapper
     /**
      * @param RequestStack $requestStack
      * @param UrlGeneratorInterface $urlGenerator
+     * @param TranslatorInterface $translator
      * @param PointLangDataHelperInterface $pointLangDataHelper
      * @param PointImageHelperInterface $pointImageHelper
      */
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
+        TranslatorInterface $translator,
         PointLangDataHelperInterface $pointLangDataHelper,
         PointImageHelperInterface $pointImageHelper
     )
     {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
+        $this->translator = $translator;
         $this->pointLangDataHelper = $pointLangDataHelper;
         $this->pointImageHelper = $pointImageHelper;
     }
@@ -60,7 +67,9 @@ class PointDTOMapper
         $dto->setId($point->getId())
             ->setLat($point->getLat())
             ->setLon($point->getLon())
-            ->setImage($this->pointImageHelper->getPointImage($point));
+            ->setImage($this->pointImageHelper->getPointImage($point))
+            ->setCity($point->getCity()->getCode())
+            ->setCategory($point->getType()->getCode());
 
         if ($point->getUrl()) {
             $link = $this->urlGenerator->generate(
@@ -79,19 +88,44 @@ class PointDTOMapper
 
         $pointData = $point->getData();
 
+        $services = $pointData[Fields::FIELD_SERVICES] ?? [];
+
+        $services = array_map(function ($service) use ($locale)  {
+            return $this->translator->trans(
+                'services.' . $service, [], 'messages', $locale
+            );
+        }, $services);
+
         $dto->setEmail($pointData[Fields::FIELD_EMAIl] ?? '')
             ->setWebsite($pointData[Fields::FIELD_WEBSITE] ?? '')
             ->setPhones($pointData[Fields::FIELD_PHONES] ?? '')
-            ->setServices($pointData[Fields::FIELD_SERVICES] ?? []);
+            ->setServices($services);
 
         $pointLangData = $this->pointLangDataHelper->getLangPointData($point, $locale);
 
         if ($pointLangData !== null) {
             $pointLangDataArray = $pointLangData->getData();
 
+            $description = $pointLangDataArray[LangFields::FIELD_DESC] ?? '';
+            $shortDescription = $pointLangDataArray[LangFields::FIELD_SHORT_DESC] ?? '';
+
             $dto->setTitle($pointLangData->getTitle())
-                ->setDescription($pointLangDataArray[LangFields::FIELD_DESC] ?? '')
+                ->setDescription($description !== '' ? $description : $shortDescription)
                 ->setAddress($pointLangDataArray[LangFields::FIELD_ADDRESS] ?? '');
+
+            $address = $pointLangDataArray[LangFields::FIELD_ADDRESS] ?? '';
+
+            if ($address) {
+                $transCity = $this->translator->trans(
+                    'cities.' . $point->getCity()->getCode(), [], 'messages', $locale
+                );
+
+                if ($locale === 'ru') {
+                    $dto->setAddress($transCity . ', ' . $address);
+                } else {
+                    $dto->setAddress($address . ', ' . $transCity);
+                }
+            }
         }
 
         return $dto;

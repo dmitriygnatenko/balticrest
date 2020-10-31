@@ -75,7 +75,7 @@ class MapPointsListDTOMapper
 
         $locale = $this->requestStack->getMasterRequest()->getLocale();
 
-        $listDTO->setTransPointButton($this->translator->trans('map.point.btn_title'));
+        $listDTO->setTransPointButton($this->translator->trans('map.point.btn_title', [], 'messages', $locale));
 
         $cities = $this->cityDataProvider->getCachedCitiesList();
 

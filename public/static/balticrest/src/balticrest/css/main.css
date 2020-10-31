@@ -128,7 +128,7 @@ a:hover {
 }
 
 .page_info {
-    padding: 90px 15px 60px;
+    padding: 90px 15px 30px;
 }
 
 .page_info img {
@@ -1814,15 +1814,15 @@ a.green_btn:hover {
     color: #A8A8A8;
 }
 
+.point_desc {
+    padding: 20px 30px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
 /*Features block*/
 .features_block {
     overflow: overlay;
     min-height: 162px;
-}
-
-.features_block div {
-    width: 50%;
-    float: left;
 }
 
 .features_block div ul {
@@ -2047,7 +2047,6 @@ a.green_btn:hover {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: #ffffff;
-    padding: 25px 0px 10px;
 }
 
 .similar img {
