@@ -15,6 +15,21 @@ map:
     point:
         btn_title: 更多細節
 
+point:
+    services: 服務
+    website: 網站
+    email: 電子郵件
+    phones: 電話
+    similar:
+        hotels: 其他酒店
+        medicine: 其他療養院
+        cafes: 其他咖啡館，餐館和酒吧
+        shops: 其他商店
+        banks: 其他銀行和ATM
+        museums: 其他景點
+        sport: 其他體育設施
+        transport: 其他運輸設施
+
 profile:
     login: 登錄
     logout: 登出
@@ -29,6 +44,25 @@ categories:
     museums: 博物館
     sport: 運動
     transport: 交通運輸
+
+services:
+    parking: 停車
+    restaurant: 餐廳
+    conference-hall: 會議廳
+    spa: 水療中心
+    fitness: 健身中心
+    bar: 酒吧
+    indoor-pool: 室內游泳池
+    outdoor-pool: 室外游泳池
+    wi-fi: Wi-Fi
+    car-rental: 汽車租賃
+    safe: 安全
+    transfer: 轉移
+    sauna: 桑拿浴
+    library: 庫
+    laundry: 洗衣
+    children-playground: 兒童遊樂場
+    guide: 指南翻譯服務
 
 navigation:
     menu:

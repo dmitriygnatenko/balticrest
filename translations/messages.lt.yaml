@@ -15,6 +15,21 @@ map:
     point:
         btn_title: Daugiau informacijos
 
+point:
+    services: Paslaugos
+    website: Svetainė
+    email: El. paštas
+    phones: Telefonai
+    similar:
+        hotels: Kiti viešbučiai
+        medicine: Kitos sanatorijos
+        cafes: kitos kavinės, restoranai ir barai
+        shops: kitos parduotuvės
+        banks: Kiti bankai ir bankomatai
+        museums: Kitos lankytinos vietos
+        sport: Kitos sporto priemonės
+        transport: Kitos transporto priemonės
+
 profile:
     login: Prisijungti
     logout: Atsijungti
@@ -29,6 +44,25 @@ categories:
     museums: Muziejai
     sport: Sportas
     transport: Transportas
+
+services:
+    parking: automobilių stovėjimo aikštelė
+    restaurant: restoranas
+    conference-hall: konferencijų salė
+    spa: SPA
+    fitness: fitneso centras
+    bar: baras
+    indoor-pool: uždaras baseinas
+    outdoor-pool: lauko baseinas
+    wi-fi: Wi-Fi
+    car-rental: automobilių nuoma
+    safe: saugu
+    transfer: perdavimas
+    sauna: pirtis
+    library: biblioteka
+    laundry: skalbykla
+    children-playground: vaikų žaidimų aikštelė
+    guide: gido-vertėjo paslaugos
 
 navigation:
     menu:
