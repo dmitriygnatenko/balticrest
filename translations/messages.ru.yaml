@@ -15,6 +15,21 @@ map:
     point:
         btn_title: Подробнее
 
+point:
+    services: Услуги
+    website: Сайт
+    email: Адрес электронной почты
+    phones: Телефоны
+    similar:
+        hotels: Другие отели и гостиницы
+        medicine: Другие санатории
+        cafes: Другие кафе, рестораны и бары
+        shops: Другие магазины
+        banks: Другие банки и банкоматы
+        museums: Другие достопримечательности
+        sport: Другие спортивные объекты
+        transport: Другие транспортные объекты
+
 profile:
     login: Войти
     logout: Выйти
@@ -29,6 +44,25 @@ categories:
     museums: Музеи
     sport: Спорт
     transport: Транспорт
+
+services:
+    parking: парковка
+    restaurant: ресторан
+    conference-hall: конференц-зал
+    spa: SPA
+    fitness: фитнес-центр
+    bar: бар
+    indoor-pool: закрытый бассейн
+    outdoor-pool: открытый бассейн
+    wi-fi: Wi-Fi
+    car-rental: прокат авто
+    safe: сейф
+    transfer: трансфер
+    sauna: сауна
+    library: библиотека
+    laundry: прачечная
+    children-playground: детская игровая площадка
+    guide: услуги гида-переводчика
 
 navigation:
     menu:

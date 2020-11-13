@@ -15,6 +15,21 @@ map:
     point:
         btn_title: Więcej szczegółów
 
+point:
+    services: Usługi
+    website: Stronie internetowej
+    email: Adres e-mail
+    phones: Telefony
+    similar:
+        hotels: Więcej hoteli
+        medicine: Inne sanatoria
+        cafes: Inne kawiarnie, restauracje i bary
+        shops: Inne sklepy
+        banks: Inne banki i bankomaty
+        museums: Inne atrakcje
+        sport: Inne obiekty sportowe
+        transport: Inne obiekty transportowe
+
 profile:
     login: Zaloguj się
     logout: Wyloguj się
@@ -29,6 +44,25 @@ categories:
     museums: Muzea
     sport: Sport
     transport: Transport
+
+services:
+    parking: parking
+    restaurant: restauracja
+    conference-hall: sala konferencyjna
+    spa: SPA
+    fitness: centrum fitness
+    bar: bar
+    indoor-pool: kryty basen
+    outdoor-pool: basen otwarty
+    wi-fi: Wi-Fi
+    car-rental: wypożyczalnia samochodów
+    safe: bezpieczny
+    transfer: transfer
+    sauna: sauna
+    library: biblioteka
+    laundry: pralnia
+    children-playground: plac zabaw
+    guide: usługi przewodnika-tłumacza
 
 navigation:
     menu:

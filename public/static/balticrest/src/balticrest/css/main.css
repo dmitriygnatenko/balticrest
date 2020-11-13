@@ -133,9 +133,10 @@ a:hover {
 
 .page_info img {
     width: 100px;
-    border-radius: 3px;
     float: left;
     margin-right: 20px;
+    border-radius: 100px;
+    border: 5px solid #e1e1e1;
 }
 
 .page_info ul li {
