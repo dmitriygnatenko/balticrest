@@ -75,3 +75,29 @@ list:
         title: 'Automobilių stovėjimo aikštelės ir stotys %city_gen%'
         desc: 'Automobilių stovėjimo aikštelės ir stotys %city_gen%'
         keywords: '%city%, geležinkelio stotys, autobusai, automobilių stovėjimo aikštelė, elektrinis traukinys, priemiestis'
+
+point:
+    hotels:
+        desc: '%city_gen% viešbutis'
+        keywords: '%city%, viešbutis'
+    medicine:
+        desc: '%city_gen% sanatorija'
+        keywords: '%city%, sanatorija'
+    cafes:
+        desc: '%city_gen% kavinė'
+        keywords: '%city%, kavinė'
+    shops:
+        desc: '%city_gen% parduotuvė'
+        keywords: '%city%, parduotuvė, prekybos centras'
+    banks:
+        desc: '%city_gen% banko bankomatai'
+        keywords: '%city%, bankas, bankomatas, pinigai'
+    museums:
+        desc: '%city_gen% atrakcija'
+        keywords: '%city%, atrakcija'
+    sport:
+        desc: '%city_gen% sportas'
+        keywords: '%city%, sportas, fitnesas'
+    transport:
+        desc: '%city_gen% automobilių stovėjimo aikštelė ir traukinių stotis'
+        keywords: '%city%, geležinkelio stotis'

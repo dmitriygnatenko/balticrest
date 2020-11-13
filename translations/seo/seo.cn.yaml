@@ -75,3 +75,29 @@ list:
         title: '停車場和火車站 %city_gen%'
         desc: '停車場和車站列表 %city_gen%'
         keywords: '%city%, 火車站, 公共汽車, 停車場, 電動火車, 郊區, 火車'
+
+point:
+    hotels:
+        desc: '%city_gen% 酒店'
+        keywords: '%city%, 酒店'
+    medicine:
+        desc: '%city_gen% 療養院'
+        keywords: '%city%, 療養院'
+    cafes:
+        desc: '%city_gen% 咖啡廳'
+        keywords: '%city%, 咖啡廳'
+    shops:
+        desc: '%city_gen% 商店'
+        keywords: '%city%, 商店, 超級市場'
+    banks:
+        desc: '%city_gen% 銀行自動櫃員機'
+        keywords: '%city%, 銀行, ATM, 貨幣'
+    museums:
+        desc: '%city_gen% 吸引力'
+        keywords: '%city%, 吸引力'
+    sport:
+        desc: '%city_gen% 運動'
+        keywords: '%city%, 運動, 健身'
+    transport:
+        desc: '%city_gen% 停車場和火車站'
+        keywords: '%city%, 火車站'

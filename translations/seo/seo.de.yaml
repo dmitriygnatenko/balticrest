@@ -75,3 +75,29 @@ list:
         title: 'Liste der Parkplätze und Bahnhöfe in %city_gen%'
         desc: 'Liste der Parkplätze und Bahnhöfe in %city_gen%'
         keywords: '%city%, Bahnhöfe, Bus, Parkplatz, elektrischer Zug, Vorort, Züge'
+
+point:
+    hotels:
+        desc: '%city_gen% hotel'
+        keywords: '%city%, hotel'
+    medicine:
+        desc: '%city_gen% Sanatorium'
+        keywords: '%city%, Sanatorium'
+    cafes:
+        desc: '%city_gen% cafe'
+        keywords: '%city%, cafe'
+    shops:
+        desc: '%city_gen% Geschäft'
+        keywords: '%city%, Geschäft, Supermarkt'
+    banks:
+        desc: '%city_gen% Bankautomaten'
+        keywords: '%city%, Bankautomaten'
+    museums:
+        desc: '%city_gen% Attraktion'
+        keywords: '%city%, Attraktion'
+    sport:
+        desc: '%city_gen% sport'
+        keywords: '%city%, Sport, Fitness'
+    transport:
+        desc: '%city_gen% Parkplatz und Bahnhofn'
+        keywords: '%city%, Bahnhof'

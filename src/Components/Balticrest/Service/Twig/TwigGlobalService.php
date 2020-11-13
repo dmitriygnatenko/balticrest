@@ -35,6 +35,9 @@ class TwigGlobalService
     /** @var string */
     private const PAGE_TYPE_LIST = 'list';
 
+    /** @var string */
+    private const POINT_TYPE_LIST = 'point';
+
     /** @var PointTypeProvider */
     private $pointTypeProvider;
 
@@ -170,6 +173,28 @@ class TwigGlobalService
     public function getListPageKeywords(string $city, string $category): string
     {
         return $this->getSeoTrans(self::TAG_TYPE_KEYWORDS, self::PAGE_TYPE_LIST, $city, $category);
+    }
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return string
+     */
+    public function getPointPageDescription(string $city, string $category): string
+    {
+        return $this->getSeoTrans(self::TAG_TYPE_DESC, self::POINT_TYPE_LIST, $city, $category);
+    }
+
+    /**
+     * @param string $city
+     * @param string $category
+     *
+     * @return string
+     */
+    public function getPointPageKeywords(string $city, string $category): string
+    {
+        return $this->getSeoTrans(self::TAG_TYPE_KEYWORDS, self::POINT_TYPE_LIST, $city, $category);
     }
 
     /**

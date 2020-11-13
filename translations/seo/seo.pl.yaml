@@ -75,3 +75,29 @@ list:
         title: 'Lista parkingów i stacji kolejowych w %city_gen%'
         desc: 'Lista parkingów i stacji kolejowych w %city_gen%'
         keywords: '%city%, stacje kolejowe, autobusy, parking, pociąg elektryczny, podmiejski, pociągi'
+
+point:
+    hotels:
+        desc: '%city_gen% hotel'
+        keywords: '%city%, hotel'
+    medicine:
+        desc: '%city_gen% sanatorium'
+        keywords: '%city%, sanatorium'
+    cafes:
+        desc: '%city_gen% kawiarnia'
+        keywords: '%city%, kawiarnia'
+    shops:
+        desc: '%city_gen% sklep'
+        keywords: '%city%, sklep, supermarket'
+    banks:
+        desc: '%city_gen% bankomaty bankowe'
+        keywords: '%city%, bank, bankomat, pieniądze'
+    museums:
+        desc: '%city_gen% atrakcja'
+        keywords: '%city%, atrakcja'
+    sport:
+        desc: '%city_gen% sport'
+        keywords: '%city%, sport, fitness'
+    transport:
+        desc: '%city_gen% parking i stacja kolejowa'
+        keywords: '%city%, stacja kolejowa'

@@ -75,3 +75,29 @@ list:
         title: '%city_gen% parking and train stations'
         desc: 'List of parking and train stations in %city_gen%'
         keywords: '%city%, railway stations, bus, parking, electric train, commuter, trains'
+
+point:
+    hotels:
+        desc: '%city_gen% hotel'
+        keywords: '%city%, hotel'
+    medicine:
+        desc: '%city_gen% sanatorium'
+        keywords: '%city%, sanatorium'
+    cafes:
+        desc: '%city_gen% cafe'
+        keywords: '%city%, cafe'
+    shops:
+        desc: '%city_gen% shop'
+        keywords: '%city%, shop, supermarket'
+    banks:
+        desc: '%city_gen% bank ATMs'
+        keywords: '%city%, bank, ATM, money'
+    museums:
+        desc: '%city_gen% attraction'
+        keywords: '%city%, attraction'
+    sport:
+        desc: '%city_gen% sport'
+        keywords: '%city%, sport, fitness'
+    transport:
+        desc: '%city_gen% parking and train station'
+        keywords: '%city%, railway station'

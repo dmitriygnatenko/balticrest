@@ -84,3 +84,29 @@ list:
         title: 'Парковки и вокзалы %city_gen%'
         desc: 'Список парковок и вокзалов %city_gen%'
         keywords: '%city%, вокзалы, автобус, парковки, электричка, пригородные, поезда'
+
+point:
+    hotels:
+        desc: 'Отель %city_gen%'
+        keywords: '%city%, отель'
+    medicine:
+        desc: 'Санаторий %city_gen%'
+        keywords: '%city%, санаторий'
+    cafes:
+        desc: 'Кафе %city_gen%'
+        keywords: '%city%, кафе'
+    shops:
+        desc: 'Магазин %city_gen%'
+        keywords: '%city%, магазин, покупки, супермаркет'
+    banks:
+        desc: 'Банк и банкомат %city_gen%'
+        keywords: '%city%, банк, банкомат, деньги'
+    museums:
+        desc: 'Музей %city_gen%'
+        keywords: '%city%, достопримечательности, музей'
+    sport:
+        desc: 'Спорт %city_gen%'
+        keywords: '%city%, спорт, фитнес'
+    transport:
+        desc: 'Парковки, вокзалы %city_gen%'
+        keywords: '%city%, вокзал'
