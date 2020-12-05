@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Service\Mapper;
 
 use App\Components\Balticrest\Service\DTO\ArticleDTO;
+use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
 use App\Entity\Article;
-use App\Entity\ArticleLangData;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class ArticleDTOMapper
@@ -14,12 +14,17 @@ class ArticleDTOMapper
     /** @var RequestStack */
     private $requestStack;
 
+    /** @var DataLanguageFilterInterface */
+    private $dataLanguageFilter;
+
     /**
      * @param RequestStack $requestStack
+     * @param DataLanguageFilterInterface $dataLanguageFilter
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, DataLanguageFilterInterface $dataLanguageFilter)
     {
         $this->requestStack = $requestStack;
+        $this->dataLanguageFilter = $dataLanguageFilter;
     }
 
     /**
@@ -33,58 +38,7 @@ class ArticleDTOMapper
 
         $locale = $this->requestStack->getMasterRequest()->getLocale();
 
-        /** @var ArticleLangData $articleLangData */
-        $articleLangData = null;
-
-        $articleLangDataCollection = $article->getArticleLangData();
-
-        if ($locale === 'ru') {
-            // Данные на русском всегда присутствуют, не проверяем другие языки
-            $result = $articleLangDataCollection->filter(static function($item) {
-                /** @var ArticleLangData $item */
-                return $item->getLanguage()->getCode() === 'ru';
-            });
-
-            if (!$result->isEmpty()) {
-                $articleLangData = $result->first();
-            }
-        } else if ($locale === 'en') {
-            // Данные на английском всегда присутствуют, не проверяем другие языки
-            $result = $articleLangDataCollection->filter(static function($item) {
-                /** @var ArticleLangData $item */
-                return $item->getLanguage()->getCode() === 'en';
-            });
-
-            if (!$result->isEmpty()) {
-                $articleLangData = $result->first();
-            }
-        } else {
-            // Вначале проверяем данные на запрошенном языке
-            // Если они отсутствуют то берем английскую версию
-            $result = $articleLangDataCollection->filter(static function($item) use ($locale) {
-                /** @var ArticleLangData $item */
-                return $item->getLanguage()->getCode() === $locale;
-            });
-
-            if (!$result->isEmpty()) {
-                $articleLangData = $result->first();
-
-                if (trim($articleLangData->getTitle()) === '') {
-                    $articleLangData = null;
-                }
-            }
-
-            if ($articleLangData === null) {
-                $result = $articleLangDataCollection->filter(static function($item) {
-                    /** @var ArticleLangData $item */
-                    return $item->getLanguage()->getCode() === 'en';
-                });
-
-                if (!$result->isEmpty()) {
-                    $articleLangData = $result->first();
-                }
-            }
-        }
+        $articleLangData = $this->dataLanguageFilter->filter($article->getArticleLangData(), $locale);
 
         if ($articleLangData !== null) {
             $dto->setTitle($articleLangData->getTitle())

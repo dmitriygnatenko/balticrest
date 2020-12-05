@@ -7,6 +7,9 @@ namespace App\Components\Balticrest\Service\Cache;
 interface CacheExpireInterface
 {
     /** @var int */
+    public const EXPIRE_12_HOURS = 43200;
+
+    /** @var int */
     public const EXPIRE_DAY = 86400;
 
     /** @var int */

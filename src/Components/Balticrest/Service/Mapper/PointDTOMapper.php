@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Mapper;
 
+use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
 use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
-use App\Components\Balticrest\Service\Helper\PointLangDataHelperInterface;
 use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
 use App\Components\Balticrest\Service\DTO\PointDTO;
@@ -25,8 +25,8 @@ class PointDTOMapper
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var PointLangDataHelperInterface */
-    private $pointLangDataHelper;
+    /** @var DataLanguageFilterInterface */
+    private $dataLanguageFilter;
 
     /** @var PointImageHelperInterface */
     private $pointImageHelper;
@@ -35,21 +35,21 @@ class PointDTOMapper
      * @param RequestStack $requestStack
      * @param UrlGeneratorInterface $urlGenerator
      * @param TranslatorInterface $translator
-     * @param PointLangDataHelperInterface $pointLangDataHelper
+     * @param DataLanguageFilterInterface $dataLanguageFilter
      * @param PointImageHelperInterface $pointImageHelper
      */
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
         TranslatorInterface $translator,
-        PointLangDataHelperInterface $pointLangDataHelper,
+        DataLanguageFilterInterface $dataLanguageFilter,
         PointImageHelperInterface $pointImageHelper
     )
     {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
         $this->translator = $translator;
-        $this->pointLangDataHelper = $pointLangDataHelper;
+        $this->dataLanguageFilter = $dataLanguageFilter;
         $this->pointImageHelper = $pointImageHelper;
     }
 
@@ -101,7 +101,7 @@ class PointDTOMapper
             ->setPhones($pointData[Fields::FIELD_PHONES] ?? '')
             ->setServices($services);
 
-        $pointLangData = $this->pointLangDataHelper->getLangPointData($point, $locale);
+        $pointLangData = $this->dataLanguageFilter->filter($point->getPointLangData(), $locale);
 
         if ($pointLangData !== null) {
             $pointLangDataArray = $pointLangData->getData();

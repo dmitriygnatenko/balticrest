@@ -6,8 +6,8 @@ namespace App\Components\Balticrest\Service\Mapper;
 
 use App\Components\Balticrest\Service\DTO\MapPointDTO;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
+use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
 use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
-use App\Components\Balticrest\Service\Helper\PointLangDataHelperInterface;
 use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
@@ -32,8 +32,8 @@ class MapPointsListDTOMapper
     /** @var CityDataProvider */
     private $cityDataProvider;
 
-    /** @var PointLangDataHelperInterface */
-    private $pointLangDataHelper;
+    /** @var DataLanguageFilterInterface */
+    private $dataLanguageFilter;
 
     /** @var PointImageHelperInterface */
     private $pointImageHelper;
@@ -43,7 +43,7 @@ class MapPointsListDTOMapper
      * @param TranslatorInterface $translator
      * @param UrlGeneratorInterface $urlGenerator
      * @param CityDataProviderInterface $cityDataProvider
-     * @param PointLangDataHelperInterface $pointLangDataHelper
+     * @param DataLanguageFilterInterface $dataLanguageFilter
      * @param PointImageHelperInterface $pointImageHelper
      */
     public function __construct(
@@ -51,7 +51,7 @@ class MapPointsListDTOMapper
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator,
         CityDataProviderInterface $cityDataProvider,
-        PointLangDataHelperInterface $pointLangDataHelper,
+        DataLanguageFilterInterface $dataLanguageFilter,
         PointImageHelperInterface $pointImageHelper
     )
     {
@@ -59,7 +59,7 @@ class MapPointsListDTOMapper
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
         $this->cityDataProvider = $cityDataProvider;
-        $this->pointLangDataHelper = $pointLangDataHelper;
+        $this->dataLanguageFilter = $dataLanguageFilter;
         $this->pointImageHelper = $pointImageHelper;
     }
 
@@ -94,7 +94,7 @@ class MapPointsListDTOMapper
             foreach ($points as $point) {
                 /** @var Point $point */
                 /** @var PointLangData|null $pointLangData */
-                $pointLangData = $this->pointLangDataHelper->getLangPointData($point, $locale);
+                $pointLangData = $this->dataLanguageFilter->filter($point->getPointLangData(), $locale);
 
                 if ($pointLangData !== null) {
                     $pointData = $pointLangData->getData();

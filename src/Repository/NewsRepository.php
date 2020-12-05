@@ -8,6 +8,8 @@ use App\Components\Admin\Service\Pager\Paginator;
 use App\Entity\News;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
+use DateTime;
 
 /**
  * @method News|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +37,31 @@ class NewsRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('n')
             ->orderBy('n.publish_date', 'DESC');
+
+        return new Paginator($qb->getQuery(), $page, $max);
+    }
+
+    /**
+     * @param int $page
+     * @param int $max
+     * @param string|null $tag
+     *
+     * @return Paginator
+     *
+     * @throws Exception
+     */
+    public function getActivePaginatedNews(int $page = 1, int $max = 100, ?string $tag = null): Paginator
+    {
+        $qb = $this->createQueryBuilder('n')
+            ->andWhere('n.is_active = 1')
+            ->andWhere('n.publish_date <= :publish_date')
+            ->orderBy('n.publish_date', 'DESC')
+            ->setParameter('publish_date', new DateTime());
+
+        if ($tag !== null) {
+            $qb->andWhere($qb->expr()->like('n.tags', ':tag'))
+                 ->setParameter('tag', '%' . $tag . '%');
+        }
 
         return new Paginator($qb->getQuery(), $page, $max);
     }

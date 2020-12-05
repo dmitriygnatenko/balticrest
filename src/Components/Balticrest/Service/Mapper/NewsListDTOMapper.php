@@ -1,0 +1,78 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Components\Balticrest\Service\Mapper;
+
+use App\Components\Admin\Service\Pager\Paginator;
+use App\Components\Balticrest\Service\DTO\NewsDTO;
+use App\Components\Balticrest\Service\DTO\NewsListDTO;
+use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
+use App\Entity\News;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Exception;
+
+class NewsListDTOMapper
+{
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var DataLanguageFilterInterface */
+    private $dataLanguageFilter;
+
+    /**
+     * @param RequestStack $requestStack
+     * @param DataLanguageFilterInterface $dataLanguageFilter
+     */
+    public function __construct(RequestStack $requestStack, DataLanguageFilterInterface $dataLanguageFilter)
+    {
+        $this->requestStack = $requestStack;
+        $this->dataLanguageFilter = $dataLanguageFilter;
+    }
+
+    /**
+     * @param Paginator $paginator
+     * @param int $max
+     *
+     * @return NewsListDTO
+     *
+     * @throws Exception
+     */
+    public function fill(Paginator $paginator, int $max): NewsListDTO
+    {
+        $listDTO = new NewsListDTO();
+
+        $listDTO->setPrevPage($paginator->getPrevPage());
+
+        $locale = $this->requestStack->getMasterRequest()->getLocale();
+
+        $counter = 0;
+
+        foreach ($paginator->getIterator() as $news)
+        {
+            /** @var News $news */
+            $newsLangData = $this->dataLanguageFilter->filter($news->getNewsLangData(), $locale);
+
+            if ($newsLangData !== null) {
+                $dto = (new NewsDTO())
+                    ->setId($news->getId())
+                    ->setImage($news->getImage())
+                    ->setTags($news->getTags())
+                    ->setPublishDate($news->getPublishDate())
+                    ->setTitle($newsLangData->getTitle())
+                    ->setText($newsLangData->getText());
+
+                $listDTO->addNews($dto);
+            }
+
+            $counter++;
+
+            if ($counter === $max) {
+                $listDTO->setNextPage($paginator->getNextPage());
+                break;
+            }
+        }
+
+        return $listDTO;
+    }
+}

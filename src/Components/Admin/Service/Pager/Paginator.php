@@ -38,11 +38,7 @@ class Paginator extends DoctrinePaginator
      */
     public function getPrevPage(): ?int
     {
-        if ($this->count() > 1) {
-            return $this->page - 1;
-        } else {
-            return null;
-        }
+        return $this->page > 1 ? $this->page - 1 : null;
     }
 
     /**

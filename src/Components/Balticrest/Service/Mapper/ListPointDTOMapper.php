@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Service\Mapper;
 
 use App\Components\Balticrest\Service\DTO\ListPointDTO;
+use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
 use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
-use App\Components\Balticrest\Service\Helper\PointLangDataHelperInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
 use App\Entity\Point;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -20,8 +20,8 @@ class ListPointDTOMapper
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var PointLangDataHelperInterface */
-    private $pointLangDataHelper;
+    /** @var DataLanguageFilterInterface */
+    private $dataLanguageFilter;
 
     /** @var PointImageHelperInterface */
     private $pointImageHelper;
@@ -29,19 +29,19 @@ class ListPointDTOMapper
     /**
      * @param RequestStack $requestStack
      * @param UrlGeneratorInterface $urlGenerator
-     * @param PointLangDataHelperInterface $pointLangDataHelper
+     * @param DataLanguageFilterInterface $dataLanguageFilter
      * @param PointImageHelperInterface $pointImageHelper
      */
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
-        PointLangDataHelperInterface $pointLangDataHelper,
+        DataLanguageFilterInterface $dataLanguageFilter,
         PointImageHelperInterface $pointImageHelper
     )
     {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
-        $this->pointLangDataHelper = $pointLangDataHelper;
+        $this->dataLanguageFilter = $dataLanguageFilter;
         $this->pointImageHelper = $pointImageHelper;
     }
 
@@ -72,7 +72,7 @@ class ListPointDTOMapper
 
         $locale = $this->requestStack->getMasterRequest()->getLocale();
 
-        $pointLangData = $this->pointLangDataHelper->getLangPointData($point, $locale);
+        $pointLangData = $this->dataLanguageFilter->filter($point->getPointLangData(), $locale);
 
         if ($pointLangData !== null) {
             $pointLangDataArray = $pointLangData->getData();
