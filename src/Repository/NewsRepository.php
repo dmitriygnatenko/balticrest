@@ -8,7 +8,6 @@ use App\Components\Admin\Service\Pager\Paginator;
 use App\Entity\News;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method News|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,15 +26,13 @@ class NewsRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Request $request
+     * @param int $page
      * @param int $max
      *
      * @return Paginator
      */
-    public function getPaginatedNews(Request $request, int $max = 100): Paginator
+    public function getPaginatedNews(int $page = 1, int $max = 100): Paginator
     {
-        $page = $request->query->getInt('page', 1);
-
         $qb = $this->createQueryBuilder('n')
             ->orderBy('n.publish_date', 'DESC');
 

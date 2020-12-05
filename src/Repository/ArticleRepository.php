@@ -8,7 +8,6 @@ use App\Components\Admin\Service\Pager\Paginator;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,15 +26,13 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Request $request
+     * @param int $page
      * @param int $max
      *
      * @return Paginator
      */
-    public function getPaginatedArticles(Request $request, int $max = 100): Paginator
+    public function getPaginatedArticles(int $page = 1, int $max = 100): Paginator
     {
-        $page = $request->query->getInt('page', 1);
-
         $qb = $this->createQueryBuilder('a')
             ->orderBy('a.id', 'DESC');
 

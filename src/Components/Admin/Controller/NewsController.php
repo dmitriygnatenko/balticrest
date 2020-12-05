@@ -52,9 +52,11 @@ class NewsController extends AbstractController
     {
         $news = [];
 
+        $page = $request->query->getInt('page', 1);
+
         try {
             $newsPaginator = $this->getDoctrine()->getRepository(News::class)
-                ->getPaginatedNews($request);
+                ->getPaginatedNews($page);
 
             foreach ($newsPaginator->getIterator() as $record) {
                 $news[] = (new NewsDTO())->fillByNews($record);

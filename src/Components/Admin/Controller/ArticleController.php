@@ -51,10 +51,11 @@ class ArticleController extends AbstractController
     public function list(Request $request): Response
     {
         $articles = [];
+        $page = $request->query->getInt('page', 1);
 
         try {
             $articlePaginator = $this->getDoctrine()->getRepository(Article::class)
-                ->getPaginatedArticles($request);
+                ->getPaginatedArticles($page);
 
             foreach ($articlePaginator->getIterator() as $article) {
                 $articles[] = (new ArticleDTO())->fillByArticle($article);
