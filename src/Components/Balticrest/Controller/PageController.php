@@ -6,6 +6,7 @@ namespace App\Components\Balticrest\Controller;
 
 use App\Components\Balticrest\Service\Provider\ArticleDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\MapDataProviderInterface;
+use App\Components\Balticrest\Service\Provider\NewsDataProviderInterface;
 use App\Components\Balticrest\Service\Twig\TwigGlobalService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,13 +31,19 @@ class PageController extends AbstractController
      *
      * @param MapDataProviderInterface $mapJsonDataProvider
      * @param TwigGlobalService $globalService
+     * @param NewsDataProviderInterface $newsDataProvider
      *
      * @return Response
      */
-    public function main(MapDataProviderInterface $mapJsonDataProvider, TwigGlobalService $globalService): Response
+    public function main(
+        MapDataProviderInterface $mapJsonDataProvider,
+        TwigGlobalService $globalService,
+        NewsDataProviderInterface $newsDataProvider
+    ): Response
     {
         return $this->render('balticrest/page/index.html.twig', [
-            'map_data' => $mapJsonDataProvider->getCachedData($globalService->getDefaultCity())
+            'map_data' => $mapJsonDataProvider->getCachedData($globalService->getDefaultCity()),
+            'news' => array_slice($newsDataProvider->getCachedData()->getNews(), 0, 3)
         ]);
     }
 
