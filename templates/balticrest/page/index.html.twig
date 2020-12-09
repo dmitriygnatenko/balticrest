@@ -409,6 +409,7 @@
             </div>
         </div>
 
+        {# Карта #}
         <div class="map_block container-fluid">
             <div class="map_descr">
                 <span>{% trans %}map.text{% endtrans %}
@@ -427,63 +428,37 @@
             <div class="anim_bg"></div>
         </div>
 
-        <!--place block-->
+        {# Новости #}
         <div class="places_index_block container-fluid">
             <div class="fixed_w">
-                <h2>The best places weekly</h2>
+                <h2>{% trans %}news.text{% endtrans %}</h2>
                 <div class="row">
-                    <div class="col-md-4 place_index_item  wow bounceInLeft">
-                        <div class="place_inn">
-                            <img src="/static/balticrest/images/start/p1.png" alt="#">
-                            <div class="pl_descr">
-                                <a href="02.html">Slider Revolution included</a>
-                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                                <ul class="rate">
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                </ul>
+
+                    {% for key, value in news %}
+                        {% if key == 1 %}
+                            {% set newsClass = 'bounceInLeft' %}
+                        {% elseif key == 2 %}
+                            {% set newsClass = 'bounceInUp' %}
+                        {% else %}
+                            {% set newsClass = 'bounceInRight' %}
+                        {% endif %}
+
+                        <div class="col-md-4 place_index_item wow {{ newsClass }}">
+                            <div class="place_inn">
+                                <img src="/{{ value.image }}">
+                                <div class="pl_descr">
+                                    <h4>{{ value.title }}</h4>
+                                    <span>{{ value.text|striptags|spaceless|u.truncate(80, '...', false)|replace({'&nbsp;': ' '})|raw }}</span>
+                                    <div class="date">{{ value.getPublishDate|format_date('long') }}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 place_index_item  wow bounceInUp">
-                        <div class="place_inn">
-                            <img src="/static/balticrest/images/start/p2.png" alt="#">
-                            <div class="pl_descr">
-                                <a href="02.html">Slider Revolution included</a>
-                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                                <ul class="rate">
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star no"></i></li>
-                                    <li><i class="fa fa-star no"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 place_index_item  wow bounceInRight">
-                        <div class="place_inn">
-                            <img src="/static/balticrest/images/start/p3.png" alt="#">
-                            <div class="pl_descr">
-                                <a href="02.html">Slider Revolution included</a>
-                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                                <ul class="rate">
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star no"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
-                <a href="01.html" class="btn btn-success va">View all places</a>
+                <a href="{{ path('news') }}" class="btn btn-success va">{% trans %}news.link{% endtrans %}</a>
             </div>
         </div>
+
     </div>
 
 {% endblock %}

@@ -946,10 +946,12 @@ body.pushy-active .top_promo_block .menu-btn {
     padding: 25px;
 }
 
-.pl_descr a {
-    font-size: 18px;
+.pl_descr h4 {
+    font-size: 16px;
     display: block;
     margin-bottom: 10px;
+    font-weight: bold;
+    margin-top: 0;
 }
 
 .pl_descr span {
@@ -958,29 +960,10 @@ body.pushy-active .top_promo_block .menu-btn {
     line-height: 24px;
 }
 
-.pl_descr .rate {
-    padding: 0px;
-    margin-top: 15px;
-    margin-bottom: 0px;
-}
-
-.pl_descr .rate li {
-    list-style: none;
-    display: inline-block;
-    color: #FFCB00;
-    padding-right: 2px;
-}
-
-.pl_descr .rate li i {
-}
-
-.pl_descr .rate li i.no {
-    color: #DADADA;
-}
-
-.pl_descr .rate li i:hover {
-    color: #FF9100;
-    cursor: pointer;
+.pl_descr div.date {
+    font-size: 13px;
+    margin-top: 10px;
+    color: #999999;
 }
 
 .place_inn img {
