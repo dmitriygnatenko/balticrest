@@ -64,7 +64,7 @@ final class PostgreSqlConnection extends Connection
         if (!$this->listening) {
             // This is secure because the table name must be a valid identifier:
             // https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS
-            $this->driverConnection->exec(sprintf('LISTEN "%s"', $this->configuration['table_name']));
+            $this->executeStatement(sprintf('LISTEN "%s"', $this->configuration['table_name']));
             $this->listening = true;
         }
 
@@ -87,7 +87,7 @@ final class PostgreSqlConnection extends Connection
     {
         parent::setup();
 
-        $this->driverConnection->exec(implode("\n", $this->getTriggerSql()));
+        $this->executeStatement(implode("\n", $this->getTriggerSql()));
     }
 
     /**
@@ -109,6 +109,7 @@ final class PostgreSqlConnection extends Connection
     private function getTriggerSql(): array
     {
         return [
+            'BEGIN;',
             sprintf('LOCK TABLE %s;', $this->configuration['table_name']),
             // create trigger function
             sprintf(<<<'SQL'
@@ -123,6 +124,7 @@ SQL
             // register trigger
             sprintf('DROP TRIGGER IF EXISTS notify_trigger ON %s;', $this->configuration['table_name']),
             sprintf('CREATE TRIGGER notify_trigger AFTER INSERT ON %1$s FOR EACH ROW EXECUTE PROCEDURE notify_%1$s();', $this->configuration['table_name']),
+            'COMMIT;',
         ];
     }
 
@@ -132,7 +134,7 @@ SQL
             return;
         }
 
-        $this->driverConnection->exec(sprintf('UNLISTEN "%s"', $this->configuration['table_name']));
+        $this->executeStatement(sprintf('UNLISTEN "%s"', $this->configuration['table_name']));
         $this->listening = false;
     }
 }

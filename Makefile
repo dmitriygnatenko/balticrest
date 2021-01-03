@@ -9,6 +9,7 @@ usage:
 	@echo "make build - docker build"
 	@echo "make up - docker up"
 	@echo "make down - docker down"
+	@echo "make bash - run bash"
 
 clear:
 	cd $(docker_path) && docker-compose exec $(php_service_name) php ./bin/console cache:clear
@@ -30,3 +31,6 @@ up:
 
 down:
 	cd $(docker_path) && docker-compose down
+
+bash:
+	cd $(docker_path) && docker-compose exec $(php_service_name) bash

@@ -34,7 +34,12 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
    * `devices/{device_id}/deviceUsers/{device_user_id}/clientStates/{partner_id}`,
    * where device_id is the unique ID assigned to the Device, device_user_id is
    * the unique ID assigned to the User and partner_id identifies the partner
-   * storing the data.
+   * storing the data. To get the client state for devices belonging to your own
+   * organization, the `partnerId` is in the format: `customerId-*anystring*`.
+   * Where the `customerId` is your organization's customer ID and `anystring` is
+   * any suffix. This suffix is used in setting up Custom Access Levels in
+   * Context-Aware Access. You may use `my_customer` instead of the customer ID
+   * for devices managed by your own organization.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string customer Required. [Resource
@@ -61,20 +66,20 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
    * devices/{device}/deviceUsers/{deviceUser}
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string filter Optional. Additional restrictions when fetching list
-   * of client states.
    * @opt_param string customer Required. [Resource
    * name](https://cloud.google.com/apis/design/resource_names) of the customer.
    * If you're using this API for your own organization, use
    * `customers/my_customer` If you're using this API to manage another
    * organization, use `customers/{customer_id}`, where customer_id is the
    * customer to whom the device belongs.
+   * @opt_param string filter Optional. Additional restrictions when fetching list
+   * of client states.
+   * @opt_param string orderBy Optional. Order specification for client states in
+   * the response.
    * @opt_param string pageToken Optional. A page token, received from a previous
    * `ListClientStates` call. Provide this to retrieve the subsequent page. When
    * paginating, all other parameters provided to `ListClientStates` must match
    * the call that provided the page token.
-   * @opt_param string orderBy Optional. Order specification for client states in
-   * the response.
    * @return Google_Service_CloudIdentity_GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
    */
   public function listDevicesDeviceUsersClientStates($parent, $optParams = array())

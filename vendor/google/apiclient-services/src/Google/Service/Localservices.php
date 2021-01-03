@@ -34,7 +34,7 @@ class Google_Service_Localservices extends Google_Service
 
   public $accountReports;
   public $detailedLeadReports;
-  
+
   /**
    * Constructs the internal representation of the Localservices service.
    *
@@ -60,7 +60,7 @@ class Google_Service_Localservices extends Google_Service
               'path' => 'v1/accountReports:search',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'endDate.year' => array(
+                'endDate.day' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
@@ -68,11 +68,23 @@ class Google_Service_Localservices extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
+                'endDate.year' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'pageSize' => array(
+                'query' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'startDate.day' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
@@ -83,18 +95,6 @@ class Google_Service_Localservices extends Google_Service
                 'startDate.year' => array(
                   'location' => 'query',
                   'type' => 'integer',
-                ),
-                'startDate.day' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'endDate.day' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'query' => array(
-                  'location' => 'query',
-                  'type' => 'string',
                 ),
               ),
             ),
@@ -111,27 +111,19 @@ class Google_Service_Localservices extends Google_Service
               'path' => 'v1/detailedLeadReports:search',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'startDate.year' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'endDate.day' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'startDate.month' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'startDate.day' => array(
+                'endDate.month' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
                 'endDate.year' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
@@ -143,7 +135,15 @@ class Google_Service_Localservices extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'endDate.month' => array(
+                'startDate.day' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'startDate.month' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'startDate.year' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),

@@ -19,7 +19,7 @@
  * Service definition for WorkflowExecutions (v1beta).
  *
  * <p>
- * Manages user-provided workflows.</p>
+ * Execute workflows created with Workflows API.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -35,7 +35,7 @@ class Google_Service_WorkflowExecutions extends Google_Service
       "https://www.googleapis.com/auth/cloud-platform";
 
   public $projects_locations_workflows_executions;
-  
+
   /**
    * Constructs the internal representation of the WorkflowExecutions service.
    *
@@ -104,11 +104,11 @@ class Google_Service_WorkflowExecutions extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'view' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'pageToken' => array(
+                'view' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),

@@ -83,6 +83,10 @@ class Google_Service_RealTimeBidding_Resource_BuyersCreatives extends Google_Ser
    * specified, all active creatives will be returned. Example: 'accountId=12345
    * AND (dealsStatus:DISAPPROVED AND disapprovalReason:UNACCEPTABLE_CONTENT) OR
    * declaredAttributes:IS_COOKIE_TARGETED'
+   * @opt_param int pageSize Requested page size. The server may return fewer
+   * creatives than requested (due to timeout constraint) even if more are
+   * available via another call. If unspecified, server will pick an appropriate
+   * default. Acceptable values are 1 to 1000, inclusive.
    * @opt_param string pageToken A token identifying a page of results the server
    * should return. Typically, this is the value of
    * ListCreativesResponse.nextPageToken returned from the previous call to the
@@ -91,10 +95,6 @@ class Google_Service_RealTimeBidding_Resource_BuyersCreatives extends Google_Ser
    * response. By default only creativeServingDecision is included. To retrieve
    * the entire creative resource (including the declared fields and the creative
    * content) specify the view as "FULL".
-   * @opt_param int pageSize Requested page size. The server may return fewer
-   * creatives than requested (due to timeout constraint) even if more are
-   * available via another call. If unspecified, server will pick an appropriate
-   * default. Acceptable values are 1 to 1000, inclusive.
    * @return Google_Service_RealTimeBidding_ListCreativesResponse
    */
   public function listBuyersCreatives($parent, $optParams = array())
@@ -106,7 +106,10 @@ class Google_Service_RealTimeBidding_Resource_BuyersCreatives extends Google_Ser
   /**
    * Updates a creative. (creatives.patch)
    *
-   * @param string $name Name of the creative to update. See creative.name.
+   * @param string $name Output only. Name of the creative. Follows the pattern
+   * `buyers/{buyer}/creatives/{creative}`, where `{buyer}` represents the account
+   * ID of the buyer who owns the creative, and `{creative}` is the buyer-specific
+   * creative ID that references this creative in the bid response.
    * @param Google_Service_RealTimeBidding_Creative $postBody
    * @param array $optParams Optional parameters.
    *

@@ -42,7 +42,7 @@ class Google_Service_CloudTalentSolution extends Google_Service
   public $projects_clientEvents;
   public $projects_companies;
   public $projects_jobs;
-  
+
   /**
    * Constructs the internal representation of the CloudTalentSolution service.
    *
@@ -73,19 +73,7 @@ class Google_Service_CloudTalentSolution extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'type' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'scope' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'companyName' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'query' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -101,6 +89,18 @@ class Google_Service_CloudTalentSolution extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+                'query' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'scope' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'type' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),
@@ -172,17 +172,17 @@ class Google_Service_CloudTalentSolution extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'requireOpenJobs' => array(
+                'pageSize' => array(
                   'location' => 'query',
-                  'type' => 'boolean',
+                  'type' => 'integer',
                 ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'pageSize' => array(
+                'requireOpenJobs' => array(
                   'location' => 'query',
-                  'type' => 'integer',
+                  'type' => 'boolean',
                 ),
               ),
             ),'patch' => array(
@@ -254,19 +254,19 @@ class Google_Service_CloudTalentSolution extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'filter' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'pageToken' => array(
+                'jobView' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'jobView' => array(
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),

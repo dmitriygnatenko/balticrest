@@ -37,6 +37,7 @@ class Connection
         'port',
         'vhost',
         'user',
+        'login',
         'password',
         'queues',
         'exchange',
@@ -50,6 +51,7 @@ class Connection
         'heartbeat',
         'read_timeout',
         'write_timeout',
+        'confirm_timeout',
         'connect_timeout',
         'cacert',
         'cert',
@@ -123,11 +125,12 @@ class Connection
      *   * host: Hostname of the AMQP service
      *   * port: Port of the AMQP service
      *   * vhost: Virtual Host to use with the AMQP service
-     *   * user: Username to use to connect the the AMQP service
-     *   * password: Password to use the connect to the AMQP service
+     *   * user|login: Username to use to connect the AMQP service
+     *   * password: Password to use to connect to the AMQP service
      *   * read_timeout: Timeout in for income activity. Note: 0 or greater seconds. May be fractional.
      *   * write_timeout: Timeout in for outcome activity. Note: 0 or greater seconds. May be fractional.
      *   * connect_timeout: Connection timeout. Note: 0 or greater seconds. May be fractional.
+     *   * confirm_timeout: Timeout in seconds for confirmation, if none specified transport will not wait for message confirmation. Note: 0 or greater seconds. May be fractional.
      *   * queues[name]: An array of queues, keyed by the name
      *     * binding_keys: The binding keys (if any) to bind to this queue
      *     * binding_arguments: Arguments to be used while binding the queue.
@@ -155,8 +158,8 @@ class Connection
      *       which means heartbeats checked only during blocking calls.
      *
      *   TLS support (see https://www.rabbitmq.com/ssl.html for details):
-     *     * cacert: Path to the CA cert file in PEM format..
-     *     * cert: Path to the client certificate in PEM foramt.
+     *     * cacert: Path to the CA cert file in PEM format.
+     *     * cert: Path to the client certificate in PEM format.
      *     * key: Path to the client key in PEM format.
      *     * verify: Enable or disable peer verification. If peer verification is enabled then the common name in the
      *       server certificate must match the server name. Peer verification is enabled by default.
@@ -165,20 +168,22 @@ class Connection
     {
         if (false === $parsedUrl = parse_url($dsn)) {
             // this is a valid URI that parse_url cannot handle when you want to pass all parameters as options
-            if ('amqp://' !== $dsn) {
+            if (!\in_array($dsn, ['amqp://', 'amqps://'])) {
                 throw new InvalidArgumentException(sprintf('The given AMQP DSN "%s" is invalid.', $dsn));
             }
 
             $parsedUrl = [];
         }
 
+        $useAmqps = 0 === strpos($dsn, 'amqps://');
         $pathParts = isset($parsedUrl['path']) ? explode('/', trim($parsedUrl['path'], '/')) : [];
         $exchangeName = $pathParts[1] ?? 'messages';
         parse_str($parsedUrl['query'] ?? '', $parsedQuery);
+        $port = $useAmqps ? 5671 : 5672;
 
         $amqpOptions = array_replace_recursive([
             'host' => $parsedUrl['host'] ?? 'localhost',
-            'port' => $parsedUrl['port'] ?? 5672,
+            'port' => $parsedUrl['port'] ?? $port,
             'vhost' => isset($pathParts[0]) ? urldecode($pathParts[0]) : '/',
             'exchange' => [
                 'name' => $exchangeName,
@@ -213,6 +218,10 @@ class Connection
 
             return $queueOptions;
         }, $queuesOptions);
+
+        if ($useAmqps && !self::hasCaCertConfigured($amqpOptions)) {
+            throw new InvalidArgumentException('No CA certificate has been provided. Set "amqp.cacert" in your php.ini or pass the "cacert" parameter in the DSN to use SSL. Alternatively, you can use amqp:// to use without SSL.');
+        }
 
         return new self($amqpOptions, $exchangeOptions, $queuesOptions, $amqpFactory);
     }
@@ -256,6 +265,11 @@ class Connection
         }
 
         return $arguments;
+    }
+
+    private static function hasCaCertConfigured(array $amqpOptions): bool
+    {
+        return (isset($amqpOptions['cacert']) && '' !== $amqpOptions['cacert']) || '' !== ini_get('amqp.cacert');
     }
 
     /**
@@ -317,13 +331,18 @@ class Connection
         $attributes = $amqpStamp ? $amqpStamp->getAttributes() : [];
         $attributes['headers'] = array_merge($attributes['headers'] ?? [], $headers);
         $attributes['delivery_mode'] = $attributes['delivery_mode'] ?? 2;
+        $attributes['timestamp'] = $attributes['timestamp'] ?? time();
 
         $exchange->publish(
             $body,
             $routingKey,
-            $amqpStamp ? $amqpStamp->getFlags() : AMQP_NOPARAM,
+            $amqpStamp ? $amqpStamp->getFlags() : \AMQP_NOPARAM,
             $attributes
         );
+
+        if ('' !== ($this->connectionOptions['confirm_timeout'] ?? '')) {
+            $this->channel()->waitForConfirm((float) $this->connectionOptions['confirm_timeout']);
+        }
     }
 
     private function setupDelay(int $delay, ?string $routingKey)
@@ -342,8 +361,8 @@ class Connection
         if (null === $this->amqpDelayExchange) {
             $this->amqpDelayExchange = $this->amqpFactory->createExchange($this->channel());
             $this->amqpDelayExchange->setName($this->connectionOptions['delay']['exchange_name']);
-            $this->amqpDelayExchange->setType(AMQP_EX_TYPE_DIRECT);
-            $this->amqpDelayExchange->setFlags(AMQP_DURABLE);
+            $this->amqpDelayExchange->setType(\AMQP_EX_TYPE_DIRECT);
+            $this->amqpDelayExchange->setFlags(\AMQP_DURABLE);
         }
 
         return $this->amqpDelayExchange;
@@ -366,7 +385,7 @@ class Connection
             [$delay, $this->exchangeOptions['name'], $routingKey ?? ''],
             $this->connectionOptions['delay']['queue_name_pattern']
         ));
-        $queue->setFlags(AMQP_DURABLE);
+        $queue->setFlags(\AMQP_DURABLE);
         $queue->setArguments([
             'x-message-ttl' => $delay,
             // delete the delay queue 10 seconds after the message expires
@@ -426,7 +445,7 @@ class Connection
         return $this->queue($queueName)->ack($message->getDeliveryTag());
     }
 
-    public function nack(\AMQPEnvelope $message, string $queueName, int $flags = AMQP_NOPARAM): bool
+    public function nack(\AMQPEnvelope $message, string $queueName, int $flags = \AMQP_NOPARAM): bool
     {
         return $this->queue($queueName)->nack($message->getDeliveryTag(), $flags);
     }
@@ -470,12 +489,24 @@ class Connection
                 $credentials['password'] = '********';
                 unset($credentials['delay']);
 
-                throw new \AMQPException(sprintf('Could not connect to the AMQP server. Please verify the provided DSN. (%s).', json_encode($credentials)), 0, $e);
+                throw new \AMQPException(sprintf('Could not connect to the AMQP server. Please verify the provided DSN. (%s).', json_encode($credentials, \JSON_UNESCAPED_SLASHES)), 0, $e);
             }
             $this->amqpChannel = $this->amqpFactory->createChannel($connection);
 
             if (isset($this->connectionOptions['prefetch_count'])) {
                 $this->amqpChannel->setPrefetchCount($this->connectionOptions['prefetch_count']);
+            }
+
+            if ('' !== ($this->connectionOptions['confirm_timeout'] ?? '')) {
+                $this->amqpChannel->confirmSelect();
+                $this->amqpChannel->setConfirmCallback(
+                    static function (): bool {
+                        return false;
+                    },
+                    static function (): bool {
+                        return false;
+                    }
+                );
             }
         }
 
@@ -489,7 +520,7 @@ class Connection
 
             $amqpQueue = $this->amqpFactory->createQueue($this->channel());
             $amqpQueue->setName($queueName);
-            $amqpQueue->setFlags($queueConfig['flags'] ?? AMQP_DURABLE);
+            $amqpQueue->setFlags($queueConfig['flags'] ?? \AMQP_DURABLE);
 
             if (isset($queueConfig['arguments'])) {
                 $amqpQueue->setArguments($queueConfig['arguments']);
@@ -506,8 +537,8 @@ class Connection
         if (null === $this->amqpExchange) {
             $this->amqpExchange = $this->amqpFactory->createExchange($this->channel());
             $this->amqpExchange->setName($this->exchangeOptions['name']);
-            $this->amqpExchange->setType($this->exchangeOptions['type'] ?? AMQP_EX_TYPE_FANOUT);
-            $this->amqpExchange->setFlags($this->exchangeOptions['flags'] ?? AMQP_DURABLE);
+            $this->amqpExchange->setType($this->exchangeOptions['type'] ?? \AMQP_EX_TYPE_FANOUT);
+            $this->amqpExchange->setFlags($this->exchangeOptions['flags'] ?? \AMQP_DURABLE);
 
             if (isset($this->exchangeOptions['arguments'])) {
                 $this->amqpExchange->setArguments($this->exchangeOptions['arguments']);
