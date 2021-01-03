@@ -9,3 +9,4 @@
 /docker/supervisor/logs
 /var/
 /node_modules/
+/public/files/
