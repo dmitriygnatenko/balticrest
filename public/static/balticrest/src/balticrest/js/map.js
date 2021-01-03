@@ -1,12 +1,12 @@
 function initializeMap() {
 
-    let activePoint;
+    var activePoint;
 
     ymaps.ready(init);
 
     function init() {
 
-        let map = new ymaps.Map("map", {
+        var map = new ymaps.Map("map", {
             center: [map_data.center.lat, map_data.center.lon],
             zoom: map_data.zoom,
             controls: getControls()
@@ -104,7 +104,7 @@ function initializeMap() {
 
     function getControls() {
 
-        let typeSelector = new ymaps.control.TypeSelector({
+        var typeSelector = new ymaps.control.TypeSelector({
             options: {
                 float: 'none',
                 position: {
@@ -114,7 +114,7 @@ function initializeMap() {
             }
         });
 
-        let zoomControl = new ymaps.control.ZoomControl({
+        var zoomControl = new ymaps.control.ZoomControl({
             options: {
                 float: 'none',
                 position: {
@@ -124,7 +124,7 @@ function initializeMap() {
             }
         });
 
-        let geolocationControl = new ymaps.control.GeolocationControl({
+        var geolocationControl = new ymaps.control.GeolocationControl({
 
             options: {
                 float: 'none',
@@ -135,7 +135,7 @@ function initializeMap() {
             }
         });
 
-        let rulerControl = new ymaps.control.RulerControl({
+        var rulerControl = new ymaps.control.RulerControl({
             options: {
                 float: 'none',
                 position: {

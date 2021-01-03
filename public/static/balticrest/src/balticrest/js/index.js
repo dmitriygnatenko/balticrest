@@ -8,13 +8,13 @@ function setIndexHeight() {
 
 function initializeMap() {
 
-	let activePoint;
+	var activePoint;
 
 	ymaps.ready(init);
 
 	function init() {
 
-		let map = new ymaps.Map("map", {
+		var map = new ymaps.Map("map", {
 			center: [map_data.center.lat, map_data.center.lon],
 			zoom: map_data.zoom,
 			controls: []
