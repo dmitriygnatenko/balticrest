@@ -8,6 +8,11 @@ restore:
     desc: 'Passwortwiederherstellung im Reiseführer der Ostseeküst'
     keywords: 'Passwortwiederherstellung, Login'
 
+news:
+    title: 'Nachrichten'
+    desc: 'Neue Nachrichten aus Zelenogradsk und Svetlogorsk über Konzerte, Festivals, Ausstellungen, Änderungen im Fahrplan von Zügen und Bussen'
+    keywords: 'Nachrichten, Svetlogorsk, Zelenogradsk, Kaliningradskaya, Konzerte, Spiele, Festivals, Tickets, billig, Bus, Zug'
+
 map:
     hotels:
         title: '%city_gen% Hotels auf der Karte'

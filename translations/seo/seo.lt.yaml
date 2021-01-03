@@ -8,6 +8,11 @@ restore:
     desc: 'Slaptažodžio atkūrimas Baltijos pakrantės turizmo gide'
     keywords: 'slaptažodžio atkūrimas, prisijungimas'
 
+news:
+    title: 'Naujienos'
+    desc: 'Šviežios naujienos iš Zelenogradsko ir Svetlogorsko apie koncertus, festivalius, parodas, traukinių ir autobusų tvarkaraščio pakeitimus'
+    keywords: 'naujienos, Svetlogorskas, Zelenogradskas, Kaliningradskaja, koncertai, žaidimai, festivaliai, bilietai, pigūs, autobusai, traukiniai'
+
 map:
     hotels:
         title: 'Viešbučiai žemėlapyje %city_gen% žemėlapyje'

@@ -8,6 +8,11 @@ restore:
     desc: 'Odzyskiwanie hasła w przewodniku turystycznym wybrzeża Bałtyku'
     keywords: 'odzyskiwanie hasła, logowanie'
 
+news:
+    title: 'Aktualności'
+    desc: 'Świeże wiadomości z Zelenogradska i Swietłogorska o koncertach, festiwalach, wystawach, zmianach w rozkładzie jazdy pociągów i autobusów'
+    keywords: 'nowości, Swietłogorsk, Zelenogradsk, Kaliningradskaya, koncerty, gry, festiwale, bilety, tanio, autobus, pociąg'
+
 map:
     hotels:
         title: 'Hotele %city_gen% na mapie'

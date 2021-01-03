@@ -8,6 +8,11 @@ restore:
     desc: 'Password recovery in the Baltic coast tourist guide'
     keywords: 'password recovery, login'
 
+news:
+    title: 'News'
+    desc: 'Fresh news from Zelenogradsk and Svetlogorsk about concerts, festivals, exhibitions, about changes in the schedule of trains and buses'
+    keywords: 'news, Svetlogorsk, Zelenogradsk, Kaliningradskaya, concerts, games, festivals, tickets, cheap, bus, train'
+
 map:
     hotels:
         title: '%city_gen% hotels on the map'
