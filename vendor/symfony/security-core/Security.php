@@ -13,7 +13,6 @@ namespace Symfony\Component\Security\Core;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -21,7 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @final
  */
-class Security implements AuthorizationCheckerInterface
+class Security
 {
     public const ACCESS_DENIED_ERROR = '_security.403_error';
     public const AUTHENTICATION_ERROR = '_security.last_error';

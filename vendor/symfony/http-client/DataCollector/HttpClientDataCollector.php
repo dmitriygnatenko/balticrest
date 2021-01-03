@@ -98,7 +98,6 @@ final class HttpClientDataCollector extends DataCollector implements LateDataCol
         $errorCount = 0;
         $baseInfo = [
             'response_headers' => 1,
-            'retry_count' => 1,
             'redirect_count' => 1,
             'redirect_url' => 1,
             'user_data' => 1,
@@ -151,11 +150,6 @@ final class HttpClientDataCollector extends DataCollector implements LateDataCol
                 $content = ['response_json' => $content];
             } else {
                 $content = [];
-            }
-
-            if (isset($info['retry_count'])) {
-                $content['retries'] = $info['previous_info'];
-                unset($info['previous_info']);
             }
 
             $debugInfo = array_diff_key($info, $baseInfo);

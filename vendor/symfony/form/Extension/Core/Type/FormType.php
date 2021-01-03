@@ -12,10 +12,7 @@
 namespace Symfony\Component\Form\Extension\Core\Type;
 
 use Symfony\Component\Form\Exception\LogicException;
-use Symfony\Component\Form\Extension\Core\DataAccessor\CallbackAccessor;
-use Symfony\Component\Form\Extension\Core\DataAccessor\ChainAccessor;
-use Symfony\Component\Form\Extension\Core\DataAccessor\PropertyPathAccessor;
-use Symfony\Component\Form\Extension\Core\DataMapper\DataMapper;
+use Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper;
 use Symfony\Component\Form\Extension\Core\EventListener\TrimListener;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigBuilderInterface;
@@ -28,14 +25,11 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 class FormType extends BaseType
 {
-    private $dataMapper;
+    private $propertyAccessor;
 
     public function __construct(PropertyAccessorInterface $propertyAccessor = null)
     {
-        $this->dataMapper = new DataMapper(new ChainAccessor([
-            new CallbackAccessor(),
-            new PropertyPathAccessor($propertyAccessor ?? PropertyAccess::createPropertyAccessor()),
-        ]));
+        $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
     }
 
     /**
@@ -58,7 +52,7 @@ class FormType extends BaseType
             ->setCompound($options['compound'])
             ->setData($isDataOptionSet ? $options['data'] : null)
             ->setDataLocked($isDataOptionSet)
-            ->setDataMapper($options['compound'] ? $this->dataMapper : null)
+            ->setDataMapper($options['compound'] ? new PropertyPathMapper($this->propertyAccessor) : null)
             ->setMethod($options['method'])
             ->setAction($options['action']);
 
@@ -205,11 +199,7 @@ class FormType extends BaseType
             'help_attr' => [],
             'help_html' => false,
             'help_translation_parameters' => [],
-            'invalid_message' => 'This value is not valid.',
-            'invalid_message_parameters' => [],
             'is_empty_callback' => null,
-            'getter' => null,
-            'setter' => null,
         ]);
 
         $resolver->setAllowedTypes('label_attr', 'array');
@@ -219,11 +209,6 @@ class FormType extends BaseType
         $resolver->setAllowedTypes('help_attr', 'array');
         $resolver->setAllowedTypes('help_html', 'bool');
         $resolver->setAllowedTypes('is_empty_callback', ['null', 'callable']);
-        $resolver->setAllowedTypes('getter', ['null', 'callable']);
-        $resolver->setAllowedTypes('setter', ['null', 'callable']);
-
-        $resolver->setInfo('getter', 'A callable that accepts two arguments (the view data and the current form field) and must return a value.');
-        $resolver->setInfo('setter', 'A callable that accepts three arguments (a reference to the view data, the submitted value and the current form field).');
     }
 
     /**

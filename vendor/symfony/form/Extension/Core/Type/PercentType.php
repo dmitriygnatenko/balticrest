@@ -30,7 +30,7 @@ class PercentType extends AbstractType
             $options['scale'],
             $options['type'],
             $options['rounding_mode'],
-            $options['html5']
+            false
         ));
     }
 
@@ -40,10 +40,6 @@ class PercentType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['symbol'] = $options['symbol'];
-
-        if ($options['html5']) {
-            $view->vars['type'] = 'number';
-        }
     }
 
     /**
@@ -61,12 +57,6 @@ class PercentType extends AbstractType
             'symbol' => '%',
             'type' => 'fractional',
             'compound' => false,
-            'html5' => false,
-            'invalid_message' => function (Options $options, $previousValue) {
-                return ($options['legacy_error_messages'] ?? true)
-                    ? $previousValue
-                    : 'Please enter a percentage value.';
-            },
         ]);
 
         $resolver->setAllowedValues('type', [
@@ -92,7 +82,6 @@ class PercentType extends AbstractType
 
             return '';
         });
-        $resolver->setAllowedTypes('html5', 'bool');
     }
 
     /**

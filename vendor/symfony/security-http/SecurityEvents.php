@@ -11,9 +11,6 @@
 
 namespace Symfony\Component\Security\Http;
 
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Http\Event\SwitchUserEvent;
-
 final class SecurityEvents
 {
     /**
@@ -34,14 +31,4 @@ final class SecurityEvents
      * @Event("Symfony\Component\Security\Http\Event\SwitchUserEvent")
      */
     public const SWITCH_USER = 'security.switch_user';
-
-    /**
-     * Event aliases.
-     *
-     * These aliases can be consumed by RegisterListenersPass.
-     */
-    public const ALIASES = [
-        InteractiveLoginEvent::class => self::INTERACTIVE_LOGIN,
-        SwitchUserEvent::class => self::SWITCH_USER,
-    ];
 }

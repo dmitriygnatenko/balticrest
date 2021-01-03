@@ -179,6 +179,12 @@ final class NativeHttpClient implements HttpClientInterface, LoggerAwareInterfac
 
         $this->logger && $this->logger->info(sprintf('Request: "%s %s"', $method, implode('', $url)));
 
+        [$host, $port] = self::parseHostPort($url, $info);
+
+        if (!isset($options['normalized_headers']['host'])) {
+            $options['headers'][] = 'Host: '.$host.$port;
+        }
+
         if (!isset($options['normalized_headers']['user-agent'])) {
             $options['headers'][] = 'User-Agent: Symfony HttpClient/Native';
         }
@@ -220,26 +226,16 @@ final class NativeHttpClient implements HttpClientInterface, LoggerAwareInterfac
             ],
         ];
 
+        $proxy = self::getProxy($options['proxy'], $url, $options['no_proxy']);
+        $resolveRedirect = self::createRedirectResolver($options, $host, $proxy, $info, $onProgress);
         $context = stream_context_create($context, ['notification' => $notification]);
 
-        $resolver = static function ($multi) use ($context, $options, $url, &$info, $onProgress) {
-            [$host, $port] = self::parseHostPort($url, $info);
+        if (!self::configureHeadersAndProxy($context, $host, $options['headers'], $proxy, 'https:' === $url['scheme'])) {
+            $ip = self::dnsResolve($host, $this->multi, $info, $onProgress);
+            $url['authority'] = substr_replace($url['authority'], $ip, -\strlen($host) - \strlen($port), \strlen($host));
+        }
 
-            if (!isset($options['normalized_headers']['host'])) {
-                $options['headers'][] = 'Host: '.$host.$port;
-            }
-
-            $proxy = self::getProxy($options['proxy'], $url, $options['no_proxy']);
-
-            if (!self::configureHeadersAndProxy($context, $host, $options['headers'], $proxy, 'https:' === $url['scheme'])) {
-                $ip = self::dnsResolve($host, $multi, $info, $onProgress);
-                $url['authority'] = substr_replace($url['authority'], $ip, -\strlen($host) - \strlen($port), \strlen($host));
-            }
-
-            return [self::createRedirectResolver($options, $host, $proxy, $info, $onProgress), implode('', $url)];
-        };
-
-        return new NativeResponse($this->multi, $context, implode('', $url), $options, $info, $resolver, $onProgress, $this->logger);
+        return new NativeResponse($this->multi, $context, implode('', $url), $options, $info, $resolveRedirect, $onProgress, $this->logger);
     }
 
     /**

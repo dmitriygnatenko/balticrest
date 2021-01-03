@@ -94,7 +94,7 @@ class HttpBrowser extends AbstractBrowser
         return [http_build_query($fields, '', '&', \PHP_QUERY_RFC1738), ['Content-Type' => 'application/x-www-form-urlencoded']];
     }
 
-    protected function getHeaders(Request $request): array
+    private function getHeaders(Request $request): array
     {
         $headers = [];
         foreach ($request->getServer() as $key => $value) {

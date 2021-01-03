@@ -183,11 +183,7 @@ class YamlDumper extends Dumper
             return sprintf("    %s: '@%s'\n", $alias, $id);
         }
 
-        if ($id->isPublic()) {
-            $deprecated = "        public: true\n".$deprecated;
-        }
-
-        return sprintf("    %s:\n        alias: %s\n%s", $alias, $id, $deprecated);
+        return sprintf("    %s:\n        alias: %s\n        public: %s\n%s", $alias, $id, $id->isPublic() ? 'true' : 'false', $deprecated);
     }
 
     private function addServices(): string

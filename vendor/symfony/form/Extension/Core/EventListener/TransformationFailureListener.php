@@ -51,15 +51,14 @@ class TransformationFailureListener implements EventSubscriberInterface
         }
 
         $clientDataAsString = is_scalar($form->getViewData()) ? (string) $form->getViewData() : get_debug_type($form->getViewData());
-        $messageTemplate = $form->getConfig()->getOption('invalid_message', 'The value {{ value }} is not valid.');
-        $messageParameters = array_replace(['{{ value }}' => $clientDataAsString], $form->getConfig()->getOption('invalid_message_parameters', []));
+        $messageTemplate = 'The value {{ value }} is not valid.';
 
         if (null !== $this->translator) {
-            $message = $this->translator->trans($messageTemplate, $messageParameters);
+            $message = $this->translator->trans($messageTemplate, ['{{ value }}' => $clientDataAsString]);
         } else {
-            $message = strtr($messageTemplate, $messageParameters);
+            $message = strtr($messageTemplate, ['{{ value }}' => $clientDataAsString]);
         }
 
-        $form->addError(new FormError($message, $messageTemplate, $messageParameters, null, $form->getTransformationFailure()));
+        $form->addError(new FormError($message, $messageTemplate, ['{{ value }}' => $clientDataAsString], null, $form->getTransformationFailure()));
     }
 }

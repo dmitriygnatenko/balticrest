@@ -15,11 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Validator\EventListener\ValidationListener;
 use Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapper;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormRendererInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Bernhard Schussek <bschussek@gmail.com>
@@ -28,13 +26,11 @@ class FormTypeValidatorExtension extends BaseValidatorExtension
 {
     private $validator;
     private $violationMapper;
-    private $legacyErrorMessages;
 
-    public function __construct(ValidatorInterface $validator, bool $legacyErrorMessages = true, FormRendererInterface $formRenderer = null, TranslatorInterface $translator = null)
+    public function __construct(ValidatorInterface $validator)
     {
         $this->validator = $validator;
-        $this->violationMapper = new ViolationMapper($formRenderer, $translator);
-        $this->legacyErrorMessages = $legacyErrorMessages;
+        $this->violationMapper = new ViolationMapper();
     }
 
     /**
@@ -62,18 +58,9 @@ class FormTypeValidatorExtension extends BaseValidatorExtension
             'constraints' => [],
             'invalid_message' => 'This value is not valid.',
             'invalid_message_parameters' => [],
-            'legacy_error_messages' => $this->legacyErrorMessages,
             'allow_extra_fields' => false,
             'extra_fields_message' => 'This form should not contain extra fields.',
         ]);
-        $resolver->setAllowedTypes('legacy_error_messages', 'bool');
-        $resolver->setDeprecated('legacy_error_messages', 'symfony/form', '5.2', function (Options $options, $value) {
-            if (true === $value) {
-                return 'Setting the "legacy_error_messages" option to "true" is deprecated. It will be disabled in Symfony 6.0.';
-            }
-
-            return '';
-        });
 
         $resolver->setNormalizer('constraints', $constraintsNormalizer);
     }

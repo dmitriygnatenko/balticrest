@@ -51,7 +51,6 @@ class Connection
         'heartbeat',
         'read_timeout',
         'write_timeout',
-        'confirm_timeout',
         'connect_timeout',
         'cacert',
         'cert',
@@ -130,7 +129,6 @@ class Connection
      *   * read_timeout: Timeout in for income activity. Note: 0 or greater seconds. May be fractional.
      *   * write_timeout: Timeout in for outcome activity. Note: 0 or greater seconds. May be fractional.
      *   * connect_timeout: Connection timeout. Note: 0 or greater seconds. May be fractional.
-     *   * confirm_timeout: Timeout in seconds for confirmation, if none specified transport will not wait for message confirmation. Note: 0 or greater seconds. May be fractional.
      *   * queues[name]: An array of queues, keyed by the name
      *     * binding_keys: The binding keys (if any) to bind to this queue
      *     * binding_arguments: Arguments to be used while binding the queue.
@@ -168,22 +166,20 @@ class Connection
     {
         if (false === $parsedUrl = parse_url($dsn)) {
             // this is a valid URI that parse_url cannot handle when you want to pass all parameters as options
-            if (!\in_array($dsn, ['amqp://', 'amqps://'])) {
+            if ('amqp://' !== $dsn) {
                 throw new InvalidArgumentException(sprintf('The given AMQP DSN "%s" is invalid.', $dsn));
             }
 
             $parsedUrl = [];
         }
 
-        $useAmqps = 0 === strpos($dsn, 'amqps://');
         $pathParts = isset($parsedUrl['path']) ? explode('/', trim($parsedUrl['path'], '/')) : [];
         $exchangeName = $pathParts[1] ?? 'messages';
         parse_str($parsedUrl['query'] ?? '', $parsedQuery);
-        $port = $useAmqps ? 5671 : 5672;
 
         $amqpOptions = array_replace_recursive([
             'host' => $parsedUrl['host'] ?? 'localhost',
-            'port' => $parsedUrl['port'] ?? $port,
+            'port' => $parsedUrl['port'] ?? 5672,
             'vhost' => isset($pathParts[0]) ? urldecode($pathParts[0]) : '/',
             'exchange' => [
                 'name' => $exchangeName,
@@ -218,10 +214,6 @@ class Connection
 
             return $queueOptions;
         }, $queuesOptions);
-
-        if ($useAmqps && !self::hasCaCertConfigured($amqpOptions)) {
-            throw new InvalidArgumentException('No CA certificate has been provided. Set "amqp.cacert" in your php.ini or pass the "cacert" parameter in the DSN to use SSL. Alternatively, you can use amqp:// to use without SSL.');
-        }
 
         return new self($amqpOptions, $exchangeOptions, $queuesOptions, $amqpFactory);
     }
@@ -265,11 +257,6 @@ class Connection
         }
 
         return $arguments;
-    }
-
-    private static function hasCaCertConfigured(array $amqpOptions): bool
-    {
-        return (isset($amqpOptions['cacert']) && '' !== $amqpOptions['cacert']) || '' !== ini_get('amqp.cacert');
     }
 
     /**
@@ -331,7 +318,6 @@ class Connection
         $attributes = $amqpStamp ? $amqpStamp->getAttributes() : [];
         $attributes['headers'] = array_merge($attributes['headers'] ?? [], $headers);
         $attributes['delivery_mode'] = $attributes['delivery_mode'] ?? 2;
-        $attributes['timestamp'] = $attributes['timestamp'] ?? time();
 
         $exchange->publish(
             $body,
@@ -339,10 +325,6 @@ class Connection
             $amqpStamp ? $amqpStamp->getFlags() : \AMQP_NOPARAM,
             $attributes
         );
-
-        if ('' !== ($this->connectionOptions['confirm_timeout'] ?? '')) {
-            $this->channel()->waitForConfirm((float) $this->connectionOptions['confirm_timeout']);
-        }
     }
 
     private function setupDelay(int $delay, ?string $routingKey)
@@ -495,18 +477,6 @@ class Connection
 
             if (isset($this->connectionOptions['prefetch_count'])) {
                 $this->amqpChannel->setPrefetchCount($this->connectionOptions['prefetch_count']);
-            }
-
-            if ('' !== ($this->connectionOptions['confirm_timeout'] ?? '')) {
-                $this->amqpChannel->confirmSelect();
-                $this->amqpChannel->setConfirmCallback(
-                    static function (): bool {
-                        return false;
-                    },
-                    static function (): bool {
-                        return false;
-                    }
-                );
             }
         }
 

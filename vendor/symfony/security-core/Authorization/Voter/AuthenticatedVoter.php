@@ -32,7 +32,6 @@ class AuthenticatedVoter implements VoterInterface
     public const IS_ANONYMOUS = 'IS_ANONYMOUS';
     public const IS_IMPERSONATOR = 'IS_IMPERSONATOR';
     public const IS_REMEMBERED = 'IS_REMEMBERED';
-    public const PUBLIC_ACCESS = 'PUBLIC_ACCESS';
 
     private $authenticationTrustResolver;
 
@@ -46,10 +45,6 @@ class AuthenticatedVoter implements VoterInterface
      */
     public function vote(TokenInterface $token, $subject, array $attributes)
     {
-        if ($attributes === [self::PUBLIC_ACCESS]) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
         $result = VoterInterface::ACCESS_ABSTAIN;
         foreach ($attributes as $attribute) {
             if (null === $attribute || (self::IS_AUTHENTICATED_FULLY !== $attribute

@@ -11,6 +11,7 @@
 
 namespace Symfony\Bridge\Doctrine\PropertyInfo;
 
+use Doctrine\DBAL\Types\Type as DBALType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -31,10 +32,15 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
 {
     private $entityManager;
     private $classMetadataFactory;
+    private static $useDeprecatedConstants;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+
+        if (null === self::$useDeprecatedConstants) {
+            self::$useDeprecatedConstants = !class_exists(Types::class);
+        }
     }
 
     /**
@@ -140,31 +146,35 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
             switch ($builtinType) {
                 case Type::BUILTIN_TYPE_OBJECT:
                     switch ($typeOfField) {
-                        case Types::DATE_MUTABLE:
-                        case Types::DATETIME_MUTABLE:
-                        case Types::DATETIMETZ_MUTABLE:
+                        case self::$useDeprecatedConstants ? DBALType::DATE : Types::DATE_MUTABLE:
+                        // no break
+                        case self::$useDeprecatedConstants ? DBALType::DATETIME : Types::DATETIME_MUTABLE:
+                        // no break
+                        case self::$useDeprecatedConstants ? DBALType::DATETIMETZ : Types::DATETIMETZ_MUTABLE:
+                        // no break
                         case 'vardatetime':
-                        case Types::TIME_MUTABLE:
+                        case self::$useDeprecatedConstants ? DBALType::TIME : Types::TIME_MUTABLE:
                             return [new Type(Type::BUILTIN_TYPE_OBJECT, $nullable, 'DateTime')];
 
-                        case Types::DATE_IMMUTABLE:
-                        case Types::DATETIME_IMMUTABLE:
-                        case Types::DATETIMETZ_IMMUTABLE:
-                        case Types::TIME_IMMUTABLE:
+                        case 'date_immutable':
+                        case 'datetime_immutable':
+                        case 'datetimetz_immutable':
+                        case 'time_immutable':
                             return [new Type(Type::BUILTIN_TYPE_OBJECT, $nullable, 'DateTimeImmutable')];
 
-                        case Types::DATEINTERVAL:
+                        case 'dateinterval':
                             return [new Type(Type::BUILTIN_TYPE_OBJECT, $nullable, 'DateInterval')];
                     }
 
                     break;
                 case Type::BUILTIN_TYPE_ARRAY:
                     switch ($typeOfField) {
-                        case Types::ARRAY:
-                        case Types::JSON_ARRAY:
+                        case self::$useDeprecatedConstants ? DBALType::TARRAY : Types::ARRAY:
+                        // no break
+                        case 'json_array':
                             return [new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true)];
 
-                        case Types::SIMPLE_ARRAY:
+                        case self::$useDeprecatedConstants ? DBALType::SIMPLE_ARRAY : Types::SIMPLE_ARRAY:
                             return [new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true, new Type(Type::BUILTIN_TYPE_INT), new Type(Type::BUILTIN_TYPE_STRING))];
                     }
             }
@@ -239,43 +249,56 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
     private function getPhpType(string $doctrineType): ?string
     {
         switch ($doctrineType) {
-            case Types::SMALLINT:
-            case Types::INTEGER:
+            case self::$useDeprecatedConstants ? DBALType::SMALLINT : Types::SMALLINT:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::INTEGER : Types::INTEGER:
                 return Type::BUILTIN_TYPE_INT;
 
-            case Types::FLOAT:
+            case self::$useDeprecatedConstants ? DBALType::FLOAT : Types::FLOAT:
                 return Type::BUILTIN_TYPE_FLOAT;
 
-            case Types::BIGINT:
-            case Types::STRING:
-            case Types::TEXT:
-            case Types::GUID:
-            case Types::DECIMAL:
+            case self::$useDeprecatedConstants ? DBALType::BIGINT : Types::BIGINT:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::STRING : Types::STRING:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::TEXT : Types::TEXT:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::GUID : Types::GUID:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::DECIMAL : Types::DECIMAL:
                 return Type::BUILTIN_TYPE_STRING;
 
-            case Types::BOOLEAN:
+            case self::$useDeprecatedConstants ? DBALType::BOOLEAN : Types::BOOLEAN:
                 return Type::BUILTIN_TYPE_BOOL;
 
-            case Types::BLOB:
-            case Types::BINARY:
+            case self::$useDeprecatedConstants ? DBALType::BLOB : Types::BLOB:
+            // no break
+            case 'binary':
                 return Type::BUILTIN_TYPE_RESOURCE;
 
-            case Types::OBJECT:
-            case Types::DATE_MUTABLE:
-            case Types::DATETIME_MUTABLE:
-            case Types::DATETIMETZ_MUTABLE:
+            case self::$useDeprecatedConstants ? DBALType::OBJECT : Types::OBJECT:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::DATE : Types::DATE_MUTABLE:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::DATETIME : Types::DATETIME_MUTABLE:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::DATETIMETZ : Types::DATETIMETZ_MUTABLE:
+            // no break
             case 'vardatetime':
-            case Types::TIME_MUTABLE:
-            case Types::DATE_IMMUTABLE:
-            case Types::DATETIME_IMMUTABLE:
-            case Types::DATETIMETZ_IMMUTABLE:
-            case Types::TIME_IMMUTABLE:
-            case Types::DATEINTERVAL:
+            case self::$useDeprecatedConstants ? DBALType::TIME : Types::TIME_MUTABLE:
+            // no break
+            case 'date_immutable':
+            case 'datetime_immutable':
+            case 'datetimetz_immutable':
+            case 'time_immutable':
+            case 'dateinterval':
                 return Type::BUILTIN_TYPE_OBJECT;
 
-            case Types::ARRAY:
-            case Types::SIMPLE_ARRAY:
-            case Types::JSON_ARRAY:
+            case self::$useDeprecatedConstants ? DBALType::TARRAY : Types::ARRAY:
+            // no break
+            case self::$useDeprecatedConstants ? DBALType::SIMPLE_ARRAY : Types::SIMPLE_ARRAY:
+            // no break
+            case 'json_array':
                 return Type::BUILTIN_TYPE_ARRAY;
         }
 
