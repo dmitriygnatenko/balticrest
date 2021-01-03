@@ -14,6 +14,7 @@ use App\Components\Balticrest\Service\Mapper\NewsListDTOMapper;
 use App\Entity\News;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
@@ -103,8 +104,8 @@ class NewsDataProvider implements NewsDataProviderInterface
     public function getData(int $page = 1, ?string $tag = null): NewsListDTO
     {
         /** @var Paginator $results */
-        $results = $this->em->getRepository(News::class)->getActivePaginatedNews($page, self::NEWS_PER_PAGE + 1, $tag);
+        $results = $this->em->getRepository(News::class)->getActivePaginatedNews($page, self::NEWS_PER_PAGE, $tag);
 
-        return $this->newsListDTOMapper->fill($results, self::NEWS_PER_PAGE);
+        return $this->newsListDTOMapper->fill($results);
     }
 }

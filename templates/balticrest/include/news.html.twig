@@ -1,0 +1,37 @@
+
+{% if tag is not defined %}
+    {% set tag = null %}
+{% endif %}
+
+{% for record in news.news %}
+    <div class="post p_style_three">
+        <div class="post_info">
+            <h3>{{ record.title }}</h3>
+            <div class="date">
+                <i class="fa fa-calendar"></i>
+                {{ record.getPublishDate|format_date('long') }}
+            </div>
+            <div class="p_text">
+                <div class="image">
+                    <img src="/{{ record.image }}">
+                </div>
+                {{ record.text|raw }}
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endfor %}
+
+{% if news.nextPage is not null %}
+    <div class="news-page-links">
+        {% if tag is null %}
+            <div href="{{ path('api_news', {page: news.nextPage}) }}" class="btn btn-success va" onclick="refreshNews($(this))">
+                {% trans %}news.next_link{% endtrans %}
+            </div>
+        {% else %}
+            <div href="{{ path('api_news_tag', {tag: tag, page: news.nextPage}) }}" class="btn btn-success va" onclick="refreshNews($(this))">
+                {% trans %}news.next_link{% endtrans %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

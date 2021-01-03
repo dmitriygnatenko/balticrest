@@ -32,21 +32,19 @@ class NewsListDTOMapper
 
     /**
      * @param Paginator $paginator
-     * @param int $max
      *
      * @return NewsListDTO
      *
      * @throws Exception
      */
-    public function fill(Paginator $paginator, int $max): NewsListDTO
+    public function fill(Paginator $paginator): NewsListDTO
     {
         $listDTO = new NewsListDTO();
 
-        $listDTO->setPrevPage($paginator->getPrevPage());
+        $listDTO->setPrevPage($paginator->getPrevPage())
+            ->setNextPage($paginator->getNextPage());
 
         $locale = $this->requestStack->getMasterRequest()->getLocale();
-
-        $counter = 0;
 
         foreach ($paginator->getIterator() as $news)
         {
@@ -63,13 +61,6 @@ class NewsListDTOMapper
                     ->setText($newsLangData->getText());
 
                 $listDTO->addNews($dto);
-            }
-
-            $counter++;
-
-            if ($counter === $max) {
-                $listDTO->setNextPage($paginator->getNextPage());
-                break;
             }
         }
 

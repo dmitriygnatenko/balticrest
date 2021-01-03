@@ -1,0 +1,72 @@
+{% extends 'balticrest/base_left_top_menu.html.twig' %}
+
+{% block body_attr %}class="innerpage"{% endblock %}
+
+{% block title %}{{ parent() }} {% trans from 'seo' %}news.title{% endtrans %}{% endblock %}
+{% block description %}{% trans from 'seo' %}news.desc{% endtrans %}{% endblock %}
+{% block keywords %}{% trans from 'seo' %}news.keywords{% endtrans %}{% endblock %}
+
+{% if tag is not defined %}
+    {% set tag = null %}
+{% endif %}
+
+{% block content %}
+
+    <div class="container page_info">
+        <div class="col_md_12">
+            <h1>{% trans %}news.title{% endtrans %}</h1>
+            <ul class="blog_cat">
+                <li><a href="{{ path('news') }}" class="{% if tag is null %}active{% endif %}">
+                        {% trans %}news.tags.all{% endtrans %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('news_tag', {tag: 'events'}) }}" class="{% if tag == 'events' %}active{% endif %}">
+                        {% trans %}news.tags.events{% endtrans %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('news_tag', {tag: 'transport'}) }}" class="{% if tag == 'transport' %}active{% endif %}">
+                        {% trans %}news.tags.transport{% endtrans %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('news_tag', {tag: 'offers'}) }}" class="{% if tag == 'offers' %}active{% endif %}">
+                        {% trans %}news.tags.offers{% endtrans %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container contant">
+        <div class="row cont">
+            <div class="col-md-12 basic">
+                <div class="place_li_cont">
+                    {{ include('balticrest/include/news.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block balticrest_js_body %}
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+        function refreshNews(btn) {
+            const link = btn.attr('href');
+            const $pageBlock = $('.news-page-links');
+
+            $pageBlock.html('<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>');
+
+            $.get(link, function(content) {
+                $pageBlock.remove();
+                $('.place_li_cont').append(content);
+            });
+        }
+    </script>
+
+{% endblock %}
