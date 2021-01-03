@@ -30,6 +30,15 @@ point:
         sport: Другие спортивные объекты
         transport: Другие транспортные объекты
 
+news:
+    title: Новости
+    next_link: Предыдущие
+    tags:
+        all: Все
+        events: Концерты, праздники
+        transport: Как добраться
+        offers: Акции
+
 profile:
     login: Войти
     logout: Выйти

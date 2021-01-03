@@ -15,6 +15,15 @@ map:
     point:
         btn_title: Daugiau informacijos
 
+news:
+    title: Naujienos
+    next_link: Ankstesnis
+    tags:
+        all: Visi
+        events: Koncertai, šventės
+        transport: Kaip ten nuvykti
+        offers: Pasiūlymai
+
 point:
     services: Paslaugos
     website: Svetainė

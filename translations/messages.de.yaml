@@ -30,6 +30,15 @@ point:
         sport: Andere Sportanlagen
         transport: Andere Transportmöglichkeiten
 
+news:
+    title: Nachrichten
+    next_link: Zurück
+    tags:
+        all: Alles
+        events: Konzerte, Feiertage
+        transport: Wie man dorthin kommt
+        offers: Angebote
+
 profile:
     login: Anmeldung
     logout: Ausloggen

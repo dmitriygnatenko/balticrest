@@ -30,6 +30,15 @@ point:
         sport: Other sports facilities
         transport: Other transport facilities
 
+news:
+    title: News
+    next_link: Previous
+    tags:
+        all: All
+        events: Concerts, holidays
+        transport: How to get there
+        offers: Offers
+
 profile:
     login: Login
     logout: Logout

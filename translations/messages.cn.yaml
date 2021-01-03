@@ -30,6 +30,15 @@ point:
         sport: 其他體育設施
         transport: 其他運輸設施
 
+news:
+    title: 新聞
+    next_link: 以前
+    tags:
+        all: 所有新聞
+        events: 音樂會，節假日
+        transport: 如何到那
+        offers: 優惠
+
 profile:
     login: 登錄
     logout: 登出

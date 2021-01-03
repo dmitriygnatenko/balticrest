@@ -30,6 +30,15 @@ point:
         sport: Inne obiekty sportowe
         transport: Inne obiekty transportowe
 
+news:
+    title: Wiadomości
+    next_link: Poprzedni
+    tags:
+        all: Wszystko
+        events: Koncerty, święta
+        transport: Jak się tam dostać
+        offers: Oferty
+
 profile:
     login: Zaloguj się
     logout: Wyloguj się
