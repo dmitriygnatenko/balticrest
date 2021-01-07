@@ -55,6 +55,7 @@ class NewsForm extends AbstractType
 
         $builder->add('publish_date', DateType::class, [
             'label' => 'Дата публикации',
+            'widget' => 'single_text',
             'constraints' => [
                 new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
             ]
