@@ -26,7 +26,7 @@ class Paginator extends DoctrinePaginator
         $this->page = $page;
         $this->max = $max;
 
-        $firstResult = $page === 1 ? 0 : ($page * $max - 1);
+        $firstResult = ($page - 1) * $max;
 
         $query->setFirstResult($firstResult)->setMaxResults($max);
 
