@@ -2434,12 +2434,19 @@ a.green_btn:hover {
 .places_cat li {
     list-style: none;
 }
+.places_cat.top li {
+    list-style: none;
+    margin: 0;
+}
 
 .places_cat li a {
     display: block;
     padding: 12px 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.42);
     color: #ffffff;
+}
+.places_cat.top li a {
+    border-bottom: none;
 }
 
 .places_cat li a.active {
@@ -2459,6 +2466,12 @@ a.green_btn:hover {
 
 .places_cat li a span i {
     margin-right: 15px;
+}
+
+.places_cat.top li a:hover {
+    background: #E73931;
+    color: #ffffff;
+    border-bottom: none;
 }
 
 .tag {

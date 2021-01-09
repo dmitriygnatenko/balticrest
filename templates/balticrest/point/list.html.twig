@@ -15,6 +15,73 @@
         <div class="col_md_12">
             <h1>{{ global_service.listPageTitle(city, category) }}</h1>
         </div>
+        <div class="visible-sm visible-xs">
+            <ul class="places_cat top">
+                {% if point_types['hotels'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.hotels{% endtrans %}" href="{{ path('point_list', {city: city, category: 'hotels'}) }}" class="{% if category == 'hotels' %}active{% endif %}">
+                            {% trans %}categories.hotels{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if point_types['medicine'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.medicine{% endtrans %}" href="{{ path('point_list', {city: city, category: 'medicine'}) }}" class="{% if category == 'medicine' %}active{% endif %}">
+                            {% trans %}categories.medicine{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if point_types['cafes'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.cafes{% endtrans %}" href="{{ path('point_list', {city: city, category: 'cafes'}) }}" class="{% if category == 'cafes' %}active{% endif %}">
+                            {% trans %}categories.cafes{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if point_types['shops'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.shops{% endtrans %}" href="{{ path('point_list', {city: city, category: 'shops'}) }}" class="{% if category == 'shops' %}active{% endif %}">
+                            {% trans %}categories.shops{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if point_types['banks'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.banks{% endtrans %}" href="{{ path('point_list', {city: city, category: 'banks'}) }}" class="{% if category == 'banks' %}active{% endif %}">
+                            {% trans %}categories.banks{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if point_types['museums'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.museums{% endtrans %}" href="{{ path('point_list', {city: city, category: 'museums'}) }}" class="{% if category == 'museums' %}active{% endif %}">
+                            {% trans %}categories.museums{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if point_types['sport'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.sport{% endtrans %}" href="{{ path('point_list', {city: city, category: 'sport'}) }}" class="{% if category == 'sport' %}active{% endif %}">
+                            {% trans %}categories.sport{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if point_types['transport'] is defined %}
+                    <li>
+                        <a title="{% trans %}categories.transport{% endtrans %}" href="{{ path('point_list', {city: city, category: 'transport'}) }}" class="{% if category == 'transport' %}active{% endif %}">
+                            {% trans %}categories.transport{% endtrans %}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 
     <div class="container contant">
