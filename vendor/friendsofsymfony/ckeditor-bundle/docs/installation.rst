@@ -13,7 +13,18 @@ Require the bundle in your ``composer.json`` file:
 Register the Bundle
 -------------------
 
-Then, update your ``app/AppKernel.php``:
+If you're using Symfony >= 4.0, skip this step, as it is automatically done by Flex's recipe.
+
+If you choose to not execute the recipe, and if you're using Symfony >= 4.0, update your ``config/bundles.php``:
+
+.. code-block:: php
+
+    return [
+        // ...
+        FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
+    ];
+
+If you're using Symfony < 4.0, update your ``app/AppKernel.php``:
 
 .. code-block:: php
 
@@ -54,17 +65,17 @@ If you want to learn more about this command, you can read :doc:`its documentati
 Using Webpack Encore
 ~~~~~~~~~~~~~~~~~~~~
 
-If you have installed Webpack Encore, you may want to have it as a `node_module` dependency. 
+If you have installed Webpack Encore, you may want to have it as a `node_module` dependency.
 
 You can by running this command:
 
 .. code-block:: bash
 
     # if you are using NPM as package manager
-    $ npm install --save ckeditor@^4.0.0
-    
+    $ npm install --save ckeditor@^4.13.0
+
     # if you are using Yarn as package manager
-    $ yarn add ckeditor@^4.0.0
+    $ yarn add ckeditor@^4.13.0
 
 Once installed, add the following lines to your Webpack Encore configuration file (this excludes the samples directory from the ckeditor node module):
 
@@ -76,11 +87,12 @@ Once installed, add the following lines to your Webpack Encore configuration fil
     Encore
         // ...
         .copyFiles([
-            {from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
-            {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
-            {from: './node_modules/ckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
-            {from: './node_modules/ckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
-            {from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
+            {from: './node_modules/ckeditor4/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+            {from: './node_modules/ckeditor4/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+            {from: './node_modules/ckeditor4/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+            {from: './node_modules/ckeditor4/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+            {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
+            {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'}
         ])
         // Uncomment the following line if you are using Webpack Encore <= 0.24
         // .addLoader({test: /\.json$/i, include: [require('path').resolve(__dirname, 'node_modules/ckeditor')], loader: 'raw-loader', type: 'javascript/auto'})
@@ -101,7 +113,7 @@ Finally, run encore command:
 
     # if you are using NPM as package manager
     $ npm run dev
-    
+
     # if you are using Yarn as package manager
     $ yarn run encore dev
 
