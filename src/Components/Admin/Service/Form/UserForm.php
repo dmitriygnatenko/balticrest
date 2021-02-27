@@ -40,12 +40,6 @@ class UserForm extends AbstractForm
         $user = $options['user'] ?? null;
         $em = $this->entityManager;
 
-        $allGroups = [
-            self::VALIDATION_GROUP_CREATE,
-            self::VALIDATION_GROUP_UPDATE
-        ];
-
-
         $builder->setRequired(false);
 
         $builder->add('is_active', IsActiveFormType::class);
@@ -53,10 +47,10 @@ class UserForm extends AbstractForm
         $builder->add('email', TextType::class, [
             'label' => 'Адрес электронной почты',
             'constraints' => [
-                new NotBlank(['groups' => $allGroups]),
-                new Email(['groups' => $allGroups]),
+                new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS]),
+                new Email(['groups' => self::ALL_VALIDATION_GROUPS]),
                 new Callback([
-                    'groups' => $allGroups,
+                    'groups' => self::ALL_VALIDATION_GROUPS,
                     'callback' => static function ($value, $context) use ($em, $user) {
                         if ($value === '' || $value === null) {
                             return;

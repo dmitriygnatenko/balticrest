@@ -4,38 +4,73 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Service\DTO;
 
-use App\Entity\Article;
-use App\Entity\ArticleLangData;
-
 class ArticleDTO
 {
     /** @var int */
-    public $id;
+    private $id;
 
     /** @var string */
-    public $title;
+    private $title;
 
     /** @var boolean */
-    public $is_active;
+    private $is_active;
 
     /**
-     * @param Article $article
-     *
-     * @return $this
+     * @return int
      */
-    public function fillByArticle(Article $article): self
+    public function getId(): int
     {
-        $this->id = $article->getId();
-        $this->is_active = $article->getIsActive();
+        return $this->id;
+    }
 
-        $pointRuData = $article->getArticleLangData()->filter(static function($articleLangData) {
-            /** @var ArticleLangData $articleLangData */
-            return $articleLangData->getLanguage()->getCode() === 'ru';
-        });
+    /**
+     * @param int $id
+     *
+     * @return ArticleDTO
+     */
+    public function setId(int $id): ArticleDTO
+    {
+        $this->id = $id;
 
-        if (!$pointRuData->isEmpty()) {
-            $this->title = $pointRuData->first()->getTitle();
-        }
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return ArticleDTO
+     */
+    public function setTitle(string $title): ArticleDTO
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return ArticleDTO
+     */
+    public function setIsActive(bool $isActive): ArticleDTO
+    {
+        $this->is_active = $isActive;
 
         return $this;
     }

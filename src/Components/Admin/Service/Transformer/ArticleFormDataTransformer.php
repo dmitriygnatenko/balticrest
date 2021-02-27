@@ -2,26 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Admin\Service\Form\Mapper;
+namespace App\Components\Admin\Service\Transformer;
 
 use App\Entity\Article;
 use App\Entity\Language;
 use App\Entity\ArticleLangData;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class ArticleFormDataTransformer implements DataTransformer
+class ArticleFormDataTransformer implements TransformerInterface
 {
-    /** @var EntityManager */
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
     /**
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -69,9 +68,9 @@ class ArticleFormDataTransformer implements DataTransformer
         $article->setIsActive((bool) ($form['is_active'] ?? true))
             ->setUrl((string) ($form['url'] ?? ''));
 
-        $languages = $this->em->getRepository(Language::class)->findBy(['is_active' => true]);
+        $languages = $this->entityManager->getRepository(Language::class)->findBy(['is_active' => true]);
 
-        $articleLangDataRepository = $this->em->getRepository(ArticleLangData::class);
+        $articleLangDataRepository = $this->entityManager->getRepository(ArticleLangData::class);
 
         foreach ($languages as $language) {
             $articleLangData = $articleLangDataRepository->findOneBy([

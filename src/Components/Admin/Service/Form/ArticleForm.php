@@ -8,9 +8,7 @@ use App\Components\Admin\Service\Form\Type\CKEditorFormType;
 use App\Components\Admin\Service\Form\Type\IsActiveFormType;
 use App\Entity\Article;
 use App\Entity\Language;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -18,16 +16,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ArticleForm extends AbstractType
+class ArticleForm extends AbstractForm
 {
-    /** @var string */
-    public const VALIDATION_GROUP_CREATE = 'create';
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    /** @var string */
-    public const VALIDATION_GROUP_UPDATE = 'update';
-
-    /** @var array */
-    public const REQUIRED_LANGUAGES = ['ru', 'en'];
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -37,12 +37,10 @@ class ArticleForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var EntityManager $em */
-        $em = $options['em'];
-
         /** @var Article|null $article */
         $article = $options['article'] ?? null;
 
+        $em = $this->entityManager;
         $languages = $em->getRepository(Language::class)->findBy(['is_active' => true]);
 
         $builder->setRequired(false);
@@ -53,7 +51,7 @@ class ArticleForm extends AbstractType
             'label' => 'URL',
             'constraints' => [
                 new Callback([
-                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
+                    'groups' => self::ALL_VALIDATION_GROUPS,
                     'callback' => static function($value, $context) use ($em, $article) {
                         if ($value === '' || $value === null) {
                             return;
@@ -70,7 +68,7 @@ class ArticleForm extends AbstractType
                         }
                     }
                 ]),
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
+                new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS])
             ]
         ]);
 
@@ -79,7 +77,7 @@ class ArticleForm extends AbstractType
             $builder->add('lang_' . $language->getId() . '_title', TextType::class, [
                 'label' => 'Название',
                 'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES, true)
-                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
+                    ? [new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS])]
                     : []
             ]);
 
@@ -104,8 +102,6 @@ class ArticleForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired('em')
-            ->addAllowedTypes('em', EntityManagerInterface::class)
             ->setDefault('article', null)
             ->setRequired('validation_groups');
     }

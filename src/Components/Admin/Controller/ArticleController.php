@@ -4,24 +4,21 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Controller;
 
-use App\Components\Admin\Service\DTO\ArticleDTO;
 use App\Components\Admin\Service\Form\ArticleForm;
-use App\Components\Admin\Service\Form\Mapper\ArticleFormDataTransformer;
+use App\Components\Admin\Service\Mapper\ArticleDTOMapper;
+use App\Components\Admin\Service\Transformer\ArticleFormDataTransformer;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Entity\Article;
 use App\Entity\ArticleLangData;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use Psr\Cache\InvalidArgumentException;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Exception;
+use Throwable;
 
 class ArticleController extends AbstractController
 {
@@ -31,44 +28,55 @@ class ArticleController extends AbstractController
     /** @var LoggerInterface */
     private $logger;
 
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    /** @var ArticleFormDataTransformer */
+    private $articleFormDataTransformer;
+
     /**
      * @param CacheManagerInterface $cacheManager
      * @param LoggerInterface $logger
+     * @param EntityManagerInterface $entityManager
+     * @param ArticleFormDataTransformer $articleFormDataTransformer
      */
-    public function __construct(CacheManagerInterface $cacheManager, LoggerInterface $logger)
-    {
+    public function __construct(
+        CacheManagerInterface $cacheManager,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        ArticleFormDataTransformer $articleFormDataTransformer
+    ) {
         $this->cacheManager = $cacheManager;
         $this->logger = $logger;
+        $this->entityManager = $entityManager;
+        $this->articleFormDataTransformer = $articleFormDataTransformer;
     }
 
     /**
      * @Route("/article", name="admin.article_list", methods={"GET"})
      *
      * @param Request $request
+     * @param ArticleDTOMapper $articleDTOMapper
      *
      * @return Response
      */
-    public function list(Request $request): Response
+    public function list(Request $request, ArticleDTOMapper $articleDTOMapper): Response
     {
         $articles = [];
         $page = $request->query->getInt('page', 1);
 
         try {
-            $articlePaginator = $this->getDoctrine()->getRepository(Article::class)
-                ->getPaginatedArticles($page);
-
-            foreach ($articlePaginator->getIterator() as $article) {
-                $articles[] = (new ArticleDTO())->fillByArticle($article);
-            }
-        } catch (Exception $exception) {
+            $articlesPaginator = $this->entityManager->getRepository(Article::class)->getPaginatedArticles($page);
+            $articles = $articleDTOMapper->fillByArticles($articlesPaginator->getIterator());
+        } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-            $articlePaginator = null;
+            $articlesPaginator = null;
         }
 
         return $this->render('admin/article/list.html.twig', [
             'articles' => $articles,
-            'next_page' => $articlePaginator ? $articlePaginator->getNextPage() : null,
-            'prev_page' => $articlePaginator ? $articlePaginator->getPrevPage() : null,
+            'next_page' => $articlesPaginator ? $articlesPaginator->getNextPage() : null,
+            'prev_page' => $articlesPaginator ? $articlesPaginator->getPrevPage() : null,
         ]);
     }
 
@@ -76,17 +84,12 @@ class ArticleController extends AbstractController
      * @Route("/article/add", name="admin.article_add", methods={"GET","POST"})
      *
      * @param Request $request
-     * @param ArticleFormDataTransformer $articleFormDataTransformer
      *
      * @return Response
      */
-    public function add(Request $request, ArticleFormDataTransformer $articleFormDataTransformer): Response
+    public function add(Request $request): Response
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
         $form = $this->createForm(ArticleForm::class, [], [
-            'em' => $entityManager,
             'validation_groups' => ArticleForm::VALIDATION_GROUP_CREATE
         ]);
 
@@ -94,19 +97,19 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article = new Article();
-            $articleFormDataTransformer->transformToEntity($form->getData(), $article);
+            $this->articleFormDataTransformer->transformToEntity($form->getData(), $article);
 
             try {
-                $entityManager->persist($article);
+                $this->entityManager->persist($article);
                 foreach ($article->getArticleLangData() as $articleLangData) {
-                    $entityManager->persist($articleLangData);
+                    $this->entityManager->persist($articleLangData);
                 }
-                $entityManager->flush();
+                $this->entityManager->flush();
 
                 $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLES);
 
                 $this->addFlash('success', 'Статья успешно добавлена');
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при добавлении статьи');
             }
@@ -125,22 +128,13 @@ class ArticleController extends AbstractController
      *
      * @param Article $article
      * @param Request $request
-     * @param ArticleFormDataTransformer $articleFormDataTransformer
      *
      * @return Response
      */
-    public function edit(
-        Article $article,
-        Request $request,
-        ArticleFormDataTransformer $articleFormDataTransformer
-    ): Response {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $formData = $articleFormDataTransformer->transformFromEntity($article);
+    public function edit(Article $article, Request $request): Response {
+        $formData = $this->articleFormDataTransformer->transformFromEntity($article);
 
         $form = $this->createForm(ArticleForm::class, $formData, [
-            'em' => $entityManager,
             'article' => $article,
             'validation_groups' => ArticleForm::VALIDATION_GROUP_UPDATE
         ]);
@@ -148,20 +142,19 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $articleFormDataTransformer->transformToEntity($form->getData(), $article);
+            $this->articleFormDataTransformer->transformToEntity($form->getData(), $article);
 
             try {
-                $entityManager->persist($article);
+                $this->entityManager->persist($article);
                 foreach ($article->getArticleLangData() as $articleLangData) {
-                    $entityManager->persist($articleLangData);
+                    $this->entityManager->persist($articleLangData);
                 }
-                $entityManager->flush();
+                $this->entityManager->flush();
 
                 $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLES);
 
                 $this->addFlash('success', 'Статья успешно сохранена');
-
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             }
 
@@ -184,18 +177,15 @@ class ArticleController extends AbstractController
      */
     public function delete(Article $article, Request $request): Response
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
         if ($request->isMethod('post')) {
             try {
-                $entityManager->remove($article);
-                $entityManager->flush();
+                $this->entityManager->remove($article);
+                $this->entityManager->flush();
 
                 $this->cacheManager->clearByTag(CacheTagInterface::TAG_ARTICLES);
 
                 $this->addFlash('success', 'Статья успешно удалена');
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при удалении статьи');
             }
