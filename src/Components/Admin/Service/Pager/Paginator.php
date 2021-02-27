@@ -34,7 +34,7 @@ class Paginator extends DoctrinePaginator
     }
 
     /**
-     * @return int|bool
+     * @return int|null
      */
     public function getPrevPage(): ?int
     {
@@ -42,7 +42,7 @@ class Paginator extends DoctrinePaginator
     }
 
     /**
-     * @return int|bool
+     * @return int|null
      */
     public function getNextPage(): ?int
     {

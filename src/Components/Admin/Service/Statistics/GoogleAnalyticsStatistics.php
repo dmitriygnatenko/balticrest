@@ -14,7 +14,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 /*
 Путь к серверному ключу Google Analytics.
-- Выбираем существующий или создаем новый проект в Google Developers Console.
+- Выбираем существующий или создаем новый проект в Google Developers Console (https://console.cloud.google.com/api).
 - На странице "Обзор" переходим по ссылке Analytics API (находится в блоке "Другие популярные API").
 - Нажимаем кнопку "Включить".
 - В левом меню нажимаем на ссылку "Учетные данные".
@@ -35,10 +35,10 @@ class GoogleAnalyticsStatistics implements GoogleAnalyticsStatisticsInterface
     /** @var LoggerInterface */
     private $logger;
 
-    /** @var Google_Service_Analytics */
+    /** @var Google_Service_Analytics|null */
     private $analytics;
 
-    /** @var string */
+    /** @var string|null */
     private $viewId;
 
     /** @var TagAwareCacheInterface */

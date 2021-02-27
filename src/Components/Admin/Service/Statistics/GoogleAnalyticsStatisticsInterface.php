@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Service\Statistics;
 
-use Symfony\Contracts\Cache\ItemInterface;
-
 interface GoogleAnalyticsStatisticsInterface
 {
     /** @var */
@@ -43,4 +41,14 @@ interface GoogleAnalyticsStatisticsInterface
 
     /** @var string Показатель отказов в % */
     public const FIELD_BOUNCE_RATE = 'bounceRate';
+
+    /**
+     * @return array
+     */
+    public function getCachedStatistics(): array;
+
+    /**
+     * @return array
+     */
+    public function getStatistics(): array;
 }
