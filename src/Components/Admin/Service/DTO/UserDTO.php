@@ -4,29 +4,73 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Service\DTO;
 
-use App\Entity\User;
-
 class UserDTO
 {
     /** @var int */
-    public $id;
+    private $id;
 
     /** @var string */
-    public $email;
+    private $email;
 
     /** @var boolean */
-    public $is_active;
+    private $is_active;
 
     /**
-     * @param User $user
-     *
-     * @return $this
+     * @return int
      */
-    public function fillByUser(User $user): self
+    public function getId(): int
     {
-        $this->id = $user->getId();
-        $this->email = $user->getEmail();
-        $this->is_active = $user->getIsActive();
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return UserDTO
+     */
+    public function setId(int $id): UserDTO
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return UserDTO
+     */
+    public function setEmail(string $email): UserDTO
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return UserDTO
+     */
+    public function setIsActive(bool $isActive): UserDTO
+    {
+        $this->is_active = $isActive;
 
         return $this;
     }

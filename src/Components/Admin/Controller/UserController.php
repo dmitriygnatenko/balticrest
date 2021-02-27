@@ -4,51 +4,49 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Controller;
 
-use App\Components\Admin\Service\DTO\UserDTO;
-use App\Components\Admin\Service\Form\ArticleForm;
 use App\Components\Admin\Service\Form\UserForm;
+use App\Components\Admin\Service\Mapper\UserDTOMapper;
 use App\Entity\Interfaces\UserRolesInterface;
 use App\Entity\User;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use Psr\Cache\InvalidArgumentException;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
 
 class UserController extends AbstractController
 {
     /** @var LoggerInterface */
     private $logger;
 
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
     /**
      * @param LoggerInterface $logger
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, EntityManagerInterface $entityManager)
     {
         $this->logger = $logger;
+        $this->entityManager = $entityManager;
     }
 
     /**
      * @Route("/user", name="admin.user_list", methods={"GET"})
      *
-     * @param Request $request
+     * @param UserDTOMapper $userDTOMapper
      *
      * @return Response
      */
-    public function list(Request $request): Response
+    public function list(UserDTOMapper $userDTOMapper): Response
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-
-        $users = array_map(static function ($user) {
-            return (new UserDTO())->fillByUser($user);
-        }, $users);
+        $users = $this->entityManager->getRepository(User::class)->findAll();
 
         return $this->render('admin/user/list.html.twig', [
-            'users' => $users
+            'users' => $userDTOMapper->fillByUsers($users)
         ]);
     }
 
@@ -61,12 +59,8 @@ class UserController extends AbstractController
      */
     public function add(Request $request): Response
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
         $form = $this->createForm(UserForm::class, [], [
-            'em' => $entityManager,
-            'validation_groups' => ArticleForm::VALIDATION_GROUP_CREATE
+            'validation_groups' => UserForm::VALIDATION_GROUP_CREATE
         ]);
 
         $form->handleRequest($request);
@@ -74,18 +68,18 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
-            $user = (new User())
-                ->setIsActive((bool) $formData['is_active'])
-                ->setEmail((string) $formData['email'])
-                ->setPassword(null)
-                ->setRoles([UserRolesInterface::ROLE_USER]);
-
             try {
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $user = (new User())
+                    ->setIsActive((bool) $formData['is_active'])
+                    ->setEmail((string) $formData['email'])
+                    ->setPassword('')
+                    ->setRoles([UserRolesInterface::ROLE_USER]);
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
 
                 $this->addFlash('success', 'Пользователь успешно добавлен');
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при добавлении пользователя');
             }
@@ -109,24 +103,20 @@ class UserController extends AbstractController
      */
     public function edit(User $user, Request $request): Response
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
         $form = $this->createForm(UserForm::class, $user, [
-            'em' => $entityManager,
             'user' => $user,
-            'validation_groups' => ArticleForm::VALIDATION_GROUP_CREATE
+            'validation_groups' => UserForm::VALIDATION_GROUP_UPDATE
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
 
                 $this->addFlash('success', 'Пользователь успешно сохранен');
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при сохранении пользователя');
             }
