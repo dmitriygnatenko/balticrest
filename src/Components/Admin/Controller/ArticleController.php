@@ -67,7 +67,7 @@ class ArticleController extends AbstractController
 
         try {
             $articlesPaginator = $this->entityManager->getRepository(Article::class)->getPaginatedArticles($page);
-            $articles = $articleDTOMapper->fillByArticles((array) $articlesPaginator->getIterator());
+            $articles = $articleDTOMapper->fillAll((array) $articlesPaginator->getIterator());
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             $articlesPaginator = null;

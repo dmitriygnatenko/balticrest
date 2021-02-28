@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Admin\Service\Form\Mapper;
+namespace App\Components\Admin\Service\Transformer;
 
 use App\Entity\Language;
 use App\Entity\News;
@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class NewsFormDataTransformer implements DataTransformer
+class NewsFormDataTransformer implements TransformerInterface
 {
     /** @var EntityManager */
     private $em;

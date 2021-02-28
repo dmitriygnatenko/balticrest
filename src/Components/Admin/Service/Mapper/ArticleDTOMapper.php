@@ -16,15 +16,15 @@ class ArticleDTOMapper
      *
      * @return ArticleDTO
      */
-    public function fillByArticle(Article $article, ArticleDTO $dto): ArticleDTO
+    public function fill(Article $article, ArticleDTO $dto): ArticleDTO
     {
         $dto
             ->setId((int) $article->getId())
             ->setIsActive((bool) $article->getIsActive());
 
-        $ruData = $article->getArticleLangData()->filter(static function($articleLangData) {
-            /** @var ArticleLangData $articleLangData */
-            return $articleLangData->getLanguage()->getCode() === 'ru';
+        $ruData = $article->getArticleLangData()->filter(static function($langData) {
+            /** @var ArticleLangData $langData */
+            return $langData->getLanguage()->getCode() === 'ru';
         });
 
         if (!$ruData->isEmpty()) {
@@ -39,13 +39,12 @@ class ArticleDTOMapper
      *
      * @return ArticleDTO[]
      */
-    public function fillByArticles(array $articles): array
+    public function fillAll(array $articles): array
     {
         $dtoArray = [];
 
         foreach ($articles as $article) {
-            $dtoArray[] = $this->fillByArticle($article, new ArticleDTO());
-
+            $dtoArray[] = $this->fill($article, new ArticleDTO());
         }
 
         return $dtoArray;

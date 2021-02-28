@@ -4,42 +4,96 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Service\DTO;
 
-use App\Entity\News;
-use App\Entity\NewsLangData;
-
 class NewsDTO
 {
     /** @var int */
-    public $id;
+    private $id;
 
     /** @var string */
-    public $title;
+    private $title;
 
     /** @var string */
-    public $publish_date;
+    private $publish_date;
 
     /** @var boolean */
-    public $is_active;
+    private $is_active;
 
     /**
-     * @param News $news
-     *
-     * @return $this
+     * @return int
      */
-    public function fillByNews(News $news): self
+    public function getId(): int
     {
-        $this->id = $news->getId();
-        $this->is_active = $news->getIsActive();
-        $this->publish_date = $news->getPublishDate() !== null ? $news->getPublishDate()->format('d.m.Y') : '';
+        return $this->id;
+    }
 
-        $newsRuData = $news->getNewsLangData()->filter(static function($newsLangData) {
-            /** @var NewsLangData $newsLangData */
-            return $newsLangData->getLanguage()->getCode() === 'ru';
-        });
+    /**
+     * @param int $id
+     *
+     * @return NewsDTO
+     */
+    public function setId(int $id): NewsDTO
+    {
+        $this->id = $id;
 
-        if (!$newsRuData->isEmpty()) {
-            $this->title = $newsRuData->first()->getTitle();
-        }
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return NewsDTO
+     */
+    public function setTitle(string $title): NewsDTO
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPublishDate(): string
+    {
+        return $this->publish_date;
+    }
+
+    /**
+     * @param string $publishDate
+     *
+     * @return NewsDTO
+     */
+    public function setPublishDate(string $publishDate): NewsDTO
+    {
+        $this->publish_date = $publishDate;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return NewsDTO
+     */
+    public function setIsActive(bool $isActive): NewsDTO
+    {
+        $this->is_active = $isActive;
 
         return $this;
     }

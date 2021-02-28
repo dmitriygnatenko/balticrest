@@ -15,7 +15,7 @@ class UserDTOMapper
      *
      * @return UserDTO
      */
-    public function fillByUser(User $user, UserDTO $dto): UserDTO
+    public function fill(User $user, UserDTO $dto): UserDTO
     {
         $dto
             ->setId((int) $user->getId())
@@ -30,13 +30,12 @@ class UserDTOMapper
      *
      * @return UserDTO[]
      */
-    public function fillByUsers(array $users): array
+    public function fillAll(array $users): array
     {
         $dtoArray = [];
 
         foreach ($users as $user) {
-            $dtoArray[] = $this->fillByUser($user, new UserDTO());
-
+            $dtoArray[] = $this->fill($user, new UserDTO());
         }
 
         return $dtoArray;

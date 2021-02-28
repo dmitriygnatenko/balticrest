@@ -8,9 +8,7 @@ use App\Components\Admin\Service\Form\Type\CKEditorFormType;
 use App\Components\Admin\Service\Form\Type\IsActiveFormType;
 use App\Components\Admin\Service\Form\Type\NewsTagsFormType;
 use App\Entity\Language;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,16 +16,18 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class NewsForm extends AbstractType
+class NewsForm extends AbstractForm
 {
-    /** @var string */
-    public const VALIDATION_GROUP_CREATE = 'create';
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    /** @var string */
-    public const VALIDATION_GROUP_UPDATE = 'update';
-
-    /** @var array */
-    public const REQUIRED_LANGUAGES = ['ru', 'en'];
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -37,10 +37,7 @@ class NewsForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var EntityManager $em */
-        $em = $options['em'];
-
-        $languages = $em->getRepository(Language::class)->findBy(['is_active' => true]);
+        $languages = $this->entityManager->getRepository(Language::class)->findBy(['is_active' => true]);
 
         $builder->setRequired(false);
 
@@ -49,7 +46,7 @@ class NewsForm extends AbstractType
         $builder->add('image', TextType::class, [
             'label' => 'Картинка',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
+                new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS])
             ]
         ]);
 
@@ -57,7 +54,7 @@ class NewsForm extends AbstractType
             'label' => 'Дата публикации',
             'widget' => 'single_text',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
+                new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS])
             ]
         ]);
 
@@ -68,7 +65,7 @@ class NewsForm extends AbstractType
             $builder->add('lang_' . $language->getId() . '_title', TextType::class, [
                 'label' => 'Название',
                 'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES, true)
-                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
+                    ? [new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS])]
                     : []
             ]);
 
@@ -84,9 +81,6 @@ class NewsForm extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setRequired('em')
-            ->addAllowedTypes('em', EntityManagerInterface::class)
-            ->setRequired('validation_groups');
+        $resolver->setRequired('validation_groups');
     }
 }

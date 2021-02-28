@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Controller;
 
-use App\Components\Admin\Service\DTO\NewsDTO;
-use App\Components\Admin\Service\Form\Mapper\NewsFormDataTransformer;
 use App\Components\Admin\Service\Form\NewsForm;
+use App\Components\Admin\Service\Mapper\NewsDTOMapper;
+use App\Components\Admin\Service\Transformer\NewsFormDataTransformer;
 use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Entity\News;
 use App\Entity\NewsLangData;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Exception;
+use Throwable;
 
 class NewsController extends AbstractController
 {
@@ -31,36 +29,47 @@ class NewsController extends AbstractController
     /** @var LoggerInterface */
     private $logger;
 
+    /** @var NewsFormDataTransformer */
+    private $newsFormDataTransformer;
+
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
     /**
      * @param CacheManagerInterface $cacheManager
      * @param LoggerInterface $logger
+     * @param EntityManagerInterface $entityManager
+     * @param NewsFormDataTransformer $newsFormDataTransformer
      */
-    public function __construct(CacheManagerInterface $cacheManager, LoggerInterface $logger)
-    {
+    public function __construct(
+        CacheManagerInterface $cacheManager,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        NewsFormDataTransformer $newsFormDataTransformer
+    ) {
         $this->cacheManager = $cacheManager;
         $this->logger = $logger;
+        $this->newsFormDataTransformer = $newsFormDataTransformer;
+        $this->entityManager = $entityManager;
     }
 
     /**
      * @Route("/news", name="admin.news_list", methods={"GET"})
      *
      * @param Request $request
+     * @param NewsDTOMapper $newsDTOMapper
      *
      * @return Response
      */
-    public function list(Request $request): Response
+    public function list(Request $request, NewsDTOMapper $newsDTOMapper): Response
     {
         $news = [];
 
         $page = $request->query->getInt('page', 1);
 
         try {
-            $newsPaginator = $this->getDoctrine()->getRepository(News::class)
-                ->getPaginatedNews($page);
-
-            foreach ($newsPaginator->getIterator() as $record) {
-                $news[] = (new NewsDTO())->fillByNews($record);
-            }
+            $newsPaginator = $this->entityManager->getRepository(News::class)->getPaginatedNews($page);
+            $news = $newsDTOMapper->fillAll((array) $newsPaginator->getIterator());
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             $newsPaginator = null;
@@ -77,17 +86,12 @@ class NewsController extends AbstractController
      * @Route("/news/add", name="admin.news_add", methods={"GET","POST"})
      *
      * @param Request $request
-     * @param NewsFormDataTransformer $newsFormDataTransformer
      *
      * @return Response
      */
-    public function add(Request $request, NewsFormDataTransformer $newsFormDataTransformer): Response
+    public function add(Request $request): Response
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
         $form = $this->createForm(NewsForm::class, [], [
-            'em' => $entityManager,
             'validation_groups' => NewsForm::VALIDATION_GROUP_CREATE
         ]);
 
@@ -95,19 +99,19 @@ class NewsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $news = new News();
-            $newsFormDataTransformer->transformToEntity($form->getData(), $news);
+            $this->newsFormDataTransformer->transformToEntity($form->getData(), $news);
 
             try {
-                $entityManager->persist($news);
+                $this->entityManager->persist($news);
                 foreach ($news->getNewsLangData() as $newsLangData) {
-                    $entityManager->persist($newsLangData);
+                    $this->entityManager->persist($newsLangData);
                 }
-                $entityManager->flush();
+                $this->entityManager->flush();
 
                 $this->cacheManager->clearByTag(CacheTagInterface::TAG_NEWS);
 
                 $this->addFlash('success', 'Новость успешно добавлена');
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при добавлении новости');
             }
@@ -126,42 +130,33 @@ class NewsController extends AbstractController
      *
      * @param News $news
      * @param Request $request
-     * @param NewsFormDataTransformer $newsFormDataTransformer
      *
      * @return Response
      */
-    public function edit(
-        News $news,
-        Request $request,
-        NewsFormDataTransformer $newsFormDataTransformer
-    ): Response {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $formData = $newsFormDataTransformer->transformFromEntity($news);
+    public function edit(News $news, Request $request): Response
+    {
+        $formData = $this->newsFormDataTransformer->transformFromEntity($news);
 
         $form = $this->createForm(NewsForm::class, $formData, [
-            'em' => $entityManager,
             'validation_groups' => NewsForm::VALIDATION_GROUP_UPDATE
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newsFormDataTransformer->transformToEntity($form->getData(), $news);
+            $this->newsFormDataTransformer->transformToEntity($form->getData(), $news);
 
             try {
-                $entityManager->persist($news);
+                $this->entityManager->persist($news);
                 foreach ($news->getNewsLangData() as $newsLangData) {
-                    $entityManager->persist($newsLangData);
+                    $this->entityManager->persist($newsLangData);
                 }
-                $entityManager->flush();
+                $this->entityManager->flush();
 
                 $this->cacheManager->clearByTag(CacheTagInterface::TAG_NEWS);
 
                 $this->addFlash('success', 'Новость успешно сохранена');
-
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             }
 
@@ -184,18 +179,15 @@ class NewsController extends AbstractController
      */
     public function delete(News $news, Request $request): Response
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $this->getDoctrine()->getManager();
-
         if ($request->isMethod('post')) {
             try {
-                $entityManager->remove($news);
-                $entityManager->flush();
+                $this->entityManager->remove($news);
+                $this->entityManager->flush();
 
                 $this->cacheManager->clearByTag(CacheTagInterface::TAG_NEWS);
 
                 $this->addFlash('success', 'Новость успешно удалена');
-            } catch (InvalidArgumentException | OptimisticLockException | ORMException $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 $this->addFlash('danger', 'Ошибка при удалении новости');
             }
