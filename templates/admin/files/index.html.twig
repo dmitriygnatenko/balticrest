@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div id="elfinder"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block admin_js_body %}
+    {{ parent() }}
+    <script src="{{ asset('static/admin/src/elfinder/js/elfinder.full.js') }}"></script>
+    <script src="{{ asset('static/admin/src/elfinder/js/i18n/elfinder.ru.js') }}"></script>
+    <script src="{{ asset('static/admin/src/jquery-ui/jquery-ui.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#elfinder').elfinder(
+                {
+                    cssAutoLoad : false,
+                    baseUrl : "./",
+                    url : "{{ path('admin.files.connector') }}",
+                    lang: "ru",
+                    height: '100%',
+                    width: '100%',
+                    resizable : false
+                }
+            );
+        });
+    </script>
+{% endblock %}
+
+{% block admin_css_head %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/jquery-ui/jquery-ui.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/jquery-ui/jquery-ui.theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/elfinder/css/elfinder.full.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/elfinder/css/theme.css') }}">
+{% endblock %}
