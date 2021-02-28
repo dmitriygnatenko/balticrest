@@ -12,9 +12,7 @@ use App\Components\Admin\Service\Form\Type\PointFormType;
 use App\Components\Admin\Service\Form\Type\ServicesFormType;
 use App\Entity\Language;
 use App\Entity\Point;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,16 +23,18 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PointForm extends AbstractType
+class PointForm extends AbstractForm
 {
-    /** @var string */
-    public const VALIDATION_GROUP_CREATE = 'create';
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    /** @var string */
-    public const VALIDATION_GROUP_UPDATE = 'update';
-
-    /** @var array */
-    public const REQUIRED_LANGUAGES = ['ru', 'en'];
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -44,8 +44,7 @@ class PointForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var EntityManager $em */
-        $em = $options['em'];
+        $em = $this->entityManager;
 
         /** @var Point|null $point */
         $point = $options['point'] ?? null;
@@ -53,8 +52,7 @@ class PointForm extends AbstractType
         /** @var array $validationGroups */
         $validationGroups = $options['validation_groups'] ?? [];
 
-        $languages = $em->getRepository(Language::class)
-            ->findBy(['is_active' => true]);
+        $languages = $em->getRepository(Language::class)->findBy(['is_active' => true]);
 
         $builder->setRequired(false);
 
@@ -73,9 +71,9 @@ class PointForm extends AbstractType
         $builder->add('lat', TextType::class, [
             'label' => 'Широта',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]]),
+                new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS]),
                 new Type([
-                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
+                    'groups' => self::ALL_VALIDATION_GROUPS,
                     'type' => 'numeric'
                 ])
             ]
@@ -84,9 +82,9 @@ class PointForm extends AbstractType
         $builder->add('lon', TextType::class, [
             'label' => 'Долгота',
             'constraints' => [
-                new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]]),
+                new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS]),
                 new Type([
-                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
+                    'groups' => self::ALL_VALIDATION_GROUPS,
                     'type' => 'numeric'
                 ])
             ]
@@ -96,7 +94,7 @@ class PointForm extends AbstractType
             'label' => 'URL',
             'constraints' => [
                 new Callback([
-                    'groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE],
+                    'groups' => self::ALL_VALIDATION_GROUPS,
                     'callback' => static function($value, $context) use ($em, $point) {
                         if ($value === '' || $value === null) {
                             return;
@@ -119,7 +117,7 @@ class PointForm extends AbstractType
         $builder->add('email', EmailType::class, [
             'label' => 'Электронная почта',
             'constraints' => [
-                new Email(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])
+                new Email(['groups' => self::ALL_VALIDATION_GROUPS])
             ]
         ]);
 
@@ -141,11 +139,10 @@ class PointForm extends AbstractType
 
         /** @var Language $language */
         foreach ($languages as $language) {
-
             $builder->add('lang_' . $language->getId() . '_title', TextType::class, [
                 'label' => 'Название',
                 'constraints' => in_array($language->getCode(), self::REQUIRED_LANGUAGES, true)
-                    ? [new NotBlank(['groups' => [self::VALIDATION_GROUP_CREATE, self::VALIDATION_GROUP_UPDATE]])]
+                    ? [new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS])]
                     : []
             ]);
 
@@ -170,8 +167,6 @@ class PointForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired('em')
-            ->addAllowedTypes('em', EntityManagerInterface::class)
             ->setDefault('point', null)
             ->setRequired('validation_groups');
     }

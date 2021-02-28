@@ -14,14 +14,14 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class NewsFormDataTransformer implements TransformerInterface
 {
     /** @var EntityManager */
-    private $em;
+    private $entityManager;
 
     /**
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -71,9 +71,9 @@ class NewsFormDataTransformer implements TransformerInterface
             ->setTags((array) ($form['tags'] ?? []))
             ->setPublishDate(($form['publish_date'] ?? ''));
 
-        $languages = $this->em->getRepository(Language::class)->findBy(['is_active' => true]);
+        $languages = $this->entityManager->getRepository(Language::class)->findBy(['is_active' => true]);
 
-        $newsLangDataRepository = $this->em->getRepository(NewsLangData::class);
+        $newsLangDataRepository = $this->entityManager->getRepository(NewsLangData::class);
 
         foreach ($languages as $language) {
             $newsLangData = $newsLangDataRepository->findOneBy([

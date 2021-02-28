@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Components\Admin\Service\Form\Mapper;
+namespace App\Components\Admin\Service\Transformer;
 
 use App\Entity\Language;
 use App\Entity\Point;
@@ -13,17 +13,17 @@ use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class PointFormDataTransformer implements DataTransformer
+class PointFormDataTransformer implements TransformerInterface
 {
     /** @var EntityManager */
-    private $em;
+    private $entityManager;
 
     /**
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      */
-    public  function __construct(EntityManagerInterface $em)
+    public  function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -101,9 +101,9 @@ class PointFormDataTransformer implements DataTransformer
             ->setType($form['type'] ?? null)
             ->setData($pointExtData);
 
-        $languages = $this->em->getRepository(Language::class)->findBy(['is_active' => true]);
+        $languages = $this->entityManager->getRepository(Language::class)->findBy(['is_active' => true]);
 
-        $pointLangDataRepository = $this->em->getRepository(PointLangData::class);
+        $pointLangDataRepository = $this->entityManager->getRepository(PointLangData::class);
 
         foreach ($languages as $language) {
             $pointLangData = $pointLangDataRepository->findOneBy([

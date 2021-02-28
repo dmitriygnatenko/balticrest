@@ -4,46 +4,119 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Service\DTO;
 
-use App\Entity\Point;
-use App\Entity\PointLangData;
-
 class PointDTO
 {
     /** @var int */
-    public $id;
+    private $id;
 
     /** @var string */
-    public $type;
+    private $type;
 
     /** @var string */
-    public $city;
+    private $city;
 
     /** @var string */
-    public $title;
+    private $title;
 
     /** @var boolean */
-    public $is_active;
+    private $is_active;
 
     /**
-     * @param Point $point
-     *
-     * @return $this
+     * @return int
      */
-    public function fillByPoint(Point $point): self
+    public function getId(): int
     {
-        $this->id = $point->getId();
-        $this->is_active = $point->getIsActive();
-        $this->city = $point->getCity()->getCode();
-        $this->type = $point->getType()->getCode();
+        return $this->id;
+    }
 
-        $pointRuData = $point->getPointLangData()->filter(static function($pointLangData) {
-            /** @var PointLangData $pointLangData */
-            return $pointLangData->getLanguage()->getCode() === 'ru';
-        });
+    /**
+     * @param int $id
+     *
+     * @return PointDTO
+     */
+    public function setId(int $id): PointDTO
+    {
+        $this->id = $id;
 
-        if (!$pointRuData->isEmpty()) {
-            $this->title = $pointRuData->first()->getTitle();
-        }
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return PointDTO
+     */
+    public function setType(string $type): PointDTO
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     *
+     * @return PointDTO
+     */
+    public function setCity(string $city): PointDTO
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return PointDTO
+     */
+    public function setTitle(string $title): PointDTO
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return PointDTO
+     */
+    public function setIsActive(bool $isActive): PointDTO
+    {
+        $this->is_active = $isActive;
 
         return $this;
     }

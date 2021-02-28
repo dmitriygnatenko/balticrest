@@ -28,7 +28,7 @@ class ArticleDTOMapper
         });
 
         if (!$ruData->isEmpty()) {
-            $dto->setTitle($ruData->first()->getTitle());
+            $dto->setTitle((string) $ruData->first()->getTitle());
         }
 
         return $dto;

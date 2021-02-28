@@ -18,7 +18,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Exception;
 use Throwable;
 
 class NewsController extends AbstractController
@@ -70,7 +69,7 @@ class NewsController extends AbstractController
         try {
             $newsPaginator = $this->entityManager->getRepository(News::class)->getPaginatedNews($page);
             $news = $newsDTOMapper->fillAll((array) $newsPaginator->getIterator());
-        } catch (Exception $exception) {
+        } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             $newsPaginator = null;
         }
