@@ -77,6 +77,7 @@ final class Versions
   'psr/log' => '1.1.3@0f73288fd15629204f9d42b7055f72dacbe811fc',
   'ralouphie/getallheaders' => '3.0.3@120b605dfeb996808c31b6477290a714d356e822',
   'sensio/framework-extra-bundle' => 'v5.6.1@430d14c01836b77c28092883d195a43ce413ee32',
+  'studio-42/elfinder' => '2.1.57@087524b1d7a4d76cfd848dee2093cd8daf987f78',
   'symfony/amqp-messenger' => 'v5.2.3@cf309a35ed08caa77886ee6a352b8491c7681424',
   'symfony/asset' => 'v5.2.3@54a42aa50f9359d1184bf7e954521b45ca3d5828',
   'symfony/cache' => 'v5.2.3@d6aed6c1bbf6f59e521f46437475a0ff4878d388',

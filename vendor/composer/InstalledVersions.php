@@ -550,6 +550,15 @@ private static $installed = array (
       ),
       'reference' => '430d14c01836b77c28092883d195a43ce413ee32',
     ),
+    'studio-42/elfinder' => 
+    array (
+      'pretty_version' => '2.1.57',
+      'version' => '2.1.57.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '087524b1d7a4d76cfd848dee2093cd8daf987f78',
+    ),
     'symfony/amqp-messenger' => 
     array (
       'pretty_version' => 'v5.2.3',

@@ -3443,6 +3443,71 @@
             "install-path": "../sensio/framework-extra-bundle"
         },
         {
+            "name": "studio-42/elfinder",
+            "version": "2.1.57",
+            "version_normalized": "2.1.57.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Studio-42/elFinder.git",
+                "reference": "087524b1d7a4d76cfd848dee2093cd8daf987f78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/087524b1d7a4d76cfd848dee2093cd8daf987f78",
+                "reference": "087524b1d7a4d76cfd848dee2093cd8daf987f78",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "suggest": {
+                "barryvdh/elfinder-flysystem-driver": "VolumeDriver for elFinder to use Flysystem as a root.",
+                "google/apiclient": "VolumeDriver GoogleDrive require `google/apiclient:^2.0.",
+                "kunalvarma05/dropbox-php-sdk": "VolumeDriver `Dropbox`2 require `kunalvarma05/dropbox-php-sdk.",
+                "nao-pon/flysystem-google-drive": "require in GoogleDrive network volume mounting with Flysystem."
+            },
+            "time": "2020-06-05T08:06:57+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Levashov",
+                    "email": "dio@std42.ru",
+                    "homepage": "http://std42.ru"
+                },
+                {
+                    "name": "Troex Nevelin",
+                    "email": "troex@fury.scancode.ru",
+                    "homepage": "http://std42.ru"
+                },
+                {
+                    "name": "Naoki Sawada",
+                    "email": "hypweb+elfinder@gmail.com",
+                    "homepage": "http://xoops.hypweb.net"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Studio-42/elFinder/contributors"
+                }
+            ],
+            "description": "File manager for web",
+            "homepage": "http://elfinder.org",
+            "support": {
+                "issues": "https://github.com/Studio-42/elFinder/issues",
+                "source": "https://github.com/Studio-42/elFinder/tree/2.1"
+            },
+            "install-path": "../studio-42/elfinder"
+        },
+        {
             "name": "symfony/amqp-messenger",
             "version": "v5.2.3",
             "version_normalized": "5.2.3.0",

@@ -14,6 +14,7 @@
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "google/apiclient": "^2.7",
         "sensio/framework-extra-bundle": "^5.2",
+        "studio-42/elfinder": "^2.1",
         "symfony/asset": "*",
         "symfony/cache": "5.2.*",
         "symfony/console": "*",

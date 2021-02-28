@@ -192,6 +192,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "studio-42/elfinder": {
+        "version": "2.1.57"
+    },
     "symfony/amqp-messenger": {
         "version": "v5.1.5"
     },
