@@ -6,7 +6,6 @@ namespace App\Components\Admin\Controller;
 
 use App\Components\Admin\Service\Factory\ElfinderConnectorFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Exception;
@@ -28,7 +27,7 @@ class FilesController extends AbstractController
      *
      * @see https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
      *
-     * @param Request $request
+     * @param ElfinderConnectorFactoryInterface $elfinderConnectorFactory
      *
      * @throws Exception
      */
