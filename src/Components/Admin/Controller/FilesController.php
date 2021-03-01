@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Admin\Controller;
 
-use elFinder;
-use elFinderConnector;
+use App\Components\Admin\Service\Factory\ElfinderConnectorFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,20 +32,9 @@ class FilesController extends AbstractController
      *
      * @throws Exception
      */
-    public function connector(Request $request)
+    public function connector(ElfinderConnectorFactoryInterface $elfinderConnectorFactory)
     {
-        $opts = [
-            'debug' => true,
-            'roots' => [
-                [
-                    'driver' => 'LocalFileSystem',
-                    'path' => 'files/',
-                    'URL' => '/files/',
-                ],
-            ]
-        ];
-
-        $connector = new elFinderConnector(new elFinder($opts));
+        $connector = $elfinderConnectorFactory->create();
         $connector->run();
     }
 }
