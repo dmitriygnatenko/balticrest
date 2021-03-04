@@ -51,6 +51,28 @@ $(document).ready(function() {
         $(this).parent(".input-group").removeClass("input-group-focus");
     });
 
+    $('.image-selector').click(function() {
+        let $elem = $(this).parent('div.input-group-append').prev('input');
+
+        $('<div \>').dialog({modal: true, width: "80%", title: "Выберите файл", zIndex: 99999,
+            create: function(event, ui) {
+                $(this).elfinder({
+                    resizable: false,
+                    url: "/admin/files/connector",
+                    commandsOptions: {
+                        getfile: {
+                            oncomplete: 'destroy'
+                        }
+                    },
+                    getFileCallback: function(result) {
+                        $elem.val(result.url);
+                        $('button.ui-dialog-titlebar-close').click();
+                    }
+                }).elfinder('instance')
+            }
+        });
+    });
+
     // Fixes sub-nav not working as expected on IOS
     $('body').on('touchstart.dropdown', '.dropdown-menu', function(e) {
         e.stopPropagation();

@@ -1,0 +1,10 @@
+{% if build_assets %}
+    <script src="{{ asset('static/admin/build/admin_main.js') }}"></script>
+{% else %}
+    <script src="{{ asset('static/admin/src/jquery/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap-notify.js') }}"></script>
+    <script src="{{ asset('static/admin/src/bootstrap/js/bootstrap-switch.js') }}"></script>
+    <script src="{{ asset('static/admin/src/light-bootstrap/js/light-bootstrap-dashboard.js') }}"></script>
+{% endif %}

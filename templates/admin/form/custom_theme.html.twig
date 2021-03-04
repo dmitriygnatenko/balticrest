@@ -61,3 +61,12 @@
         {%- endif -%}
     {%- endif -%}
 {%- endblock form_label %}
+
+{% block image_selector_widget -%}
+    <div class="input-group{{ group_class|default('') }}">
+        {{- block('form_widget_simple') -}}
+        <div class="input-group-append">
+            <button class="btn image-selector" type="button">Выбрать</button>
+        </div>
+    </div>
+{%- endblock image_selector_widget %}

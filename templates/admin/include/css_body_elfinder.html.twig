@@ -1,0 +1,8 @@
+{% if build_assets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/build/admin_elfinder.css') }}">
+{% else %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/jquery-ui/jquery-ui.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/jquery-ui/jquery-ui.theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/elfinder/css/elfinder.full.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/elfinder/css/theme.css') }}">
+{% endif %}

@@ -1229,7 +1229,7 @@ var elFinder = function(elm, opts, bootCallback) {
 					self.options.themes = Object.assign({
 						'default' : {
 							'name': 'default',
-							'cssurls': 'css/theme.css',
+							'cssurls': '../../static/admin/src/elfinder/css/theme.css',
 							'author': 'elFinder Project',
 							'license': '3-clauses BSD'
 						}

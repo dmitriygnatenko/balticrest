@@ -1,0 +1,7 @@
+{% if build_assets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/build/admin_main.css') }}">
+{% else %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/admin/src/light-bootstrap/css/light-bootstrap-dashboard.css') }}">
+{% endif %}

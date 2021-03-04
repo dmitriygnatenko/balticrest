@@ -1,0 +1,7 @@
+{% if build_assets %}
+    <script src="{{ asset('static/admin/build/admin_elfinder.js') }}"></script>
+{% else %}
+    <script src="{{ asset('static/admin/src/elfinder/js/elfinder.full.js') }}"></script>
+    <script src="{{ asset('static/admin/src/elfinder/js/i18n/elfinder.ru.js') }}"></script>
+    <script src="{{ asset('static/admin/src/jquery-ui/jquery-ui.js') }}"></script>
+{% endif %}

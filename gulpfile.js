@@ -10,20 +10,32 @@ const balticrestPath = 'public/static/balticrest/';
 
 // ==================================================== Admin CSS ======================================================
 
-gulp.task('admin:css', function() {
+gulp.task('admin:css:main', function() {
     return gulp.src([
         adminPath + 'src/bootstrap/css/bootstrap.min.css',
         adminPath + 'src/font-awesome/css/font-awesome.css',
         adminPath + 'src/light-bootstrap/css/light-bootstrap-dashboard.css'
     ])
         .pipe(minifycss())
-        .pipe(concat('admin.css'))
+        .pipe(concat('admin_main.css'))
+        .pipe(gulp.dest(adminPath + 'build'));
+});
+
+gulp.task('admin:css:elfinder', function() {
+    return gulp.src([
+        adminPath + 'src/jquery-ui/jquery-ui.css',
+        adminPath + 'src/jquery-ui/jquery-ui.theme.css',
+        adminPath + 'src/elfinder/css/elfinder.full.css',
+        adminPath + 'src/elfinder/css/theme.css'
+    ])
+        .pipe(minifycss())
+        .pipe(concat('admin_elfinder.css'))
         .pipe(gulp.dest(adminPath + 'build'));
 });
 
 // ==================================================== Admin JS =======================================================
 
-gulp.task('admin:js', function() {
+gulp.task('admin:js:main', function() {
     return gulp.src([
         adminPath + 'src/jquery/js/jquery.min.js',
         adminPath + 'src/bootstrap/js/bootstrap.bundle.min.js',
@@ -33,7 +45,18 @@ gulp.task('admin:js', function() {
         adminPath + 'src/light-bootstrap/js/light-bootstrap-dashboard.js'
     ])
         .pipe(uglify())
-        .pipe(concat('admin.js'))
+        .pipe(concat('admin_main.js'))
+        .pipe(gulp.dest(adminPath + 'build'));
+});
+
+gulp.task('admin:js:elfinder', function() {
+    return gulp.src([
+        adminPath + 'src/elfinder/js/elfinder.full.js',
+        adminPath + 'src/elfinder/js/i18n/elfinder.ru.js',
+        adminPath + 'src/jquery-ui/jquery-ui.js'
+    ])
+        .pipe(uglify())
+        .pipe(concat('admin_elfinder.js'))
         .pipe(gulp.dest(adminPath + 'build'));
 });
 
@@ -96,7 +119,8 @@ gulp.task('balticrest:js:index', function() {
 // ===================================================== Main ==========================================================
 
 gulp.task('prod', gulp.parallel(
-    'admin:css', 'admin:js',
+    'admin:css:main', 'admin:js:main',
+    'admin:css:elfinder', 'admin:js:elfinder',
     'balticrest:css:main', 'balticrest:js:main',
     'balticrest:js:map',
     'balticrest:css:index', 'balticrest:js:index'
