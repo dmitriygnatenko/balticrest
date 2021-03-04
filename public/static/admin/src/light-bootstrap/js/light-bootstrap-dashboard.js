@@ -52,7 +52,7 @@ $(document).ready(function() {
     });
 
     $('.image-selector').click(function() {
-        let $elem = $(this).parent('div.input-group-append').prev('input');
+        var elem = $(this).parent('div.input-group-append').prev('input');
 
         $('<div \>').dialog({modal: true, width: "80%", title: "Выберите файл", zIndex: 99999,
             create: function(event, ui) {
@@ -65,7 +65,7 @@ $(document).ready(function() {
                         }
                     },
                     getFileCallback: function(result) {
-                        $elem.val(result.url);
+                        elem.val(result.url);
                         $('button.ui-dialog-titlebar-close').click();
                     }
                 }).elfinder('instance')
