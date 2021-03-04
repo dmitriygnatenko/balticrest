@@ -131,6 +131,7 @@ class PointForm extends AbstractForm
 
         $builder->add('logo', TextType::class, [
             'label' => 'Логотип',
+            'block_prefix' => 'image_selector',
         ]);
 
         $builder->add('comment', CKEditorFormType::class, [

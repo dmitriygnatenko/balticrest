@@ -45,6 +45,7 @@ class NewsForm extends AbstractForm
 
         $builder->add('image', TextType::class, [
             'label' => 'Картинка',
+            'block_prefix' => 'image_selector',
             'constraints' => [
                 new NotBlank(['groups' => self::ALL_VALIDATION_GROUPS])
             ]
