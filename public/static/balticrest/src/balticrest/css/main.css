@@ -864,8 +864,8 @@ body.pushy-active .top_promo_block .menu-btn {
 
 /*promo block*/
 .promo_block {
-    padding: 110px 0px;
-    background: #1d142b;
+    padding: 50px 0px;
+    background: rgba(29, 20, 43, 0.9);
     position: relative;
     overflow: hidden;
 }
@@ -873,21 +873,6 @@ body.pushy-active .top_promo_block .menu-btn {
 .promka {
     z-index: 9;
     position: relative;
-}
-
-.promo_block .anim_bg {
-    background: url("/static/balticrest/images/start/promo_bg.jpg");
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 3000px;
-    width: 100%;
-    -webkit-animation: cloud_one 50s linear infinite;
-    -moz-animation: cloud_one 50s linear infinite;
-    -o-animation: cloud_one 50s linear infinite;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0)
 }
 
 @-webkit-keyframes cloud_one {
@@ -907,21 +892,14 @@ body.pushy-active .top_promo_block .menu-btn {
         top: -100%
     }
 }
-
-.promo_block img {
-    display: block;
-    margin: 0px auto 40px;
-}
-
 .promo_block span {
     display: block;
-    font-size: 36px;
-    font-weight: 100;
-    color: #e73931;
+    font-size: 30px;
+    color: #FFFFFF;
     max-width: 900px;
     text-align: center;
     margin: 0 auto;
-    line-height: 60px;
+    line-height: 50px;
 }
 
 /*places block*/
