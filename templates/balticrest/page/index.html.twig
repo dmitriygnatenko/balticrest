@@ -20,6 +20,7 @@
 
             {{ include('balticrest/include/navigation.html.twig') }}
 
+            {# Блок выбора языков #}
             {% if languages[language] is defined %}
                 <div class="container">
                     <div class="row">
@@ -50,196 +51,147 @@
                 </div>
             {% endif %}
 
+            {# Верхний блок #}
             <div class="start_description">
-                <h1>Туристический справочник Балтийского побережья!<span></span></h1>
-                <span>Гостям и жителям Калининградской области сайт рассказывает об интересных местах проведения незабываемых выходных и отдыха на Балтийском море.</span>
-                <div class="search_promo">
-                    <div class="input-group">
-                        {% set cities = global_service.cities %}
-                        <div>
-                            <select class="form-control city">
-                                {% for key, values in cities %}
-                                    {% set city_title = 'cities.' ~ values.code  %}
-                                    <option value="{{ key }}">{{ city_title|trans({}, 'messages') }}</option>
-                                {% endfor %}
-                            </select>
-                            <select class="form-control category">
-                                <option value="hotels">{% trans from "messages" %}categories.hotels{% endtrans %}</option>
-                                <option value="medicine">{% trans from "messages" %}categories.medicine{% endtrans %}</option>
-                                <option value="cafes">{% trans from "messages" %}categories.cafes{% endtrans %}</option>
-                                <option value="shops">{% trans from "messages" %}categories.shops{% endtrans %}</option>
-                                <option value="banks">{% trans from "messages" %}categories.banks{% endtrans %}</option>
-                                <option value="museums">{% trans from "messages" %}categories.museums{% endtrans %}</option>
-                                <option value="sport">{% trans from "messages" %}categories.sport{% endtrans %}</option>
-                                <option value="transport">{% trans from "messages" %}categories.transport{% endtrans %}</option>
-                            </select>
-                        </div>
-                        <div class="input-group-btn btn_promo_search">
-                            <button type="button" class="btn btn-success">Поиск</button>
-                        </div>
-                    </div>
-                </div>
+                <h1>{% trans %}top.header{% endtrans %}<span></span></h1>
+                <span>{% trans %}top.text{% endtrans %}</span>
             </div>
             <div class="scroll_block">
-                <img src="/static/balticrest/images/start/scroll.png" class="animated infinite bounce" alt="#">
+                <img src="{{ asset('/static/balticrest/images/promo/scroll.png') }}" class="animated infinite bounce" alt="#">
             </div>
         </div>
 
-        <!--Features block-->
+        {# Блок фич сайта #}
         <div class="fea_block container-fluid">
             <div class="fixed_w">
-                <h2>Features My City</h2>
+                <h2>{% trans %}features.header{% endtrans %}</h2>
                 <div class="row">
                     <div class="col-md-4 fea_item wow bounceInUp">
-                        <h3><i class="fa fa-picture-o"></i>Slider Revolution included</h3>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                        <h3><i class="fa fa-globe"></i>{% trans %}features.f1.header{% endtrans %}</h3>
+                        <span>{% trans %}features.f1.text{% endtrans %}</span>
                     </div>
                     <div class="col-md-4 fea_item wow bounceInUp">
-                        <h3><i class="fa fa-globe"></i>Google maps API support</h3>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                        <h3><i class="fa fa-glass"></i>{% trans %}features.f2.header{% endtrans %}</h3>
+                        <span>{% trans %}features.f2.text{% endtrans %}</span>
                     </div>
                     <div class="col-md-4 fea_item wow bounceInUp">
-                        <h3><i class="fa fa-video-camera"></i>Simple animation css3 framework</h3>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                        <h3><i class="fa fa-university"></i>{% trans %}features.f4.header{% endtrans %}</h3>
+                        <span>{% trans %}features.f4.text{% endtrans %}</span>
                     </div>
                     <div class="col-md-4 fea_item wow bounceInUp">
-                        <h3><i class="fa fa-twitter"></i>Twitter bootstrap 3</h3>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                        <h3><i class="fa fa-newspaper-o"></i>{% trans %}features.f5.header{% endtrans %}</h3>
+                        <span>{% trans %}features.f5.text{% endtrans %}</span>
                     </div>
                     <div class="col-md-4 fea_item wow bounceInUp">
-                        <h3><i class="fa fa-html5"></i>Valid HTML pages</h3>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
-                    </div>
-                    <div class="col-md-4 fea_item wow bounceInUp">
-                        <h3><i class="fa fa-mobile"></i>Adaptive design</h3>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</span>
+                        <h3><i class="fa fa-car"></i>{% trans %}features.f3.header{% endtrans %}</h3>
+                        <span>{% trans %}features.f3.text{% endtrans %}</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--
-        #################################
-        - Slider revolution -
-        #################################
-        -->
+        {# Блок слайдшоу #}
         <div class="tp-banner-container">
             <div class="tp-banner" >
                 <ul>
-                    <!-- SLIDE  -->
                     <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
-                        <!-- MAIN IMAGE -->
-                        <img src="/static/balticrest/images/start/sl1/sl_bg.png"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                        <!-- LAYER NR. 1 -->
+                        <img src="{{ asset('/static/balticrest/images/promo/sl1/sl_bg.png') }}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                         <div class="tp-caption lfb fadeout rs-parallaxlevel-10"
                              data-x="center"
                              data-y="bottom"
                              data-speed="1000"
                              data-start="400"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/map.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/map.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-8"
                              data-x="-10"
                              data-y="280"
                              data-speed="500"
                              data-start="1200"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/dott.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/dott.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-8"
                              data-x="-10"
                              data-y="320"
                              data-speed="600"
                              data-start="1300"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/dott.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/dott.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-8"
                              data-x="-30"
                              data-y="295"
                              data-speed="700"
                              data-start="1400"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/dott.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/dott.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-8"
                              data-x="right"
                              data-y="480"
                              data-speed="800"
                              data-start="1500"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/dott.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/dott.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-8"
                              data-x="950"
                              data-y="510"
                              data-speed="900"
                              data-start="1600"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/dott.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/dott.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-6"
                              data-x="20"
                              data-y="480"
                              data-speed="1000"
                              data-start="1700"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/marker.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/marker.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-6"
                              data-x="1030"
                              data-y="260"
                              data-speed="1100"
                              data-start="1800"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/marker.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/marker.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-6"
                              data-x="855"
                              data-y="450"
                              data-speed="1200"
                              data-start="1900"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/marker.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/marker.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-6"
                              data-x="990"
                              data-y="560"
                              data-speed="1300"
                              data-start="2000"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/marker.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/marker.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-4"
                              data-x="-3"
                              data-y="432"
                              data-speed="1400"
                              data-start="2100"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/bubble.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/bubble.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-4"
                              data-x="965"
                              data-y="510"
                              data-speed="1500"
                              data-start="2300"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl1/bubble.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl1/bubble.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-1"
                              data-x="center"
                              data-y="center"
@@ -247,48 +199,43 @@
                              data-start="2400"
                              data-easing="Power4.easeOut">
                             <div class="sl_descrition">
-                                <a href="#" class="start_logo"><img src="/static/balticrest/images/start/logo.png" alt="#"></a>
-                                <h1>welcome to my city guide!<span></span></h1>
-                                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-    galley of type and scrambled it to make a type specimen book. </span>
-                                <div class="btns"><a href="01.html" class="btn btn-success">Get started</a></div>
+                                <h1>{% trans %}slider.sl1.header{% endtrans %}<span></span></h1>
+                                <span>{% trans %}slider.sl1.text{% endtrans %}</span>
+                                <div class="btns">
+                                    <a href="{{ path('map', {city: default_city}) }}" class="btn btn-success">
+                                        {% trans %}slider.sl1.btn{% endtrans %}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </li>
-
-                    <!-- SLIDE  -->
+                    {# 2 слайд #}
                     <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
-                        <!-- MAIN IMAGE -->
-                        <img src="/static/balticrest/images/start/sl1/sl_bg.png"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                        <!-- LAYER NR. 1 -->
+                        <img src="{{ asset('/static/balticrest/images/promo/sl1/sl_bg.png') }}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                         <div class="tp-caption lfb fadeout rs-parallaxlevel-1"
                              data-x="60"
                              data-y="200"
                              data-speed="1000"
                              data-start="400"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl2/imac.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl2/imac.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-3"
                              data-x="170"
                              data-y="350"
                              data-speed="500"
                              data-start="1200"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl2/macbok.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl2/macbook.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-7"
                              data-x="-10"
                              data-y="340"
                              data-speed="700"
                              data-start="1500"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl2/ipad.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl2/ipad.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-1"
                              data-x="500"
                              data-y="center"
@@ -296,46 +243,38 @@
                              data-start="2000"
                              data-easing="Power4.easeOut">
                             <div class="sl_descrition right">
-                                <h1>Fully adaptive design<span></span></h1>
-                                <span>Design looks good on phones, computers and tablets</span>
-                                <img src="/static/balticrest/images/start/sl2/qr.png" alt="#">
+                                <h1>{% trans %}slider.sl2.header{% endtrans %}<span></span></h1>
+                                <span>{% trans %}slider.sl2.text{% endtrans %}</span>
                             </div>
                         </div>
                     </li>
-
-                    <!-- SLIDE  -->
+                    {# 3 слайд #}
                     <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
-                        <!-- MAIN IMAGE -->
-                        <img src="/static/balticrest/images/start/sl1/sl_bg.png"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                        <!-- LAYER NR. 1 -->
+                        <img src="{{ asset('/static/balticrest/images/promo/sl1/sl_bg.png') }}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                         <div class="tp-caption lfb fadeout rs-parallaxlevel-5"
                              data-x="center"
                              data-y="320"
                              data-speed="1000"
                              data-start="400"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl3/h1.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl3/h1.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lfb fadeout rs-parallaxlevel-1"
                              data-x="center"
                              data-y="340"
                              data-speed="1500"
                              data-start="700"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl3/h2.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl3/h2.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lfb fadeout rs-parallaxlevel-10"
                              data-x="center"
                              data-y="560"
                              data-speed="2000"
                              data-start="1000"
                              data-easing="Power4.easeOut">
-                            <img src="/static/balticrest/images/start/sl3/h3.png" alt="#">
+                            <img src="{{ asset('/static/balticrest/images/promo/sl3/h3.png') }}" alt="#">
                         </div>
-                        <!-- LAYER NR. 1 -->
                         <div class="tp-caption lft fadeout rs-parallaxlevel-1"
                              data-x="center"
                              data-y="top"
@@ -343,9 +282,13 @@
                              data-start="1200"
                              data-easing="Power4.easeOut">
                             <div class="sl_descrition top">
-                                <h1><b>1000+</b> places<span></span></h1>
-                                <span>Design looks good on phones, computers and tablets</span>
-                                <div class="btns"><a href="01.html" class="btn btn-success">Get started</a></div>
+                                <h1>{% trans %}slider.sl3.header{% endtrans %}<span></span></h1>
+                                <span>{% trans %}slider.sl3.text{% endtrans %}</span>
+                                <div class="btns">
+                                    <a href="{{ path('point_list', {city: default_city, category: 'hotels'}) }}" class="btn btn-success">
+                                        {% trans %}slider.sl3.btn{% endtrans %}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </li>

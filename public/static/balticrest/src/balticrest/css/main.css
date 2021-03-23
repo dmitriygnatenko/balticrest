@@ -242,7 +242,7 @@ body.inner_page .bg_parallax {
 }
 
 .top_promo_block {
-    background: url(/static/balticrest/images/start/bg.jpg);
+    background: url(/static/balticrest/images/promo/bg1.jpg);
     width: 100%;
     background-position: center;
     position: relative;
@@ -270,7 +270,6 @@ body.pushy-active .top_promo_block .menu-btn {
 }
 
 .top_promo_block .bg_img {
-    background: url(/static/balticrest/images/start/bg2.png);
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -320,36 +319,6 @@ body.pushy-active .top_promo_block .menu-btn {
     min-width: 130px;
 }
 
-.search_promo {
-    max-width: 900px;
-    margin: 40px auto;
-}
-
-.search_promo select.form-control.city {
-    width: 50%;
-    height: 50px;
-}
-
-.search_promo select.form-control.category {
-    width: 50%;
-    height: 50px;
-}
-
-.search_promo input {
-    height: 55px;
-    border: 0px;
-    border-radius: 3px;
-    color: #8c8c8c;
-    font-size: 18px;
-    font-weight: 300;
-    padding: 0px 20px;
-}
-
-.search_promo input:focus, .btn_cat button:focus, .btn_promo_search button:focus, .input-group-btn {
-    outline: none;
-    box-shadow: none;
-}
-
 .btn_promo_search button {
     height: 55px;
     padding: 0px 50px;
@@ -386,8 +355,8 @@ body.pushy-active .top_promo_block .menu-btn {
 
 .start_description h1 {
     font-size: 42px;
+    font-weight: bold;
     text-transform: uppercase;
-    font-weight: 300;
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
 }
@@ -402,8 +371,8 @@ body.pushy-active .top_promo_block .menu-btn {
 
 .start_description span {
     font-family: 'Roboto', sans-serif;
-    font-size: 22px;
-    font-weight: 100;
+    font-size: 24px;
+    font-weight: 200;
     color: #ffffff;
     line-height: 36px;
 }
@@ -477,6 +446,7 @@ body.pushy-active .top_promo_block .menu-btn {
 
 .sl_descrition span {
     font-size: 22px;
+    line-height: 30px;
     color: #ffffff;
 }
 
@@ -539,7 +509,7 @@ body.pushy-active .top_promo_block .menu-btn {
 .category_block {
     padding: 110px 0px;
     background-color: #ffffff;
-    background-image: url(/static/balticrest/images/start/houses.png);
+    background-image: url(/static/balticrest/images/promo/houses.png);
     background-repeat: repeat-x;
 }
 
