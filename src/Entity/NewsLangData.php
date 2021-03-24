@@ -17,29 +17,29 @@ class NewsLangData
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=News::class, inversedBy="newsLangData")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $news;
+    private ?News $news = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Language::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $language;
+    private ?Language $language = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title = null;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $text;
+    private ?string $text = null;
 
     /**
      * @return int|null

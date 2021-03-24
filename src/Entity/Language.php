@@ -25,22 +25,22 @@ class Language
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=2)
      */
-    private $code;
+    private ?string $code = null;
 
     /**
      * @ORM\Column(type="string", length=150)
      */
-    private $title;
+    private ?string $title = null;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $is_active;
+    private ?bool $is_active = null;
 
     /**
      * @return int|null

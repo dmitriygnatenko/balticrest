@@ -20,28 +20,28 @@ class UserConfirmCode implements UserConfirmCodeInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private ?User $user = null;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $type;
+    private ?int $type = null;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $code;
+    private ?string $code = null;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $created;
+    private ?DateTimeImmutable $created = null;
 
     /**
      * @ORM\PrePersist

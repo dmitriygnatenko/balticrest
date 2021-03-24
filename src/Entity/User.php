@@ -18,27 +18,27 @@ class User implements UserInterface, UserRolesInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=true)
      */
-    private $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $password;
+    private ?string $password = null;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $is_active = true;
+    private bool $is_active = true;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @return int|null

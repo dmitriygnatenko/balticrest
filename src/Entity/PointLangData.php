@@ -16,29 +16,29 @@ class PointLangData
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Point", inversedBy="pointLangData")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $point;
+    private ?Point $point = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Language")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $language;
+    private ?Language $language = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title = null;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @return int|null

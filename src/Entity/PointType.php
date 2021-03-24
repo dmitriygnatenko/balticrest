@@ -24,17 +24,17 @@ class PointType
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $code;
+    private ?string $code = null;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Point", mappedBy="type", orphanRemoval=true)
      */
-    private $points;
+    private Collection $points;
 
     public function __construct()
     {

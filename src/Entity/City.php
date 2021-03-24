@@ -25,37 +25,37 @@ class City
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $code;
+    private ?string $code = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private ?string $image = null;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $lat;
+    private ?float $lat = null;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $lon;
+    private ?float $lon = null;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $zoom;
+    private ?int $zoom = null;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $is_active = true;
+    private bool $is_active = true;
 
     /**
      * @return int|null

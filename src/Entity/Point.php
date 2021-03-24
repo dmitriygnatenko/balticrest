@@ -27,54 +27,54 @@ class Point
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\City")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $city;
+    private ?City $city = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PointType", inversedBy="points")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $type;
+    private ?PointType $type = null;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $lat;
+    private ?float $lat = null;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $lon;
+    private ?float $lon = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $url;
+    private ?string $url = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $logo;
+    private ?string $logo = null;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $is_active = true;
+    private bool $is_active = true;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PointLangData", mappedBy="point", orphanRemoval=true)
      */
-    private $pointLangData;
+    private Collection $pointLangData;
 
     public function __construct()
     {

@@ -26,32 +26,32 @@ class News
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private ?string $image = null;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $publish_date;
+    private ?DateTimeInterface $publish_date = null;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $tags = [];
+    private array $tags = [];
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $is_active = true;
+    private bool $is_active = true;
 
     /**
      * @ORM\OneToMany(targetEntity=NewsLangData::class, mappedBy="news", orphanRemoval=true)
      */
-    private $newsLangData;
+    private Collection $newsLangData;
 
     public function __construct()
     {

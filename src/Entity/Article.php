@@ -28,22 +28,22 @@ class Article
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private ?string $url = null;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $is_active = true;
+    private bool $is_active = true;
 
     /**
      * @ORM\OneToMany(targetEntity=ArticleLangData::class, mappedBy="article", orphanRemoval=true)
      */
-    private $articleLangData;
+    private Collection $articleLangData;
 
     public function __construct()
     {
