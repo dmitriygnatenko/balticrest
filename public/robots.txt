@@ -1,0 +1,4 @@
+Host: https://balticrest.ru
+User-Agent: *
+Disallow: /admin
+Sitemap: https://balticrest.ru/sitemap.xml
