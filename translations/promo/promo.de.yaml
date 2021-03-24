@@ -1,0 +1,42 @@
+map:
+  text: Sehen Sie den ganzen Spaß auf der Karte
+  btn: Karte
+category:
+  text: Wir kennen viele interessante Orte in Städten
+news:
+  text: Informieren Sie sich über die neuesten Nachrichten
+  link: Gehe zu Nachrichten
+top:
+  header: Reiseführer an der Ostseeküste!
+  text: Die Website informiert Gäste und Bewohner der Region Kaliningrad über interessante Orte zum Entspannen und für ein unvergessliches Wochenende an der Ostsee.
+before_news:
+  text: Wir laden Sie ein, die ungewöhnliche, schöne und gesundheitsfördernde russische Region an den Ufern der Ostsee kennenzulernen - die Region Kaliningrad!
+slider:
+  sl1:
+    header: Touristenkarte
+    text: Wählen Sie Cafés und Restaurants nach Ihren Wünschen. Wenn Sie an einem Geldwechsel oder anderen Bankdienstleistungen interessiert sind, können Sie Banken und Geldautomaten bequem zu Fuß erreichen. Für diejenigen, die mit dem Auto anreisen, werden auf der Karte kostenpflichtige und kostenlose Parkplätze angezeigt.
+    btn: Karte von Svetlogorsk
+  sl2:
+    header: Responsive Design
+    text: Es ist praktisch, die Website auf Smartphones und Tablets anzuzeigen.
+  sl3:
+    header: Wo schlafen?
+    text: Wenn Sie ein Hotel oder ein Hotel suchen, hilft Ihnen unsere Website bei der Auswahl des am besten geeigneten Hotels.
+    btn: Hotels in Svetlogorsk
+features:
+  header: Wir helfen Touristen
+  f1:
+    header: Hotels und Sanatorien
+    text: Buchen Sie Hotels und Resorts zu den besten Preisen des Reiseveranstalters, wählen Sie Hotels auf der Karte näher am Meer oder an Sehenswürdigkeiten.
+  f2:
+    header: Cafés, Pizzerien, Restaurants
+    text: Auf unseren Karten finden Sie Informationen zu Cafés, Pizzerien und Restaurants mit europäischer, asiatischer und russischer Küche.
+  f3:
+    header: Parkplätze
+    text: Finden Sie den bequemsten kostenlosen oder kostenpflichtigen Parkplatz auf der Karte und lassen Sie Ihr Auto an einem sicheren Ort.
+  f4:
+    header: Museen & Sehenswürdigkeiten
+    text: Die Gäste können die Geschichte der Region kennenlernen, ungewöhnliche Museen besuchen, zum Beispiel "The Mousetrap" - ein Museum für Mäuse.
+  f5:
+    header: Nachrichten
+    text: Sie können Ihren Urlaub im Voraus planen und wissen, welche Konzerte und Feiern in naher Zukunft stattfinden werden.

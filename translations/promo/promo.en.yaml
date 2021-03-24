@@ -1,0 +1,42 @@
+map:
+  text: See all interesting on the map
+  btn: Map
+category:
+  text: We know many interesting places in cities
+news:
+  text: Find out the latest news
+  link: Go to news
+top:
+  header: Tourist guide to the Baltic coast!
+  text: The site will tell guests and residents of the Kaliningrad region about interesting places to relax and spend an unforgettable weekend on the Baltic Sea.
+before_news:
+  text: We invite you to get acquainted with the unusual, beautiful, health-improving Russian region on the shores of the Baltic Sea - the Kaliningrad region!
+slider:
+  sl1:
+    header: Tourist map
+    text: Choose cafes and restaurants to your liking. If you are interested in currency exchange or other banking services, then you can easily find banks and ATMs within walking distance from you. For those traveling by car, the map will show paid and free parking.
+    btn: Svetlogorsk map
+  sl2:
+    header: Adaptive design
+    text: It is convenient to browse the site on smartphones, tablets.
+  sl3:
+    header: Where to sleep?
+    text: If you are looking for a hotel, our site will help you choose the most suitable one.
+    btn: Svetlogorsk hotels
+features:
+  header: We help tourists
+  f1:
+    header: Hotels and sanatoriums
+    text: Book hotels and resorts at the best prices of the tour operator, choose hotels on the map closer to the sea or attractions.
+  f2:
+    header: Cafes, pizzerias, restaurants
+    text: Our cards will tell you about cafes, pizzerias and restaurants with European, Asian and Russian cuisine.
+  f3:
+    header: Parkings
+    text: Find the most convenient free or paid parking on the map and leave your car in a safe place.
+  f4:
+    header: Museums and attractions
+    text: Guests can get acquainted with the history of the region, visit unusual museums, for example "The Mousetrap" - a museum dedicated to mice.
+  f5:
+    header: News
+    text: You can plan your vacation knowing in advance what concerts and celebrations will take place in the near future.
