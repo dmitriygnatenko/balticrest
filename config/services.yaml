@@ -6,6 +6,7 @@
 parameters:
     app.mailer_from: '%env(MAILER_FROM)%'
     app.ga_view_id: '%env(GA_VIEW_ID)%'
+    app.base_url: '%env(APP_BASE_URL)%'
 
 services:
     _defaults:
