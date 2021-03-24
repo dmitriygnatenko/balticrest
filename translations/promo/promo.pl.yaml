@@ -1,0 +1,42 @@
+map:
+  text: Zobacz całą zabawę na mapie
+  btn: Map
+category:
+  text: Znamy wiele ciekawych miejsc w miastach
+news:
+  text: Poznaj najnowsze wiadomości
+  link: Przejdź do aktualności
+top:
+  header: Przewodnik turystyczny po wybrzeżu Bałtyku!
+  text: Strona opowie gościom i mieszkańcom obwodu kaliningradzkiego o ciekawych miejscach do wypoczynku i spędzenia niezapomnianego weekendu nad Bałtykiem.
+before_news:
+  text: Zapraszamy do zapoznania się z niezwykłym, pięknym, poprawiającym zdrowie rosyjskim regionem nad Morzem Bałtyckim - Obwodem Kaliningradzkim!
+slider:
+  sl1:
+    header: Mapa turystyczna
+    text: Wybierz kawiarnie i restauracje według swoich upodobań. Jeśli interesuje Cię wymiana walut lub inne usługi bankowe, możesz łatwo znaleźć banki i bankomaty w odległości spaceru od Ciebie. Dla osób podróżujących samochodem mapa pokaże parking płatny i bezpłatny.
+    btn: Mapa Svetlogorsk
+  sl2:
+    header: Projekt responsywny
+    text: Wygodne jest przeglądanie strony na smartfonach, tabletach.
+  sl3:
+    header: Gdzie spać?
+    text: Jeśli szukasz hotelu lub hotelu, nasza strona pomoże Ci wybrać najbardziej odpowiedni.
+    btn: Hotele w Swietłogorsku
+features:
+  header: Pomagamy turystom
+  f1:
+    header: Hotele i sanatoria
+    text: Rezerwuj hotele i kurorty w najlepszych cenach organizatora wycieczek, wybieraj hotele na mapie bliżej morza lub atrakcji.
+  f2:
+    header: Kawiarnie, pizzerie, restauracje
+    text: Nasze mapy opowiedzą o kawiarniach, pizzeriach i restauracjach z kuchnią europejską, azjatycką i rosyjską.
+  f3:
+    header: Parkingi
+    text: Znajdź na mapie najwygodniejszy darmowy lub płatny parking i zostaw samochód w bezpiecznym miejscu.
+  f4:
+    header: Muzea i zabytki
+    text: Goście mogą zapoznać się z historią regionu, odwiedzić niezwykłe muzea, np. „Pułapka na Myszy” - muzeum poświęcone myszom.
+  f5:
+    header: Wiadomości
+    text: Możesz zaplanować swoje wakacje, wiedząc z wyprzedzeniem, jakie koncerty i uroczystości odbędą się w najbliższej przyszłości.

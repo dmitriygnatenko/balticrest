@@ -1,0 +1,42 @@
+map:
+  text: Žiūrėkite visas įdomybes žemėlapyje
+  btn: Žemėlapis
+category:
+  text: Mes žinome daug įdomių vietų miestuose
+news:
+  text: Sužinokite naujausias naujienas
+  link: Eikite į naujienas
+top:
+  header: Baltijos pakrantės turistinis vadovas!
+  text: Svetainėje svečiams ir Kaliningrado srities gyventojams bus pasakojama apie įdomias poilsio vietas ir nepamirštamą savaitgalio praleidimą prie Baltijos jūros.
+before_news:
+  text: Kviečiame susipažinti su neįprastu, gražiu, sveikatą gerinančiu Rusijos regionu Baltijos jūros pakrantėje - Kaliningrado sritimi!
+slider:
+  sl1:
+    header: Turizmo žemėlapis
+    text: Pasirinkite kavines ir restoranus pagal savo skonį. Jei jus domina valiutos keitimas ar kitos banko paslaugos, pėsčiomis nuo jūsų lengvai rasite bankus ir bankomatus. Keliaujantiems automobiliu žemėlapyje bus rodoma mokama ir nemokama automobilių stovėjimo aikštelė.
+    btn: Svetlogorsko žemėlapis
+  sl2:
+    header: Interaktyvus dizainas
+    text: Patogu peržiūrėti svetainę išmaniuosiuose telefonuose, planšetiniuose kompiuteriuose.
+  sl3:
+    header: Kur miegoti?
+    text: Jei ieškote viešbučio ar viešbučio, mūsų svetainė padės jums pasirinkti tinkamiausią.
+    btn: Viešbučiai Svetlogorske
+features:
+  header: Mes padedame turistams
+  f1:
+    header: Viešbučiai ir sanatorijos
+    text: Užsisakykite viešbučius ir kurortus geriausiomis kelionių organizatoriaus kainomis, žemėlapyje pasirinkite viešbučius arčiau jūros ar lankytinų vietų.
+  f2:
+    header: Kavinės, picerijos, restoranai
+    text: Mūsų žemėlapiuose bus pasakojama apie kavines, picerijas ir restoranus su europietiška, azijietiška ir rusiška virtuve.
+  f3:
+    header: Automobilių stovėjimo aikštelės
+    text: Žemėlapyje raskite patogiausią nemokamą ar mokamą stovėjimo vietą ir palikite automobilį saugioje vietoje.
+  f4:
+    header: Muziejai ir lankytinos vietos
+    text: Svečiai gali susipažinti su regiono istorija, aplankyti neįprastus muziejus, pavyzdžiui, „Pelės spąstai“ - muziejus, skirtas pelėms.
+  f5:
+    header: Naujienos
+    text: Galite planuoti savo atostogas iš anksto žinodami, kokie koncertai ir šventės vyks artimiausiu metu.
