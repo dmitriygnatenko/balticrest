@@ -20,10 +20,8 @@
  *
  * <p>
  * The Chrome Management API is a suite of services that allows Chrome
- * administrators to view, manage and gain insights on their Chrome OS The
- * Chrome Management API is a suite of services that allows GSuite domain
  * administrators to view, manage and gain insights on their Chrome OS and
- * Chrome Browser devices and users.</p>
+ * Chrome Browser devices.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -34,7 +32,9 @@
  */
 class Google_Service_ChromeManagement extends Google_Service
 {
-
+  /** See reports about devices and Chrome browsers managed within your organization. */
+  const CHROME_MANAGEMENT_REPORTS_READONLY =
+      "https://www.googleapis.com/auth/chrome.management.reports.readonly";
 
   public $customers_reports;
 
