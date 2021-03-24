@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Provider;
 
-use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\DTO\PointDTO;
 use App\Components\Balticrest\Service\Mapper\PointDTOMapper;
+use App\Repository\PointRepository;
 use Psr\Cache\InvalidArgumentException;
-use App\Entity\Point;
-use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
@@ -20,28 +18,22 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class PointDataProvider implements PointDataProviderInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var EntityManagerInterface */
-    private $em;
+    private TagAwareCacheInterface $cache;
 
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    private CacheManagerInterface $cacheManager;
 
-    /** @var CacheManager */
-    private $cacheManager;
+    private PointDTOMapper $pointDTOMapper;
 
-    /** @var PointDTOMapper */
-    private $pointDTOMapper;
+    private PointRepository $pointRepository;
 
     /**
      * @param RequestStack $requestStack
      * @param LoggerInterface $logger
-     * @param EntityManagerInterface $em
+     * @param PointRepository $pointRepository
      * @param TagAwareCacheInterface $cache
      * @param CacheManagerInterface $cacheManager
      * @param PointDTOMapper $pointDTOMapper
@@ -49,17 +41,17 @@ class PointDataProvider implements PointDataProviderInterface
     public function __construct(
         RequestStack $requestStack,
         LoggerInterface $logger,
-        EntityManagerInterface $em,
+        PointRepository $pointRepository,
         TagAwareCacheInterface $cache,
         CacheManagerInterface $cacheManager,
         PointDTOMapper $pointDTOMapper
     ) {
         $this->requestStack = $requestStack;
         $this->logger = $logger;
-        $this->em = $em;
         $this->cache = $cache;
         $this->cacheManager = $cacheManager;
         $this->pointDTOMapper = $pointDTOMapper;
+        $this->pointRepository = $pointRepository;
     }
 
     /**
@@ -94,7 +86,7 @@ class PointDataProvider implements PointDataProviderInterface
      */
     public function getPointData(string $url): ?PointDTO
     {
-        $point = $this->em->getRepository(Point::class)->findOneBy(['url' => $url, 'is_active' => true]);
+        $point = $this->pointRepository->findOneBy(['url' => $url, 'is_active' => true]);
 
         return $point === null ? null : $this->pointDTOMapper->fill($point);
     }

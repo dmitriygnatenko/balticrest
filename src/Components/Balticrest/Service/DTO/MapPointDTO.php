@@ -6,35 +6,25 @@ namespace App\Components\Balticrest\Service\DTO;
 
 class MapPointDTO
 {
-    /** @var float */
-    private $lat;
+    private ?float $lat = null;
 
-    /** @var float */
-    private $lon;
+    private ?float $lon = null;
 
-    /** @var string */
-    private $hint;
+    private ?string $hint = null;
 
-    /** @var string */
-    private $title;
+    private ?string $title = null;
 
-    /** @var string */
-    private $description;
+    private ?string $description = null;
 
-    /** @var string */
-    private $image;
+    private ?string $image = null;
 
-    /** @var string */
-    private $link;
+    private ?string $link = null;
 
-    /** @var string */
-    private $iconImage;
+    private ?string $iconImage = null;
 
-    /** @var int */
-    private $iconImageWidth;
+    private ?int $iconImageWidth = null;
 
-    /** @var int */
-    private $iconImageHeight;
+    private ?int $iconImageHeight = null;
 
     /**
      * @param float $lat

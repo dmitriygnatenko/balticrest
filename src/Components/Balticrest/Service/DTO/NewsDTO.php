@@ -8,23 +8,17 @@ use DateTimeInterface;
 
 class NewsDTO
 {
-    /** @var int|null */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string|null */
-    private $image;
+    private ?string $image = null;
 
-    /** @var array */
-    private $tags = [];
+    private array $tags = [];
 
-    /** @var DateTimeInterface|null */
-    private $publish_date;
+    private ?DateTimeInterface $publish_date = null;
 
-    /** @var string|null */
-    private $title;
+    private ?string $title = null;
 
-    /** @var string|null */
-    private $text;
+    private ?string $text = null;
 
     /**
      * @return int|null

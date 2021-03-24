@@ -9,20 +9,15 @@ use Symfony\Component\Serializer\Serializer;
 
 class MapPointsListDTO
 {
-    /** @var float */
-    private $centerLat;
+    private ?float $centerLat = null;
 
-    /** @var float */
-    private $centerLon;
+    private ?float $centerLon = null;
 
-    /** @var int */
-    private $zoom;
+    private ?int $zoom = null;
 
-    /** @var string */
-    private $transPointButton;
+    private ?string $transPointButton = null;
 
-    /** @var array */
-    private $points = [];
+    private array $points = [];
 
     /**
      * @param float $centerLat

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Service\Provider;
 
 use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
-use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Components\Balticrest\Service\Mapper\MapPointsListDTOMapper;
@@ -17,23 +16,17 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class MapDataProvider implements MapDataProviderInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    private TagAwareCacheInterface $cache;
 
-    /** @var CacheManager */
-    private $cacheManager;
+    private CacheManagerInterface $cacheManager;
 
-    /** @var PointsDataProvider */
-    private $pointsDataProvider;
+    private PointsDataProviderInterface $pointsDataProvider;
 
-    /** @var MapPointsListDTOMapper */
-    private $mapPointsListDTOMapper;
+    private MapPointsListDTOMapper $mapPointsListDTOMapper;
 
     /**
      * @param RequestStack $requestStack
@@ -50,8 +43,7 @@ class MapDataProvider implements MapDataProviderInterface
         CacheManagerInterface $cacheManager,
         PointsDataProviderInterface $pointsDataProvider,
         MapPointsListDTOMapper $mapPointsListDTOMapper
-    )
-    {
+    ) {
         $this->requestStack = $requestStack;
         $this->logger = $logger;
         $this->cache = $cache;

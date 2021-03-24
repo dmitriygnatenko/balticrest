@@ -6,17 +6,13 @@ namespace App\Components\Balticrest\Service\DTO;
 
 class ArticleDTO
 {
-    /** @var string|null */
-    private $title;
+    private ?string $title = null;
 
-    /** @var string|null */
-    private $text;
+    private ?string $text = null;
 
-    /** @var string|null */
-    private $meta_keywords;
+    private ?string $meta_keywords = null;
 
-    /** @var string|null */
-    private $meta_description;
+    private ?string $meta_description = null;
 
     /**
      * @return string|null

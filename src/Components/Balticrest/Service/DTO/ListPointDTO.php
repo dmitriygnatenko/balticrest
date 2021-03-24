@@ -6,23 +6,17 @@ namespace App\Components\Balticrest\Service\DTO;
 
 class ListPointDTO
 {
-    /** @var int|null */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string|null */
-    private $title;
+    private ?string $title = null;
 
-    /** @var string|null */
-    private $link;
+    private ?string $link = null;
 
-    /** @var string|null */
-    private $description;
+    private ?string $description = null;
 
-    /** @var string|null */
-    private $address;
+    private ?string $address = null;
 
-    /** @var string|null */
-    private $image;
+    private ?string $image = null;
 
     /**
      * @return int|null

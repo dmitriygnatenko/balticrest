@@ -6,11 +6,9 @@ namespace App\Components\Balticrest\Service\Provider;
 
 use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\Cache\CacheKeyInterface;
-use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
-use App\Entity\PointType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\PointTypeRepository;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -18,34 +16,30 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class PointTypeProvider implements PointTypeProviderInterface
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    private TagAwareCacheInterface $cache;
 
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    private CacheManagerInterface $cacheManager;
 
-    /** @var CacheManager */
-    private $cacheManager;
+    private LoggerInterface $logger;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private PointTypeRepository $pointTypeRepository;
 
     /**
-     * @param EntityManagerInterface $em
+     * @param PointTypeRepository $pointTypeRepository
      * @param TagAwareCacheInterface $cache
      * @param CacheManagerInterface $cacheManager
      * @param LoggerInterface $logger
      */
     public function __construct(
-        EntityManagerInterface $em,
+        PointTypeRepository $pointTypeRepository,
         TagAwareCacheInterface $cache,
         CacheManagerInterface $cacheManager,
         LoggerInterface $logger
     ) {
-        $this->em = $em;
         $this->cache = $cache;
         $this->cacheManager = $cacheManager;
         $this->logger = $logger;
+        $this->pointTypeRepository = $pointTypeRepository;
     }
 
     /**
@@ -71,7 +65,7 @@ class PointTypeProvider implements PointTypeProviderInterface
      */
     public function getPointTypes(): array
     {
-        return $this->em->getRepository(PointType::class)->findAll();
+        return $this->pointTypeRepository->findAll();
     }
 
     /**
@@ -106,7 +100,7 @@ class PointTypeProvider implements PointTypeProviderInterface
     {
         $formattedResults = [];
 
-        $results = $this->em->getRepository(PointType::class)->getCityPointTypes($city);
+        $results = $this->pointTypeRepository->getCityPointTypes($city);
 
         foreach ($results as $result) {
             $formattedResults[$result->getCode()] = true;
@@ -147,7 +141,7 @@ class PointTypeProvider implements PointTypeProviderInterface
     {
         $formattedResults = [];
 
-        $results = $this->em->getRepository(PointType::class)->getCityPointWithUrlsTypes($city);
+        $results = $this->pointTypeRepository->getCityPointWithUrlsTypes($city);
 
         foreach ($results as $result) {
             $formattedResults[$result->getCode()] = true;

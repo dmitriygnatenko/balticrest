@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Provider;
 
-use App\Components\Admin\Service\Pager\Paginator;
-use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Components\Balticrest\Service\DTO\NewsListDTO;
 use App\Components\Balticrest\Service\Mapper\NewsListDTOMapper;
-use App\Entity\News;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\NewsRepository;
 use Exception;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -22,27 +19,21 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class NewsDataProvider implements NewsDataProviderInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var EntityManagerInterface */
-    private $em;
+    private LoggerInterface $logger;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private TagAwareCacheInterface $cache;
 
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    private CacheManagerInterface $cacheManager;
 
-    /** @var CacheManager */
-    private $cacheManager;
+    private NewsListDTOMapper $newsListDTOMapper;
 
-    /** @var NewsListDTOMapper */
-    private $newsListDTOMapper;
+    private NewsRepository $newsRepository;
 
     /**
      * @param RequestStack $requestStack
-     * @param EntityManagerInterface $em
+     * @param NewsRepository $newsRepository
      * @param LoggerInterface $logger
      * @param TagAwareCacheInterface $cache
      * @param CacheManagerInterface $cacheManager
@@ -50,19 +41,18 @@ class NewsDataProvider implements NewsDataProviderInterface
      */
     public function __construct(
         RequestStack $requestStack,
-        EntityManagerInterface $em,
+        NewsRepository $newsRepository,
         LoggerInterface $logger,
         TagAwareCacheInterface $cache,
         CacheManagerInterface $cacheManager,
         NewsListDTOMapper $newsListDTOMapper
-    )
-    {
+    ) {
         $this->requestStack = $requestStack;
-        $this->em = $em;
         $this->newsListDTOMapper = $newsListDTOMapper;
         $this->logger = $logger;
         $this->cache = $cache;
         $this->cacheManager = $cacheManager;
+        $this->newsRepository = $newsRepository;
     }
 
     /**
@@ -103,8 +93,7 @@ class NewsDataProvider implements NewsDataProviderInterface
      */
     public function getData(int $page = 1, ?string $tag = null): NewsListDTO
     {
-        /** @var Paginator $results */
-        $results = $this->em->getRepository(News::class)->getActivePaginatedNews($page, self::NEWS_PER_PAGE, $tag);
+        $results = $this->newsRepository->getActivePaginatedNews($page, self::NEWS_PER_PAGE, $tag);
 
         return $this->newsListDTOMapper->fill($results);
     }

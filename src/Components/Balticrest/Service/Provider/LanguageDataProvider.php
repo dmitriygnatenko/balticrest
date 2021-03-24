@@ -6,8 +6,7 @@ namespace App\Components\Balticrest\Service\Provider;
 
 use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\Cache\CacheKeyInterface;
-use App\Entity\Language;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\LanguageRepository;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -15,25 +14,25 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class LanguageDataProvider implements LanguageDataProviderInterface
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    private TagAwareCacheInterface $cache;
 
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    private LoggerInterface $logger;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LanguageRepository $languageRepository;
 
     /**
-     * @param EntityManagerInterface $em
+     * @param LanguageRepository $languageRepository
      * @param TagAwareCacheInterface $cache
      * @param LoggerInterface $logger
      */
-    public function __construct(EntityManagerInterface $em, TagAwareCacheInterface $cache, LoggerInterface $logger)
-    {
-        $this->em = $em;
+    public function __construct(
+        LanguageRepository $languageRepository,
+        TagAwareCacheInterface $cache,
+        LoggerInterface $logger
+    ){
         $this->cache = $cache;
         $this->logger = $logger;
+        $this->languageRepository = $languageRepository;
     }
 
     /**
@@ -59,8 +58,7 @@ class LanguageDataProvider implements LanguageDataProviderInterface
      */
     public function getLanguagesList(): array
     {
-        $results = $this->em->getRepository(Language::class)
-            ->findBy(['is_active' => true], ['id' => 'ASC']);
+        $results = $this->languageRepository->findBy(['is_active' => true], ['id' => 'ASC']);
 
         $formattedResults = [];
         foreach ($results as $result) {

@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Provider;
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Point;
+use App\Repository\PointRepository;
 
 class PointsDataProvider implements PointsDataProviderInterface
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    private PointRepository $pointRepository;
 
     /**
-     * @param EntityManagerInterface $em
+     * @param PointRepository $pointRepository
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(PointRepository $pointRepository)
     {
-        $this->em = $em;
+        $this->pointRepository = $pointRepository;
     }
 
     /**
@@ -28,7 +26,7 @@ class PointsDataProvider implements PointsDataProviderInterface
      */
     public function getPointsByCityAndCategory(string $city, string $category): array
     {
-        return $this->em->getRepository(Point::class)->getPointsByCityAndCategory($city, $category);
+        return $this->pointRepository->getPointsByCityAndCategory($city, $category);
     }
 
     /**
@@ -39,6 +37,6 @@ class PointsDataProvider implements PointsDataProviderInterface
      */
     public function getPointsWithUrlByCityAndCategory(string $city, string $category): array
     {
-        return $this->em->getRepository(Point::class)->getPointsWithUrlByCityAndCategory($city, $category);
+        return $this->pointRepository->getPointsWithUrlByCityAndCategory($city, $category);
     }
 }

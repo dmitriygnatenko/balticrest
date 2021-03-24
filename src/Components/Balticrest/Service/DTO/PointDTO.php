@@ -6,47 +6,33 @@ namespace App\Components\Balticrest\Service\DTO;
 
 class PointDTO
 {
-    /** @var int|null */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string|null */
-    private $title;
+    private ?string $title = null;
 
-    /** @var string|null */
-    private $description;
+    private ?string $description = null;
 
-    /** @var string|null */
-    private $address;
+    private ?string $address = null;
 
-    /** @var string|null */
-    private $phones;
+    private ?string $phones = null;
 
-    /** @var float|null */
-    private $lat;
+    private ?float $lat = null;
 
-    /** @var float|null */
-    private $lon;
+    private ?float $lon = null;
 
-    /** @var string|null */
-    private $link;
+    private ?string $link = null;
 
-    /** @var string|null */
-    private $image;
+    private ?string $image = null;
 
-    /** @var string|null */
-    private $email;
+    private ?string $email = null;
 
-    /** @var string|null */
-    private $website;
+    private ?string $website = null;
 
-    /** @var array */
-    private $services = [];
+    private array $services = [];
 
-    /** @var string|null */
-    private $category;
+    private ?string $category = null;
 
-    /** @var string|null */
-    private $city;
+    private ?string $city = null;
 
     /**
      * @return int|null

@@ -6,14 +6,12 @@ namespace App\Components\Balticrest\Service\DTO;
 
 class NewsListDTO
 {
-    /** @var int|null */
-    private $prev_page;
+    private ?int $prev_page = null;
 
-    /** @var int|null */
-    private $next_page;
+    private ?int $next_page = null;
 
     /** @var NewsDTO[] */
-    private $news = [];
+    private array $news = [];
 
     /**
      * @return int|null

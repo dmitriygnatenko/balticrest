@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Service\Provider;
 
 use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
-use App\Components\Balticrest\Service\Cache\CacheManager;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
 use App\Components\Balticrest\Service\DTO\ListPointDTO;
@@ -19,23 +18,17 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ListDataProvider implements ListDataProviderInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    private TagAwareCacheInterface $cache;
 
-    /** @var CacheManager */
-    private $cacheManager;
+    private CacheManagerInterface $cacheManager;
 
-    /** @var PointsDataProvider */
-    private $pointsDataProvider;
+    private PointsDataProviderInterface $pointsDataProvider;
 
-    /** @var ListPointDTOMapper */
-    private $pointsListDTOMapper;
+    private ListPointDTOMapper $pointsListDTOMapper;
 
     /**
      * @param RequestStack $requestStack
@@ -52,8 +45,7 @@ class ListDataProvider implements ListDataProviderInterface
         CacheManagerInterface $cacheManager,
         PointsDataProviderInterface $pointsDataProvider,
         ListPointDTOMapper $pointsListDTOMapper
-    )
-    {
+    ) {
         $this->requestStack = $requestStack;
         $this->logger = $logger;
         $this->cache = $cache;
