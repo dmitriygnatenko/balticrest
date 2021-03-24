@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Sitemap;
 
-use App\Components\Balticrest\Service\Provider\ArticleDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\LanguageDataProviderInterface;
-use App\Entity\Article;
 use App\Entity\Language;
+use App\Repository\ArticleRepository;
+use App\Repository\PointRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -15,9 +15,6 @@ class SitemapGenerator implements SitemapGeneratorInterface
 {
     /** @var string[] */
     private const NEWS_TAGS = ['events', 'transport', 'offers'];
-
-    /** @var string[] */
-    private const ARTICLES = ['contacts', 'privacy_policy'];
 
     /** @var string */
     private const XML_TAG = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -47,24 +44,29 @@ class SitemapGenerator implements SitemapGeneratorInterface
 
     private LanguageDataProviderInterface $languageDataProvider;
 
-    private ArticleDataProviderInterface $articleDataProvider;
+    private PointRepository $pointRepository;
+
+    private ArticleRepository $articleRepository;
 
     /**
      * @param ContainerBagInterface $containerBag
      * @param UrlGeneratorInterface $urlGenerator
      * @param LanguageDataProviderInterface $languageDataProvider
-     * @param ArticleDataProviderInterface $articleDataProvider
+     * @param ArticleRepository $articleRepository
+     * @param PointRepository $pointRepository
      */
     public function __construct(
         ContainerBagInterface $containerBag,
         UrlGeneratorInterface $urlGenerator,
         LanguageDataProviderInterface $languageDataProvider,
-        ArticleDataProviderInterface $articleDataProvider
+        ArticleRepository $articleRepository,
+        PointRepository $pointRepository
     ) {
         $this->baseUrl = (string) $containerBag->get('app.base_url');
         $this->urlGenerator = $urlGenerator;
         $this->languageDataProvider = $languageDataProvider;
-        $this->articleDataProvider = $articleDataProvider;
+        $this->pointRepository = $pointRepository;
+        $this->articleRepository = $articleRepository;
     }
 
     /**
@@ -76,8 +78,9 @@ class SitemapGenerator implements SitemapGeneratorInterface
             self::XML_TAG . PHP_EOL .
             self::URLSET_OPEN_TAG . PHP_EOL .
             $this->getRootContent() .
-             $this->getArticlesContent() .
+            $this->getArticlesContent() .
             $this->getNewsContent() .
+            $this->getPointsContent() .
             self::URLSET_CLOSE_TAG;
     }
 
@@ -92,7 +95,7 @@ class SitemapGenerator implements SitemapGeneratorInterface
         foreach ($this->languageDataProvider->getLanguagesList() as $language) {
             $content .= $this->formatUrl(
                 $this->urlGenerator->generate('main', ['_locale' => $language->getCode()]),
-                 self::FREQ_DAILY
+                 self::FREQ_WEEKLY
             );
         }
 
@@ -106,19 +109,17 @@ class SitemapGenerator implements SitemapGeneratorInterface
     {
         $content = '';
 
-        foreach (self::ARTICLES as $articleUrl) {
-            /** @var Article $article */
-            $article = $this->articleDataProvider->getArticle($articleUrl);
-            if ($article !== null) {
-                foreach ($article->getArticleLangData() as $langData) {
-                    $content .= $this->formatUrl(
-                        $this->urlGenerator->generate(
-                            $article->getUrl(),
-                            ['_locale' => $langData->getLanguage()->getCode()]
-                        ),
-                        self::FREQ_MONTHLY
-                    );
-                }
+        $articles = $this->articleRepository->findBy(['is_active' => true]);
+
+        foreach ($articles as $article) {
+            foreach ($article->getArticleLangData() as $langData) {
+                $content .= $this->formatUrl(
+                    $this->urlGenerator->generate(
+                        $article->getUrl(),
+                        ['_locale' => $langData->getLanguage()->getCode()]
+                    ),
+                    self::FREQ_MONTHLY
+                );
             }
         }
 
@@ -144,6 +145,80 @@ class SitemapGenerator implements SitemapGeneratorInterface
                     $this->urlGenerator->generate('news_tag', ['_locale' => $language->getCode(), 'tag' => $tag]),
                     self::FREQ_DAILY
                 );
+            }
+        }
+
+        return $content;
+    }
+
+    /**
+     * @return string
+     */
+    private function getPointsContent(): string
+    {
+        $content = '';
+
+        $issetMaps = [];
+        $issetPointLists = [];
+
+        $points = $this->pointRepository->findBy(['is_active' => true]);
+        foreach ($points as $point) {
+            foreach ($point->getPointLangData() as $langData) {
+                $url = $point->getUrl();
+                $locale = $langData->getLanguage()->getCode();
+                $city = $point->getCity()->getCode();
+                $category = $point->getType()->getCode();
+
+                $index = $city . $category;
+
+                if (!isset($issetMaps[$index])) {
+                    $issetMaps[$index] = true;
+
+                    $content .= $this->formatUrl(
+                        $this->urlGenerator->generate(
+                            'map',
+                            [
+                                '_locale' => $locale,
+                                'city' => $city,
+                                'category' => $category,
+                            ]
+                        ),
+                        self::FREQ_WEEKLY
+                    );
+                }
+
+                if ($url !== null) {
+                    $index = $locale . $city . $category;
+
+                    if (!isset($issetPointLists[$index])) {
+                        $issetPointLists[$index] = true;
+
+                        $content .= $this->formatUrl(
+                            $this->urlGenerator->generate(
+                                'point_list',
+                                [
+                                    '_locale' => $locale,
+                                    'city' => $city,
+                                    'category' => $category,
+                                ]
+                            ),
+                            self::FREQ_WEEKLY
+                        );
+                    }
+
+                    $content .= $this->formatUrl(
+                        $this->urlGenerator->generate(
+                            'point',
+                            [
+                                '_locale' => $locale,
+                                'city' => $city,
+                                'category' => $category,
+                                'url' => $url
+                            ]
+                        ),
+                        self::FREQ_WEEKLY
+                    );
+                }
             }
         }
 

@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 class SitemapUpdateCommand extends Command
 {
     /** @var string */
-    private const SITEMAP_PATH = '/public/__sitemap.xml';
+    private const SITEMAP_PATH = '/public/sitemap.xml';
 
     /** @var string */
     protected static $defaultName = 'balticrest:update-sitemap';
@@ -58,8 +58,6 @@ class SitemapUpdateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
-
         $sitemapFullPath = $this->containerBag->get('kernel.project_dir') . self::SITEMAP_PATH;
 
         $result = file_put_contents($sitemapFullPath, $this->sitemapGenerator->generateContent());
