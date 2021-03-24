@@ -6,19 +6,16 @@ namespace App\Components\Admin\Service\DTO;
 
 class UserDTO
 {
-    /** @var int */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string */
-    private $email;
+    private ?string $email = null;
 
-    /** @var boolean */
-    private $is_active;
+    private bool $is_active = true;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -36,9 +33,9 @@ class UserDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

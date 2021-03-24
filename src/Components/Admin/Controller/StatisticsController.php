@@ -11,8 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StatisticsController extends AbstractController
 {
-    /** @var GoogleAnalyticsStatistics */
-    public $googleAnalyticsStatistics;
+    public GoogleAnalyticsStatistics $googleAnalyticsStatistics;
 
     /**
      * @param GoogleAnalyticsStatistics $googleAnalyticsStatistics

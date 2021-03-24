@@ -18,11 +18,9 @@ use Throwable;
 
 class UserController extends AbstractController
 {
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param LoggerInterface $logger

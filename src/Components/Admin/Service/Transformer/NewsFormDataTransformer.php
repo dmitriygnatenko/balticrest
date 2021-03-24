@@ -7,14 +7,12 @@ namespace App\Components\Admin\Service\Transformer;
 use App\Entity\Language;
 use App\Entity\News;
 use App\Entity\NewsLangData;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class NewsFormDataTransformer implements TransformerInterface
 {
-    /** @var EntityManager */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -65,7 +63,6 @@ class NewsFormDataTransformer implements TransformerInterface
             throw new BadRequestHttpException('Second argument must be News entity');
         }
 
-        /** @var News $news */
         $news->setIsActive((bool) ($form['is_active'] ?? true))
             ->setImage((string) ($form['image'] ?? ''))
             ->setTags((array) ($form['tags'] ?? []))

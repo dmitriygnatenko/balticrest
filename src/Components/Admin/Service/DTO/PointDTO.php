@@ -6,25 +6,20 @@ namespace App\Components\Admin\Service\DTO;
 
 class PointDTO
 {
-    /** @var int */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string */
-    private $type;
+    private ?string $type = null;
 
-    /** @var string */
-    private $city;
+    private ?string $city = null;
 
-    /** @var string */
-    private $title;
+    private ?string $title = null;
 
-    /** @var boolean */
-    private $is_active;
+    private bool $is_active = true;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -42,9 +37,9 @@ class PointDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -62,9 +57,9 @@ class PointDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -82,9 +77,9 @@ class PointDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }

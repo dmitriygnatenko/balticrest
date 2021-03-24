@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class NewsForm extends AbstractForm
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager

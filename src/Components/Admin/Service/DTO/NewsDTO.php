@@ -6,22 +6,18 @@ namespace App\Components\Admin\Service\DTO;
 
 class NewsDTO
 {
-    /** @var int */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string */
-    private $title;
+    private ?string $title = null;
 
-    /** @var string */
-    private $publish_date;
+    private ?string $publish_date = null;
 
-    /** @var boolean */
-    private $is_active;
+    private bool $is_active = true;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -39,9 +35,9 @@ class NewsDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -59,9 +55,9 @@ class NewsDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPublishDate(): string
+    public function getPublishDate(): ?string
     {
         return $this->publish_date;
     }

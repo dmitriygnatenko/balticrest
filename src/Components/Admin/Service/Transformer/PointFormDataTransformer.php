@@ -7,7 +7,6 @@ namespace App\Components\Admin\Service\Transformer;
 use App\Entity\Language;
 use App\Entity\Point;
 use App\Entity\PointLangData;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
@@ -15,8 +14,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PointFormDataTransformer implements TransformerInterface
 {
-    /** @var EntityManager */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -91,7 +89,6 @@ class PointFormDataTransformer implements TransformerInterface
             Fields::FIELD_DETAILED_TYPE => (string) ($form['detailed_type'] ?? ''),
         ];
 
-        /** @var Point $point */
         $point->setLat((float) ($form['lat'] ?? 0))
             ->setLon((float) ($form['lon'] ?? 0))
             ->setLogo((string) ($form['logo'] ?? ''))

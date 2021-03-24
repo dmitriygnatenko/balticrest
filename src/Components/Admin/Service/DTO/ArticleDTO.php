@@ -6,19 +6,16 @@ namespace App\Components\Admin\Service\DTO;
 
 class ArticleDTO
 {
-    /** @var int */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string */
-    private $title;
+    private ?string $title = null;
 
-    /** @var boolean */
-    private $is_active;
+    private bool $is_active = true;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -36,9 +33,9 @@ class ArticleDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }

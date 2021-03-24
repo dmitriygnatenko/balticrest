@@ -8,8 +8,7 @@ use elFinderConnector;
 
 class ElfinderConnectorFactory implements ElfinderConnectorFactoryInterface
 {
-    /** @var ElfinderFactoryInterface */
-    private $elfinderFactory;
+    private ElfinderFactoryInterface $elfinderFactory;
 
     /**
      * @param ElfinderFactoryInterface $elfinderFactory

@@ -10,11 +10,9 @@ use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 
 class Paginator extends DoctrinePaginator
 {
-    /** @var int  */
-    private $page;
+    private int $page;
 
-    /** @var int  */
-    private $max;
+    private int $max;
 
     /**
      * @param Query|QueryBuilder $query

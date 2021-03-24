@@ -25,14 +25,11 @@ class NewsController extends AbstractController
     /** @var CacheManager */
     private $cacheManager;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var NewsFormDataTransformer */
-    private $newsFormDataTransformer;
+    private NewsFormDataTransformer $newsFormDataTransformer;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param CacheManagerInterface $cacheManager

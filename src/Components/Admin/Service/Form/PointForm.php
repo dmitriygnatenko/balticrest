@@ -25,8 +25,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PointForm extends AbstractForm
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager

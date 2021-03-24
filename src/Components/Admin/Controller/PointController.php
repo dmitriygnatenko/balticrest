@@ -25,14 +25,11 @@ class PointController extends AbstractController
     /** @var CacheManager */
     private $cacheManager;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    /** @var PointFormDataTransformer */
-    private $pointFormDataTransformer;
+    private PointFormDataTransformer $pointFormDataTransformer;
 
     /**
      * @param CacheManagerInterface $cacheManager

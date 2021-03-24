@@ -12,8 +12,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ArticleFormDataTransformer implements TransformerInterface
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -64,7 +63,6 @@ class ArticleFormDataTransformer implements TransformerInterface
             throw new BadRequestHttpException('Second argument must be Article entity');
         }
 
-        /** @var Article $article */
         $article->setIsActive((bool) ($form['is_active'] ?? true))
             ->setUrl((string) ($form['url'] ?? ''));
 

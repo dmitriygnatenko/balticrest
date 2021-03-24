@@ -32,11 +32,9 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 */
 class GoogleAnalyticsStatistics implements GoogleAnalyticsStatisticsInterface
 {
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var Google_Service_Analytics|null */
-    private $analytics;
+    private ?Google_Service_Analytics $analytics;
 
     /** @var string|null */
     private $viewId;
