@@ -19,23 +19,17 @@ use Twig\Environment;
 
 class EmailSender implements EmailSenderInterface
 {
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var UserConfirmCodeGeneratorInterface */
-    private $userConfirmCodeGenerator;
+    private UserConfirmCodeGeneratorInterface $userConfirmCodeGenerator;
 
-    /** @var MessageBusInterface */
-    private $bus;
+    private MessageBusInterface $bus;
 
-    /** @var Environment */
-    private $twig;
+    private Environment $twig;
 
     /**
      * @param LoggerInterface $logger

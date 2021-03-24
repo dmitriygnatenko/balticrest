@@ -10,8 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class UserConfirmCodeGenerator implements UserConfirmCodeGeneratorInterface
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager

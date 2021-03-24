@@ -14,17 +14,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ListPointDTOMapper
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    /** @var DataLanguageFilterInterface */
-    private $dataLanguageFilter;
+    private DataLanguageFilterInterface $dataLanguageFilter;
 
-    /** @var PointImageHelperInterface */
-    private $pointImageHelper;
+    private PointImageHelperInterface $pointImageHelper;
 
     /**
      * @param RequestStack $requestStack
@@ -37,8 +33,7 @@ class ListPointDTOMapper
         UrlGeneratorInterface $urlGenerator,
         DataLanguageFilterInterface $dataLanguageFilter,
         PointImageHelperInterface $pointImageHelper
-    )
-    {
+    ) {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
         $this->dataLanguageFilter = $dataLanguageFilter;

@@ -11,11 +11,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ArticleDTOMapper
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var DataLanguageFilterInterface */
-    private $dataLanguageFilter;
+    private DataLanguageFilterInterface $dataLanguageFilter;
 
     /**
      * @param RequestStack $requestStack

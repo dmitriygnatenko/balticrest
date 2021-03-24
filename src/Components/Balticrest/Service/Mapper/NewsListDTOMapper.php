@@ -14,11 +14,9 @@ use Exception;
 
 class NewsListDTOMapper
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var DataLanguageFilterInterface */
-    private $dataLanguageFilter;
+    private DataLanguageFilterInterface $dataLanguageFilter;
 
     /**
      * @param RequestStack $requestStack

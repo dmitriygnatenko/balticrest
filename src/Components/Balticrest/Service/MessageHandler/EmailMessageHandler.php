@@ -13,11 +13,9 @@ use Throwable;
 
 class EmailMessageHandler implements MessageHandlerInterface
 {
-    /** @var MailerInterface */
-    private $mailer;
+    private MailerInterface $mailer;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @param MailerInterface $mailer

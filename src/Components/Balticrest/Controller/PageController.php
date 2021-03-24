@@ -15,8 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
-    /** @var ArticleDataProviderInterface */
-    private $articleDataProvider;
+    private ArticleDataProviderInterface $articleDataProvider;
 
     /**
      * @param ArticleDataProviderInterface $articleDataProvider

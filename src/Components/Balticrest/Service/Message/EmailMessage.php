@@ -6,14 +6,11 @@ namespace App\Components\Balticrest\Service\Message;
 
 class EmailMessage
 {
-    /** @var string */
-    private $email = '';
+    private string $email = '';
 
-    /** @var string */
-    private $subject = '';
+    private string $subject = '';
 
-    /** @var string */
-    private $content = '';
+    private string $content = '';
 
     /**
      * @return string

@@ -8,7 +8,6 @@ use App\Components\Balticrest\Service\DTO\MapPointDTO;
 use App\Components\Balticrest\Service\DTO\MapPointsListDTO;
 use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
 use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
-use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
 use App\Entity\City;
@@ -20,23 +19,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MapPointsListDTOMapper
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    /** @var CityDataProvider */
-    private $cityDataProvider;
+    private CityDataProviderInterface $cityDataProvider;
 
-    /** @var DataLanguageFilterInterface */
-    private $dataLanguageFilter;
+    private DataLanguageFilterInterface $dataLanguageFilter;
 
-    /** @var PointImageHelperInterface */
-    private $pointImageHelper;
+    private PointImageHelperInterface $pointImageHelper;
 
     /**
      * @param RequestStack $requestStack
@@ -53,8 +46,7 @@ class MapPointsListDTOMapper
         CityDataProviderInterface $cityDataProvider,
         DataLanguageFilterInterface $dataLanguageFilter,
         PointImageHelperInterface $pointImageHelper
-    )
-    {
+    ) {
         $this->requestStack = $requestStack;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;

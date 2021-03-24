@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace App\Components\Balticrest\Service\Auth;
 
 use App\Entity\UserConfirmCode;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserConfirmService implements UserConfirmServiceInterface
 {
-    /** @var EntityManager */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager

@@ -13,11 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MapController extends AbstractController
 {
-    /** @var MapDataProviderInterface  */
-    private $mapJsonDataProvider;
+    private MapDataProviderInterface $mapJsonDataProvider;
 
-    /** @var PointTypeProviderInterface */
-    public $pointTypeProvider;
+    public PointTypeProviderInterface $pointTypeProvider;
 
     /**
      * @param MapDataProviderInterface $mapJsonDataProvider

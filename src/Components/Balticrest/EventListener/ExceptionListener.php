@@ -11,8 +11,7 @@ use Twig\Environment;
 
 class ExceptionListener
 {
-    /** @var Environment */
-    private $twig;
+    private Environment $twig;
 
     /**
      * @param Environment $twig

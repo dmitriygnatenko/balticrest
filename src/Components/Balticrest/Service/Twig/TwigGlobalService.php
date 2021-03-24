@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Twig;
 
-use App\Components\Balticrest\Service\Provider\CityDataProvider;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
-use App\Components\Balticrest\Service\Provider\LanguageDataProvider;
 use App\Components\Balticrest\Service\Provider\LanguageDataProviderInterface;
-use App\Components\Balticrest\Service\Provider\PointTypeProvider;
 use App\Components\Balticrest\Service\Provider\PointTypeProviderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -38,17 +35,13 @@ class TwigGlobalService
     /** @var string */
     private const POINT_TYPE_LIST = 'point';
 
-    /** @var PointTypeProvider */
-    private $pointTypeProvider;
+    private PointTypeProviderInterface $pointTypeProvider;
 
-    /** @var CityDataProvider */
-    private $cityDataProvider;
+    private CityDataProviderInterface $cityDataProvider;
 
-    /** @var LanguageDataProvider */
-    private $languageDataProvider;
+    private LanguageDataProviderInterface $languageDataProvider;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     /**
      * @param TranslatorInterface $translator

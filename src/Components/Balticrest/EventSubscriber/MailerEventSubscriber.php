@@ -11,8 +11,7 @@ use Symfony\Component\Mime\Email;
 
 class MailerEventSubscriber implements EventSubscriberInterface
 {
-    /** @var ContainerBagInterface */
-    private $parameters;
+    private ContainerBagInterface $parameters;
 
     /**
      * @param ContainerBagInterface $containerBag

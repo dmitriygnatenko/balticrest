@@ -16,20 +16,15 @@ use App\Entity\Point;
 
 class PointDTOMapper
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var DataLanguageFilterInterface */
-    private $dataLanguageFilter;
+    private DataLanguageFilterInterface $dataLanguageFilter;
 
-    /** @var PointImageHelperInterface */
-    private $pointImageHelper;
+    private PointImageHelperInterface $pointImageHelper;
 
     /**
      * @param RequestStack $requestStack
@@ -44,8 +39,7 @@ class PointDTOMapper
         TranslatorInterface $translator,
         DataLanguageFilterInterface $dataLanguageFilter,
         PointImageHelperInterface $pointImageHelper
-    )
-    {
+    ) {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
         $this->translator = $translator;

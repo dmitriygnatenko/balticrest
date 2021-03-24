@@ -10,11 +10,9 @@ use Psr\Log\LoggerInterface;
 
 class CacheManager implements CacheManagerInterface, CacheTagInterface, CacheKeyInterface
 {
-    /** @var TagAwareCacheInterface */
-    private $cache;
+    private TagAwareCacheInterface $cache;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @param TagAwareCacheInterface $cache

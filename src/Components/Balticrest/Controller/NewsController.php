@@ -15,8 +15,7 @@ class NewsController extends AbstractController
     /** @var int */
     private const DEFAULT_PAGE = 1;
 
-    /** @var NewsDataProviderInterface */
-    private $newsDataProvider;
+    private NewsDataProviderInterface $newsDataProvider;
 
     /**
      * @param NewsDataProviderInterface $newsDataProvider
