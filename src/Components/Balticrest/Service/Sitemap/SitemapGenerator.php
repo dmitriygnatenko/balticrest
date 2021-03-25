@@ -78,6 +78,7 @@ class SitemapGenerator implements SitemapGeneratorInterface
             self::XML_TAG . PHP_EOL .
             self::URLSET_OPEN_TAG . PHP_EOL .
             $this->getRootContent() .
+            $this->getWebcamsContent() .
             $this->getArticlesContent() .
             $this->getNewsContent() .
             $this->getPointsContent() .
@@ -96,6 +97,24 @@ class SitemapGenerator implements SitemapGeneratorInterface
             $content .= $this->formatUrl(
                 $this->urlGenerator->generate('main', ['_locale' => $language->getCode()]),
                  self::FREQ_WEEKLY
+            );
+        }
+
+        return $content;
+    }
+
+    /**
+     * @return string
+     */
+    private function getWebcamsContent(): string
+    {
+        $content = '';
+
+        /** @var Language $language */
+        foreach ($this->languageDataProvider->getLanguagesList() as $language) {
+            $content .= $this->formatUrl(
+                $this->urlGenerator->generate('webcams', ['_locale' => $language->getCode()]),
+                self::FREQ_MONTHLY
             );
         }
 
