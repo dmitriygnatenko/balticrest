@@ -106,3 +106,8 @@ point:
     transport:
         desc: '%city_gen% automobilių stovėjimo aikštelė ir traukinių stotis'
         keywords: '%city%, geležinkelio stotis'
+
+webcams:
+    title: 'Baltijos pakrantės internetinės kameros'
+    desc: 'Pamatykite promenadą ir jūrą internete realiuoju laiku'
+    keywords: 'internetas, kamera, internetinė kamera, internetinė, promenada, jūra, oras'

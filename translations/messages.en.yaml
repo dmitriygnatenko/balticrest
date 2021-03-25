@@ -39,6 +39,9 @@ news:
         transport: How to get there
         offers: Offers
 
+webcams:
+    title: Webcams
+
 profile:
     login: Login
     logout: Logout

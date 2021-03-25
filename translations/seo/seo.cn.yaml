@@ -106,3 +106,8 @@ point:
     transport:
         desc: '%city_gen% 停車場和火車站'
         keywords: '%city%, 火車站'
+
+webcams:
+    title: '波羅的海海岸網絡攝像頭'
+    desc: '實時在線查看長廊和大海'
+    keywords: '網絡，攝像頭，網絡攝像頭，在線，長廊，海洋，天氣'

@@ -569,6 +569,7 @@ body.pushy-active .top_promo_block .menu-btn {
     background: #1bad03;
     border-color: #1bad03;
 }
+
 .category_block .cat_item.cafes div:hover {
     background: #e26cc3;
     border-color: #e26cc3;
@@ -865,6 +866,7 @@ body.pushy-active .top_promo_block .menu-btn {
         top: -100%
     }
 }
+
 .promo_block span {
     display: block;
     font-size: 30px;
@@ -2385,6 +2387,7 @@ a.green_btn:hover {
 .places_cat li {
     list-style: none;
 }
+
 .places_cat.top li {
     list-style: none;
     margin: 0;
@@ -2396,6 +2399,7 @@ a.green_btn:hover {
     border-bottom: 1px solid rgba(0, 0, 0, 0.42);
     color: #ffffff;
 }
+
 .places_cat.top li a {
     border-bottom: none;
 }
@@ -2941,4 +2945,55 @@ a.green_btn:hover {
 }
 
 .fourzerofour div a {
+}
+
+.iv-embed {
+    margin: 0 auto 10px auto;
+    padding: 0;
+    border: 0;
+    width: 100%;
+
+}
+
+.iv-embed .iv-v {
+    display: block;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+    background: #FFF;
+}
+
+.iv-embed .iv-b {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.iv-embed iframe.iv-i {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 1100px;
+    height: 825px;
+}
+
+.iv-embed .iv-b > div:first-of-type {
+    float: right;
+    text-align: right;
+    padding: 0 0 10px;
+    line-height: 10px;
+}
+
+.iv-embed .iv-b > div.clear {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+
+.iv-embed .iv-b a.iv-a {
+    font: 10px Verdana, sans-serif;
+    color: inherit;
+    opacity: .6;
 }

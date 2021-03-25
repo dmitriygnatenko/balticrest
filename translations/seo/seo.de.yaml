@@ -106,3 +106,8 @@ point:
     transport:
         desc: '%city_gen% Parkplatz und Bahnhofn'
         keywords: '%city%, Bahnhof'
+
+webcams:
+    title: 'Baltic Coast Webcams'
+    desc: 'Sehen Sie die Promenade und das Meer online in Echtzeit'
+    keywords: 'Web, Kamera, Webcam, Online, Promenade, Meer, Wetter'

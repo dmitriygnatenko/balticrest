@@ -39,6 +39,9 @@ news:
         transport: 如何到那
         offers: 優惠
 
+webcams:
+    title: 網路攝影機
+
 profile:
     login: 登錄
     logout: 登出

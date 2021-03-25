@@ -39,6 +39,9 @@ news:
         transport: Как добраться
         offers: Акции
 
+webcams:
+    title: Вебкамеры
+
 profile:
     login: Войти
     logout: Выйти

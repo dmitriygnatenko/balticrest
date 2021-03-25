@@ -1,0 +1,60 @@
+{% extends 'balticrest/base_left_top_menu.html.twig' %}
+
+{% block body_attr %}class="innerpage"{% endblock %}
+
+{% block title %}{{ parent() }} {% trans from 'seo' %}webcams.title{% endtrans %}{% endblock %}
+{% block description %}{% trans from 'seo' %}webcams.desc{% endtrans %}{% endblock %}
+{% block keywords %}{% trans from 'seo' %}webcams.keywords{% endtrans %}{% endblock %}
+
+{% block content %}
+
+    <div class="container page_info">
+        <div class="col_md_12">
+            <h1>{% trans %}webcams.title{% endtrans %}</h1>
+        </div>
+    </div>
+
+    <div class="container contant">
+        <div class="row">
+            <div class="col-md-12 basic">
+                <div class="post_content">
+
+                    <div class="iv-embed">
+                        <div class="iv-v">
+                            <iframe class="iv-i" style="" src="https://open.ivideon.com/embed/v2/?server=100-YFPYwCqRYORtGZSrwBGQeK&amp;camera=0&amp;width=&amp;height=&amp;lang=ru" frameborder="0"></iframe>
+                        </div>
+                        <div class="iv-b">
+                            <div>
+                                <a class="iv-a" href="https://www.ivideon.com/" target="_blank">
+                                    Powered by Ivideon
+                                </a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <div class="iv-embed">
+                        <div class="iv-v">
+                            <iframe class="iv-i" style="" src="https://open.ivideon.com/embed/v2/?server=100-YFPYwCqRYORtGZSrwBGQeK&amp;camera=458752&amp;width=&amp;height=&amp;lang=ru" frameborder="0"></iframe>
+                        </div>
+                        <div class="iv-b">
+                            <div>
+                                <a class="iv-a" href="https://www.ivideon.com/" target="_blank">
+                                    Powered by Ivideon
+                                </a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block balticrest_js_body %}
+     {{ parent() }}
+    <script src="https://open.ivideon.com/embed/v2/embedded.js"></script>
+{% endblock %}

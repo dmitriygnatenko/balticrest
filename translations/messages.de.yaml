@@ -39,6 +39,9 @@ news:
         transport: Wie man dorthin kommt
         offers: Angebote
 
+webcams:
+    title: Webcams
+
 profile:
     login: Anmeldung
     logout: Ausloggen

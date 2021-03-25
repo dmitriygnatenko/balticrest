@@ -24,6 +24,9 @@ news:
         transport: Kaip ten nuvykti
         offers: Pasiūlymai
 
+webcams:
+    title: Interneto kameros
+
 point:
     services: Paslaugos
     website: Svetainė

@@ -106,3 +106,8 @@ point:
     transport:
         desc: '%city_gen% parking i stacja kolejowa'
         keywords: '%city%, stacja kolejowa'
+
+webcams:
+    title: 'Kamery internetowe Wybrzeża Bałtyku'
+    desc: 'Zobacz promenadę i morze online w czasie rzeczywistym'
+    keywords: 'kamera internetowa, online, promenada, morze, pogoda'

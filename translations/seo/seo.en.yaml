@@ -106,3 +106,8 @@ point:
     transport:
         desc: '%city_gen% parking and train station'
         keywords: '%city%, railway station'
+
+webcams:
+    title: 'Baltic Coast Webcams'
+    desc: 'See the promenade and the sea online in real time'
+    keywords: 'web, camera, webcam, online, promenade, sea, weather'

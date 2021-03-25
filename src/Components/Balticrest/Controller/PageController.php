@@ -47,6 +47,16 @@ class PageController extends AbstractController
     }
 
     /**
+     * @Route("/webcams", methods={"GET"}, name="webcams")
+     *
+     * @return Response
+     */
+    public function webcams(): Response
+    {
+        return $this->render('balticrest/page/webcams.html.twig');
+    }
+
+    /**
      * @Route("/privacy_policy", methods={"GET"}, name="privacy_policy")
      *
      * @param Request $request

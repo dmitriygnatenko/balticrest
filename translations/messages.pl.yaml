@@ -39,6 +39,9 @@ news:
         transport: Jak się tam dostać
         offers: Oferty
 
+webcams:
+    title: Kamery internetowe
+
 profile:
     login: Zaloguj się
     logout: Wyloguj się

@@ -41,6 +41,11 @@
     .user_avatar span {
         font-size: 20px;
     }
+
+    .iv-embed iframe.iv-i {
+        width: 900px;
+        height: 675px;
+    }
 }
 
 /*
@@ -94,6 +99,11 @@
     .place_index_item {
         width: 33%;
         float: left;
+    }
+
+    .iv-embed iframe.iv-i {
+        width: 670px;
+        height: 503px;
     }
 }
 
@@ -292,6 +302,11 @@
         padding-top: 0;
         background-position: bottom !important;
     }
+
+    .iv-embed iframe.iv-i {
+        width: 570px;
+        height: 428px;
+    }
 }
 
 /*
@@ -356,6 +371,11 @@
         width: 100%;
         margin: 0 0 15px;
     }
+
+    .iv-embed iframe.iv-i {
+        width: 470px;
+        height: 353px;
+    }
 }
 
 /*
@@ -402,6 +422,11 @@
 
     .map {
         padding-top: 110px;
+    }
+
+    .iv-embed iframe.iv-i {
+        width: 420px;
+        height: 315px;
     }
 }
 
@@ -755,6 +780,11 @@
 
     .user_sm {
         width: 25%;
+    }
+
+    .iv-embed iframe.iv-i {
+        width: 350px;
+        height: 263px;
     }
 }
 
