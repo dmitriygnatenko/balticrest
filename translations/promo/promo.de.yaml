@@ -40,3 +40,6 @@ features:
   f5:
     header: Nachrichten
     text: Sie können Ihren Urlaub im Voraus planen und wissen, welche Konzerte und Feiern in naher Zukunft stattfinden werden.
+  f6:
+    header: Webcams
+    text: Sehen Sie die Promenade und das Meer online in Echtzeit.

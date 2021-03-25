@@ -40,3 +40,6 @@ features:
   f5:
     header: News
     text: You can plan your vacation knowing in advance what concerts and celebrations will take place in the near future.
+  f6:
+    header: Webcams
+    text: See the boardwalk and the sea online in real time.

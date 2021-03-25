@@ -40,3 +40,6 @@ features:
   f5:
     header: Naujienos
     text: Galite planuoti savo atostogas iš anksto žinodami, kokie koncertai ir šventės vyks artimiausiu metu.
+  f6:
+    header: Interneto kameros
+    text: Internete pamatykite lentų taką ir jūrą realiuoju laiku.

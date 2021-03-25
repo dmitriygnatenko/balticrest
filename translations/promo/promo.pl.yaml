@@ -40,3 +40,6 @@ features:
   f5:
     header: Wiadomości
     text: Możesz zaplanować swoje wakacje, wiedząc z wyprzedzeniem, jakie koncerty i uroczystości odbędą się w najbliższej przyszłości.
+  f6:
+    header: Kamery internetowe
+    text: Zobacz promenadę i morze online w czasie rzeczywistym.
