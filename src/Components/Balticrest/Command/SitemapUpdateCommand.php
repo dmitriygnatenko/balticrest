@@ -43,7 +43,6 @@ class SitemapUpdateCommand extends Command
         $this->logger = $logger;
     }
 
-
     protected function configure()
     {
         $this->setDescription('Sitemap.xml update command');
@@ -63,6 +62,7 @@ class SitemapUpdateCommand extends Command
 
         if ($result === false) {
             $this->logger->error('Error while updating sitemap.xml');
+
             return Command::FAILURE;
         }
 
