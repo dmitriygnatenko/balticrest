@@ -163,7 +163,11 @@ class ScheduleUpdater implements ScheduleUpdaterInterface, StationsInterface
      */
     private function formatDataFromYandexContent(array $content): array
     {
-        $data = [];
+        $data = [
+            'from_title' => '',
+            'to_title' => '',
+            'records' => []
+        ];
 
         $segments = $content['segments'] ?? [];
 
@@ -172,6 +176,14 @@ class ScheduleUpdater implements ScheduleUpdaterInterface, StationsInterface
         }
 
         foreach ($segments as $segment) {
+            if ($data['to_title'] === '') {
+                $data['to_title'] = $segment['to']['title'] ?? '';
+            }
+
+            if ($data['from_title'] === '') {
+                $data['from_title'] = $segment['from']['title'] ?? '';
+            }
+
             $days = $segment['days'] ?? '';
             $number = $segment['thread']['number'] ?? '';
             $duration = $segment['duration'] ?? 0;
@@ -186,7 +198,7 @@ class ScheduleUpdater implements ScheduleUpdaterInterface, StationsInterface
                 $departure = $matches[1] . ':' . $matches[2];
             }
 
-            $data[] = [
+            $data['records'][] = [
                 'departure' => $departure,
                 'arrival' => $arrival,
                 'duration' => $duration,

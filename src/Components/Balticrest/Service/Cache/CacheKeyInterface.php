@@ -35,4 +35,7 @@ interface CacheKeyInterface
 
     /** @var string */
     public const KEY_NEWS = 'news';
+
+    /** @var string */
+    public const KEY_SCHEDULE = 'schedule';
 }

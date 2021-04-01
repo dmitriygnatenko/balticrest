@@ -115,4 +115,15 @@ class CacheManager implements CacheManagerInterface, CacheTagInterface, CacheKey
     {
         return self::KEY_NEWS . $page . $tag . $locale;
     }
+
+    /**
+     * @param string $url
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getScheduleCacheKey(string $url, string $locale): string
+    {
+        return self::KEY_SCHEDULE . $url . $locale;
+    }
 }

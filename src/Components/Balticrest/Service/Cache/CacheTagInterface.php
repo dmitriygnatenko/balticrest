@@ -14,4 +14,7 @@ interface CacheTagInterface
 
     /** @var string */
     public const TAG_POINTS = 'tag_points';
+
+    /** @var string */
+    public const TAG_SCHEDULE = 'tag_schedule';
 }

@@ -51,4 +51,19 @@ class ScheduleRepository extends ServiceEntityRepository
 
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * @param string $stationId
+     *
+     * @return array
+     */
+    public function findAllByStationId(string $stationId): array
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        $qb->andWhere('s.station_from = :station OR s.station_to = :station')
+            ->setParameter('station', $stationId);
+
+        return $qb->getQuery()->getResult();
+    }
 }
