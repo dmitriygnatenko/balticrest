@@ -6,6 +6,7 @@ namespace App\Components\Balticrest\Service\Mapper;
 
 use App\Components\Balticrest\Service\DTO\ScheduleListDTO;
 use App\Components\Balticrest\Service\DTO\ScheduleRecordDTO;
+use App\Components\Balticrest\Service\Helper\TransliteratorHelperInterface;
 use App\Entity\Schedule;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Transliterator;
@@ -14,12 +15,16 @@ class ScheduleListDTOMapper
 {
     private ?string $locale = null;
 
+    private TransliteratorHelperInterface $transliteratorHelper;
+
     /**
      * @param RequestStack $requestStack
+     * @param TransliteratorHelperInterface $transliteratorHelper
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, TransliteratorHelperInterface $transliteratorHelper)
     {
         $this->locale = $requestStack->getMasterRequest()->getLocale();
+        $this->transliteratorHelper = $transliteratorHelper;
     }
 
     /**
@@ -73,13 +78,13 @@ class ScheduleListDTOMapper
         if ($this->locale !== 'ru') {
             if ($listDTO->getFromTitle() !== null) {
                 $listDTO->setFromTitle(
-                    Transliterator::create("Any-Latin; Latin-ASCII")->transliterate($listDTO->getFromTitle())
+                    $this->transliteratorHelper->transliterate((string) $listDTO->getFromTitle())
                 );
             }
 
             if ($listDTO->getToTitle() !== null) {
                 $listDTO->setToTitle(
-                    Transliterator::create("Any-Latin; Latin-ASCII")->transliterate($listDTO->getToTitle())
+                    $this->transliteratorHelper->transliterate((string) $listDTO->getToTitle())
                 );
             }
         }

@@ -87,6 +87,16 @@ navigation:
         about: О проекте
         privacy_policy: Конфиденциальность
 
+schedule:
+    title: Расписание электричек
+    last_update: Дата последнего обновления
+    copyright: Данные предоставлены сервисом Яндекс.Расписания
+    departure: Отправление
+    arrival: Прибытие
+    duration: Длительность
+    number: Номер
+    period: Периодичность
+
 error:
     404:
         header: Страница не найдена

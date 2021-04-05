@@ -8,6 +8,7 @@ use App\Components\Balticrest\Service\DTO\PointDTO;
 use App\Components\Balticrest\Service\Provider\PointDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\ListDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\PointTypeProviderInterface;
+use App\Components\Balticrest\Service\Schedule\ScheduleDataProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,13 +61,15 @@ class PointController extends AbstractController
      * @param Request $request
      * @param PointDataProviderInterface $pointDataProvider
      * @param ListDataProviderInterface $listDataProvider
+     * @param ScheduleDataProviderInterface $scheduleDataProvider
      *
      * @return Response
      */
     public function point(
         Request $request,
         PointDataProviderInterface $pointDataProvider,
-        ListDataProviderInterface $listDataProvider
+        ListDataProviderInterface $listDataProvider,
+        ScheduleDataProviderInterface $scheduleDataProvider
     ): Response {
         $url = $request->get('url', '');
 
@@ -79,7 +82,8 @@ class PointController extends AbstractController
 
         return $this->render('balticrest/point/point.html.twig', [
             'point' => $point,
-            'similar_points' => $listDataProvider->getCachedSimilarPointsData($point)
+            'similar_points' => $listDataProvider->getCachedSimilarPointsData($point),
+            'schedule' => $scheduleDataProvider->getCachedPointData($url)
         ]);
     }
 }

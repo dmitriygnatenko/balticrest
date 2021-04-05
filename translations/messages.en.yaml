@@ -87,6 +87,16 @@ navigation:
         about: About
         privacy_policy: Privacy policy
 
+schedule:
+    title: Suburban train schedule
+    last_update: Date of last update
+    copyright: The data is provided by the Yandex.Schedule service
+    departure: Departure
+    arrival: arrival
+    duration: Duration
+    number: Train number
+    period: Interval
+
 error:
     404:
         header: Page not found

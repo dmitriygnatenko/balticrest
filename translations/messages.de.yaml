@@ -87,6 +87,16 @@ navigation:
         about: Über das Projekt
         privacy_policy: Datenschutz-Bestimmungen
 
+schedule:
+    title: Zugfahrplan
+    last_update: Datum der letzten Aktualisierung
+    copyright: Vom Yandex.Schedule-Dienst bereitgestellte Daten
+    departure: Abfahrt
+    arrival: Ankunft
+    duration: Dauer
+    number: Nummer
+    period: Periodizität
+
 error:
     404:
         header: Seite nicht gefunden

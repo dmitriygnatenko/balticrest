@@ -2997,3 +2997,38 @@ a.green_btn:hover {
     color: inherit;
     opacity: .6;
 }
+
+.schedule .title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 30px 0 7px 0;
+}
+.schedule .update-date {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.schedule table {
+    width: 100%;
+    border: 1px solid #bfbfbf;
+    padding: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.schedule table td {
+    text-align: center;
+    padding: 3px 4px;
+    border: 1px solid #bfbfbf;
+}
+.schedule table tr:first-of-type td {
+    background-color: #e73931 !important;
+    color: #FFF !important;
+}
+.schedule table tr:hover td {
+    background-color: #e8ebf3;
+}
+.schedule-yandex-copyright {
+    text-align: right;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 20px 10px 20px 0;
+}

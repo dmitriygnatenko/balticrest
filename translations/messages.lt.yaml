@@ -87,6 +87,16 @@ navigation:
         about: Apie projektą
         privacy_policy: Privatumo politika
 
+schedule:
+    title: Traukinių tvarkaraštis
+    last_update: Paskutinio atnaujinimo data
+    copyright: Duomenis teikia „Yandex.Schedule“ tarnyba
+    departure: Išvykimas
+    arrival: Atvykimas
+    duration: Trukmė
+    number: Skaičius
+    period: Periodiškumas
+
 error:
     404:
         header: Puslapis nerastas

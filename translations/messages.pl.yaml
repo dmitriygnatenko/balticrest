@@ -87,6 +87,16 @@ navigation:
         about: O projekcie
         privacy_policy: Polityka prywatności
 
+schedule:
+    title: Rozkład jazdy pociągów
+    last_update: Data ostatniej aktualizacji
+    copyright: Dane dostarczone przez usługę Yandex.Schedule
+    departure: Wyjazd
+    arrival: Przyjazd
+    duration: Czas trwania
+    number: Number
+    period: Okresowość
+
 error:
     404:
         header: Strona nie znaleziona

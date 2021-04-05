@@ -1,0 +1,39 @@
+{% if schedule %}
+
+    {% for schedule_record in schedule %}
+        <div class="schedule">
+            <div class="title">
+                {% trans %}schedule.title{% endtrans %}
+                {{ schedule_record.getFromTitle() }} - {{ schedule_record.getToTitle() }}
+            </div>
+            <div class="update-date">
+                {% trans %}schedule.last_update{% endtrans %}:
+                {{ schedule_record.getLastUpdate()|format_date('long') }}
+            </div>
+            <table>
+                <tr>
+                    <td>{% trans %}schedule.departure{% endtrans %}</td>
+                    <td>{% trans %}schedule.arrival{% endtrans %}</td>
+                    <td>{% trans %}schedule.duration{% endtrans %}</td>
+                    <td>{% trans %}schedule.number{% endtrans %}</td>
+                    <td>{% trans %}schedule.period{% endtrans %}</td>
+                </tr>
+                {% for record in schedule_record.records %}
+                    <tr>
+                        <td>{{ record.departure }}</td>
+                        <td>{{ record.arrival }}</td>
+                        <td>{{ record.duration }}</td>
+                        <td>{{ record.number }}</td>
+                        <td>{{ record.days }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    {% endfor %}
+
+    <div class="schedule-yandex-copyright">
+        <a href="http://rasp.yandex.ru" target="_blank" rel="nofollow">{% trans %}schedule.copyright{% endtrans %}</a>
+    </div>
+
+{% endif %}

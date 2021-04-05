@@ -87,6 +87,16 @@ navigation:
         about: 關於項目
         privacy_policy: 隱私政策
 
+schedule:
+    title: 市郊火車時刻表
+    last_update: 上次更新日期
+    copyright: 數據由Yandex.Schedule服務提供
+    departure: 出發
+    arrival: 到達
+    duration: 持續時間
+    number: 火車號
+    period: 間隔
+
 error:
     404:
         header: 找不到網頁

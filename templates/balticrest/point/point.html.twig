@@ -51,6 +51,8 @@
 
             <div class="col-md-{% if show_similar %}9{% else %}12{% endif %} basic">
 
+                {{ include('balticrest/include/schedule.html.twig') }}
+
                 {% if point.address %}
                     <div class="phone_email">
                         <span>
