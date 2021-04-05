@@ -30,20 +30,25 @@ class PointController extends AbstractController
      * @param Request $request
      * @param PointTypeProviderInterface $pointTypeProvider
      * @param ListDataProviderInterface $listDataProvider
+     * @param ScheduleDataProviderInterface $scheduleDataProvider
      *
      * @return Response
      */
     public function pointList(
         Request $request,
         PointTypeProviderInterface $pointTypeProvider,
-        ListDataProviderInterface $listDataProvider
+        ListDataProviderInterface $listDataProvider,
+        ScheduleDataProviderInterface $scheduleDataProvider
     ): Response {
         $city = $request->get('city', '');
         $category = $request->get('category', '');
 
+        $data = $listDataProvider->getCachedData($city, $category);
+
         return $this->render('balticrest/point/list.html.twig', [
             'point_types' => $pointTypeProvider->getCachedListPointTypesList($city),
-            'list_data' => $listDataProvider->getCachedData($city, $category)
+            'schedule_data' => $scheduleDataProvider->getCachedPointListData($data),
+            'list_data' => $data,
         ]);
     }
 

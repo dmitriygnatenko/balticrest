@@ -88,6 +88,7 @@ class ListPointDTOMapper
             }
 
             $dto->setId($point->getId())
+                ->setUrl($point->getUrl())
                 ->setTitle($pointLangData->getTitle())
                 ->setLink($link)
                 ->setAddress($pointLangDataArray[PointLangFields::FIELD_ADDRESS] ?? '')

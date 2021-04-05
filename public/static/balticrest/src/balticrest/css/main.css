@@ -3032,3 +3032,6 @@ a.green_btn:hover {
     border-bottom: 1px solid #e8e8e8;
     padding: 20px 10px 20px 0;
 }
+.place_li_cont .schedule-yandex-copyright {
+    border-bottom: none;
+}

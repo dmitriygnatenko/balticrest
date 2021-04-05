@@ -8,6 +8,8 @@ class ListPointDTO
 {
     private ?int $id = null;
 
+    private ?string $url = null;
+
     private ?string $title = null;
 
     private ?string $link = null;
@@ -134,6 +136,26 @@ class ListPointDTO
     public function setImage(?string $image): ListPointDTO
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string|null $url
+     *
+     * @return ListPointDTO
+     */
+    public function setUrl(?string $url): ListPointDTO
+    {
+        $this->url = $url;
 
         return $this;
     }

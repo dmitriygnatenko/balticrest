@@ -7,6 +7,7 @@ namespace App\Components\Balticrest\Service\Schedule;
 use App\Components\Balticrest\Service\Cache\CacheExpireInterface;
 use App\Components\Balticrest\Service\Cache\CacheManagerInterface;
 use App\Components\Balticrest\Service\Cache\CacheTagInterface;
+use App\Components\Balticrest\Service\DTO\ListPointDTO;
 use App\Components\Balticrest\Service\DTO\ScheduleListDTO;
 use App\Components\Balticrest\Service\Mapper\ScheduleListDTOMapper;
 use App\Repository\ScheduleRepository;
@@ -108,5 +109,47 @@ class ScheduleDataProvider implements ScheduleDataProviderInterface, StationsInt
     private function getMappedStationId(string $url): ?string
     {
         return self::STATIONS_MAPPING[$url] ?? null;
+    }
+
+    /**
+     * @param ListPointDTO[] $points
+     *
+     * @return array
+     */
+    public function getCachedPointListData(array $points): array
+    {
+        $scheduleListData = [];
+
+        foreach ($points as $listPointDTO) {
+            $url = (string) $listPointDTO->getUrl();
+            $pointData = $this->getCachedPointData($url);
+
+            if ($pointData !== null) {
+                $scheduleListData[$url] = $pointData;
+            }
+        }
+
+        return $scheduleListData;
+    }
+
+    /**
+     * @param ListPointDTO[] $points
+     *
+     * @return array
+     */
+    public function getPointListData(array $points): array
+    {
+        $scheduleListData = [];
+
+        foreach ($points as $listPointDTO) {
+            $url = (string) $listPointDTO->getUrl();
+            $pointData = $this->getPointData($url);
+
+            if ($pointData !== null) {
+                $scheduleListData[$url] = $pointData;
+            }
+        }
+
+        return $scheduleListData;
     }
 }

@@ -183,6 +183,10 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if schedule_data[point.url] is defined %}
+                                {% set schedule = schedule_data[point.url]%}
+                                {{ include('balticrest/include/schedule.html.twig') }}
+                            {% endif  %}
                         </div>
                     {% endfor %}
 
