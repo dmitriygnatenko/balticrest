@@ -1,15 +1,5 @@
 
 $(document).ready(function () {
-    //////Add place//////
-    $('#ad').on('click', function () {
-        "use strict";
-        $('#pl').removeClass("none");
-    })
-    $('#close').on('click', function () {
-        "use strict";
-        $('#pl').addClass("none");
-    })
-
     //////Autorization//////
     $('.login_btn').on('click', function () {
         "use strict";

@@ -19,6 +19,7 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('static/balticrest/src/balticrest/css/adaptive.css') }}">
         {% endif %}
     {% endblock %}
+    {{ include('balticrest/include/preload.html.twig') }}
     {% block balticrest_js_head %}
         {{ include('balticrest/include/google adsense.html.twig') }}
         {{ include('balticrest/include/google_analytics.html.twig') }}
