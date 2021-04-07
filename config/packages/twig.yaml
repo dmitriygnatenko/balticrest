@@ -4,5 +4,6 @@ twig:
         app_name: '%env(APP_NAME)%'
         yandex_maps_api_key: '%env(YANDEX_MAPS_API_KEY)%'
         ga_tracking_id: '%env(GA_TRACKING_ID)%'
+        ga_ad_client_id: '%env(GA_AD_CLIENT_ID)%'
         build_assets: '%env(bool:BUILD_ASSETS)%'
         global_service: '@App\Components\Balticrest\Service\Twig\TwigGlobalService'
