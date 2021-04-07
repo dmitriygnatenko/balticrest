@@ -28,7 +28,8 @@ html, body {
 }
 
 body {
-    background: url(/static/balticrest/images/promo/bg.jpg);
+    background-color: #23212e;
+    background: url(/static/balticrest/images/bg/bg.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -167,11 +168,12 @@ a:hover {
 }
 
 body.inner_page {
-    background: url(/static/balticrest/images/bg.png);
+    background-color: #23212e;
+    background: url(/static/balticrest/images/bg/bg.jpg);
 }
 
 body.inner_page .bg_parallax {
-    background: url(/static/balticrest/images/bg.jpg);
+    background: url(/static/balticrest/images/bg/bg.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -242,7 +244,7 @@ body.inner_page .bg_parallax {
 }
 
 .top_promo_block {
-    background: url(/static/balticrest/images/promo/bg2.jpg);
+    background: url(/static/balticrest/images/bg/bg-promo.jpg);
     width: 100%;
     background-position: center;
     position: relative;
