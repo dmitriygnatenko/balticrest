@@ -23,4 +23,18 @@ class SearchDataRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, SearchData::class);
     }
+
+    /**
+     * @param string $searchText
+     *
+     * @return array
+     */
+    public function search(string $searchText): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('MATCH_AGAINST(s.data) AGAINST(:search) > 0')
+            ->setParameter('search', $searchText);
+
+        return $qb->getQuery()->getResult();
+    }
 }
