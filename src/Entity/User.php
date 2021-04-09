@@ -21,12 +21,12 @@ class User implements UserInterface, UserRolesInterface
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\Column(type="string", unique=true)
      */
     private ?string $email = null;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
     private ?string $password = null;
 
