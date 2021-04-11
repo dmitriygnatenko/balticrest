@@ -9,7 +9,6 @@ use App\Components\Balticrest\Service\DTO\ScheduleRecordDTO;
 use App\Components\Balticrest\Service\Helper\TransliteratorHelperInterface;
 use App\Entity\Schedule;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Transliterator;
 
 class ScheduleListDTOMapper
 {
@@ -58,7 +57,7 @@ class ScheduleListDTOMapper
         $listDTO
             ->setToCode($schedule->getStationTo())
             ->setFromCode($schedule->getStationFrom())
-            ->setLastUpdate($schedule->getLastUpdate())
+            ->setLastUpdate($schedule->getLastUpdateTime())
             ->setFromTitle($data['from_title'] ?? null)
             ->setToTitle($data['to_title'] ?? null);
 

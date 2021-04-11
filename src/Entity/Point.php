@@ -7,6 +7,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PointRepository")
@@ -19,6 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          @ORM\Index(columns={"is_active"})
  *     }
  * )
+ * @ORM\HasLifecycleCallbacks()
  */
 class Point
 {
@@ -72,6 +74,11 @@ class Point
     private bool $is_active = true;
 
     /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private ?DateTimeImmutable $last_update_time = null;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\PointLangData", mappedBy="point", orphanRemoval=true)
      */
     private Collection $pointLangData;
@@ -79,6 +86,15 @@ class Point
     public function __construct()
     {
         $this->pointLangData = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersistUpdate(): void
+    {
+        $this->last_update_time = new DateTimeImmutable();
     }
 
     /**
@@ -245,6 +261,26 @@ class Point
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTimeImmutable|null
+     */
+    public function getLastUpdateTime(): ?DateTimeImmutable
+    {
+        return $this->last_update_time;
+    }
+
+    /**
+     * @param DateTimeImmutable|null $lastUpdateTime
+     *
+     * @return Point
+     */
+    public function setLastUpdateTime(?DateTimeImmutable $lastUpdateTime): Point
+    {
+        $this->last_update_time = $lastUpdateTime;
 
         return $this;
     }

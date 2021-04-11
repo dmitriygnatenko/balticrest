@@ -16,6 +16,7 @@ use DateTimeImmutable;
  *         @ORM\Index(columns={"data"}, flags={"fulltext"})
  *     }
  * )
+ * @ORM\HasLifecycleCallbacks()
  */
 class SearchData
 {
@@ -44,7 +45,16 @@ class SearchData
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private ?DateTimeImmutable $last_update = null;
+    private ?DateTimeImmutable $last_update_time = null;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist(): void
+    {
+        $this->last_update_time = new DateTimeImmutable();
+    }
 
     /**
      * @return int|null
@@ -63,13 +73,13 @@ class SearchData
     }
 
     /**
-     * @param int $object_id
+     * @param int $objectId
      *
      * @return $this
      */
-    public function setObjectId(int $object_id): self
+    public function setObjectId(int $objectId): self
     {
-        $this->object_id = $object_id;
+        $this->object_id = $objectId;
 
         return $this;
     }
@@ -77,7 +87,7 @@ class SearchData
     /**
      * @return int|null
      */
-    public function getObjectType(): ?int
+    public function getObjectTypeId(): ?int
     {
         return $this->object_type_id;
     }
@@ -87,7 +97,7 @@ class SearchData
      *
      * @return $this
      */
-    public function setObjectType(int $objectTypeId): self
+    public function setObjectTypeId(int $objectTypeId): self
     {
         $this->object_type_id = $objectTypeId;
 
@@ -117,19 +127,19 @@ class SearchData
     /**
      * @return DateTimeImmutable|null
      */
-    public function getLastUpdate(): ?DateTimeImmutable
+    public function getLastUpdateTime(): ?DateTimeImmutable
     {
-        return $this->last_update;
+        return $this->last_update_time;
     }
 
     /**
-     * @param DateTimeImmutable $lastUpdate
+     * @param DateTimeImmutable $lastUpdateTime
      *
      * @return $this
      */
-    public function setLastUpdate(\DateTimeImmutable $lastUpdate): self
+    public function setLastUpdateTime(\DateTimeImmutable $lastUpdateTime): self
     {
-        $this->last_update = $lastUpdate;
+        $this->last_update_time = $lastUpdateTime;
 
         return $this;
     }

@@ -10,6 +10,7 @@ use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass=SearchLogRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class SearchLog
 {
@@ -34,6 +35,14 @@ class SearchLog
      * @ORM\Column(type="datetime_immutable")
      */
     private ?DateTimeImmutable $create_time = null;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->create_time = new DateTimeImmutable();
+    }
 
     /**
      * @return int|null

@@ -8,6 +8,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -20,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          @ORM\Index(columns={"is_active"})
  *     }
  * )
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -41,6 +43,11 @@ class Article
     private bool $is_active = true;
 
     /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private ?DateTimeImmutable $last_update_time = null;
+
+    /**
      * @ORM\OneToMany(targetEntity=ArticleLangData::class, mappedBy="article", orphanRemoval=true)
      */
     private Collection $articleLangData;
@@ -48,6 +55,15 @@ class Article
     public function __construct()
     {
         $this->articleLangData = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersistUpdate(): void
+    {
+        $this->last_update_time = new DateTimeImmutable();
     }
 
     /**
@@ -94,6 +110,26 @@ class Article
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTimeImmutable|null
+     */
+    public function getLastUpdateTime(): ?DateTimeImmutable
+    {
+        return $this->last_update_time;
+    }
+
+    /**
+     * @param DateTimeImmutable|null $lastUpdateTime
+     *
+     * @return Article
+     */
+    public function setLastUpdateTime(?DateTimeImmutable $lastUpdateTime): Article
+    {
+        $this->last_update_time = $lastUpdateTime;
 
         return $this;
     }

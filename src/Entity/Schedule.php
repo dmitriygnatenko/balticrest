@@ -16,6 +16,7 @@ use DateTimeImmutable;
  *          @ORM\UniqueConstraint(columns={"station_from", "station_to"})
  *     }
  * )
+ * @ORM\HasLifecycleCallbacks()
  */
 class Schedule
 {
@@ -44,7 +45,16 @@ class Schedule
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private ?DateTimeImmutable $last_update = null;
+    private ?DateTimeImmutable $last_update_time = null;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist(): void
+    {
+        $this->last_update_time = new DateTimeImmutable();
+    }
 
     /**
      * @return int|null
@@ -129,19 +139,19 @@ class Schedule
     /**
      * @return DateTimeImmutable|null
      */
-    public function getLastUpdate(): ?DateTimeImmutable
+    public function getLastUpdateTime(): ?DateTimeImmutable
     {
-        return $this->last_update;
+        return $this->last_update_time;
     }
 
     /**
-     * @param DateTimeImmutable $lastUpdate
+     * @param DateTimeImmutable $lastUpdateTime
      *
      * @return Schedule
      */
-    public function setLastUpdate(DateTimeImmutable $lastUpdate): Schedule
+    public function setLastUpdateTime(DateTimeImmutable $lastUpdateTime): Schedule
     {
-        $this->last_update = $lastUpdate;
+        $this->last_update_time = $lastUpdateTime;
 
         return $this;
     }
