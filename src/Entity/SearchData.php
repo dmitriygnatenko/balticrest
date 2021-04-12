@@ -13,7 +13,8 @@ use DateTimeImmutable;
  * @ORM\Table(
  *     name="search_data",
  *     indexes={
- *         @ORM\Index(columns={"data"}, flags={"fulltext"})
+ *         @ORM\Index(columns={"data"}, flags={"fulltext"}),
+ *         @ORM\Index(columns={"object_id","object_type_id"})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()
