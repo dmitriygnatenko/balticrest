@@ -38,4 +38,17 @@ class ArticleRepository extends ServiceEntityRepository
 
         return new Paginator($qb->getQuery(), $page, $max);
     }
+
+    /**
+     * @return array
+     */
+    public function getArticlesForSearchData(): array
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.is_active = true')
+            ->andWhere('a.url IS NOT NULL');
+
+        return $qb->getQuery()->getResult();
+    }
 }

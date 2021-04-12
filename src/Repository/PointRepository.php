@@ -104,4 +104,17 @@ class PointRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @return array
+     */
+    public function getPointsForSearchData(): array
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->where('p.is_active = true')
+            ->andWhere('p.url IS NOT NULL');
+
+        return $qb->getQuery()->getResult();
+    }
 }

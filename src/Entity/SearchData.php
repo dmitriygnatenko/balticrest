@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\SearchDataObjectTypesInterface;
 use App\Repository\SearchDataRepository;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
@@ -19,7 +20,7 @@ use DateTimeImmutable;
  * )
  * @ORM\HasLifecycleCallbacks()
  */
-class SearchData
+class SearchData implements SearchDataObjectTypesInterface
 {
     /**
      * @ORM\Id
