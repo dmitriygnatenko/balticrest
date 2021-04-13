@@ -97,6 +97,10 @@ schedule:
     number: Train number
     period: Interval
 
+search:
+    title: Search results
+    empty: Nothing found
+
 error:
     404:
         header: Page not found

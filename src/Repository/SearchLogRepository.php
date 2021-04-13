@@ -23,4 +23,21 @@ class SearchLogRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, SearchLog::class);
     }
+
+    /**
+     * @param string $query
+     * @param int $foundResultsCount
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function saveLog(string $query, int $foundResultsCount): void
+    {
+        $log = (new SearchLog())
+            ->setQuery($query)
+            ->setFoundResultsCount($foundResultsCount);
+
+        $this->getEntityManager()->persist($log);
+        $this->getEntityManager()->flush();
+    }
 }

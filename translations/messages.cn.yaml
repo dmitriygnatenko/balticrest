@@ -97,6 +97,10 @@ schedule:
     number: 火車號
     period: 間隔
 
+search:
+    title: 搜索結果
+    empty: 未找到任何內容
+
 error:
     404:
         header: 找不到網頁

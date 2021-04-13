@@ -111,3 +111,8 @@ webcams:
     title: 'Baltic Coast Webcams'
     desc: 'See the promenade and the sea online in real time'
     keywords: 'web, camera, webcam, online, promenade, sea, weather'
+
+search:
+    title: 'Search'
+    desc: 'Search by objects and articles'
+    keywords: 'search, objects, articles'

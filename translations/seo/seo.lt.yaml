@@ -111,3 +111,8 @@ webcams:
     title: 'Baltijos pakrantės internetinės kameros'
     desc: 'Pamatykite promenadą ir jūrą internete realiuoju laiku'
     keywords: 'internetas, kamera, internetinė kamera, internetinė, promenada, jūra, oras'
+
+search:
+    title: 'Paieška'
+    desc: 'Paieška pagal objektus ir straipsnius'
+    keywords: 'paieška, daiktai, straipsniai'

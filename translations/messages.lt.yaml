@@ -97,6 +97,10 @@ schedule:
     number: Skaičius
     period: Periodiškumas
 
+search:
+    title: Paieškos rezultatai
+    empty: Nieko nerasta
+
 error:
     404:
         header: Puslapis nerastas

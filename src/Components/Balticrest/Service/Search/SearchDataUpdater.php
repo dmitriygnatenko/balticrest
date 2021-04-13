@@ -129,7 +129,7 @@ class SearchDataUpdater implements SearchDataUpdaterInterface, PointLangDataFiel
             implode(' ', $pointLangData->getData())
         );
 
-        return trim(strip_tags($text));
+        return trim(htmlspecialchars_decode(strip_tags($text)));
     }
 
     /**
@@ -144,6 +144,6 @@ class SearchDataUpdater implements SearchDataUpdaterInterface, PointLangDataFiel
             . $articleLangData->getMetaKeywords() . ' '
             . $articleLangData->getText();
 
-        return trim(strip_tags($text));
+        return trim(htmlspecialchars_decode(strip_tags($text)));
     }
 }

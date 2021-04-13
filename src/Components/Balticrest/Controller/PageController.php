@@ -7,6 +7,7 @@ namespace App\Components\Balticrest\Controller;
 use App\Components\Balticrest\Service\Provider\ArticleDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\MapDataProviderInterface;
 use App\Components\Balticrest\Service\Provider\NewsDataProviderInterface;
+use App\Components\Balticrest\Service\Search\SearchDataProviderInterface;
 use App\Components\Balticrest\Service\Twig\TwigGlobalService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,6 +79,21 @@ class PageController extends AbstractController
     public function contacts(Request $request): Response
     {
         return $this->showArticle($request->attributes->get('_route'));
+    }
+
+    /**
+     * @Route("/search", methods={"GET"}, name="search")
+     *
+     * @param Request $request
+     * @param SearchDataProviderInterface $searchDataProvider
+     *
+     * @return Response
+     */
+    public function search(Request $request, SearchDataProviderInterface $searchDataProvider): Response
+    {
+        return $this->render('balticrest/page/search.html.twig', [
+            'results' => $searchDataProvider->search($request->query->get('q', ''))
+        ]);
     }
 
     /**

@@ -33,7 +33,7 @@ class SearchDataRepository extends ServiceEntityRepository
     public function search(string $searchText): array
     {
         $qb = $this->createQueryBuilder('s')
-            ->where('MATCH_AGAINST(s.data) AGAINST(:search) > 0')
+            ->where('MATCH_AGAINST(s.data) AGAINST(:search boolean) > 0')
             ->setParameter('search', $searchText);
 
         return $qb->getQuery()->getResult();

@@ -111,3 +111,8 @@ webcams:
     title: '波羅的海海岸網絡攝像頭'
     desc: '實時在線查看長廊和大海'
     keywords: '網絡，攝像頭，網絡攝像頭，在線，長廊，海洋，天氣'
+
+search:
+    title: '搜索'
+    desc: '按對象和文章搜索'
+    keywords: '搜索，對象，文章'

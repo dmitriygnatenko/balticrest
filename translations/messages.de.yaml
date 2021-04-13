@@ -97,6 +97,10 @@ schedule:
     number: Nummer
     period: Periodizität
 
+search:
+    title: Suchergebnisse
+    empty: Nichts gefunden
+
 error:
     404:
         header: Seite nicht gefunden

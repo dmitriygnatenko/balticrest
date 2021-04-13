@@ -97,6 +97,10 @@ schedule:
     number: Number
     period: Okresowość
 
+search:
+    title: Wyniki wyszukiwania
+    empty: Nic nie znaleziono
+
 error:
     404:
         header: Strona nie znaleziona

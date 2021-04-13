@@ -97,6 +97,10 @@ schedule:
     number: Номер
     period: Периодичность
 
+search:
+    title: Результаты поиска
+    empty: Ничего не найдено
+
 error:
     404:
         header: Страница не найдена

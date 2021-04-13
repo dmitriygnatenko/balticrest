@@ -111,3 +111,8 @@ webcams:
     title: 'Kamery internetowe Wybrzeża Bałtyku'
     desc: 'Zobacz promenadę i morze online w czasie rzeczywistym'
     keywords: 'kamera internetowa, online, promenada, morze, pogoda'
+
+search:
+    title: 'Szukaj'
+    desc: 'Szukaj według obiektów i artykułów'
+    keywords: 'szukaj, obiekty, artykuły'

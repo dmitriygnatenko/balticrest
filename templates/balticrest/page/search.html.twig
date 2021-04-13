@@ -1,0 +1,39 @@
+{% extends 'balticrest/base_left_top_menu.html.twig' %}
+
+{% block body_attr %}class="innerpage"{% endblock %}
+
+{% block title %}{{ parent() }} {% trans from 'seo' %}search.title{% endtrans %}{% endblock %}
+{% block description %}{% trans from 'seo' %}search.desc{% endtrans %}{% endblock %}
+{% block keywords %}{% trans from 'seo' %}search.keywords{% endtrans %}{% endblock %}
+
+{% block content %}
+
+    <div class="container page_info">
+        <div class="col_md_12">
+            <h1>{% trans %}search.title{% endtrans %}</h1>
+        </div>
+    </div>
+
+    <div class="container contant">
+        <div class="row">
+            <div class="col-md-12 basic">
+                <div class="post_content">
+                    {% if results is empty %}
+                        {% trans %}search.empty{% endtrans %}
+                    {% else %}
+                        <ul class="mainlist">
+                            {% for result in results %}
+                                <li>
+                                    <a href="{{ result.url }}" target="_blank">
+                                        {{ result.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
