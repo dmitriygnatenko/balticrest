@@ -13,6 +13,9 @@ class SearchDataProvider implements SearchDataProviderInterface
     /** @var int */
     private const MIN_CHARS_IN_WORD = 3;
 
+    /** @var int */
+    private const MAX_RESULTS_COUNT = 30;
+
     private SearchDataRepository $searchDataRepository;
 
     private SearchLogRepository $searchLogRepository;
@@ -50,7 +53,7 @@ class SearchDataProvider implements SearchDataProviderInterface
             return [];
         }
 
-        $results = $this->searchDataRepository->search($searchText);
+        $results = $this->searchDataRepository->search($searchText, self::MAX_RESULTS_COUNT);
 
         $this->searchLogRepository->saveLog($searchText, count($results));
 
