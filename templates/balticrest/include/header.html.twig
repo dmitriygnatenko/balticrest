@@ -55,16 +55,16 @@
                     </div>
                 {% endif %}
 
-                {#
-                <div class="input-group search">
-                    <input type="text" class="form-control" placeholder="{% trans %}header.search.text_placeholder{% endtrans %}">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" title="{% trans %}header.search.btn_title{% endtrans %}">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-                #}
+                <form action="{{ path('search') }}" method="get">
+                    <div class="input-group search">
+                        <input name="q" type="text" class="form-control" placeholder="{% trans %}header.search.text_placeholder{% endtrans %}" value="{{ app.request.query.get('q') }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" title="{% trans %}header.search.btn_title{% endtrans %}">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
 
             </div>
         </div>
