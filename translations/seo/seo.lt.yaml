@@ -8,12 +8,21 @@ restore:
     desc: 'Slaptažodžio atkūrimas Baltijos pakrantės turizmo gide'
     keywords: 'slaptažodžio atkūrimas, prisijungimas'
 
+index:
+    title: 'Baltijos pakrantės turizmo vadovas'
+    desc: 'Kaliningrado sritis kviečia praleisti atostogas jūroje. Viešbučiai ir sanatorijos, viešbučiai ir kavinės Kaliningrado srities miestų žemėlapyje'
+    keywords: 'poilsis jūroje, Kaliningrado sritis, žemėlapis, sanatorijos, viešbučiai, viešbučiai, parduotuvės, kavinės, restoranai, muziejai, sportas, bankai, bankomatai, orai, stotys, tvarkaraštis, traukinys, naujienos'
+
 news:
     title: 'Naujienos'
     desc: 'Šviežios naujienos iš Zelenogradsko ir Svetlogorsko apie koncertus, festivalius, parodas, traukinių ir autobusų tvarkaraščio pakeitimus'
     keywords: 'naujienos, Svetlogorskas, Zelenogradskas, Kaliningradskaja, koncertai, žaidimai, festivaliai, bilietai, pigūs, autobusai, traukiniai'
 
 map:
+    default:
+        title: 'Baltijos pakrantės turizmo vadovas - žemėlapis %city_gen%'
+        desc: '%city% Kaliningrado srityje kviečia jus praleisti atostogas jūroje.'
+        keywords: '%city%, poilsis jūroje, Kaliningrado sritis, žemėlapis, sanatorijos, viešbučiai, viešbučiai, parduotuvės, kavinės, restoranai, muziejai, sportas, bankai, bankomatai, orai, stotys, tvarkaraštis, traukinys, naujienos'
     hotels:
         title: 'Viešbučiai žemėlapyje %city_gen% žemėlapyje'
         desc: 'Viešbučiai %city_gen% žemėlapyje. % miesto% Kaliningrado srityje kviečia atsipalaiduoti viešbučiuose ir viešbučiuose pajūryje. Turistinis žemėlapis %city_gen% yra geriausias jūsų vadovas.'

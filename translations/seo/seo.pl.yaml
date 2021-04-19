@@ -8,12 +8,21 @@ restore:
     desc: 'Odzyskiwanie hasła w przewodniku turystycznym wybrzeża Bałtyku'
     keywords: 'odzyskiwanie hasła, logowanie'
 
+index:
+    title: 'Przewodnik turystyczny po Wybrzeżu Bałtyckim'
+    desc: 'Region Kaliningradu zaprasza do spędzenia wakacji na morzu. Hotele i sanatoria, hotele i kawiarnie na mapie miast obwodu kaliningradzkiego'
+    keywords: 'wypoczynek na morzu, obwód kaliningradzki, mapa, sanatoria, hotele, hotele, sklepy, kawiarnie, restauracje, muzea, sport, banki, bankomaty, pogoda, stacje, rozkład jazdy, pociąg, aktualności'
+
 news:
     title: 'Aktualności'
     desc: 'Świeże wiadomości z Zelenogradska i Swietłogorska o koncertach, festiwalach, wystawach, zmianach w rozkładzie jazdy pociągów i autobusów'
     keywords: 'nowości, Swietłogorsk, Zelenogradsk, Kaliningradskaya, koncerty, gry, festiwale, bilety, tanio, autobus, pociąg'
 
 map:
+    default:
+        title: 'Przewodnik turystyczny Wybrzeża Bałtyckiego - mapa %city_gen%'
+        desc: '%city% w obwodzie kaliningradzkim zaprasza do spędzenia wakacji na morzu.'
+        keywords: '%city%, wypoczynek na morzu, obwód kaliningradzki, mapa, sanatoria, hotele, hotele, sklepy, kawiarnie, restauracje, muzea, sport, banki, bankomaty, pogoda, stacje, rozkład jazdy, pociąg, aktualności'
     hotels:
         title: 'Hotele %city_gen% na mapie'
         desc: 'Hotels %city_gen% na mapie. %city% w obwodzie kaliningradzkim zaprasza do wypoczynku w hotelach i hotelach nad morzem. Mapa turystyczna %city_gen% jest twoim najlepszym przewodnikiem.'

@@ -8,12 +8,21 @@ restore:
     desc: 'Passwortwiederherstellung im Reiseführer der Ostseeküst'
     keywords: 'Passwortwiederherstellung, Login'
 
+index:
+    title: 'Reiseführer für die Ostseeküste'
+    desc: 'Die Region Kaliningrad lädt Sie ein, Ihren Urlaub auf See zu verbringen. Hotels und Sanatorien, Hotels und Cafés auf der Karte der Städte in der Region Kaliningrad'
+    keywords: 'Ruhe auf See, Region Kaliningrad, Karte, Sanatorien, Hotels, Hotels, Geschäfte, Cafés, Restaurants, Museen, Sport, Banken, Geldautomaten, Wetter, Bahnhöfe, Fahrplan, Zug, Nachrichten'
+
 news:
     title: 'Nachrichten'
     desc: 'Neue Nachrichten aus Zelenogradsk und Svetlogorsk über Konzerte, Festivals, Ausstellungen, Änderungen im Fahrplan von Zügen und Bussen'
     keywords: 'Nachrichten, Svetlogorsk, Zelenogradsk, Kaliningradskaya, Konzerte, Spiele, Festivals, Tickets, billig, Bus, Zug'
 
 map:
+    default:
+        title: 'Baltic Coast Tourist Guide - Karte %city_gen%'
+        desc: '%city% in der Region Kaliningrad lädt Sie ein, Ihren Urlaub auf See zu verbringen. Hotels und Sanatorien% city_gen%, ausgezeichnete Hotels %city_gen% auf der Karte der Städte in der Region Kaliningrad'
+        keywords: '%city%, Ruhe auf See, Region Kaliningrad, Karte, Sanatorien, Hotels, Hotels, Geschäfte, Cafés, Restaurants, Museen, Sport, Banken, Geldautomaten, Wetter, Bahnhöfe, Fahrplan, Zug, Nachrichten'
     hotels:
         title: '%city_gen% Hotels auf der Karte'
         desc: '%city_gen% Hotels auf der Karte. %city% in der Region Kaliningrad lädt zum Entspannen in Hotels und Hotels an der Küste ein.'

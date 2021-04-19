@@ -8,12 +8,21 @@ restore:
     desc: 'Password recovery in the Baltic coast tourist guide'
     keywords: 'password recovery, login'
 
+index:
+    title: 'Tourist Guide to the Baltic Coast'
+    desc: 'The Kaliningrad region invites you to spend your holidays at sea. Hotels and sanatoriums, hotels and cafes on the map of the cities of the Kaliningrad region'
+    keywords: 'sea holidays, Kaliningrad region, map, sanatoriums, hotels, hotels, shops, cafes, restaurants, museums, sports, banks, ATMs, weather, train stations, schedule, train, news'
+
 news:
     title: 'News'
     desc: 'Fresh news from Zelenogradsk and Svetlogorsk about concerts, festivals, exhibitions, about changes in the schedule of trains and buses'
     keywords: 'news, Svetlogorsk, Zelenogradsk, Kaliningradskaya, concerts, games, festivals, tickets, cheap, bus, train'
 
 map:
+    default:
+        title: 'Baltic Coast Tourist Guide - %city_gen% map'
+        desc: '%city% in the Kaliningrad region invites you to spend your vacation at the sea.'
+        keywords: '%city%, rest at sea, Kaliningrad region, map, sanatoriums, hotels, hotels, shops, cafes, restaurants, museums, sports, banks, ATMs, weather, stations, schedule, train, news'
     hotels:
         title: '%city_gen% hotels on the map'
         desc: '%city_gen% hotels on the map. %city% in the Kaliningrad region invites you to relax in hotels and hotels on the seashore. The tourist map %city_gen% is your best guide.'
