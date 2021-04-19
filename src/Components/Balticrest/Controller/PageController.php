@@ -58,7 +58,7 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/privacy_policy", methods={"GET"}, name="privacy_policy")
+     * @Route("/privacy-policy", methods={"GET"}, name="privacy_policy")
      *
      * @param Request $request
      *
