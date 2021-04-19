@@ -2,13 +2,17 @@
 
 {% block body_attr %}class="innerpage"{% endblock %}
 
-{% block title %}{{ parent() }} {% trans from 'seo' %}news.title{% endtrans %}{% endblock %}
-{% block description %}{% trans from 'seo' %}news.desc{% endtrans %}{% endblock %}
-{% block keywords %}{% trans from 'seo' %}news.keywords{% endtrans %}{% endblock %}
-
 {% if tag is not defined %}
     {% set tag = null %}
+    {% set tag_title  = '' %}
+{% else %}
+    {% set tag_trans = 'news.tags.' ~ tag %}
+    {% set tag_title = ' - ' ~ tag_trans|trans %}
 {% endif %}
+
+{% block title %}{{ parent() }} {% trans from 'seo' %}news.title{% endtrans %} {{ tag_title|trans }}{% endblock %}
+{% block description %}{% trans from 'seo' %}news.desc{% endtrans %}{% endblock %}
+{% block keywords %}{% trans from 'seo' %}news.keywords{% endtrans %}{% endblock %}
 
 {% block content %}
 
