@@ -85,7 +85,7 @@ navigation:
         news: Neuigkeiten
         contacts: Kontaktdaten
         about: Über das Projekt
-        privacy_policy: Datenschutz-Bestimmungen
+        privacy-policy: Datenschutz-Bestimmungen
 
 schedule:
     title: Zugfahrplan

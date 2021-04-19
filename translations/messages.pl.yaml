@@ -85,7 +85,7 @@ navigation:
         news: Wiadomości
         contacts: Dane kontaktowe
         about: O projekcie
-        privacy_policy: Polityka prywatności
+        privacy-policy: Polityka prywatności
 
 schedule:
     title: Rozkład jazdy pociągów

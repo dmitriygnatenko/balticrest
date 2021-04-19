@@ -85,7 +85,7 @@ navigation:
         news: 最新消息
         contacts: 聯絡資料
         about: 關於項目
-        privacy_policy: 隱私政策
+        privacy-policy: 隱私政策
 
 schedule:
     title: 市郊火車時刻表

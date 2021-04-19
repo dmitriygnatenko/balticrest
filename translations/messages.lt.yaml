@@ -85,7 +85,7 @@ navigation:
         news: Naujienos
         contacts: Kontaktiniai duomenys
         about: Apie projektą
-        privacy_policy: Privatumo politika
+        privacy-policy: Privatumo politika
 
 schedule:
     title: Traukinių tvarkaraštis

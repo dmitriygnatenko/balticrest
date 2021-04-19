@@ -85,7 +85,7 @@ navigation:
         news: Новости
         contacts: Контакты
         about: О проекте
-        privacy_policy: Конфиденциальность
+        privacy-policy: Конфиденциальность
 
 schedule:
     title: Расписание электричек

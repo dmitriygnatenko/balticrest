@@ -85,7 +85,7 @@ navigation:
         news: News
         contacts: Contacts
         about: About
-        privacy_policy: Privacy policy
+        privacy-policy: Privacy policy
 
 schedule:
     title: Suburban train schedule
