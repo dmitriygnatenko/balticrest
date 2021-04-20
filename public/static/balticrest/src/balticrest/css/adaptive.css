@@ -769,14 +769,6 @@
         display: block;
     }
 
-    .start_description {
-        margin-top: 20px;
-    }
-
-    .start_description h1 span {
-        margin: 20px auto;
-    }
-
     .bgg {
         display: none;
     }
@@ -853,14 +845,6 @@
 
     .header_promo a {
         display: none;
-    }
-
-    .start_description {
-        margin-top: 20px;
-    }
-
-    .start_description h1 span {
-        margin: 20px auto;
     }
 
     .btn_cat {
