@@ -101,6 +101,9 @@ search:
     title: Paieškos rezultatai
     empty: Nieko nerasta
 
+links:
+    to_mainpage: į pagrindinį puslapį
+
 error:
     404:
         header: Puslapis nerastas

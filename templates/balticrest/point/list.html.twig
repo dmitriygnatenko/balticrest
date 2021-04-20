@@ -14,6 +14,9 @@
     <div class="container page_info">
         <div class="col_md_12">
             <h1>{{ global_service.listPageTitle(city, category) }}</h1>
+            <div class="return-block">
+                <a href="{{ path('main') }}">&crarr; {% trans %}links.to_mainpage{% endtrans %}</a>
+            </div>
         </div>
         <div class="visible-sm visible-xs">
             <ul class="places_cat top">

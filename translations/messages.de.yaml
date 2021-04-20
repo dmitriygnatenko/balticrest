@@ -101,6 +101,9 @@ search:
     title: Suchergebnisse
     empty: Nichts gefunden
 
+links:
+    to_mainpage: zur Homepage
+
 error:
     404:
         header: Seite nicht gefunden

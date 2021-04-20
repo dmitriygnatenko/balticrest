@@ -136,6 +136,7 @@ a:hover {
     width: 100px;
     float: left;
     margin-right: 20px;
+    margin-bottom: 20px;
     border-radius: 100px;
     border: 5px solid #e1e1e1;
 }
@@ -3036,4 +3037,13 @@ a.green_btn:hover {
 }
 .place_li_cont .schedule-yandex-copyright {
     border-bottom: none;
+}
+.return-block {
+    padding: 5px 0;
+    font-size: 16px;
+}
+.return-block a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
 }

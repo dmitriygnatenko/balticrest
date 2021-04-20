@@ -101,6 +101,9 @@ search:
     title: Wyniki wyszukiwania
     empty: Nic nie znaleziono
 
+links:
+    to_mainpage: do strony głównej
+
 error:
     404:
         header: Strona nie znaleziona
