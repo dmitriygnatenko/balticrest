@@ -177,6 +177,10 @@
         width: 30%;
         margin: 0px 10px;
     }
+
+    #promo_head > div.header_promo > div > button > span.lang-title {
+        display: none;
+    }
 }
 
 /*
@@ -766,22 +770,11 @@
     }
 
     .start_description {
-        z-index: 9;
-        text-align: center;
-        position: relative;
-        width: 80%;
-        top: 0;
-        margin-top: 100px;
-        margin-bottom: 100px;
-        left: 50%;
-        margin-left: -40%;
+        margin-top: 20px;
     }
 
-    .start_description .btns a {
-        float: none;
-        width: 100%;
-        display: block;
-        margin: 30px 0 !important;
+    .start_description h1 span {
+        margin: 20px auto;
     }
 
     .bgg {
