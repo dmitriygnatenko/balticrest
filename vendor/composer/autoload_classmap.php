@@ -8,9 +8,13 @@ $baseDir = dirname($vendorDir);
 return array(
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Codeception\\Exception\\ExternalUrlException' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Exception/ExternalUrlException.php',
+    'Codeception\\Lib\\Connector\\Guzzle' => $vendorDir . '/codeception/module-phpbrowser/src/Codeception/Lib/Connector/Guzzle.php',
     'Codeception\\Lib\\Connector\\Symfony' => $vendorDir . '/codeception/module-symfony/src/Codeception/Lib/Connector/Symfony.php',
     'Codeception\\Lib\\Framework' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Lib/Framework.php',
     'Codeception\\Lib\\InnerBrowser' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Lib/InnerBrowser.php',
+    'Codeception\\Module\\AbstractAsserts' => $vendorDir . '/codeception/module-asserts/src/Codeception/Module/AbstractAsserts.php',
+    'Codeception\\Module\\Asserts' => $vendorDir . '/codeception/module-asserts/src/Codeception/Module/Asserts.php',
+    'Codeception\\Module\\PhpBrowser' => $vendorDir . '/codeception/module-phpbrowser/src/Codeception/Module/PhpBrowser.php',
     'Codeception\\Module\\Symfony' => $vendorDir . '/codeception/module-symfony/src/Codeception/Module/Symfony.php',
     'Codeception\\Module\\Symfony\\BrowserAssertionsTrait' => $vendorDir . '/codeception/module-symfony/src/Codeception/Module/Symfony/BrowserAssertionsTrait.php',
     'Codeception\\Module\\Symfony\\ConsoleAssertionsTrait' => $vendorDir . '/codeception/module-symfony/src/Codeception/Module/Symfony/ConsoleAssertionsTrait.php',

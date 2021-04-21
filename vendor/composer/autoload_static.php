@@ -677,8 +677,8 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/stub/src',
-            1 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            1 => __DIR__ . '/..' . '/codeception/stub/src',
         ),
         'App\\Tests\\' => 
         array (
@@ -710,9 +710,13 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Codeception\\Exception\\ExternalUrlException' => __DIR__ . '/..' . '/codeception/lib-innerbrowser/src/Codeception/Exception/ExternalUrlException.php',
+        'Codeception\\Lib\\Connector\\Guzzle' => __DIR__ . '/..' . '/codeception/module-phpbrowser/src/Codeception/Lib/Connector/Guzzle.php',
         'Codeception\\Lib\\Connector\\Symfony' => __DIR__ . '/..' . '/codeception/module-symfony/src/Codeception/Lib/Connector/Symfony.php',
         'Codeception\\Lib\\Framework' => __DIR__ . '/..' . '/codeception/lib-innerbrowser/src/Codeception/Lib/Framework.php',
         'Codeception\\Lib\\InnerBrowser' => __DIR__ . '/..' . '/codeception/lib-innerbrowser/src/Codeception/Lib/InnerBrowser.php',
+        'Codeception\\Module\\AbstractAsserts' => __DIR__ . '/..' . '/codeception/module-asserts/src/Codeception/Module/AbstractAsserts.php',
+        'Codeception\\Module\\Asserts' => __DIR__ . '/..' . '/codeception/module-asserts/src/Codeception/Module/Asserts.php',
+        'Codeception\\Module\\PhpBrowser' => __DIR__ . '/..' . '/codeception/module-phpbrowser/src/Codeception/Module/PhpBrowser.php',
         'Codeception\\Module\\Symfony' => __DIR__ . '/..' . '/codeception/module-symfony/src/Codeception/Module/Symfony.php',
         'Codeception\\Module\\Symfony\\BrowserAssertionsTrait' => __DIR__ . '/..' . '/codeception/module-symfony/src/Codeception/Module/Symfony/BrowserAssertionsTrait.php',
         'Codeception\\Module\\Symfony\\ConsoleAssertionsTrait' => __DIR__ . '/..' . '/codeception/module-symfony/src/Codeception/Module/Symfony/ConsoleAssertionsTrait.php',

@@ -34,3 +34,6 @@ down:
 
 bash:
 	cd $(docker_path) && docker-compose exec $(php_service_name) bash
+
+test:
+	cd $(docker_path) && docker-compose exec $(php_service_name) php ./vendor/bin/codecept run

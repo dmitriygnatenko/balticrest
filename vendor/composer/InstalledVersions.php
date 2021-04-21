@@ -71,6 +71,24 @@ private static $installed = array (
       ),
       'reference' => '4ffb91c18e4cacd073ff2914c07e5ccaf5efe449',
     ),
+    'codeception/module-asserts' => 
+    array (
+      'pretty_version' => '1.3.1',
+      'version' => '1.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '59374f2fef0cabb9e8ddb53277e85cdca74328de',
+    ),
+    'codeception/module-phpbrowser' => 
+    array (
+      'pretty_version' => '1.0.2',
+      'version' => '1.0.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '770a6be4160a5c0c08d100dd51bff35f6056bbf1',
+    ),
     'codeception/module-symfony' => 
     array (
       'pretty_version' => '2.0.2',

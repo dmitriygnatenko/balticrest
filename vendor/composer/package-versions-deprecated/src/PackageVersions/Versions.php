@@ -151,6 +151,8 @@ final class Versions
   'codeception/codeception' => '4.1.20@d8b16e13e1781dbc3a7ae8292117d520c89a9c5a',
   'codeception/lib-asserts' => '1.13.2@184231d5eab66bc69afd6b9429344d80c67a33b6',
   'codeception/lib-innerbrowser' => '1.4.2@4ffb91c18e4cacd073ff2914c07e5ccaf5efe449',
+  'codeception/module-asserts' => '1.3.1@59374f2fef0cabb9e8ddb53277e85cdca74328de',
+  'codeception/module-phpbrowser' => '1.0.2@770a6be4160a5c0c08d100dd51bff35f6056bbf1',
   'codeception/module-symfony' => '2.0.2@0460f39ea37dcc0e0b24190ac9a42497a1992f56',
   'codeception/phpunit-wrapper' => '9.0.6@b0c06abb3181eedca690170f7ed0fd26a70bfacc',
   'codeception/stub' => '3.7.0@468dd5fe659f131fc997f5196aad87512f9b1304',
