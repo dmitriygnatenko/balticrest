@@ -11,3 +11,8 @@
 /node_modules/
 /public/files/
 /public/sitemap.xml
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
