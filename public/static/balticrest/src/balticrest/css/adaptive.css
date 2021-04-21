@@ -385,6 +385,7 @@
         margin: 0 0 15px;
     }
 
+    .places_index_block .index-news img,
     .post.p_style_three .p_text .image img {
         max-width: 500px;
     }
@@ -510,6 +511,7 @@
         padding-bottom: 128px;
     }
 
+    .places_index_block .index-news img,
     .post.p_style_three .p_text .image img {
         max-width: 400px;
     }
@@ -815,6 +817,7 @@
         height: 263px;
     }
 
+    .places_index_block .index-news img,
     .post.p_style_three .p_text .image img {
         max-width: 300px;
     }
@@ -885,6 +888,7 @@
         width: 100%;
     }
 
+    .places_index_block .index-news img,
     .post.p_style_three .p_text .image img {
         max-width: 250px;
     }
@@ -937,6 +941,7 @@
         text-align: center;
     }
 
+    .places_index_block .index-news img,
     .post.p_style_three .p_text .image img {
         max-width: 200px;
     }
@@ -959,6 +964,7 @@
         left: 18px;
     }
 
+    .places_index_block .index-news img,
     .post.p_style_three .p_text .image img {
         max-width: 120px;
     }

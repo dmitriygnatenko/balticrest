@@ -284,6 +284,7 @@ body.pushy-active .top_promo_block .menu-btn {
     right: 30px;
     top: 40px;
     margin: 0;
+    z-index: 999;
 }
 
 .header_promo .language-selector button {
@@ -295,7 +296,6 @@ body.pushy-active .top_promo_block .menu-btn {
     padding: 9px 5px;
     border-radius: 100px;
     transition: 0.3s;
-    z-index: 99999999;
 }
 
 .header_promo .language-selector span.language {
@@ -321,6 +321,7 @@ body.pushy-active .top_promo_block .menu-btn {
     top: 41px;
     left: -95px;
     min-width: 130px;
+    z-index: 999;
 }
 
 .btn_promo_search button {
