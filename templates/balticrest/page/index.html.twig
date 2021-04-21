@@ -26,10 +26,8 @@
             {% if languages[language] is defined %}
                 <div class="header_promo">
                     <div class="btn-group language-selector">
-                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                            <span class="lang-title">{{ languages[language].title }}</span>
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" title="{{ languages[language].title }}">
                             <span class="language icon-{{ language }}"></span>
-                            <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
                             {% for key, values in languages %}
