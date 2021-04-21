@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Entity\Schedule;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use DateTimeImmutable;
 
 /**
  * @method Schedule|null find($id, $lockMode = null, $lockVersion = null)
@@ -41,12 +42,11 @@ class ScheduleRepository extends ServiceEntityRepository
             $schedule = (new Schedule())
                 ->setStationFrom($from)
                 ->setStationTo($to);
-
-            $this->getEntityManager()->persist($schedule);
         }
 
         $schedule->setData($data);
 
+        $this->getEntityManager()->persist($schedule);
         $this->getEntityManager()->flush();
     }
 
