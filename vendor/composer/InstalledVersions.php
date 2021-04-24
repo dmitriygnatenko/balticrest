@@ -80,6 +80,15 @@ private static $installed = array (
       ),
       'reference' => '59374f2fef0cabb9e8ddb53277e85cdca74328de',
     ),
+    'codeception/module-doctrine2' => 
+    array (
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a39cd444fac840c907d33d33bca83e57dd0e04d1',
+    ),
     'codeception/module-phpbrowser' => 
     array (
       'pretty_version' => '1.0.2',

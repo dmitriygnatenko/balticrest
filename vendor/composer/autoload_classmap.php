@@ -14,6 +14,7 @@ return array(
     'Codeception\\Lib\\InnerBrowser' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Lib/InnerBrowser.php',
     'Codeception\\Module\\AbstractAsserts' => $vendorDir . '/codeception/module-asserts/src/Codeception/Module/AbstractAsserts.php',
     'Codeception\\Module\\Asserts' => $vendorDir . '/codeception/module-asserts/src/Codeception/Module/Asserts.php',
+    'Codeception\\Module\\Doctrine2' => $vendorDir . '/codeception/module-doctrine2/src/Codeception/Module/Doctrine2.php',
     'Codeception\\Module\\PhpBrowser' => $vendorDir . '/codeception/module-phpbrowser/src/Codeception/Module/PhpBrowser.php',
     'Codeception\\Module\\Symfony' => $vendorDir . '/codeception/module-symfony/src/Codeception/Module/Symfony.php',
     'Codeception\\Module\\Symfony\\BrowserAssertionsTrait' => $vendorDir . '/codeception/module-symfony/src/Codeception/Module/Symfony/BrowserAssertionsTrait.php',

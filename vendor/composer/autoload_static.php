@@ -716,6 +716,7 @@ class ComposerStaticInita3cb05d07a0f8611fd04d8fd32a259f1
         'Codeception\\Lib\\InnerBrowser' => __DIR__ . '/..' . '/codeception/lib-innerbrowser/src/Codeception/Lib/InnerBrowser.php',
         'Codeception\\Module\\AbstractAsserts' => __DIR__ . '/..' . '/codeception/module-asserts/src/Codeception/Module/AbstractAsserts.php',
         'Codeception\\Module\\Asserts' => __DIR__ . '/..' . '/codeception/module-asserts/src/Codeception/Module/Asserts.php',
+        'Codeception\\Module\\Doctrine2' => __DIR__ . '/..' . '/codeception/module-doctrine2/src/Codeception/Module/Doctrine2.php',
         'Codeception\\Module\\PhpBrowser' => __DIR__ . '/..' . '/codeception/module-phpbrowser/src/Codeception/Module/PhpBrowser.php',
         'Codeception\\Module\\Symfony' => __DIR__ . '/..' . '/codeception/module-symfony/src/Codeception/Module/Symfony.php',
         'Codeception\\Module\\Symfony\\BrowserAssertionsTrait' => __DIR__ . '/..' . '/codeception/module-symfony/src/Codeception/Module/Symfony/BrowserAssertionsTrait.php',
