@@ -151,7 +151,7 @@ class ScheduleUpdater implements ScheduleUpdaterInterface, StationsInterface
 
         $data = $this->formatDataFromYandexContent($content);
 
-        if (empty(!$data)) {
+        if (!empty($data)) {
             $this->scheduleRepository->createOrUpdateSchedule($from, $to, $data);
         }
     }

@@ -44,7 +44,7 @@ class ScheduleRepository extends ServiceEntityRepository
                 ->setStationTo($to);
         }
 
-        $schedule->setData($data);
+        $schedule->setData($data)->setLastUpdateTime(new DateTimeImmutable());
 
         $this->getEntityManager()->persist($schedule);
         $this->getEntityManager()->flush();
