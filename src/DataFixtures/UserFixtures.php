@@ -33,7 +33,7 @@ class UserFixtures extends Fixture
             ->setRoles([UserRolesInterface::ROLE_USER])
             ->setEmail('test@balticrest.ru')
             ->setIsActive(true)
-            ->setPassword($this->passwordEncoder->encodePassword($user, '12345'));
+            ->setPassword($this->passwordEncoder->encodePassword($user, 'test'));
 
         $manager->persist($user);
         $manager->flush();

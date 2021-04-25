@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -13,7 +13,7 @@ final class Version20200506214911 extends AbstractMigration
     /**
      * @param Schema $schema
      *
-     * @throws DBALException
+     * @throws Exception
      */
     public function up(Schema $schema) : void
     {
@@ -25,13 +25,13 @@ final class Version20200506214911 extends AbstractMigration
         $this->addSql('CREATE TABLE city (
             id INT AUTO_INCREMENT NOT NULL,
             code VARCHAR(50) NOT NULL,
-            image VARCHAR(255) NOT NULL,
-            lat DOUBLE PRECISION NOT NULL,
-            lon DOUBLE PRECISION NOT NULL,
+            image VARCHAR(255) NOT NULL, 
+            lat VARCHAR(50) NOT NULL,
+            lon VARCHAR(50) NOT NULL,
             zoom SMALLINT NOT NULL,
             is_active TINYINT(1) DEFAULT \'1\' NOT NULL,
-            UNIQUE INDEX UNIQ_2D5B023477153098 (code),
             INDEX IDX_2D5B02341B5771DD (is_active),
+            UNIQUE INDEX UNIQ_2D5B023477153098 (code),
             PRIMARY KEY(id)
         ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
@@ -39,7 +39,7 @@ final class Version20200506214911 extends AbstractMigration
     /**
      * @param Schema $schema
      *
-     * @throws DBALException
+     * @throws Exception
      */
     public function down(Schema $schema) : void
     {

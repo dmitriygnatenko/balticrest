@@ -89,8 +89,8 @@ class PointFormDataTransformer implements TransformerInterface
             Fields::FIELD_DETAILED_TYPE => (string) ($form['detailed_type'] ?? ''),
         ];
 
-        $point->setLat((float) ($form['lat'] ?? 0))
-            ->setLon((float) ($form['lon'] ?? 0))
+        $point->setLat((string) ($form['lat'] ?? ''))
+            ->setLon((string) ($form['lon'] ?? ''))
             ->setLogo((string) ($form['logo'] ?? ''))
             ->setUrl($form['url'] ?? null)
             ->setIsActive((bool) ($form['is_active'] ?? true))

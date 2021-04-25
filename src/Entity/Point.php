@@ -44,14 +44,14 @@ class Point
     private ?PointType $type = null;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=50)
      */
-    private ?float $lat = null;
+    private ?string $lat = null;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=50)
      */
-    private ?float $lon = null;
+    private ?string $lon = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -154,11 +154,11 @@ class Point
     }
 
     /**
-     * @param float $lat
+     * @param string $lat
      *
      * @return $this
      */
-    public function setLat(float $lat): self
+    public function setLat(string $lat): self
     {
         $this->lat = $lat;
 
@@ -166,19 +166,19 @@ class Point
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
-    public function getLon(): ?float
+    public function getLon(): ?string
     {
         return $this->lon;
     }
 
     /**
-     * @param float $lon
+     * @param string $lon
      *
      * @return $this
      */
-    public function setLon(float $lon): self
+    public function setLon(string $lon): self
     {
         $this->lon = $lon;
 
