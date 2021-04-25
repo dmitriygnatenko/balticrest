@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -11,6 +12,8 @@ final class Version20210329202944 extends AbstractMigration
 {
     /**
      * @param Schema $schema
+     *
+     * @throws Exception
      */
     public function up(Schema $schema) : void
     {
@@ -19,19 +22,31 @@ final class Version20210329202944 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('
-            CREATE TABLE schedule (
-                id INT AUTO_INCREMENT NOT NULL,
-                station_from VARCHAR(10) NOT NULL,
-                station_to VARCHAR(10) NOT NULL,
-                data LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\',
-                last_update DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\',
-                UNIQUE INDEX UNIQ_5A3811FB5729864D490307A1 (station_from, station_to),
-                PRIMARY KEY(id)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
-        ');
+        $this->addSql('CREATE TABLE search_data (
+            id INT AUTO_INCREMENT NOT NULL,
+            object_id INT NOT NULL,
+            object_type_id SMALLINT NOT NULL,
+            data LONGTEXT NOT NULL,
+            last_update_time DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\',
+            FULLTEXT INDEX IDX_F6E9E60AADF3F363 (data),
+            INDEX IDX_F6E9E60A232D562BC5020C33 (object_id, object_type_id),
+            PRIMARY KEY(id)
+        ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+
+        $this->addSql('CREATE TABLE search_log (
+            id INT AUTO_INCREMENT NOT NULL,
+            query VARCHAR(255) NOT NULL,
+            found_results_count SMALLINT NOT NULL,
+            create_time DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\',
+            PRIMARY KEY(id)
+        ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
+    /**
+     * @param Schema $schema
+     *
+     * @throws Exception
+     */
     public function down(Schema $schema) : void
     {
         $this->abortIf(
@@ -39,6 +54,7 @@ final class Version20210329202944 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP TABLE schedule');
+        $this->addSql('DROP TABLE search_data');
+        $this->addSql('DROP TABLE search_log');
     }
 }
