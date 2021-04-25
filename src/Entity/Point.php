@@ -146,9 +146,9 @@ class Point
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
-    public function getLat(): ?float
+    public function getLat(): ?string
     {
         return $this->lat;
     }

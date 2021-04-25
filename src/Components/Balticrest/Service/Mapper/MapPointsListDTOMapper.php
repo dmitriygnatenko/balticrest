@@ -76,8 +76,8 @@ class MapPointsListDTOMapper
             $cityObject = $cities[$city];
 
             // Центр карты и масштаб
-            $listDTO->setCenterLat($cityObject->getLat())
-                ->setCenterLon($cityObject->getLon())
+            $listDTO->setCenterLat((float) $cityObject->getLat())
+                ->setCenterLon((float) $cityObject->getLon())
                 ->setZoom($cityObject->getZoom());
         }
 
@@ -106,9 +106,12 @@ class MapPointsListDTOMapper
                         $link = '';
                     }
 
+                    $lat = $point->getLat() ? (float) $point->getLat() : null;
+                    $lon = $point->getLon() ? (float) $point->getLon() : null;
+
                     $pointDTO = (new MapPointDTO())
-                        ->setLat($point->getLat())
-                        ->setLon($point->getLon())
+                        ->setLat($lat)
+                        ->setLon($lon)
                         ->setTitle($pointLangData->getTitle())
                         ->setHint($pointLangData->getTitle())
                         ->setDescription($pointData[PointLangFields::FIELD_SHORT_DESC] ?? '')

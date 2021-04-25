@@ -58,9 +58,12 @@ class PointDTOMapper
 
         $locale = $this->requestStack->getMasterRequest()->getLocale();
 
+        $lat = $point->getLat() ? (float) $point->getLat() : null;
+        $lon = $point->getLon() ? (float) $point->getLon() : null;
+
         $dto->setId($point->getId())
-            ->setLat($point->getLat())
-            ->setLon($point->getLon())
+            ->setLat($lat)
+            ->setLon($lon)
             ->setImage($this->pointImageHelper->getPointImage($point))
             ->setCity($point->getCity()->getCode())
             ->setCategory($point->getType()->getCode());
