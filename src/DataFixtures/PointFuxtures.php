@@ -6,6 +6,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Point;
 use App\Entity\PointLangData;
+use App\Entity\SearchData;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -104,6 +105,15 @@ class PointFuxtures extends Fixture implements DependentFixtureInterface
                 ]);
 
             $manager->persist($hotelCn);
+
+            $manager->flush();
+
+            $searchData = (new SearchData())
+                ->setObjectId($hotelRu->getId())
+                ->setObjectTypeId(SearchData::TYPE_POINT_ID)
+                ->setData('xxxxx Тестовый отель xxxxx');
+
+            $manager->persist($searchData);
 
             $manager->flush();
         }
