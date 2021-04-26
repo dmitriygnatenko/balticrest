@@ -10,6 +10,12 @@ use Doctrine\Persistence\ObjectManager;
 
 class CityFixtures extends Fixture
 {
+    /** @var string */
+    public const CITY_ZELENOGRADSK = 'city_zelenogradsk';
+
+    /** @var string */
+    public const CITY_SVETLOGORSK = 'city_svetlogorsk';
+
     /**
      * @param ObjectManager $manager
      */
@@ -25,6 +31,8 @@ class CityFixtures extends Fixture
 
         $manager->persist($zelenogradsk);
 
+        $this->addReference(self::CITY_ZELENOGRADSK, $zelenogradsk);
+
         $svetlogorsk = (new City())
             ->setCode('svetlogorsk')
             ->setImage('/files/cities/svetlogorsk.png')
@@ -34,6 +42,8 @@ class CityFixtures extends Fixture
             ->setIsActive(true);
 
         $manager->persist($svetlogorsk);
+
+        $this->addReference(self::CITY_SVETLOGORSK, $svetlogorsk);
 
         $manager->flush();
     }

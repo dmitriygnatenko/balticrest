@@ -12,6 +12,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+    /** @var string */
+    public const USER = 'user';
+
     private UserPasswordEncoderInterface $passwordEncoder;
 
     /**
@@ -36,6 +39,9 @@ class UserFixtures extends Fixture
             ->setPassword($this->passwordEncoder->encodePassword($user, 'test'));
 
         $manager->persist($user);
+
+        $this->addReference(self::USER, $user);
+
         $manager->flush();
     }
 }

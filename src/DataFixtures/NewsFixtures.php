@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Language;
 use App\Entity\News;
 use App\Entity\NewsLangData;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use DateTimeImmutable;
 
-class NewsFixtures extends Fixture
+class NewsFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * @param ObjectManager $manager
@@ -29,7 +29,7 @@ class NewsFixtures extends Fixture
             ->setNews($news)
             ->setTitle('Тестовая новость')
             ->setText('Тестовый текст новости')
-            ->setLanguage($manager->getRepository(Language::class)->findOneByCode('ru'));
+            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_RU));
 
         $manager->persist($newsLangDataRu);
 
@@ -37,7 +37,7 @@ class NewsFixtures extends Fixture
             ->setNews($news)
             ->setTitle('Test news')
             ->setText('Test news text')
-            ->setLanguage($manager->getRepository(Language::class)->findOneByCode('en'));
+            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_EN));
 
         $manager->persist($newsLangDataEn);
 
@@ -45,7 +45,7 @@ class NewsFixtures extends Fixture
             ->setNews($news)
             ->setTitle('Testnachrichten')
             ->setText('Testen Sie den Nachrichtentext')
-            ->setLanguage($manager->getRepository(Language::class)->findOneByCode('de'));
+            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_DE));
 
         $manager->persist($newsLangDataDe);
 
@@ -53,7 +53,7 @@ class NewsFixtures extends Fixture
             ->setNews($news)
             ->setTitle('Wiadomości testowe')
             ->setText('Tekst wiadomości testowej')
-            ->setLanguage($manager->getRepository(Language::class)->findOneByCode('pl'));
+            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_PL));
 
         $manager->persist($newsLangDataPl);
 
@@ -61,7 +61,7 @@ class NewsFixtures extends Fixture
             ->setNews($news)
             ->setTitle('Testo naujienos')
             ->setText('Išbandykite naujienų tekstą')
-            ->setLanguage($manager->getRepository(Language::class)->findOneByCode('lt'));
+            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_LT));
 
         $manager->persist($newsLangDataLt);
 
@@ -69,10 +69,20 @@ class NewsFixtures extends Fixture
             ->setNews($news)
             ->setTitle('測試新聞')
             ->setText('測試新聞文字')
-            ->setLanguage($manager->getRepository(Language::class)->findOneByCode('cn'));
+            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_CN));
 
         $manager->persist($newsLangDataCn);
 
         $manager->flush();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDependencies(): array
+    {
+        return [
+            LanguageFixture::class,
+        ];
     }
 }
