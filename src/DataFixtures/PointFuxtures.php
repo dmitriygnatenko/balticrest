@@ -18,92 +18,95 @@ class PointFuxtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $this->loadHotel($manager);
+        $this->loadHotels($manager);
     }
 
     /**
      * @param ObjectManager $manager
      */
-    private function loadHotel(ObjectManager $manager)
+    private function loadHotels(ObjectManager $manager)
     {
-        $hotel = (new Point())
-            ->setUrl('test-hotel')
-            ->setIsActive(true)
-            ->setLastUpdateTime(new DateTimeImmutable())
-            ->setLat('54.9407518335')
-            ->setLon('20.1373279095')
-            ->setLogo('')
-            ->setType($this->getReference(PointTypeFixtures::POINT_TYPE_HOTELS))
-            ->setCity($this->getReference(CityFixtures::CITY_SVETLOGORSK))
-            ->setData([
-                'email' => 'test-hotel@test.ru',
-                'phones' => '+11111111111',
-                'services' => ['restaurant', 'parking'],
-            ]);
+        foreach (range(1, 3) as $number) {
 
-        $manager->persist($hotel);
+            $hotel = (new Point())
+                ->setUrl('test-hotel-' . $number)
+                ->setIsActive(true)
+                ->setLastUpdateTime(new DateTimeImmutable())
+                ->setLat('54.9407518335')
+                ->setLon('20.1373279095')
+                ->setLogo('')
+                ->setType($this->getReference(PointTypeFixtures::POINT_TYPE_HOTELS))
+                ->setCity($this->getReference(CityFixtures::CITY_SVETLOGORSK))
+                ->setData([
+                    'email' => 'test-hotel-' . $number . '@test.ru',
+                    'phones' => '+11111111111' . $number,
+                    'services' => ['restaurant', 'parking'],
+                ]);
 
-        $hotelRu = (new PointLangData())
-            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_RU))
-            ->setPoint($hotel)
-            ->setTitle('Тестовый отель')
-            ->setData([
-                'short_desc' => 'Тестовый отель',
-            ]);
+            $manager->persist($hotel);
 
-        $manager->persist($hotelRu);
+            $hotelRu = (new PointLangData())
+                ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_RU))
+                ->setPoint($hotel)
+                ->setTitle('Тестовый отель ' . $number)
+                ->setData([
+                    'short_desc' => 'Тестовый отель',
+                ]);
 
-        $hotelEn = (new PointLangData())
-            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_EN))
-            ->setPoint($hotel)
-            ->setTitle('Test hotel')
-            ->setData([
-                'short_desc' => 'Test hotel',
-            ]);
+            $manager->persist($hotelRu);
 
-        $manager->persist($hotelEn);
+            $hotelEn = (new PointLangData())
+                ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_EN))
+                ->setPoint($hotel)
+                ->setTitle('Test hotel ' . $number)
+                ->setData([
+                    'short_desc' => 'Test hotel',
+                ]);
 
-        $hotelDe = (new PointLangData())
-            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_DE))
-            ->setPoint($hotel)
-            ->setTitle('Testhotel')
-            ->setData([
-                'short_desc' => 'Testhotel',
-            ]);
+            $manager->persist($hotelEn);
 
-        $manager->persist($hotelDe);
+            $hotelDe = (new PointLangData())
+                ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_DE))
+                ->setPoint($hotel)
+                ->setTitle('Testhotel ' . $number)
+                ->setData([
+                    'short_desc' => 'Testhotel',
+                ]);
 
-        $hotelPl = (new PointLangData())
-            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_PL))
-            ->setPoint($hotel)
-            ->setTitle('Hotel testowy')
-            ->setData([
-                'short_desc' => 'Hotel testowy',
-            ]);
+            $manager->persist($hotelDe);
 
-        $manager->persist($hotelPl);
+            $hotelPl = (new PointLangData())
+                ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_PL))
+                ->setPoint($hotel)
+                ->setTitle('Hotel testowy ' . $number)
+                ->setData([
+                    'short_desc' => 'Hotel testowy',
+                ]);
 
-        $hotelLt = (new PointLangData())
-            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_LT))
-            ->setPoint($hotel)
-            ->setTitle('Bandomasis viešbutis')
-            ->setData([
-                'short_desc' => 'Bandomasis viešbutis',
-            ]);
+            $manager->persist($hotelPl);
 
-        $manager->persist($hotelLt);
+            $hotelLt = (new PointLangData())
+                ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_LT))
+                ->setPoint($hotel)
+                ->setTitle('Bandomasis viešbutis ' . $number)
+                ->setData([
+                    'short_desc' => 'Bandomasis viešbutis',
+                ]);
 
-        $hotelCn = (new PointLangData())
-            ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_CN))
-            ->setPoint($hotel)
-            ->setTitle('測試酒店')
-            ->setData([
-                'short_desc' => '測試酒店',
-            ]);
+            $manager->persist($hotelLt);
 
-        $manager->persist($hotelCn);
+            $hotelCn = (new PointLangData())
+                ->setLanguage($this->getReference(LanguageFixture::LANGUAGE_CN))
+                ->setPoint($hotel)
+                ->setTitle('測試酒店 ' . $number)
+                ->setData([
+                    'short_desc' => '測試酒店',
+                ]);
 
-        $manager->flush();
+            $manager->persist($hotelCn);
+
+            $manager->flush();
+        }
     }
 
     /**
