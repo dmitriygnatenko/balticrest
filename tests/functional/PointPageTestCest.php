@@ -11,7 +11,7 @@ class PointPageTestCest
     /**
      * @param \App\Tests\FunctionalTester $I
      */
-    public function viewPointRu(FunctionalTester $I)
+    public function viewRu(FunctionalTester $I)
     {
         $I->amOnPage('/svetlogorsk/hotels/point/test-hotel-1');
         $I->wantTo('View point page (RU)');
@@ -26,7 +26,7 @@ class PointPageTestCest
     /**
      * @param \App\Tests\FunctionalTester $I
      */
-    public function viewPointEn(FunctionalTester $I)
+    public function viewEn(FunctionalTester $I)
     {
         $I->amOnPage('/en/svetlogorsk/hotels/point/test-hotel-1');
         $I->wantTo('View point page (EN)');
@@ -41,7 +41,7 @@ class PointPageTestCest
     /**
      * @param \App\Tests\FunctionalTester $I
      */
-    public function viewPointDe(FunctionalTester $I)
+    public function viewDe(FunctionalTester $I)
     {
         $I->amOnPage('/de/svetlogorsk/hotels/point/test-hotel-1');
         $I->wantTo('View point page (DE)');
@@ -56,7 +56,7 @@ class PointPageTestCest
     /**
      * @param \App\Tests\FunctionalTester $I
      */
-    public function viewPointPl(FunctionalTester $I)
+    public function viewPl(FunctionalTester $I)
     {
         $I->amOnPage('/pl/svetlogorsk/hotels/point/test-hotel-1');
         $I->wantTo('View point page (PL)');
@@ -71,7 +71,7 @@ class PointPageTestCest
     /**
      * @param \App\Tests\FunctionalTester $I
      */
-    public function viewPointLt(FunctionalTester $I)
+    public function viewLt(FunctionalTester $I)
     {
         $I->amOnPage('/lt/svetlogorsk/hotels/point/test-hotel-1');
         $I->wantTo('View point page (LT)');
@@ -86,7 +86,7 @@ class PointPageTestCest
     /**
      * @param \App\Tests\FunctionalTester $I
      */
-    public function viewPointCn(FunctionalTester $I)
+    public function viewCn(FunctionalTester $I)
     {
         $I->amOnPage('/cn/svetlogorsk/hotels/point/test-hotel-1');
         $I->wantTo('View point page (CN)');
