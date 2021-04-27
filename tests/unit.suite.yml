@@ -7,3 +7,6 @@ modules:
     enabled:
         - Asserts
         - \App\Tests\Helper\Unit
+        - Symfony:
+              app_path: 'src'
+              environment: 'test'

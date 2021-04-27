@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Balticrest\Service\Helper;
 
+use App\Entity\Language;
 use Doctrine\Common\Collections\Collection;
 
 class DataLanguageFilter implements DataLanguageFilterInterface
@@ -18,10 +19,10 @@ class DataLanguageFilter implements DataLanguageFilterInterface
     {
         $langData = null;
 
-        if ($locale === 'ru') {
+        if ($locale === Language::DEFAULT_LANGUAGE) {
             // Данные на русском всегда присутствуют, не проверяем другие языки
             $result = $collection->filter(static function($item) {
-                return $item->getLanguage()->getCode() === 'ru';
+                return $item->getLanguage()->getCode() === Language::DEFAULT_LANGUAGE;
             });
 
             if (!$result->isEmpty()) {

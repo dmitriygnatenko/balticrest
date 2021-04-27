@@ -11,6 +11,7 @@ use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
 use App\Components\Balticrest\Service\Provider\CityDataProviderInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
 use App\Entity\City;
+use App\Entity\Language;
 use App\Entity\Point;
 use App\Entity\PointLangData;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -65,7 +66,8 @@ class MapPointsListDTOMapper
     {
         $listDTO = new MapPointsListDTO();
 
-        $locale = $this->requestStack->getMasterRequest()->getLocale();
+        $request = $this->requestStack->getMasterRequest();
+        $locale = $request === null ? Language::DEFAULT_LANGUAGE : $request->getLocale();
 
         $listDTO->setTransPointButton($this->translator->trans('map.point.btn_title', [], 'messages', $locale));
 

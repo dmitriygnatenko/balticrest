@@ -8,6 +8,7 @@ use App\Components\Balticrest\Service\DTO\ListPointDTO;
 use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
 use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as PointLangFields;
+use App\Entity\Language;
 use App\Entity\Point;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -65,7 +66,8 @@ class ListPointDTOMapper
     {
         $dto = new ListPointDTO();
 
-        $locale = $this->requestStack->getMasterRequest()->getLocale();
+        $request = $this->requestStack->getMasterRequest();
+        $locale = $request === null ? Language::DEFAULT_LANGUAGE : $request->getLocale();
 
         $pointLangData = $this->dataLanguageFilter->filter($point->getPointLangData(), $locale);
 

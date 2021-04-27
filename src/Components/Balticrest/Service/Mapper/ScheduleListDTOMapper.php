@@ -7,6 +7,7 @@ namespace App\Components\Balticrest\Service\Mapper;
 use App\Components\Balticrest\Service\DTO\ScheduleListDTO;
 use App\Components\Balticrest\Service\DTO\ScheduleRecordDTO;
 use App\Components\Balticrest\Service\Helper\TransliteratorHelperInterface;
+use App\Entity\Language;
 use App\Entity\Schedule;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -22,7 +23,8 @@ class ScheduleListDTOMapper
      */
     public function __construct(RequestStack $requestStack, TransliteratorHelperInterface $transliteratorHelper)
     {
-        $this->locale = $requestStack->getMasterRequest()->getLocale();
+        $request = $requestStack->getMasterRequest();
+        $this->locale = $request === null ? Language::DEFAULT_LANGUAGE : $request->getLocale();
         $this->transliteratorHelper = $transliteratorHelper;
     }
 
@@ -74,7 +76,7 @@ class ScheduleListDTOMapper
             $listDTO->addRecord($recordDTO);
         }
 
-        if ($this->locale !== 'ru') {
+        if ($this->locale !== Language::DEFAULT_LANGUAGE) {
             if ($listDTO->getFromTitle() !== null) {
                 $listDTO->setFromTitle(
                     $this->transliteratorHelper->transliterate((string) $listDTO->getFromTitle())
@@ -105,14 +107,14 @@ class ScheduleListDTOMapper
         $durationInMin = (int) round($durationInSec / 60);
 
         if ($durationInMin < 60) {
-            $duration = $durationInMin . ' ' . ($this->locale === 'ru' ? 'мин' : 'min');
+            $duration = $durationInMin . ' ' . ($this->locale === Language::DEFAULT_LANGUAGE ? 'мин' : 'min');
         } else {
             $hours = floor($durationInMin / 60);
             $minutes = floor($durationInMin % 60);
 
-            $duration = $hours . ' ' . ($this->locale === 'ru' ? 'ч' : 'h');
+            $duration = $hours . ' ' . ($this->locale === Language::DEFAULT_LANGUAGE ? 'ч' : 'h');
             if ($minutes) {
-                $duration .= $minutes . ' ' . ($this->locale === 'ru' ? 'мин' : 'min');
+                $duration .= $minutes . ' ' . ($this->locale === Language::DEFAULT_LANGUAGE ? 'мин' : 'min');
             }
         }
 
@@ -126,7 +128,7 @@ class ScheduleListDTOMapper
      */
     private function formatDays(?string $days): ?string
     {
-        if ($days === null || $this->locale === 'ru') {
+        if ($days === null || $this->locale === Language::DEFAULT_LANGUAGE) {
             return $days;
         }
 

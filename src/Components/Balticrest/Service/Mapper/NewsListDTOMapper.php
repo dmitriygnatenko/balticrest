@@ -8,6 +8,7 @@ use App\Components\Admin\Service\Pager\Paginator;
 use App\Components\Balticrest\Service\DTO\NewsDTO;
 use App\Components\Balticrest\Service\DTO\NewsListDTO;
 use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
+use App\Entity\Language;
 use App\Entity\News;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Exception;
@@ -42,7 +43,8 @@ class NewsListDTOMapper
         $listDTO->setPrevPage($paginator->getPrevPage())
             ->setNextPage($paginator->getNextPage());
 
-        $locale = $this->requestStack->getMasterRequest()->getLocale();
+        $request = $this->requestStack->getMasterRequest();
+        $locale = $request === null ? Language::DEFAULT_LANGUAGE : $request->getLocale();
 
         foreach ($paginator->getIterator() as $news)
         {

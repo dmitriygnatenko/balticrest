@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\LanguageInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     }
  * )
  */
-class Language
+class Language implements LanguageInterface
 {
     /**
      * @ORM\Id()

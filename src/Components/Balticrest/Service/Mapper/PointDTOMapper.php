@@ -9,6 +9,7 @@ use App\Components\Balticrest\Service\Helper\PointImageHelperInterface;
 use App\Entity\Interfaces\PointDataFieldsInterface as Fields;
 use App\Entity\Interfaces\PointLangDataFieldsInterface as LangFields;
 use App\Components\Balticrest\Service\DTO\PointDTO;
+use App\Entity\Language;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -56,7 +57,8 @@ class PointDTOMapper
     {
         $dto = new PointDTO();
 
-        $locale = $this->requestStack->getMasterRequest()->getLocale();
+        $request = $this->requestStack->getMasterRequest();
+        $locale = $request === null ? Language::DEFAULT_LANGUAGE : $request->getLocale();
 
         $lat = $point->getLat() ? (float) $point->getLat() : null;
         $lon = $point->getLon() ? (float) $point->getLon() : null;
@@ -117,7 +119,7 @@ class PointDTOMapper
                     'cities.' . $point->getCity()->getCode(), [], 'messages', $locale
                 );
 
-                if ($locale === 'ru') {
+                if ($locale === Language::DEFAULT_LANGUAGE) {
                     $dto->setAddress($transCity . ', ' . $address);
                 } else {
                     $dto->setAddress($address . ', ' . $transCity);

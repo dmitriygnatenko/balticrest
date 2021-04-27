@@ -7,6 +7,7 @@ namespace App\Components\Balticrest\Service\Mapper;
 use App\Components\Balticrest\Service\DTO\ArticleDTO;
 use App\Components\Balticrest\Service\Helper\DataLanguageFilterInterface;
 use App\Entity\Article;
+use App\Entity\Language;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class ArticleDTOMapper
@@ -34,7 +35,8 @@ class ArticleDTOMapper
     {
         $dto = new ArticleDTO();
 
-        $locale = $this->requestStack->getMasterRequest()->getLocale();
+        $request = $this->requestStack->getMasterRequest();
+        $locale = $request === null ? Language::DEFAULT_LANGUAGE : $request->getLocale();
 
         $articleLangData = $this->dataLanguageFilter->filter($article->getArticleLangData(), $locale);
 
