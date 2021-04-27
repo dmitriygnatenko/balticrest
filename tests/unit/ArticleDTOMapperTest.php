@@ -11,6 +11,7 @@ use App\Entity\Language;
 use Codeception\Module\Symfony;
 use Codeception\Test\Unit;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Tests\UnitTester;
 
 class ArticleDTOMapperTest extends Unit
 {
@@ -20,7 +21,10 @@ class ArticleDTOMapperTest extends Unit
     /** @var string */
     private const TEST_TEXT = 'Текст тестовой статьи';
 
-    private ArticleDTOMapper $articleDTOMapper;
+    /** @var UnitTester */
+    protected $tester;
+
+    private ArticleDTOMapper $mapper;
 
     private EntityManagerInterface $entityManager;
     
@@ -29,11 +33,13 @@ class ArticleDTOMapperTest extends Unit
         /** @var Symfony $symfony */
         $symfony = $this->getModule('Symfony');
         $this->entityManager = $symfony->grabService(EntityManagerInterface::class);
-        $this->articleDTOMapper = $symfony->grabService(ArticleDTOMapper::class);
+        $this->mapper = $symfony->grabService(ArticleDTOMapper::class);
     }
 
-    public function testArticleDTOMapper()
+    public function testMapper()
     {
+        $this->tester->wantToTest('ArticleDTOMapper');
+
         $articleRuData = (new ArticleLangData())
             ->setTitle(self::TEST_TITLE)
             ->setText(self::TEST_TEXT)
@@ -46,7 +52,7 @@ class ArticleDTOMapperTest extends Unit
             ->setUrl('testurl')
             ->addArticleLangData($articleRuData);
 
-        $dto = $this->articleDTOMapper->fill($article);
+        $dto = $this->mapper->fill($article);
 
         $this->assertEquals($dto->getTitle(), self::TEST_TITLE);
         $this->assertEquals($dto->getText(), self::TEST_TEXT);
