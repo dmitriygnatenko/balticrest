@@ -13,15 +13,11 @@ use App\Entity\PointType;
 use Codeception\Module\Symfony;
 use Codeception\Test\Unit;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Tests\UnitTester;
 
 class ListPointDTOMapperTest extends Unit
 {
     /** @var string */
     private const TEST_TITLE = 'Тестовый объект';
-
-    /** @var UnitTester */
-    protected $tester;
 
     private ListPointDTOMapper $mapper;
 
@@ -37,8 +33,6 @@ class ListPointDTOMapperTest extends Unit
 
     public function testMapper()
     {
-        $this->tester->wantToTest('ListPointDTOMapper');
-
         $pointRuData = (new PointLangData())
             ->setTitle(self::TEST_TITLE)
             ->setLanguage($this->entityManager->getRepository(Language::class)->findOneByCode('ru'));

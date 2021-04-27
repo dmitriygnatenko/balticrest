@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use App\Components\Balticrest\Service\Mapper\MapPointsListDTOMapper;
+use App\Components\Admin\Service\DTO\PointDTO;
+use App\Components\Admin\Service\Mapper\PointDTOMapper;
 use App\Entity\City;
 use App\Entity\Language;
 use App\Entity\Point;
@@ -14,9 +15,12 @@ use Codeception\Module\Symfony;
 use Codeception\Test\Unit;
 use Doctrine\ORM\EntityManagerInterface;
 
-class MapPointsListDTOMapperTest extends Unit
+class PointDTOMapperTest extends Unit
 {
-    private MapPointsListDTOMapper $mapper;
+    /** @var string */
+    private const TEST_TITLE = 'Тестовый объект';
+
+    private PointDTOMapper $mapper;
 
     private EntityManagerInterface $entityManager;
 
@@ -25,29 +29,27 @@ class MapPointsListDTOMapperTest extends Unit
         /** @var Symfony $symfony */
         $symfony = $this->getModule('Symfony');
         $this->entityManager = $symfony->grabService(EntityManagerInterface::class);
-        $this->mapper = $symfony->grabService(MapPointsListDTOMapper::class);
+        $this->mapper = $symfony->grabService(PointDTOMapper::class);
     }
 
     public function testMapper()
     {
         $pointRuData = (new PointLangData())
-            ->setTitle('Тестовый объект')
+            ->setTitle(self::TEST_TITLE)
             ->setLanguage($this->entityManager->getRepository(Language::class)->findOneByCode('ru'));
 
         $point = (new Point())
             ->setIsActive(true)
             ->setUrl('testurl')
-            ->setLat('1')
-            ->setLon('1')
             ->setType($this->entityManager->getRepository(PointType::class)->findOneByCode('hotels'))
             ->setCity($this->entityManager->getRepository(City::class)->findOneByCode('svetlogorsk'))
             ->addPointLangData($pointRuData);
 
-        $dto = $this->mapper->fill('zelenogradsk', [$point]);
+        $dto = $this->mapper->fill($point, new PointDTO());
 
-        $this->assertEquals(
-            $dto->getJsonResult(),
-            '{"center":{"lat":54.957757,"lon":20.474495},"trans":{"point_button":"\u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0435\u0435"},"zoom":15,"points":[{"lat":1,"lon":1,"hint":"\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0439 \u043e\u0431\u044a\u0435\u043a\u0442","title":"\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0439 \u043e\u0431\u044a\u0435\u043a\u0442","description":"","image":"\/static\/balticrest\/images\/logo\/hotels.png","link":"http:\/\/localhost\/svetlogorsk\/hotels\/point\/testurl","icon":{"image":"\/static\/balticrest\/images\/markers\/hotels.png","size":{"width":27,"height":48}}}]}'
-        );
+        $this->assertEquals($dto->getTitle(), self::TEST_TITLE);
+        $this->assertEquals($dto->getCity(), 'svetlogorsk');
+        $this->assertEquals($dto->getType(), 'hotels');
+        $this->assertEquals($dto->getIsActive(), '1');
     }
 }

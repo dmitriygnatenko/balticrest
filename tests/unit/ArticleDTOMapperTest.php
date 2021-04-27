@@ -11,7 +11,6 @@ use App\Entity\Language;
 use Codeception\Module\Symfony;
 use Codeception\Test\Unit;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Tests\UnitTester;
 
 class ArticleDTOMapperTest extends Unit
 {
@@ -20,9 +19,6 @@ class ArticleDTOMapperTest extends Unit
 
     /** @var string */
     private const TEST_TEXT = 'Текст тестовой статьи';
-
-    /** @var UnitTester */
-    protected $tester;
 
     private ArticleDTOMapper $mapper;
 
@@ -38,8 +34,6 @@ class ArticleDTOMapperTest extends Unit
 
     public function testMapper()
     {
-        $this->tester->wantToTest('ArticleDTOMapper');
-
         $articleRuData = (new ArticleLangData())
             ->setTitle(self::TEST_TITLE)
             ->setText(self::TEST_TEXT)
