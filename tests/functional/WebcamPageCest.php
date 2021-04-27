@@ -6,10 +6,10 @@ namespace App\Tests;
 
 use App\Tests\FunctionalTester;
 
-class WebcamPageTestCest
+class WebcamPageCest
 {
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewRu(FunctionalTester $I)
     {
@@ -20,7 +20,7 @@ class WebcamPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewEn(FunctionalTester $I)
     {
@@ -31,7 +31,7 @@ class WebcamPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewDe(FunctionalTester $I)
     {
@@ -42,7 +42,7 @@ class WebcamPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPl(FunctionalTester $I)
     {
@@ -53,7 +53,7 @@ class WebcamPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewLt(FunctionalTester $I)
     {
@@ -64,7 +64,7 @@ class WebcamPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewCn(FunctionalTester $I)
     {

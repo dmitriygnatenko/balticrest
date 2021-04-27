@@ -6,10 +6,10 @@ namespace App\Tests;
 
 use App\Tests\FunctionalTester;
 
-class PointPageTestCest
+class PointPageCest
 {
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewRu(FunctionalTester $I)
     {
@@ -24,7 +24,7 @@ class PointPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewEn(FunctionalTester $I)
     {
@@ -39,7 +39,7 @@ class PointPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewDe(FunctionalTester $I)
     {
@@ -54,7 +54,7 @@ class PointPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPl(FunctionalTester $I)
     {
@@ -69,7 +69,7 @@ class PointPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewLt(FunctionalTester $I)
     {
@@ -84,7 +84,7 @@ class PointPageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewCn(FunctionalTester $I)
     {

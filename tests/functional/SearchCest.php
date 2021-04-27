@@ -6,10 +6,10 @@ namespace App\Tests;
 
 use App\Tests\FunctionalTester;
 
-class SearchTestCest
+class SearchCest
 {
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function search(FunctionalTester $I)
     {

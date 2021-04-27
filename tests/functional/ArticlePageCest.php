@@ -6,10 +6,10 @@ namespace App\Tests;
 
 use App\Tests\FunctionalTester;
 
-class ArticlePageTestCest
+class ArticlePageCest
 {
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewContactsRu(FunctionalTester $I)
     {
@@ -20,7 +20,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewContactsEn(FunctionalTester $I)
     {
@@ -31,7 +31,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewContactsDe(FunctionalTester $I)
     {
@@ -42,7 +42,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewContactsPl(FunctionalTester $I)
     {
@@ -53,7 +53,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewContactsLt(FunctionalTester $I)
     {
@@ -64,7 +64,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewContactsCn(FunctionalTester $I)
     {
@@ -75,7 +75,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPrivacyPolicyRu(FunctionalTester $I)
     {
@@ -86,7 +86,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPrivacyPolicyEn(FunctionalTester $I)
     {
@@ -97,7 +97,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPrivacyPolicyDe(FunctionalTester $I)
     {
@@ -108,7 +108,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPrivacyPolicyPl(FunctionalTester $I)
     {
@@ -119,7 +119,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPrivacyPolicyLt(FunctionalTester $I)
     {
@@ -130,7 +130,7 @@ class ArticlePageTestCest
     }
 
     /**
-     * @param \App\Tests\FunctionalTester $I
+     * @param FunctionalTester $I
      */
     public function viewPrivacyPolicyCn(FunctionalTester $I)
     {

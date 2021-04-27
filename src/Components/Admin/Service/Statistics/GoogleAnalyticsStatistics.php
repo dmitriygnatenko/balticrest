@@ -34,10 +34,10 @@ class GoogleAnalyticsStatistics implements GoogleAnalyticsStatisticsInterface
 {
     private LoggerInterface $logger;
 
-    private ?Google_Service_Analytics $analytics;
+    private ?Google_Service_Analytics $analytics = null;
 
     /** @var string|null */
-    private $viewId;
+    private $viewId = null;
 
     /** @var TagAwareCacheInterface */
     private $cache;
