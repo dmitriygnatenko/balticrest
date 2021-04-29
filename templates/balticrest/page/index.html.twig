@@ -295,7 +295,7 @@
             </div>
         </div>
 
-        {{ include('balticrest/include/google_ads_index_1.html.twig') }}
+        {% include 'balticrest/include/google_ads.html.twig' with {'adblock': 'index_top'} %}
 
         {# Cсылки на список #}
         <div class="category_block container-fluid">
@@ -374,7 +374,7 @@
             <div class="anim_bg"></div>
         </div>
 
-        {{ include('balticrest/include/google_ads_index_2.html.twig') }}
+        {% include 'balticrest/include/google_ads.html.twig' with {'adblock': 'index_bottom'} %}
 
         {# Новости #}
         <div class="places_index_block container-fluid">

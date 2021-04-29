@@ -1,5 +1,37 @@
-{#
 {% if app.environment == 'prod' %}
-    <script data-ad-client="{{ ga_ad_client_id }}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    {% if adblock == 'index_top' %}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ ga_ad_client_id }}"
+                crossorigin="anonymous"></script>
+        <div class="fea_block container-fluid">
+            <div class="fixed_w">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="{{ ga_ad_client_id }}"
+                     data-ad-slot="6756667156"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true">
+                </ins>
+            </div>
+        </div>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    {% elseif adblock == 'index_bottom' %}
+        <div class="fea_block container-fluid">
+            <div class="fixed_w">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="{{ ga_ad_client_id }}"
+                     data-ad-slot="2460337106"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true">
+                </ins>
+            </div>
+        </div>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    {% endif %}
+
 {% endif %}
-#}
