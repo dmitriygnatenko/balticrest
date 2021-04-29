@@ -3046,3 +3046,7 @@ a.green_btn:hover {
     text-decoration: none;
     transition: 0.3s;
 }
+
+.margin_ads_block {
+    margin: 20px 0;
+}
