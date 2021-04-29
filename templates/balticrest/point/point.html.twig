@@ -25,6 +25,8 @@
                 </li>
             </ul>
         </div>
+
+        {% include 'balticrest/include/google_ads.html.twig' with {'adblock': 'point'} %}
     </div>
 
     {% set show_similar = similar_points is not empty %}
