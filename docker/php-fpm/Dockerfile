@@ -1,45 +1,47 @@
-FROM ubuntu:20.04
+FROM php:7.4-fpm-alpine
 
-WORKDIR /var/www/balticrest.ru
+RUN apk add --no-cache --virtual build-dependencies $PHPIZE_DEPS
 
-ENV DEBIAN_FRONTEND noninteractive
+RUN pecl install xdebug
 
-RUN apt-get update && apt-get install -y software-properties-common mc nano curl
+RUN apk add --no-cache coreutils \
+    libzip-dev \
+    freetype-dev \
+    oniguruma-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    icu-dev \
+    git \
+    nodejs \
+    npm \
+    mc
 
-RUN add-apt-repository ppa:ondrej/php
+RUN docker-php-ext-install \
+    zip \
+    intl \
+    gd \
+    bcmath \
+    sockets \
+    mbstring \
+    pdo \
+    pdo_mysql \
+    && docker-php-ext-configure gd
 
-RUN mkdir /run/php
-
-RUN apt-get install -y \
-    php7.4-cli \
-    php7.4-common \
-    php7.4-mysql \
-    php7.4-sqlite \
-    php7.4-gd \
-    php7.4-fpm \
-    php7.4-cgi \
-    php7.4-curl \
-    php7.4-json \
-    php7.4-mbstring \
-    php7.4-intl \
-    php7.4-zip \
-    php7.4-xml \
-    php-xdebug
+RUN apk del build-dependencies
 
 RUN curl -sS https://getcomposer.org/installer | php && \
     chmod 755 composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs && \
-    npm install --global gulp-cli
+RUN npm install --global gulp-cli
 
-COPY config/cli/php.ini /etc/php/7.4/cli/php.ini
-COPY config/fpm/php.ini /etc/php/7.4/fpm/php.ini
-COPY config/fpm/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
-COPY config/fpm/pool.d/www.conf /etc/php/7.4/fpm/pool.d/www.conf
-COPY config/fpm/xdebug.ini /etc/php/7.4/mods-available/xdebug.ini
+COPY config/override.ini /usr/local/etc/php/conf.d/
+COPY config/xdebug.ini /usr/local/etc/php/conf.d/
 
+RUN rm /usr/local/etc/php-fpm.d/*.conf
+COPY config/pool.conf /usr/local/etc/php-fpm.d/
+
+CMD ["sh", "-c", "php-fpm -F"]
+
+WORKDIR /var/www/balticrest.ru
 EXPOSE 9000
-
-CMD ["php-fpm7.4"]
