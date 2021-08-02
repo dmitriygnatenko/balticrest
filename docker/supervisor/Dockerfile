@@ -8,4 +8,4 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /var/www/balticrest.ru
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-n"]
