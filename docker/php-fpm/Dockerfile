@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.4-fpm-alpine AS balticrest-php-fpm
 
 RUN apk add --no-cache --virtual build-dependencies $PHPIZE_DEPS
 
