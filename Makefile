@@ -21,34 +21,34 @@ usage:
 
 
 build:
-	cd $(docker_path) && docker-compose up --build -d
+	cd $(docker_path) && docker-compose -p "balticrest" up --build -d
 
 up:
-	cd $(docker_path) && docker-compose up -d
+	cd $(docker_path) && docker-compose -p "balticrest" up -d
 
 down:
-	cd $(docker_path) && docker-compose down
+	cd $(docker_path) && docker-compose -p "balticrest" down
 
 clear:
-	cd $(docker_path) && docker-compose exec $(php_service_name) php ./bin/console cache:clear
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) php ./bin/console cache:clear
 
 gulp:
-	cd $(docker_path) && docker-compose exec $(php_service_name) gulp
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) gulp
 
 migrate:
-	cd $(docker_path) && docker-compose exec $(php_service_name) php ./bin/console doctrine:migrations:migrate
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) php ./bin/console doctrine:migrations:migrate
 
 diff:
-	cd $(docker_path) && docker-compose exec $(php_service_name) php ./bin/console doctrine:migrations:diff
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) php ./bin/console doctrine:migrations:diff
 
 bash:
-	cd $(docker_path) && docker-compose exec $(php_service_name) bash
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) bash
 
 test-migrate:
-	cd $(docker_path) && docker-compose exec $(php_service_name) php ./bin/console doctrine:migrations:migrate --env=test
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) php ./bin/console doctrine:migrations:migrate --env=test
 
 test-fixtures:
-	cd $(docker_path) && docker-compose exec $(php_service_name) php ./bin/console doctrine:fixtures:load --env=test
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) php ./bin/console doctrine:fixtures:load --env=test
 
 test-codecept:
-	cd $(docker_path) && docker-compose exec $(php_service_name) php ./vendor/bin/codecept run
+	cd $(docker_path) && docker-compose -p "balticrest" exec $(php_service_name) php ./vendor/bin/codecept run
